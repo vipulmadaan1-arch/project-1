@@ -41,14 +41,40 @@ function diffLabel(tz, d) {
   return `${h}h${m ? ` ${m}m` : ''} ${diff > 0 ? 'ahead' : 'behind'}`;
 }
 
+const $at = document.getElementById('at');
+const $in = document.getElementById('in-zone');
+$in.innerHTML = `<option value="${localZone}">Your time (${nameOf(localZone)})</option>` +
+  CITIES.map(([n, tz]) => `<option value="${tz}">${n}</option>`).join('');
+let fixed = null; // a chosen moment, or null for live time
+
+// Converts a wall-clock time in a given zone to an absolute Date.
+function wallTimeToDate(value, tz) {
+  const [date, time] = value.split('T');
+  const [y, mo, da] = date.split('-').map(Number), [h, mi] = time.split(':').map(Number);
+  const wall = Date.UTC(y, mo - 1, da, h, mi);
+  let guess = wall - offsetMinutes(tz, new Date(wall)) * 60000;
+  guess = wall - offsetMinutes(tz, new Date(guess)) * 60000;
+  return new Date(guess);
+}
+function setFixed() {
+  if (!$at.value) { fixed = null; } else { fixed = wallTimeToDate($at.value, $in.value); }
+  document.getElementById('mode-note').textContent = fixed
+    ? `Showing ${$at.value.replace('T', ' ')} in ${$in.options[$in.selectedIndex].text} across all cities.`
+    : 'Showing live time.';
+  render();
+}
+$at.addEventListener('input', setFixed);
+$in.addEventListener('input', setFixed);
+document.getElementById('now').addEventListener('click', () => { $at.value = ''; setFixed(); });
+
 function render() {
-  const d = new Date();
+  const d = fixed || new Date();
   const list = [localZone, ...zones.filter((z) => z !== localZone)];
   $clocks.replaceChildren(...list.map((tz) => {
     const el = document.createElement('div');
     const isLocal = tz === localZone;
     el.className = `card clock${isLocal ? ' local' : ''}`;
-    const time = d.toLocaleTimeString('en-AU', { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit' });
+    const time = d.toLocaleTimeString('en-AU', fixed ? { timeZone: tz, hour: 'numeric', minute: '2-digit' } : { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit' });
     const date = d.toLocaleDateString('en-AU', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short' });
     el.innerHTML = `<div class="city">${isLocal ? `Your time · ${nameOf(tz)}` : nameOf(tz)}</div>
       <div class="time">${time}</div><div class="meta">${date} · ${isLocal ? 'Local' : diffLabel(tz, d)}</div>
@@ -65,4 +91,4 @@ document.getElementById('add').addEventListener('click', () => {
   if (!zones.includes($sel.value)) { zones.push($sel.value); save(); render(); }
 });
 render();
-setInterval(render, 1000);
+setInterval(() => { if (!fixed) render(); }, 1000);

@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Calculator | ToolTiles</title>
   <meta name="description" content="Free online calculator with brackets, percentages and keyboard support.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="Online Calculator">
+  <meta property="og:description" content="Free online calculator with brackets, percentages and keyboard support.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/calculator.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Calculator", "description": "Free online calculator with brackets, percentages and keyboard support.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -31,6 +38,17 @@
         <button data-k="⌫" style="grid-column: span 4">⌫ Delete</button>
       </div>
     </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>A simple, fast calculator that follows the normal order of operations — brackets first, then × and ÷, then + and −. Type directly on your keyboard: use * for ×, / for ÷, Enter for equals, Backspace to delete and Esc to clear.</p>
+<p>The % key divides by 100, so <em>50% × 200</em> = 100.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is anything I type saved or sent anywhere?</summary><p>No. Everything runs in your browser.</p></details><details><summary>Why does 0.1 + 0.2 show 0.3?</summary><p>Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="percentage.html">Percentage</a><a href="gst.html">GST Calculator</a><a href="unit-converter.html">Unit Converter</a><a href="date-calculator.html">Date Calculator</a></nav>
+    </section>
+    <!-- content:end -->
   </main>
 </body>
 </html>

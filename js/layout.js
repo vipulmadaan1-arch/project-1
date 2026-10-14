@@ -44,3 +44,49 @@ export { safeGet, safeSet };
 export const fmtMoney = (n, dp = 0) =>
   n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: dp, maximumFractionDigits: dp });
 export const num = (el) => parseFloat(String(el.value).replace(/[,$\s]/g, '')) || 0;
+
+// Keeps a calculator form in sync with the URL so results can be shared or bookmarked.
+// Fields are matched by id. Call after the page's own listeners are attached.
+export function syncFormWithUrl(form, onChange) {
+  const params = new URLSearchParams(location.search);
+  let restored = false;
+  for (const el of form.querySelectorAll('input[id], select[id]')) {
+    if (!params.has(el.id)) continue;
+    if (el.type === 'checkbox') el.checked = params.get(el.id) === '1';
+    else el.value = params.get(el.id);
+    restored = true;
+  }
+  if (restored) onChange();
+
+  let t;
+  form.addEventListener('input', () => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      const p = new URLSearchParams();
+      for (const el of form.querySelectorAll('input[id], select[id]')) {
+        p.set(el.id, el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value);
+      }
+      history.replaceState(null, '', `${location.pathname}?${p}`);
+    }, 300);
+  });
+}
+
+// Adds "Copy link" and a gentle coffee prompt under a result card.
+export function addResultActions(card) {
+  const wrap = document.createElement('div');
+  wrap.className = 'result-actions';
+  wrap.innerHTML = `
+    <button class="btn" type="button">🔗 Copy link to these results</button>
+    <p class="nudge">Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener">Buy me a coffee ☕</a></p>`;
+  const btn = wrap.querySelector('button');
+  btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(location.href); btn.textContent = '✓ Link copied'; }
+    catch { prompt('Copy this link:', location.href); }
+    setTimeout(() => { btn.textContent = '🔗 Copy link to these results'; }, 2000);
+  });
+  card.append(wrap);
+}
+
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  navigator.serviceWorker.register(`${base}sw.js`).catch(() => { /* offline support unavailable */ });
+}

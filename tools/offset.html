@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Offset Account Calculator (Australia) | ToolTiles</title>
   <meta name="description" content="See how much interest and time an offset account saves on your home loan.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="Offset Account Calculator (Australia)">
+  <meta property="og:description" content="See how much interest and time an offset account saves on your home loan.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/offset.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Offset Account Calculator (Australia)", "description": "See how much interest and time an offset account saves on your home loan.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is an offset better than extra repayments?", "acceptedAnswer": {"@type": "Answer", "text": "Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender)."}}, {"@type": "Question", "name": "Does the calculator assume my offset balance changes?", "acceptedAnswer": {"@type": "Answer", "text": "No, it assumes a constant balance. In practice your balance moves with your pay and spending."}}, {"@type": "Question", "name": "Is offset interest saving taxable?", "acceptedAnswer": {"@type": "Answer", "text": "Interest saved through an offset isn't income, so it isn't taxed — unlike interest earned in a savings account. Check your own situation with a tax professional."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -28,7 +35,7 @@
       </form>
       <div class="card">
         <div>Interest saved</div>
-        <div class="result-big" id="saved">–</div>
+        <div class="result-big" aria-live="polite" id="saved">–</div>
         <div class="kv"><span>Time saved</span><span id="time">–</span></div>
         <div class="kv"><span>Repayment</span><span id="repayment">–</span></div>
         <div class="kv"><span>Interest without offset</span><span id="base">–</span></div>
@@ -36,6 +43,17 @@
         <p class="disclaimer">Estimate only. Assumes constant rate and offset balance, and no fees. Not financial advice.</p>
       </div>
     </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>An offset account is a transaction account linked to your home loan. Its balance is subtracted from your loan balance before interest is calculated, so $50,000 in offset on a $600,000 loan means you're charged interest on $550,000.</p>
+<p>Because your repayment stays the same, more of each payment goes to principal and the loan finishes early. This calculator compares the loan with and without the offset to show interest and time saved.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is an offset better than extra repayments?</summary><p>Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender).</p></details><details><summary>Does the calculator assume my offset balance changes?</summary><p>No, it assumes a constant balance. In practice your balance moves with your pay and spending.</p></details><details><summary>Is offset interest saving taxable?</summary><p>Interest saved through an offset isn't income, so it isn't taxed — unlike interest earned in a savings account. Check your own situation with a tax professional.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="compound-interest.html">Compound Interest</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="rental-yield.html">Rental Yield</a></nav>
+    </section>
+    <!-- content:end -->
   </main>
 </body>
 </html>

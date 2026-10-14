@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   evaluate, nswTransferDuty, nswDuty, incomeTax, lito, medicareLevy, takeHome,
   mortgage, offsetSavings, compoundInterest, convert, formatDuration,
+  gst, percent, rentalYield, daysBetween, businessDays, ymdBetween, addDays,
 } from '../js/calc.js';
 
 test('calculator evaluates with precedence, brackets and percent', () => {
@@ -86,4 +87,41 @@ test('unit conversion', () => {
 test('duration formatting', () => {
   assert.equal(formatDuration(61230), '01:01.23');
   assert.equal(formatDuration(3723000, { showMs: false }), '01:02:03');
+});
+
+test('super is capped at the maximum contribution base', () => {
+  assert.equal(Math.round(takeHome(400000).super), Math.round(270830 * 0.12));
+  const pkg = takeHome(300000 + 270830 * 0.12, { includesSuper: true });
+  assert.equal(Math.round(pkg.salary), 300000);
+});
+
+test('GST add and remove', () => {
+  assert.equal(Math.round(gst(100, 'add').inclusive * 100) / 100, 110);
+  const r = gst(110, 'remove');
+  assert.equal(Math.round(r.gst * 100) / 100, 10);
+  assert.equal(Math.round(r.exclusive * 100) / 100, 100);
+});
+
+test('percentages', () => {
+  assert.equal(percent.of(15, 200), 30);
+  assert.equal(percent.whatPercent(30, 120), 25);
+  assert.equal(percent.change(80, 100), 25);
+  assert.equal(percent.change(100, 80), -20);
+  assert.ok(Number.isNaN(percent.change(0, 5)));
+});
+
+test('rental yield', () => {
+  const r = rentalYield({ price: 520000, weeklyRent: 500, annualCosts: 6000 });
+  assert.equal(Math.round(r.gross * 100) / 100, 5);
+  assert.equal(Math.round(r.net * 100) / 100, Math.round(((26000 - 6000) / 520000) * 10000) / 100);
+});
+
+test('dates', () => {
+  assert.equal(daysBetween('2026-01-01', '2026-12-31'), 364);
+  assert.equal(daysBetween('2026-01-01', '2026-12-31', { inclusive: true }), 365);
+  assert.equal(daysBetween('2026-04-04', '2026-04-05'), 1); // DST change in Australia
+  assert.equal(businessDays('2026-10-12', '2026-10-18'), 5); // Mon–Sun
+  assert.deepEqual(ymdBetween('1990-05-20', '2026-10-14'), { years: 36, months: 4, days: 24 });
+  assert.deepEqual(ymdBetween('2026-01-31', '2026-03-01'), { years: 0, months: 1, days: 1 });
+  assert.equal(addDays('2026-12-25', 10), '2027-01-04');
 });

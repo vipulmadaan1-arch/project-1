@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Percentage Calculator | ToolTiles</title>
+  <meta name="description" content="Work out a percentage of a number, what percent one number is of another, and percentage increase or decrease.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="Percentage Calculator">
+  <meta property="og:description" content="Work out a percentage of a number, what percent one number is of another, and percentage increase or decrease.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/percentage.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Percentage Calculator", "description": "Work out a percentage of a number, what percent one number is of another, and percentage increase or decrease.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I add a percentage to a number?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply by (1 + percent ÷ 100). To add 15% to 200: 200 × 1.15 = 230."}}, {"@type": "Question", "name": "What's the difference between percent and percentage points?", "acceptedAnswer": {"@type": "Answer", "text": "If a rate goes from 5% to 6%, it rose by 1 percentage point, which is a 20% increase."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Percentage Calculator</h1>
+      <p>Three common percentage questions, answered as you type.</p>
+    </div>
+    <form id="form">
+      <div class="card" style="margin-bottom:14px">
+        <h2 class="section-title" style="margin-top:0">What is X% of Y?</h2>
+        <div class="cols">
+          <div class="field"><label for="a1">Percent (%)</label><input type="number" id="a1" value="15" inputmode="decimal"></div>
+          <div class="field"><label for="a2">Of</label><input type="number" id="a2" value="200" inputmode="decimal"></div>
+        </div>
+        <div class="result-big" aria-live="polite" id="r1">–</div>
+      </div>
+      <div class="card" style="margin-bottom:14px">
+        <h2 class="section-title" style="margin-top:0">X is what percent of Y?</h2>
+        <div class="cols">
+          <div class="field"><label for="b1">Value</label><input type="number" id="b1" value="30" inputmode="decimal"></div>
+          <div class="field"><label for="b2">Total</label><input type="number" id="b2" value="120" inputmode="decimal"></div>
+        </div>
+        <div class="result-big" aria-live="polite" id="r2">–</div>
+      </div>
+      <div class="card">
+        <h2 class="section-title" style="margin-top:0">Percentage change from X to Y</h2>
+        <div class="cols">
+          <div class="field"><label for="c1">From</label><input type="number" id="c1" value="80" inputmode="decimal"></div>
+          <div class="field"><label for="c2">To</label><input type="number" id="c2" value="100" inputmode="decimal"></div>
+        </div>
+        <div class="result-big" aria-live="polite" id="r3">–</div>
+      </div>
+    </form>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <ul><li><strong>X% of Y</strong> = X ÷ 100 × Y. 15% of 200 = 30.</li>
+<li><strong>X is what % of Y</strong> = X ÷ Y × 100. 30 is 25% of 120.</li>
+<li><strong>Percentage change</strong> = (new − old) ÷ old × 100. From 80 to 100 is +25%.</li></ul>
+<p>Note that a 25% increase followed by a 25% decrease doesn't get you back to where you started: 80 → 100 → 75.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How do I add a percentage to a number?</summary><p>Multiply by (1 + percent ÷ 100). To add 15% to 200: 200 × 1.15 = 230.</p></details><details><summary>What's the difference between percent and percentage points?</summary><p>If a rate goes from 5% to 6%, it rose by 1 percentage point, which is a 20% increase.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="gst.html">GST Calculator</a><a href="calculator.html">Calculator</a><a href="compound-interest.html">Compound Interest</a><a href="unit-converter.html">Unit Converter</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

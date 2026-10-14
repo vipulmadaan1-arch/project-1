@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>World Clock — Time in Cities Around the World | ToolTiles</title>
   <meta name="description" content="Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="World Clock — Time in Cities Around the World">
+  <meta property="og:description" content="Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/world-clock.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "World Clock — Time in Cities Around the World", "description": "Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the time difference change during the year?", "acceptedAnswer": {"@type": "Answer", "text": "Daylight saving starts and ends on different dates in different countries — and Queensland, the NT and WA don't use it at all — so the gap between two cities can shift by an hour."}}, {"@type": "Question", "name": "Which time zone is Newcastle NSW in?", "acceptedAnswer": {"@type": "Answer", "text": "Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -17,11 +24,31 @@
       <h1>World Clock</h1>
       <p>Live local time in cities around the world. Add or remove cities — your list is saved on this device.</p>
     </div>
+    <form class="card" id="convert" style="margin-bottom:16px">
+      <h2 class="section-title" style="margin-top:0">Convert a time</h2>
+      <div class="cols">
+        <div class="field"><label for="at">Date and time</label><input type="datetime-local" id="at"></div>
+        <div class="field"><label for="in-zone">In</label><select id="in-zone"></select></div>
+      </div>
+      <div class="btn-row"><button class="btn" type="button" id="now">Back to live time</button></div>
+      <p class="note" id="mode-note">Showing live time.</p>
+    </form>
     <div class="add-row">
       <select id="zone-select" aria-label="Choose a city"></select>
       <button class="btn primary" id="add">Add</button>
     </div>
     <div class="clock-grid" id="clocks"></div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>See the current time in cities around the world, with the difference from your own time. Add cities you call or work with often — your list is saved on this device.</p>
+<p>To plan a call, use <strong>Convert a time</strong>: pick a date and time in any city, and every clock shows what time that will be there. Daylight saving is handled automatically, including the different change-over dates in Australia, Europe and North America.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Why does the time difference change during the year?</summary><p>Daylight saving starts and ends on different dates in different countries — and Queensland, the NT and WA don't use it at all — so the gap between two cities can shift by an hour.</p></details><details><summary>Which time zone is Newcastle NSW in?</summary><p>Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="date-calculator.html">Date Calculator</a><a href="timer.html">Countdown Timer</a><a href="stopwatch.html">Stopwatch</a><a href="calculator.html">Calculator</a></nav>
+    </section>
+    <!-- content:end -->
   </main>
 </body>
 </html>

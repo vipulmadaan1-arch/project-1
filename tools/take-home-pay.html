@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Take-Home Pay Calculator Australia 2026-27 | ToolTiles</title>
   <meta name="description" content="Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="Take-Home Pay Calculator Australia 2026-27">
+  <meta property="og:description" content="Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/take-home-pay.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Take-Home Pay Calculator Australia 2026-27", "description": "Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this include HECS/HELP repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Study loan repayments, the Medicare levy surcharge, salary sacrifice, deductions and other offsets aren't included."}}, {"@type": "Question", "name": "What's the difference between salary and package?", "acceptedAnswer": {"@type": "Answer", "text": "A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."}}, {"@type": "Question", "name": "Why is my payslip slightly different?", "acceptedAnswer": {"@type": "Answer", "text": "Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."}}, {"@type": "Question", "name": "Is there a cap on super?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -26,7 +33,7 @@
       </form>
       <div class="card">
         <div id="period-label">Take-home pay per fortnight</div>
-        <div class="result-big" id="net">–</div>
+        <div class="result-big" aria-live="polite" id="net">–</div>
         <div class="kv"><span>Gross salary</span><span id="salary">–</span></div>
         <div class="kv"><span>Income tax (after LITO)</span><span id="tax">–</span></div>
         <div class="kv"><span>Medicare levy</span><span id="medicare">–</span></div>
@@ -35,6 +42,20 @@
         <p class="disclaimer">Australian residents, 2026-27 rates (15% bracket from 1 July 2026). Medicare levy uses the latest ATO-published low-income thresholds. Excludes HELP/HECS repayments, Medicare levy surcharge, other offsets and deductions. Estimate only — check with the <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener">ATO</a>.</p>
       </div>
     </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Your take-home pay is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026.</p>
+<table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
+<tr><td>$0 – $18,200</td><td>Nil</td></tr><tr><td>$18,201 – $45,000</td><td>15%</td></tr><tr><td>$45,001 – $135,000</td><td>30%</td></tr>
+<tr><td>$135,001 – $190,000</td><td>37%</td></tr><tr><td>$190,001 and over</td><td>45%</td></tr></tbody></table>
+<p>It then subtracts the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667) and adds the <strong>Medicare levy</strong> of 2%, which is reduced for low incomes. Employer super of 12% is shown separately because it's paid on top of your salary, not out of it (unless you enter a package that includes super).</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Does this include HECS/HELP repayments?</summary><p>No. Study loan repayments, the Medicare levy surcharge, salary sacrifice, deductions and other offsets aren't included.</p></details><details><summary>What's the difference between salary and package?</summary><p>A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package.</p></details><details><summary>Why is my payslip slightly different?</summary><p>Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return.</p></details><details><summary>Is there a cap on super?</summary><p>Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="compound-interest.html">Compound Interest</a><a href="gst.html">GST Calculator</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a></nav>
+    </section>
+    <!-- content:end -->
   </main>
 </body>
 </html>

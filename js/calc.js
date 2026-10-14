@@ -181,6 +181,7 @@ export const TAX_BRACKETS = [
 ];
 export const MEDICARE = { rate: 0.02, lower: 28011, upper: 35013, shadeIn: 0.10 };
 export const SUPER_GUARANTEE = 0.12;
+export const SUPER_MAX_BASE = 270830; // ATO maximum contribution base 2026-27 (annual)
 
 export function incomeTax(income) {
   let tax = 0, prev = 0;
@@ -204,8 +205,11 @@ export function medicareLevy(income) {
 }
 
 export function takeHome(gross, { includesSuper = false } = {}) {
-  const salary = includesSuper ? gross / (1 + SUPER_GUARANTEE) : gross;
-  const superAmt = salary * SUPER_GUARANTEE;
+  // Super is only payable on earnings up to the maximum contribution base.
+  const salary = includesSuper
+    ? (gross <= SUPER_MAX_BASE * (1 + SUPER_GUARANTEE) ? gross / (1 + SUPER_GUARANTEE) : gross - SUPER_MAX_BASE * SUPER_GUARANTEE)
+    : gross;
+  const superAmt = Math.min(salary, SUPER_MAX_BASE) * SUPER_GUARANTEE;
   const tax = Math.max(0, incomeTax(salary) - lito(salary));
   const medicare = medicareLevy(salary);
   const net = salary - tax - medicare;
@@ -243,4 +247,62 @@ export function formatDuration(ms, { showMs = true } = {}) {
   const pad = (n) => String(n).padStart(2, '0');
   const core = `${h ? pad(h) + ':' : ''}${pad(m)}:${pad(s)}`;
   return (neg ? '-' : '') + (showMs ? `${core}.${pad(cs)}` : core);
+}
+
+// ---------- GST (Australia, 10%) ----------
+export const GST_RATE = 0.10;
+export function gst(amount, mode = 'add') {
+  if (mode === 'add') return { exclusive: amount, gst: amount * GST_RATE, inclusive: amount * (1 + GST_RATE) };
+  const exclusive = amount / (1 + GST_RATE);
+  return { exclusive, gst: amount - exclusive, inclusive: amount };
+}
+
+// ---------- Percentages ----------
+export const percent = {
+  of: (p, x) => (p / 100) * x,                       // p% of x
+  whatPercent: (x, y) => (y === 0 ? NaN : (x / y) * 100), // x is what % of y
+  change: (from, to) => (from === 0 ? NaN : ((to - from) / Math.abs(from)) * 100),
+};
+
+// ---------- Rental yield ----------
+export function rentalYield({ price, weeklyRent, annualCosts = 0, vacancyWeeks = 0 }) {
+  if (!(price > 0)) return { gross: 0, net: 0, annualRent: 0, netIncome: 0 };
+  const annualRent = weeklyRent * (52 - vacancyWeeks);
+  const netIncome = annualRent - annualCosts;
+  return { annualRent, netIncome, gross: (weeklyRent * 52 / price) * 100, net: (netIncome / price) * 100 };
+}
+
+// ---------- Dates ----------
+// Inputs are 'YYYY-MM-DD' strings. Works in UTC to avoid daylight-saving off-by-one errors.
+const toUTC = (s) => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+export function daysBetween(a, b, { inclusive = false } = {}) {
+  const days = Math.round((toUTC(b) - toUTC(a)) / 86400000);
+  return inclusive ? days + Math.sign(days || 1) : days;
+}
+export function businessDays(a, b) {
+  let start = toUTC(a), end = toUTC(b);
+  const sign = end < start ? -1 : 1;
+  if (sign < 0) [start, end] = [end, start];
+  let count = 0;
+  for (let t = start; t <= end; t += 86400000) {
+    const wd = new Date(t).getUTCDay();
+    if (wd !== 0 && wd !== 6) count++;
+  }
+  return count * sign;
+}
+function addMonthsClamped(y, m, d, n) {
+  const target = new Date(Date.UTC(y, m - 1 + n, 1));
+  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  return Date.UTC(target.getUTCFullYear(), target.getUTCMonth(), Math.min(d, lastDay));
+}
+export function ymdBetween(a, b) {
+  if (toUTC(b) < toUTC(a)) [a, b] = [b, a];
+  const [y1, m1, d1] = a.split('-').map(Number), [y2, m2] = b.split('-').map(Number);
+  let months = (y2 - y1) * 12 + (m2 - m1);
+  if (addMonthsClamped(y1, m1, d1, months) > toUTC(b)) months--;
+  const days = Math.round((toUTC(b) - addMonthsClamped(y1, m1, d1, months)) / 86400000);
+  return { years: Math.floor(months / 12), months: months % 12, days };
+}
+export function addDays(a, n) {
+  return new Date(toUTC(a) + n * 86400000).toISOString().slice(0, 10);
 }

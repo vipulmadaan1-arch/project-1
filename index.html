@@ -4,9 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ToolTiles — Free Australian calculators, timers and everyday tools</title>
-  <meta name="description" content="Free, fast tools in one place: NSW stamp duty, take-home pay, mortgage and offset calculators, compound interest, world clock, stopwatch, timer and unit converter. Pin your favourites.">
+  <meta name="description" content="Free Australian calculators and everyday tools in one place: NSW stamp duty, take-home pay, mortgage, offset, rental yield, GST, compound interest, world clock, timers and converters. No sign-up, works offline.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="js/layout.js"></script>
   <script type="module" src="js/pages/home.js"></script>
 </head>
@@ -24,6 +27,15 @@
     <h2 class="section-title" id="all-title">All tools</h2>
     <div class="grid" id="all"></div>
     <p class="empty" id="empty" hidden>No tools match that search.</p>
+    <section class="content">
+      <h2>Why use ToolTiles?</h2>
+      <ul>
+        <li><strong>Built for Australia:</strong> current NSW stamp duty, ATO tax rates, GST and super — in dollars, with weekly and fortnightly options.</li>
+        <li><strong>Private:</strong> every calculation runs in your browser. Nothing you type is sent or stored on a server.</li>
+        <li><strong>Fast and free:</strong> no sign-up, no pop-ups. Pin the tools you use and they stay at the top.</li>
+        <li><strong>Shareable:</strong> copy a link to your results to send to a partner, broker or accountant.</li>
+      </ul>
+    </section>
   </main>
 </body>
 </html>

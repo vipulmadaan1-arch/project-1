@@ -1,4 +1,4 @@
-import { fmtMoney, num } from '../layout.js';
+import { fmtMoney, num, syncFormWithUrl, addResultActions } from '../layout.js';
 import { offsetSavings } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
@@ -17,3 +17,5 @@ function update() {
 $('form').addEventListener('input', update);
 $('form').addEventListener('submit', (e) => e.preventDefault());
 update();
+syncFormWithUrl($('form'), update);
+addResultActions(document.querySelectorAll('.cols > .card')[1]);

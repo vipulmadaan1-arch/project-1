@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GST Calculator Australia — Add or Remove 10% GST | ToolTiles</title>
+  <meta name="description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="GST Calculator Australia — Add or Remove 10% GST">
+  <meta property="og:description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/gst.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator Australia — Add or Remove 10% GST", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO for your situation."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>GST Calculator</h1>
+      <p>Add 10% GST to a price, or find the GST included in a GST-inclusive amount.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="mode">I want to</label>
+          <select id="mode"><option value="add">Add GST to an amount</option><option value="remove">Remove GST from an amount</option></select></div>
+        <div class="field"><label for="amount" id="amount-label">Amount excluding GST ($)</label><input type="number" id="amount" value="100" min="0" step="0.01" inputmode="decimal"></div>
+      </form>
+      <div class="card">
+        <div id="headline-label">Total including GST</div>
+        <div class="result-big" aria-live="polite" id="headline">–</div>
+        <div class="kv"><span>Amount excluding GST</span><span id="ex">–</span></div>
+        <div class="kv"><span>GST (10%)</span><span id="g">–</span></div>
+        <div class="kv"><span>Amount including GST</span><span id="inc">–</span></div>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Australia's GST rate is 10%.</p>
+<ul><li><strong>Add GST:</strong> price × 1.1. $100 + GST = $110.</li>
+<li><strong>Remove GST:</strong> price ÷ 1.1. $110 includes $10 GST.</li>
+<li><strong>GST in a GST-inclusive price:</strong> price ÷ 11. For $220, GST is $20.</li></ul>
+<p>A common mistake is taking 10% off a GST-inclusive price — $110 − 10% = $99, not $100.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO for your situation.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="percentage.html">Percentage</a><a href="calculator.html">Calculator</a><a href="take-home-pay.html">Take-Home Pay (AU)</a><a href="compound-interest.html">Compound Interest</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

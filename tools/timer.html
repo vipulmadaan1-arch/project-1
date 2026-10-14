@@ -5,10 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Countdown Timer | ToolTiles</title>
   <meta name="description" content="Free online countdown timer with alarm sound. Set hours, minutes and seconds.">
+  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <meta property="og:title" content="Online Countdown Timer">
+  <meta property="og:description" content="Free online countdown timer with alarm sound. Set hours, minutes and seconds.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/timer.js"></script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Countdown Timer", "description": "Free online countdown timer with alarm sound. Set hours, minutes and seconds.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why didn't the alarm make a sound?", "acceptedAnswer": {"@type": "Answer", "text": "Some browsers block audio until you interact with the page, and phones may mute it in silent mode. Make sure your volume is on."}}, {"@type": "Question", "name": "Does it work in the background?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's based on the clock time, so it stays accurate. Some phones pause background tabs to save battery, though."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -33,6 +40,17 @@
         <button class="btn" id="reset">Reset</button>
       </div>
     </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Set hours, minutes and seconds, or tap a preset, then press Start. An alarm sounds and the time flashes when it reaches zero. The remaining time also shows in your browser tab, so you can keep an eye on it while working elsewhere.</p>
+<p>The 25-minute preset suits the Pomodoro technique: 25 minutes of focus, then a short break.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Why didn't the alarm make a sound?</summary><p>Some browsers block audio until you interact with the page, and phones may mute it in silent mode. Make sure your volume is on.</p></details><details><summary>Does it work in the background?</summary><p>Yes, it's based on the clock time, so it stays accurate. Some phones pause background tabs to save battery, though.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="stopwatch.html">Stopwatch</a><a href="world-clock.html">World Clock</a><a href="date-calculator.html">Date Calculator</a><a href="calculator.html">Calculator</a></nav>
+    </section>
+    <!-- content:end -->
   </main>
 </body>
 </html>
