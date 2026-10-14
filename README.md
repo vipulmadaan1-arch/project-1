@@ -15,7 +15,7 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 
 ## Features
 - Pin favourite tiles on the home page. Pins are saved in the browser.
-- Calculators save their inputs in the URL, so "Copy link" shares the exact results.
+- "Copy link" shares a calculator's exact inputs; opening the link restores them.
 - Works offline after the first visit (service worker) and can be installed as an app.
 - Each tool page has a how-it-works section, FAQs and structured data (JSON-LD) for search engines.
 - Light and dark mode.
@@ -24,11 +24,24 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 1. **Buy Me a Coffee:** create an account at buymeacoffee.com, then set `BMC_URL` in `js/config.js`. Until then all coffee links stay hidden, so the site can go live without them.
 2. **Site name:** change `SITE_NAME` in `js/config.js`, and the `| ToolTiles` suffix in the page `<title>` tags.
 
+## Revenue
+**Buy Me a Coffee:** set `BMC_URL` in `js/config.js`. The header button, footer link and the prompt under results appear automatically.
+
+**Google AdSense:** off until configured. Once AdSense approves your site (you'll need your own domain):
+1. In AdSense, create one responsive display ad unit.
+2. Set `ADSENSE_CLIENT` (e.g. `ca-pub-1234567890123456`) and `ADSENSE_SLOT` (the unit's ID) in `js/config.js`.
+3. Run `npm run ads-txt` and commit the generated `ads.txt` (it's deployed to the site root).
+4. In AdSense → Privacy & messaging, publish the European regulations message so EEA, UK and Swiss visitors get a consent banner.
+5. Set `CONTACT_EMAIL` so the privacy page lists a contact.
+
+Ads appear in one labelled slot per page: after each tool's results (before the explainer) and on the home page below the tool list. Space is reserved so the page doesn't jump when an ad loads. Calculator inputs stay out of the page address (only "Copy link" adds them), so ad scripts can't read them from the URL. The privacy policy is `privacy.html`; update it if you add other services.
+
 ## Run locally
 ```
 npm run serve      # http://localhost:8080
 npm test           # unit tests for all calculations
 npm run launch-check   # lists anything still to set before launch
+npm run ads-txt        # writes ads.txt from ADSENSE_CLIENT
 ```
 
 ## Deploy (GitHub Pages, free)

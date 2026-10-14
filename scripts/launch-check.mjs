@@ -1,11 +1,21 @@
 // Lists anything still to set before launch. Usage: npm run launch-check
 import { existsSync, readFileSync } from 'node:fs';
-import { BMC_URL, SITE_NAME } from '../js/config.js';
+import { BMC_URL, SITE_NAME, ADSENSE_CLIENT, ADSENSE_SLOT, CONTACT_EMAIL } from '../js/config.js';
 
 const todo = [];
 if (BMC_URL.includes('YOUR_HANDLE')) todo.push('Set BMC_URL in js/config.js (coffee button is hidden until you do).');
 if (!existsSync('sitemap.xml')) todo.push('Run: npm run sitemap -- https://your-domain (once you have a domain).');
 if (!readFileSync('robots.txt', 'utf8').includes('Sitemap:')) todo.push('robots.txt has no Sitemap line (the sitemap script adds it).');
+if (!CONTACT_EMAIL) todo.push('Set CONTACT_EMAIL in js/config.js so the privacy page lists a contact.');
+if (!ADSENSE_CLIENT) {
+  console.log('Ads: off (set ADSENSE_CLIENT and ADSENSE_SLOT in js/config.js once AdSense approves the site).');
+} else {
+  if (!/^ca-pub-\d{10,20}$/.test(ADSENSE_CLIENT)) todo.push(`ADSENSE_CLIENT "${ADSENSE_CLIENT}" should look like ca-pub-1234567890123456.`);
+  if (!/^\d{6,12}$/.test(ADSENSE_SLOT)) todo.push('Set ADSENSE_SLOT in js/config.js to your display ad unit ID (digits only).');
+  const pub = ADSENSE_CLIENT.replace(/^ca-/, '');
+  if (!existsSync('ads.txt') || !readFileSync('ads.txt', 'utf8').includes(pub)) todo.push('Run: npm run ads-txt (ads.txt is missing or does not match ADSENSE_CLIENT).');
+  todo.push('In AdSense → Privacy & messaging, publish the European regulations message (EEA, UK, Switzerland consent).');
+}
 console.log(`Site name: ${SITE_NAME}`);
 console.log(todo.length ? `Before launch:\n- ${todo.join('\n- ')}` : 'Ready to launch.');
 console.log('\nAfter merging to main: Settings → Pages → Source: GitHub Actions, then add the site to Google Search Console.');

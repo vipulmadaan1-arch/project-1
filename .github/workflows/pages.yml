@@ -35,9 +35,10 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp -r index.html manifest.webmanifest robots.txt sw.js css js img fonts tools _site/
+          cp -r index.html privacy.html manifest.webmanifest robots.txt sw.js css js img fonts tools _site/
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
           [ -f CNAME ] && cp CNAME _site/ || true
+          [ -f ads.txt ] && cp ads.txt _site/ || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

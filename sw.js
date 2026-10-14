@@ -1,6 +1,6 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v6';
+const VERSION = 'v8';
 const CACHE = `tooltiles-${VERSION}`;
 const FILES = [
   './',
@@ -10,6 +10,7 @@ const FILES = [
   'fonts/schibsted-grotesk.woff2',
   'img/icon.svg',
   'index.html',
+  'js/ads.js',
   'js/calc.js',
   'js/config.js',
   'js/icons.js',
@@ -22,6 +23,7 @@ const FILES = [
   'js/pages/mortgage.js',
   'js/pages/offset.js',
   'js/pages/percentage.js',
+  'js/pages/privacy.js',
   'js/pages/rental-yield.js',
   'js/pages/stamp-duty-nsw.js',
   'js/pages/stopwatch.js',
@@ -31,6 +33,7 @@ const FILES = [
   'js/pages/world-clock.js',
   'js/tools.js',
   'manifest.webmanifest',
+  'privacy.html',
   'tools/calculator.html',
   'tools/compound-interest.html',
   'tools/date-calculator.html',

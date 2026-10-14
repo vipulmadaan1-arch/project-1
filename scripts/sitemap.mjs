@@ -9,7 +9,7 @@ if (!/^https?:\/\//.test(base)) {
   process.exit(1);
 }
 const today = new Date().toISOString().slice(0, 10);
-const urls = [`${base}/`, ...TOOLS.map((t) => `${base}/tools/${t.slug}.html`)];
+const urls = [`${base}/`, ...TOOLS.map((t) => `${base}/tools/${t.slug}.html`), `${base}/privacy.html`];
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join('\n')}

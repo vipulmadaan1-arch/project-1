@@ -25,7 +25,7 @@ test('service worker caches every site file', () => {
     ...readdirSync('js').filter((f) => f.endsWith('.js')).map((f) => `js/${f}`),
     ...readdirSync('js/pages').map((f) => `js/pages/${f}`),
     ...readdirSync('fonts').filter((f) => f.endsWith('.woff2')).map((f) => `fonts/${f}`),
-    'index.html', 'css/style.css',
+    'index.html', 'privacy.html', 'css/style.css',
   ];
   for (const f of files) assert.ok(listed.includes(f), `${f} missing from sw.js FILES`);
   for (const f of listed) if (f !== './') assert.ok(existsSync(f), `sw.js lists missing file ${f}`);
@@ -44,4 +44,15 @@ test('every tool belongs to a home page category', async () => {
   const { CATEGORIES } = await import('../js/tools.js');
   const keys = CATEGORIES.map((c) => c.key);
   for (const t of TOOLS) assert.ok(keys.includes(t.cat), `${t.slug} has unknown cat ${t.cat}`);
+});
+
+test('ads stay off until AdSense IDs are set', async () => {
+  const { ADS_ENABLED } = await import('../js/ads.js');
+  const { ADSENSE_CLIENT } = await import('../js/config.js');
+  if (!ADSENSE_CLIENT) assert.equal(ADS_ENABLED, false);
+});
+
+test('every page has a privacy link via the shared footer and the privacy page exists', () => {
+  assert.ok(existsSync('privacy.html'));
+  assert.match(readFileSync('js/layout.js', 'utf8'), /privacy\.html/);
 });

@@ -2,6 +2,7 @@
 import { SITE_NAME, BMC_URL } from './config.js';
 import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
 import { icon } from './icons.js';
+import { mountAds } from './ads.js';
 
 // Hide all coffee links until a real Buy Me a Coffee handle is set in config.js.
 const HAS_BMC = !BMC_URL.includes('YOUR_HANDLE');
@@ -45,7 +46,7 @@ footer.innerHTML = `
   <div class="wrap">
     <div class="footer-about">
       ${brand}
-      <p>Free calculators for Australian money questions, plus everyday tools. Everything runs in your browser. Nothing you type leaves your device.</p>
+      <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser, so the figures you enter are never sent to a server.</p>
       <span class="stamp">Rates checked ${RATES_CHECKED}</span>
     </div>
     ${CATEGORIES.map((c) => `
@@ -55,7 +56,7 @@ footer.innerHTML = `
     </div>`).join('')}
     <div class="footer-legal">
       <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, Revenue NSW or a licensed adviser.</span>
-      ${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener">Support the site</a>` : ''}
+      <span class="footer-links"><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener">Support the site</a>` : ''}</span>
     </div>
   </div>`;
 document.body.append(footer);
@@ -82,9 +83,22 @@ export const fmtMoney = (n, dp = 0) =>
   n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: dp, maximumFractionDigits: dp });
 export const num = (el) => parseFloat(String(el.value).replace(/[,$\s]/g, '')) || 0;
 
-// Keeps a calculator form in sync with the URL so results can be shared or bookmarked.
-// Fields are matched by id. Call after the page's own listeners are attached.
+// Shared results links carry a calculator's inputs in the page address (?field=value).
+// The figures are read once on load, then removed from the address, so they don't stay
+// visible to anything else on the page (such as ad scripts) while you use the tool.
+// They are only put back into a link when you choose "Copy link".
+let sharedForm = null;
+
+function formParams(form) {
+  const p = new URLSearchParams();
+  for (const el of form.querySelectorAll('input[id], select[id]')) {
+    p.set(el.id, el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value);
+  }
+  return p;
+}
+
 export function syncFormWithUrl(form, onChange) {
+  sharedForm = form;
   const params = new URLSearchParams(location.search);
   let restored = false;
   for (const el of form.querySelectorAll('input[id], select[id]')) {
@@ -94,18 +108,7 @@ export function syncFormWithUrl(form, onChange) {
     restored = true;
   }
   if (restored) onChange();
-
-  let t;
-  form.addEventListener('input', () => {
-    clearTimeout(t);
-    t = setTimeout(() => {
-      const p = new URLSearchParams();
-      for (const el of form.querySelectorAll('input[id], select[id]')) {
-        p.set(el.id, el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value);
-      }
-      history.replaceState(null, '', `${location.pathname}?${p}`);
-    }, 300);
-  });
+  if (location.search) history.replaceState(null, '', location.pathname + location.hash);
 }
 
 // Adds "Copy link" and a gentle coffee prompt under a result card.
@@ -118,8 +121,9 @@ export function addResultActions(card) {
   const btn = wrap.querySelector('button');
   const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(location.href); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; }
-    catch { prompt('Copy this link:', location.href); }
+    const url = `${location.origin}${location.pathname}${sharedForm ? `?${formParams(sharedForm)}` : ''}`;
+    try { await navigator.clipboard.writeText(url); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; }
+    catch { prompt('Copy this link:', url); }
     setTimeout(() => { btn.innerHTML = idle; }, 2000);
   });
   card.append(wrap);
@@ -128,6 +132,11 @@ export function addResultActions(card) {
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   navigator.serviceWorker.register(`${base}sw.js`).catch(() => { /* offline support unavailable */ });
 }
+
+// Ad placeholder after each tool, before the explainer. Stays hidden unless ads are enabled.
+const content = document.querySelector('main .content');
+if (tool && content) content.insertAdjacentHTML('beforebegin', '<div class="ad-slot" hidden></div>');
+mountAds();
 
 // Related-tool links get their tool's icon.
 document.querySelectorAll('.related a').forEach((a) => {
