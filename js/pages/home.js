@@ -1,4 +1,4 @@
-import { TOOLS } from '../tools.js';
+import { TOOLS, CATEGORIES } from '../tools.js';
 import { safeGet, safeSet } from '../layout.js';
 
 const PIN_KEY = 'pinnedTools';
@@ -6,7 +6,7 @@ let pinned = [];
 try { pinned = JSON.parse(safeGet(PIN_KEY) || '[]'); } catch { pinned = []; }
 
 const $pinned = document.getElementById('pinned');
-const $all = document.getElementById('all');
+const $sections = document.getElementById('sections');
 const $search = document.getElementById('search');
 
 function tile(t) {
@@ -16,9 +16,9 @@ function tile(t) {
   const isPinned = pinned.includes(t.slug);
   a.innerHTML = `
     <div class="ico" aria-hidden="true">${t.icon}</div>
-    <h2>${t.name}</h2>
+    <h3>${t.name}</h3>
     <p>${t.desc}</p>
-    <span class="tag">${t.cat}</span>
+    <span class="tag">${t.cat === 'au' ? '🇦🇺 Australian' : 'General'}</span>
     <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="${isPinned ? 'Unpin' : 'Pin'} ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${isPinned ? '★' : '☆'}</button>`;
   a.querySelector('.pin').addEventListener('click', (e) => {
     e.preventDefault();
@@ -32,15 +32,27 @@ function tile(t) {
 
 function render() {
   const q = $search.value.trim().toLowerCase();
-  const match = (t) => !q || `${t.name} ${t.desc} ${t.cat}`.toLowerCase().includes(q);
+  const match = (t) => !q || `${t.name} ${t.desc} ${t.cat === 'au' ? 'australia australian au' : 'general'}`.toLowerCase().includes(q);
   const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
-  const others = TOOLS.filter((t) => !pinned.includes(t.slug)).filter(match);
-
   $pinned.replaceChildren(...pinnedTools.map(tile));
-  $all.replaceChildren(...others.map(tile));
   document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
-  document.getElementById('all-title').textContent = pinnedTools.length ? 'More tools' : 'All tools';
-  document.getElementById('empty').hidden = pinnedTools.length + others.length > 0;
+
+  let shown = pinnedTools.length;
+  $sections.replaceChildren(...CATEGORIES.map((c) => {
+    const tools = TOOLS.filter((t) => t.cat === c.key && !pinned.includes(t.slug)).filter(match);
+    shown += tools.length;
+    const sec = document.createElement('section');
+    sec.className = 'cat-section';
+    sec.id = c.key;
+    sec.hidden = tools.length === 0;
+    sec.innerHTML = `<h2 class="cat-title">${c.title}</h2><p class="cat-blurb">${c.blurb}</p>`;
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    grid.append(...tools.map(tile));
+    sec.append(grid);
+    return sec;
+  }));
+  document.getElementById('empty').hidden = shown > 0;
 }
 
 $search.addEventListener('input', render);

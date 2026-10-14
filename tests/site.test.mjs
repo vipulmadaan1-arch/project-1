@@ -38,3 +38,9 @@ test('tool pages have title, description and FAQ', () => {
     assert.match(html, /"FAQPage"/);
   }
 });
+
+test('every tool belongs to a home page category', async () => {
+  const { CATEGORIES } = await import('../js/tools.js');
+  const keys = CATEGORIES.map((c) => c.key);
+  for (const t of TOOLS) assert.ok(keys.includes(t.cat), `${t.slug} has unknown cat ${t.cat}`);
+});
