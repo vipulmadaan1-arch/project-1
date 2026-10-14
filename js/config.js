@@ -1,6 +1,11 @@
 // Site-wide settings. Change these in one place.
 export const SITE_NAME = 'Sorted, Mate';
 
+// The site's address, with no trailing slash (e.g. 'https://sortedmate.com.au').
+// Leave empty until you have a domain. After changing it, run: npm run seo
+// That writes canonical links, social share tags, breadcrumb data, sitemap.xml and robots.txt.
+export const SITE_URL = '';
+
 // Replace YOUR_HANDLE with your Buy Me a Coffee username (e.g. https://buymeacoffee.com/jane).
 export const BMC_URL = 'https://buymeacoffee.com/YOUR_HANDLE';
 
