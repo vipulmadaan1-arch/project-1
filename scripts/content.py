@@ -82,9 +82,9 @@ C = {
  related=['gst','calculator','compound-interest','unit-converter']),
 'calculator': dict(
  how="""<p>A simple, fast calculator that follows the normal order of operations — brackets first, then × and ÷, then + and −. Type directly on your keyboard: use * for ×, / for ÷, Enter for equals, Backspace to delete and Esc to clear.</p>
-<p>The % key divides by 100, so <em>50% × 200</em> = 100.</p>""",
+<p>The % key divides by 100, so <em>50% × 200</em> = 100. A number next to a bracket multiplies, so <em>2(3 + 4)</em> = 14. Press a different operator to replace the one you just pressed.</p>""",
  faq=[("Is anything I type saved or sent anywhere?","No. Everything runs in your browser."),
-      ("Why does 0.1 + 0.2 show 0.3?","Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic.")],
+      ("Why does 0.1 + 0.2 show 0.3?","Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0.")],
  related=['percentage','gst','unit-converter','date-calculator']),
 'unit-converter': dict(
  how="""<p>Convert between metric and imperial units for length, mass, volume, area, speed and temperature. Australia uses metric, but you'll still meet feet, pounds and Fahrenheit in recipes, specs and overseas listings.</p>

@@ -1,11 +1,18 @@
-import { fmtMoney, num, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
 import { compoundInterest } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
 function update() {
+  const principal = readNumber($('principal'), { name: 'Starting amount', unit: 'money', min: 0, max: 1e12, optional: true, example: '10,000' });
+  const ratePct = readNumber($('rate'), { name: 'Interest rate', unit: 'percent', min: 0, max: 100, example: '5' });
+  const years = readNumber($('years'), { name: 'Years', unit: 'years', min: 1, max: 100, example: '10' });
+  const contribution = readNumber($('contrib'), { name: 'Regular deposit', unit: 'money', min: 0, max: 1e12, optional: true, example: '200' });
+  if ([principal, ratePct, years, contribution].includes(null)) {
+    $('rows').replaceChildren();
+    return blank($('balance'), $('contributed'), $('interest'));
+  }
   const r = compoundInterest({
-    principal: num($('principal')), ratePct: num($('rate')), years: Math.min(100, Math.max(1, num($('years')))),
-    compoundsPerYear: +$('comp').value, contribution: num($('contrib')), contributionsPerYear: +$('cfreq').value,
+    principal, ratePct, years, compoundsPerYear: +$('comp').value, contribution, contributionsPerYear: +$('cfreq').value,
   });
   $('balance').textContent = fmtMoney(r.balance);
   $('contributed').textContent = fmtMoney(r.contributed);
@@ -13,8 +20,6 @@ function update() {
   $('rows').innerHTML = r.yearly.map((y) =>
     `<tr><td>${y.year}</td><td>${fmtMoney(y.contributed)}</td><td>${fmtMoney(y.interest)}</td><td>${fmtMoney(y.balance)}</td></tr>`).join('');
 }
-$('form').addEventListener('input', update);
-$('form').addEventListener('submit', (e) => e.preventDefault());
-update();
+wireForm($('form'), update);
 syncFormWithUrl($('form'), update);
 addResultActions(document.querySelectorAll('.cols > .card')[1]);

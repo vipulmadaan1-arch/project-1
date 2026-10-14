@@ -47,20 +47,32 @@ $in.innerHTML = `<option value="${localZone}">Your time (${nameOf(localZone)})</
   CITIES.map(([n, tz]) => `<option value="${tz}">${n}</option>`).join('');
 let fixed = null; // a chosen moment, or null for live time
 
-// Converts a wall-clock time in a given zone to an absolute Date.
+// Converts a wall-clock time in a given zone to an absolute Date. Around daylight saving
+// changes a wall time can be skipped (clocks go forward) or happen twice (clocks go back).
+// Like most calendars, a skipped time moves forward by the gap and a repeated time uses the
+// first occurrence. `shift` says which happened, so the page can explain it.
 function wallTimeToDate(value, tz) {
   const [date, time] = value.split('T');
   const [y, mo, da] = date.split('-').map(Number), [h, mi] = time.split(':').map(Number);
   const wall = Date.UTC(y, mo - 1, da, h, mi);
-  let guess = wall - offsetMinutes(tz, new Date(wall)) * 60000;
-  guess = wall - offsetMinutes(tz, new Date(guess)) * 60000;
-  return new Date(guess);
+  const before = offsetMinutes(tz, new Date(wall - 86400000)), after = offsetMinutes(tz, new Date(wall + 86400000));
+  const fits = [before, after].filter((o, i, a) => a.indexOf(o) === i && offsetMinutes(tz, new Date(wall - o * 60000)) === o);
+  if (fits.length) {
+    const t = Math.min(...fits.map((o) => wall - o * 60000));
+    return { date: new Date(t), shift: fits.length > 1 ? 'repeated' : '' };
+  }
+  return { date: new Date(wall - before * 60000), shift: 'skipped' };
 }
 function setFixed() {
-  if (!$at.value) { fixed = null; } else { fixed = wallTimeToDate($at.value, $in.value); }
-  document.getElementById('mode-note').textContent = fixed
-    ? `Showing ${$at.value.replace('T', ' ')} in ${$in.options[$in.selectedIndex].text} across all cities.`
-    : 'Showing live time.';
+  const r = $at.value ? wallTimeToDate($at.value, $in.value) : null;
+  fixed = r && !Number.isNaN(r.date.getTime()) ? r.date : null;
+  const where = $in.options[$in.selectedIndex].text;
+  const when = $at.value.replace('T', ' ');
+  const shown = fixed ? fixed.toLocaleTimeString('en-AU', { timeZone: $in.value, hour: 'numeric', minute: '2-digit' }) : '';
+  document.getElementById('mode-note').textContent = !fixed ? 'Showing live time.'
+    : r.shift === 'skipped' ? `${when} doesn’t exist in ${where} because clocks go forward for daylight saving. Showing ${shown} instead.`
+    : r.shift === 'repeated' ? `${when} happens twice in ${where} because clocks go back. Showing the first time, before the change.`
+    : `Showing ${when} in ${where} across all cities.`;
   render();
 }
 $at.addEventListener('input', setFixed);

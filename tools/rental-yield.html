@@ -26,10 +26,10 @@
     </div>
     <div class="cols">
       <form class="card" id="form">
-        <div class="field"><label for="price">Purchase price ($)</label><input type="number" id="price" value="550000" min="0" inputmode="decimal"></div>
-        <div class="field"><label for="rent">Weekly rent ($)</label><input type="number" id="rent" value="520" min="0" inputmode="decimal"></div>
-        <div class="field"><label for="costs">Annual costs ($)</label><input type="number" id="costs" value="7500" min="0" inputmode="decimal"><small>Council and water rates, insurance, strata, property management, maintenance.</small></div>
-        <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="number" id="vacancy" value="2" min="0" max="52" inputmode="numeric"></div>
+        <div class="field"><label for="price">Purchase price ($)</label><input type="text" id="price" class="num" value="550000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rent">Weekly rent ($)</label><input type="text" id="rent" class="num" value="520" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="costs">Annual costs ($)</label><input type="text" id="costs" class="num" value="7500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small>Council and water rates, insurance, strata, property management, maintenance.</small></div>
+        <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="text" id="vacancy" class="num" value="2" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
       </form>
       <div class="card readout">
         <div>Net rental yield</div>
