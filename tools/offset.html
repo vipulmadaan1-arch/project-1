@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offset Account Calculator (Australia) | ToolTiles</title>
+  <meta name="description" content="See how much interest and time an offset account saves on your home loan.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/offset.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Offset Account Calculator</h1>
+      <p>How much interest and time your offset balance saves, keeping repayments the same.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="principal">Loan amount ($)</label><input type="number" id="principal" value="600000" min="0" inputmode="decimal"></div>
+        <div class="field"><label for="offset">Offset balance ($)</label><input type="number" id="offset" value="50000" min="0" inputmode="decimal"><small>Assumes the balance stays constant.</small></div>
+        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="number" id="rate" value="6" step="0.01" min="0" inputmode="decimal"></div>
+        <div class="field"><label for="years">Loan term (years)</label><input type="number" id="years" value="30" min="1" max="40" inputmode="numeric"></div>
+        <div class="field"><label for="freq">Repayment frequency</label>
+          <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
+      </form>
+      <div class="card">
+        <div>Interest saved</div>
+        <div class="result-big" id="saved">–</div>
+        <div class="kv"><span>Time saved</span><span id="time">–</span></div>
+        <div class="kv"><span>Repayment</span><span id="repayment">–</span></div>
+        <div class="kv"><span>Interest without offset</span><span id="base">–</span></div>
+        <div class="kv"><span>Interest with offset</span><span id="with">–</span></div>
+        <p class="disclaimer">Estimate only. Assumes constant rate and offset balance, and no fees. Not financial advice.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

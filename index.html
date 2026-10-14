@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-AU" data-base="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ToolTiles — Free Australian calculators, timers and everyday tools</title>
+  <meta name="description" content="Free, fast tools in one place: NSW stamp duty, take-home pay, mortgage and offset calculators, compound interest, world clock, stopwatch, timer and unit converter. Pin your favourites.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/pages/home.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Everyday tools, built for Australians</h1>
+      <p>Money calculators with current Australian rates, plus clocks, timers and converters. Tap ☆ to pin your favourites to the top.</p>
+      <input class="search" id="search" type="search" placeholder="Search tools…" aria-label="Search tools">
+    </section>
+    <div id="pinned-section" hidden>
+      <h2 class="section-title">Pinned</h2>
+      <div class="grid" id="pinned"></div>
+    </div>
+    <h2 class="section-title" id="all-title">All tools</h2>
+    <div class="grid" id="all"></div>
+    <p class="empty" id="empty" hidden>No tools match that search.</p>
+  </main>
+</body>
+</html>

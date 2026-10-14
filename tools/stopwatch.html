@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Stopwatch with Laps | ToolTiles</title>
+  <meta name="description" content="Free online stopwatch with lap times. Works on phone and desktop.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/stopwatch.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Stopwatch</h1>
+      <p>Start, pause and record laps. Space to start/stop, L for lap.</p>
+    </div>
+    <div class="card">
+      <div class="big-time" id="display" aria-live="off">00:00.00</div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn primary" id="start">Start</button>
+        <button class="btn" id="lap" disabled>Lap</button>
+        <button class="btn" id="reset" disabled>Reset</button>
+      </div>
+      <ol class="laps" id="laps"></ol>
+    </div>
+  </main>
+</body>
+</html>

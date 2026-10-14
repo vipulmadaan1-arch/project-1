@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NSW Stamp Duty Calculator 2026/27 | ToolTiles</title>
+  <meta name="description" content="Calculate NSW transfer (stamp) duty using 2026/27 Revenue NSW rates, including first home buyer exemption and foreign purchaser surcharge.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/stamp-duty-nsw.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>NSW Stamp Duty Calculator 2026/27</h1>
+      <p>Transfer duty on NSW property using the current Revenue NSW rates.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="value">Property value ($)</label><input type="number" id="value" value="750000" min="0" inputmode="decimal"><small>Dutiable value is the higher of the price and market value.</small></div>
+        <label class="check"><input type="checkbox" id="residential" checked> Residential property</label>
+        <label class="check"><input type="checkbox" id="fhb"> First home buyer (home, not vacant land)</label>
+        <label class="check"><input type="checkbox" id="foreign"> Foreign purchaser</label>
+      </form>
+      <div class="card">
+        <div>Total duty payable</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
+        <div class="kv"><span>Foreign purchaser surcharge (9%)</span><span id="surcharge">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Rates: Revenue NSW 2026/27 (contracts dated from 1 July 2026). Estimate only — exemptions and concessions depend on eligibility. Confirm with <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener">Revenue NSW</a> or your conveyancer. <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener">First home buyer concession calculator</a>.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

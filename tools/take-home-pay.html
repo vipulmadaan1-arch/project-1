@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Take-Home Pay Calculator Australia 2026-27 | ToolTiles</title>
+  <meta name="description" content="Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/take-home-pay.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Take-Home Pay Calculator (2026-27)</h1>
+      <p>Your after-tax pay as an Australian resident, using 2026-27 tax rates.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="gross">Annual salary ($)</label><input type="number" id="gross" value="90000" min="0" inputmode="decimal"></div>
+        <label class="check"><input type="checkbox" id="incl"> Salary includes super (package)</label>
+        <div class="field"><label for="period">Show pay per</label>
+          <select id="period"><option value="1">Year</option><option value="12">Month</option><option value="26" selected>Fortnight</option><option value="52">Week</option></select></div>
+      </form>
+      <div class="card">
+        <div id="period-label">Take-home pay per fortnight</div>
+        <div class="result-big" id="net">–</div>
+        <div class="kv"><span>Gross salary</span><span id="salary">–</span></div>
+        <div class="kv"><span>Income tax (after LITO)</span><span id="tax">–</span></div>
+        <div class="kv"><span>Medicare levy</span><span id="medicare">–</span></div>
+        <div class="kv"><span>Super (12%, paid on top)</span><span id="super">–</span></div>
+        <div class="kv"><span>Effective tax rate</span><span id="eff">–</span></div>
+        <p class="disclaimer">Australian residents, 2026-27 rates (15% bracket from 1 July 2026). Medicare levy uses the latest ATO-published low-income thresholds. Excludes HELP/HECS repayments, Medicare levy surcharge, other offsets and deductions. Estimate only — check with the <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener">ATO</a>.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

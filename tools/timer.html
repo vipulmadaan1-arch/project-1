@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Online Countdown Timer | ToolTiles</title>
+  <meta name="description" content="Free online countdown timer with alarm sound. Set hours, minutes and seconds.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/timer.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Countdown Timer</h1>
+      <p>Set a time and start. An alarm sounds when it reaches zero.</p>
+    </div>
+    <div class="card">
+      <div class="timer-inputs" id="inputs">
+        <div class="field"><label for="h">Hours</label><input type="number" id="h" min="0" max="99" value="0" inputmode="numeric"></div>
+        <div class="field"><label for="m">Minutes</label><input type="number" id="m" min="0" max="59" value="5" inputmode="numeric"></div>
+        <div class="field"><label for="s">Seconds</label><input type="number" id="s" min="0" max="59" value="0" inputmode="numeric"></div>
+      </div>
+      <div class="btn-row" style="margin-bottom:8px">
+        <button class="btn" data-preset="60">1 min</button><button class="btn" data-preset="300">5 min</button>
+        <button class="btn" data-preset="600">10 min</button><button class="btn" data-preset="1500">25 min</button>
+      </div>
+      <div class="big-time" id="display">05:00</div>
+      <div class="btn-row" style="justify-content:center">
+        <button class="btn primary" id="start">Start</button>
+        <button class="btn" id="reset">Reset</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit Converter — Metric and Imperial | ToolTiles</title>
+  <meta name="description" content="Convert length, weight, volume, area, speed and temperature between metric and imperial units.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/unit-converter.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>Unit Converter</h1>
+      <p>Convert between metric and imperial units.</p>
+    </div>
+    <div class="card">
+      <div class="field"><label for="cat">Category</label><select id="cat"></select></div>
+      <div class="cols">
+        <div>
+          <div class="field"><label for="from">From</label><select id="from"></select></div>
+          <div class="field"><label for="in">Value</label><input type="number" id="in" value="1" inputmode="decimal"></div>
+        </div>
+        <div>
+          <div class="field"><label for="to">To</label><select id="to"></select></div>
+          <div class="field"><label>Result</label><div class="result-big" id="out">–</div></div>
+        </div>
+      </div>
+      <button class="btn" id="swap" type="button">⇄ Swap</button>
+    </div>
+  </main>
+</body>
+</html>

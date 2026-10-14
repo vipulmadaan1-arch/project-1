@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>World Clock — Time in Cities Around the World | ToolTiles</title>
+  <meta name="description" content="Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+  <script type="module" src="../js/layout.js"></script>
+  <script type="module" src="../js/pages/world-clock.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <p class="crumbs"><a href="../">← All tools</a></p>
+    <div class="tool-head">
+      <h1>World Clock</h1>
+      <p>Live local time in cities around the world. Add or remove cities — your list is saved on this device.</p>
+    </div>
+    <div class="add-row">
+      <select id="zone-select" aria-label="Choose a city"></select>
+      <button class="btn primary" id="add">Add</button>
+    </div>
+    <div class="clock-grid" id="clocks"></div>
+  </main>
+</body>
+</html>
