@@ -20,14 +20,26 @@ const DEFAULT = ['Europe/London', 'America/New_York', 'Asia/Kolkata', 'Asia/Toky
 const KEY = 'worldClockZones';
 const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
+// Saved cities can only be ones from the list above. Anything else in storage is ignored.
+const KNOWN = new Set(CITIES.map((c) => c[1]));
 let zones;
-try { zones = JSON.parse(safeGet(KEY)) || DEFAULT; } catch { zones = DEFAULT; }
+try {
+  const saved = JSON.parse(safeGet(KEY));
+  zones = Array.isArray(saved) ? [...new Set(saved.filter((z) => KNOWN.has(z)))] : DEFAULT;
+} catch { zones = DEFAULT; }
 const save = () => safeSet(KEY, JSON.stringify(zones));
 const nameOf = (tz) => (CITIES.find((c) => c[1] === tz) || [tz.split('/').pop().replace(/_/g, ' ')])[0];
+const make = (tag, className, text) => {
+  const el = document.createElement(tag);
+  if (className) el.className = className;
+  if (text !== undefined) el.textContent = text;
+  return el;
+};
+const cityOptions = () => CITIES.map(([n, tz]) => new Option(n, tz));
 
 const $sel = document.getElementById('zone-select');
 const $clocks = document.getElementById('clocks');
-$sel.innerHTML = CITIES.map(([n, tz]) => `<option value="${tz}">${n}</option>`).join('');
+$sel.replaceChildren(...cityOptions());
 
 function offsetMinutes(tz, d) {
   const parts = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' })
@@ -43,8 +55,7 @@ function diffLabel(tz, d) {
 
 const $at = document.getElementById('at');
 const $in = document.getElementById('in-zone');
-$in.innerHTML = `<option value="${localZone}">Your time (${nameOf(localZone)})</option>` +
-  CITIES.map(([n, tz]) => `<option value="${tz}">${n}</option>`).join('');
+$in.replaceChildren(new Option(`Your time (${nameOf(localZone)})`, localZone), ...cityOptions());
 let fixed = null; // a chosen moment, or null for live time
 
 // Converts a wall-clock time in a given zone to an absolute Date.
@@ -76,9 +87,17 @@ function render() {
     el.className = `card clock${isLocal ? ' local' : ''}`;
     const time = d.toLocaleTimeString('en-AU', fixed ? { timeZone: tz, hour: 'numeric', minute: '2-digit' } : { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit' });
     const date = d.toLocaleDateString('en-AU', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short' });
-    el.innerHTML = `<div class="city">${isLocal ? `Your time · ${nameOf(tz)}` : nameOf(tz)}</div>
-      <div class="time">${time}</div><div class="meta">${date} · ${isLocal ? 'Local' : diffLabel(tz, d)}</div>
-      ${isLocal ? '' : `<button class="remove" aria-label="Remove ${nameOf(tz)}" data-tz="${tz}">✕</button>`}`;
+    el.append(
+      make('div', 'city', isLocal ? `Your time · ${nameOf(tz)}` : nameOf(tz)),
+      make('div', 'time', time),
+      make('div', 'meta', `${date} · ${isLocal ? 'Local' : diffLabel(tz, d)}`),
+    );
+    if (!isLocal) {
+      const btn = make('button', 'remove', '✕');
+      btn.setAttribute('aria-label', `Remove ${nameOf(tz)}`);
+      btn.dataset.tz = tz;
+      el.append(btn);
+    }
     return el;
   }));
 }

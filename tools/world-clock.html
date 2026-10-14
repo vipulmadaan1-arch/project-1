@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/world-clock.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>World Clock — Time in Cities Around the World | Sorted, Mate</title>
   <meta name="description" content="Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <!-- seo:start -->
   <meta property="og:site_name" content="Sorted, Mate">
   <meta property="og:locale" content="en_AU">
@@ -18,8 +20,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/world-clock.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "World Clock", "description": "Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the time difference change during the year?", "acceptedAnswer": {"@type": "Answer", "text": "Daylight saving starts and ends on different dates in different countries — and Queensland, the NT and WA don't use it at all — so the gap between two cities can shift by an hour."}}, {"@type": "Question", "name": "Which time zone is Newcastle NSW in?", "acceptedAnswer": {"@type": "Answer", "text": "Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving."}}]}]</script>
 </head>
 <body>

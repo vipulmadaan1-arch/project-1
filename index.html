@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="./">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="js/pages/home.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Free Australian Calculators and Everyday Tools | Sorted, Mate</title>
   <meta name="description" content="Free Australian calculators and everyday tools in one place: NSW stamp duty, take-home pay, mortgage, offset, rental yield, GST, compound interest, world clock, timers and converters. No sign-up, works offline.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <!-- seo:start -->
   <meta property="og:site_name" content="Sorted, Mate">
   <meta property="og:locale" content="en_AU">
@@ -18,8 +20,6 @@
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="js/layout.js"></script>
-  <script type="module" src="js/pages/home.js"></script>
 </head>
 <body>
   <main class="wrap">

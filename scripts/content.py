@@ -123,7 +123,9 @@ names = {}
 src = open('js/tools.js').read()
 for slug, name in re.findall(r"slug: '([^']+)', name: '([^']+)'", src): names[slug]=name
 
-THEME = "<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>"
+# Every page's <head> has the Content-Security-Policy meta tag and one inline boot script
+# (theme + page script loader). Its hash is in the policy; npm test checks they match.
+BOOT = "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))"
 
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 
@@ -151,15 +153,14 @@ for slug, c in C.items():
       {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"}},
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":strip_tags(a)}} for q,a in c['faq']]},
     ]
-    ldtag = '\n  <script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>'
+    # Escape "</" so text in the FAQ can never close the script tag early.
+    ldtag = '\n  <script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>'
     s = s.replace('\n</head>', ldtag + '\n</head>')
-    if THEME not in s:
-        s = s.replace('  <link rel="stylesheet"', '  ' + THEME + '\n  <link rel="stylesheet"', 1)
+    if BOOT not in s:
+        sys.exit(f'{p} has no boot script. Copy the <head> of an existing tool page.')
     # Open Graph, canonical and breadcrumb tags are written by scripts/seo.mjs (between seo:start/end).
     open(p,'w').write(s)
     print('ok', slug)
 
-p='index.html'; s=open(p).read()
-if THEME not in s:
-    s = s.replace('  <link rel="stylesheet"', '  ' + THEME + '\n  <link rel="stylesheet"', 1)
-open(p,'w').write(s)
+if BOOT not in open('index.html').read():
+    sys.exit('index.html has no boot script.')

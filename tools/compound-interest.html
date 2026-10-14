@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/compound-interest.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Compound Interest Calculator (Australia) | Sorted, Mate</title>
   <meta name="description" content="Free compound interest calculator with regular deposits. See how savings grow year by year.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <!-- seo:start -->
   <meta property="og:site_name" content="Sorted, Mate">
   <meta property="og:locale" content="en_AU">
@@ -18,8 +20,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/compound-interest.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free compound interest calculator with regular deposits. See how savings grow year by year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return — but investment returns vary year to year and aren't guaranteed."}}]}]</script>
 </head>
 <body>
