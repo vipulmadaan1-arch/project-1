@@ -42,6 +42,7 @@ npm run serve      # http://localhost:8080
 npm test           # unit tests for all calculations
 npm run launch-check   # lists anything still to set before launch
 npm run ads-txt        # writes ads.txt from ADSENSE_CLIENT
+npm run seo            # canonical/share tags, static tool links, sitemap.xml, robots.txt
 ```
 
 ## Deploy (GitHub Pages, free)
@@ -49,19 +50,29 @@ npm run ads-txt        # writes ads.txt from ADSENSE_CLIENT
 2. Go to repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Every push to `main` now runs the tests and, if they pass, deploys the site (`.github/workflows/pages.yml`).
 4. For a custom domain, add a `CNAME` file containing the domain (e.g. `sortedmate.com.au`) and set the domain's DNS as GitHub Pages instructs.
-Once you have a domain, run `npm run sitemap -- https://your-domain.com.au` and commit the result.
-Then add the site to Google Search Console and submit `sitemap.xml`.
+5. Set `SITE_URL` in `js/config.js` (e.g. `'https://sortedmate.com.au'`), run `npm run seo`, bump `VERSION` in `sw.js` and commit. See **Search and sharing** below.
+6. Add the site to Google Search Console and submit `sitemap.xml`.
 
 **After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing.
+
+## Search and sharing (SEO)
+The domain is set in one place: `SITE_URL` in `js/config.js`. `npm run seo` (`scripts/seo.mjs`) reads it and writes:
+- in every page's `<head>`, between `<!-- seo:start -->` and `<!-- seo:end -->`: the canonical link, Open Graph and Twitter card tags (share image `img/og.png`, 1200×630), BreadcrumbList structured data built from the page's visible breadcrumb, and WebSite structured data (site name) on the home page;
+- the static tool tiles on the home and 404 pages, between `<!-- tiles:start -->` and `<!-- tiles:end -->`, so every tool has a plain link in the HTML before JavaScript runs;
+- `sitemap.xml` (each page's `lastmod` is the date of its last commit) and `robots.txt`;
+- the `<base>` of `404.html`, which GitHub Pages serves for any missing address.
+
+Don't hand-edit between those markers. Rerun `npm run seo` after changing a page title or description, adding a tool, or changing `SITE_URL`. Until `SITE_URL` is set it writes only the tags that don't need an address. `npm test` checks that titles and descriptions are unique, every page has one `h1`, all JSON-LD parses, and (once `SITE_URL` is set) every page has the right canonical link and sitemap entry.
 
 ## Editing page text
 The How it works / FAQ / Related tools section of each tool page is generated from `scripts/content.py`. Edit the text there and run `python3 scripts/content.py`. It is safe to rerun.
 
 ## Adding a tool
 1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
-2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`.
+2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`. Give it a unique `<title>` and meta description.
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.
+5. Run `python3 scripts/content.py` and `npm run seo`.
 
 ## Rates to update every year (1 July)
 | What | Where | Source |

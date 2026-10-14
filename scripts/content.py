@@ -131,7 +131,7 @@ for slug, c in C.items():
     p = f'tools/{slug}.html'; s = open(p).read()
     s = re.sub(r'\n    <!-- content:start -->.*?<!-- content:end -->', '', s, flags=re.S)
     s = re.sub(r'\n  <script type="application/ld\+json">.*?</script>', '', s, flags=re.S)
-    title = re.search(r'<title>(.*?) \|', s).group(1)
+    name = re.search(r'<h1>(.*?)</h1>', s).group(1)
     desc = re.search(r'<meta name="description" content="(.*?)">', s).group(1)
     faq_html = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in c['faq'])
     rel = ''.join(f'<a href="{r}.html">{names[r]}</a>' for r in c['related'])
@@ -148,15 +148,14 @@ for slug, c in C.items():
     <!-- content:end -->'''
     s = s.replace('\n  </main>', block + '\n  </main>')
     ld = [
-      {"@context":"https://schema.org","@type":"WebApplication","name":title,"description":desc,"applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"}},
+      {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"}},
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":strip_tags(a)}} for q,a in c['faq']]},
     ]
     ldtag = '\n  <script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False) + '</script>'
     s = s.replace('\n</head>', ldtag + '\n</head>')
     if THEME not in s:
         s = s.replace('  <link rel="stylesheet"', '  ' + THEME + '\n  <link rel="stylesheet"', 1)
-    if 'og:title' not in s:
-        s = s.replace('  <link rel="stylesheet"', f'  <meta property="og:title" content="{title}">\n  <meta property="og:description" content="{desc}">\n  <meta property="og:type" content="website">\n  <link rel="stylesheet"', 1)
+    # Open Graph, canonical and breadcrumb tags are written by scripts/seo.mjs (between seo:start/end).
     open(p,'w').write(s)
     print('ok', slug)
 

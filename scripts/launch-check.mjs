@@ -1,11 +1,12 @@
 // Lists anything still to set before launch. Usage: npm run launch-check
 import { existsSync, readFileSync } from 'node:fs';
-import { BMC_URL, SITE_NAME, ADSENSE_CLIENT, ADSENSE_SLOT, CONTACT_EMAIL } from '../js/config.js';
+import { BMC_URL, SITE_NAME, SITE_URL, ADSENSE_CLIENT, ADSENSE_SLOT, CONTACT_EMAIL } from '../js/config.js';
 
 const todo = [];
 if (BMC_URL.includes('YOUR_HANDLE')) todo.push('Set BMC_URL in js/config.js (coffee button is hidden until you do).');
-if (!existsSync('sitemap.xml')) todo.push('Run: npm run sitemap -- https://your-domain (once you have a domain).');
-if (!readFileSync('robots.txt', 'utf8').includes('Sitemap:')) todo.push('robots.txt has no Sitemap line (the sitemap script adds it).');
+if (!SITE_URL) todo.push('Set SITE_URL in js/config.js once you have a domain, then run: npm run seo');
+else if (!existsSync('sitemap.xml') || !readFileSync('index.html', 'utf8').includes(`<link rel="canonical" href="${SITE_URL}/">`)) todo.push('Run: npm run seo (canonical links and sitemap.xml are out of date for SITE_URL).');
+if (!readFileSync('robots.txt', 'utf8').includes('Sitemap:')) todo.push('robots.txt has no Sitemap line (npm run seo adds it).');
 if (!CONTACT_EMAIL) todo.push('Set CONTACT_EMAIL in js/config.js so the privacy page lists a contact.');
 if (!ADSENSE_CLIENT) {
   console.log('Ads: off (set ADSENSE_CLIENT and ADSENSE_SLOT in js/config.js once AdSense approves the site).');
