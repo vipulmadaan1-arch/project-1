@@ -15,13 +15,14 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 - Light and dark mode.
 
 ## Setup
-1. **Buy Me a Coffee:** create an account at buymeacoffee.com, then set `BMC_URL` in `js/config.js`.
+1. **Buy Me a Coffee:** create an account at buymeacoffee.com, then set `BMC_URL` in `js/config.js`. Until then all coffee links stay hidden, so the site can go live without them.
 2. **Site name:** change `SITE_NAME` in `js/config.js`, and the `| ToolTiles` suffix in the page `<title>` tags.
 
 ## Run locally
 ```
 npm run serve      # http://localhost:8080
 npm test           # unit tests for all calculations
+npm run launch-check   # lists anything still to set before launch
 ```
 
 ## Deploy (GitHub Pages, free)
