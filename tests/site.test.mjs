@@ -24,6 +24,7 @@ test('service worker caches every site file', () => {
     ...readdirSync('tools').map((f) => `tools/${f}`),
     ...readdirSync('js').filter((f) => f.endsWith('.js')).map((f) => `js/${f}`),
     ...readdirSync('js/pages').map((f) => `js/pages/${f}`),
+    ...readdirSync('fonts').filter((f) => f.endsWith('.woff2')).map((f) => `fonts/${f}`),
     'index.html', 'css/style.css',
   ];
   for (const f of files) assert.ok(listed.includes(f), `${f} missing from sw.js FILES`);

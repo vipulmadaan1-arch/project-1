@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/rental-yield.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Yield Calculator (Australia)", "description": "Calculate gross and net rental yield for an Australian investment property from price, weekly rent and annual costs.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What costs should I include?", "acceptedAnswer": {"@type": "Answer", "text": "Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."}}, {"@type": "Question", "name": "Does this include mortgage repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately."}}, {"@type": "Question", "name": "What's a good rental yield?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the location, property type and growth prospects. Higher-yield areas often have lower capital growth, and vice versa."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#au">Australian</a><span aria-hidden="true">/</span><span aria-current="page">Rental Yield</span></nav>
     <div class="tool-head">
       <h1>Rental Yield Calculator</h1>
       <p>Gross and net yield for an investment property, using weekly rent like Australian listings.</p>
@@ -31,7 +31,7 @@
         <div class="field"><label for="costs">Annual costs ($)</label><input type="number" id="costs" value="7500" min="0" inputmode="decimal"><small>Council and water rates, insurance, strata, property management, maintenance.</small></div>
         <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="number" id="vacancy" value="2" min="0" max="52" inputmode="numeric"></div>
       </form>
-      <div class="card">
+      <div class="card readout">
         <div>Net rental yield</div>
         <div class="result-big" aria-live="polite" id="net">–</div>
         <div class="kv"><span>Gross rental yield</span><span id="gross">–</span></div>
@@ -49,7 +49,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>What costs should I include?</summary><p>Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies.</p></details><details><summary>Does this include mortgage repayments?</summary><p>No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately.</p></details><details><summary>What's a good rental yield?</summary><p>It depends on the location, property type and growth prospects. Higher-yield areas often have lower capital growth, and vice versa.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="offset.html">Offset Account Savings</a><a href="compound-interest.html">Compound Interest</a></nav>
+      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="offset.html">Offset Account</a><a href="compound-interest.html">Compound Interest</a></nav>
     </section>
     <!-- content:end -->
   </main>

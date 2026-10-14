@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/date-calculator.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Date Calculator — Days Between Dates", "description": "Count days, weeks and business days between two dates, or add days to a date.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are public holidays excluded from business days?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ."}}, {"@type": "Question", "name": "Does daylight saving affect the count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Date Calculator</span></nav>
     <div class="tool-head">
       <h1>Date Calculator</h1>
       <p>Days between two dates, business days, and adding or subtracting days.</p>
@@ -34,7 +34,7 @@
         <h2 class="section-title">Add or subtract days</h2>
         <div class="field"><label for="n">Days to add from start date (use − to subtract)</label><input type="number" id="n" value="90" inputmode="numeric"></div>
       </form>
-      <div class="card">
+      <div class="card readout">
         <div>Days between</div>
         <div class="result-big" aria-live="polite" id="days">–</div>
         <div class="kv"><span>Years, months, days</span><span id="ymd">–</span></div>

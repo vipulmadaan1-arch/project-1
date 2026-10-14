@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/stopwatch.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Stopwatch with Laps", "description": "Free online stopwatch with lap times. Works on phone and desktop.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it keep running if I switch tabs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It measures elapsed time from the clock, so the time stays accurate when you come back."}}, {"@type": "Question", "name": "Are my laps saved?", "acceptedAnswer": {"@type": "Answer", "text": "No. Laps clear when you reset or leave the page."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Stopwatch</span></nav>
     <div class="tool-head">
       <h1>Stopwatch</h1>
       <p>Start, pause and record laps. Space to start/stop, L for lap.</p>

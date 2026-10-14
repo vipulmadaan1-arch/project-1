@@ -7,6 +7,12 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 **Everyday:** Calculator · Percentage · Unit Converter · Date Calculator
 **Time:** World Clock (with time converter) · Stopwatch · Countdown Timer
 
+## Design
+- Type: Schibsted Grotesk (headings, figures), IBM Plex Sans (body), IBM Plex Mono (labels, stopwatch, timer and calculator digits). The fonts are self-hosted in `fonts/` (SIL Open Font License; see `fonts/LICENSE.txt`), so no request goes to Google and the site still works offline.
+- Colour tokens and the type scale are at the top of `css/style.css`. Light and dark themes are defined in one place.
+- Icons are inline SVG line icons in `js/icons.js`, one per tool, keyed by slug. A new tool needs an icon added there.
+- Every result appears on the dark "readout" panel (class `readout`). It is the only high-contrast element on a page.
+
 ## Features
 - Pin favourite tiles on the home page. Pins are saved in the browser.
 - Calculators save their inputs in the URL, so "Copy link" shares the exact results.
@@ -39,7 +45,7 @@ Then add the site to Google Search Console and submit `sitemap.xml`.
 The How it works / FAQ / Related tools section of each tool page is generated from `scripts/content.py`. Edit the text there and run `python3 scripts/content.py`. It is safe to rerun.
 
 ## Adding a tool
-1. Add an entry to `js/tools.js`.
+1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
 2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`.
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.

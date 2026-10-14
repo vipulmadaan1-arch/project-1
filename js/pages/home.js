@@ -1,5 +1,6 @@
 import { TOOLS, CATEGORIES } from '../tools.js';
 import { safeGet, safeSet } from '../layout.js';
+import { icon } from '../icons.js';
 
 const PIN_KEY = 'pinnedTools';
 let pinned = [];
@@ -15,11 +16,11 @@ function tile(t) {
   a.href = `tools/${t.slug}.html`;
   const isPinned = pinned.includes(t.slug);
   a.innerHTML = `
-    <div class="ico" aria-hidden="true">${t.icon}</div>
+    <div class="ico">${icon(t.slug)}</div>
     <h3>${t.name}</h3>
     <p>${t.desc}</p>
-    <span class="tag">${t.cat === 'au' ? '🇦🇺 Australian' : 'General'}</span>
-    <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="${isPinned ? 'Unpin' : 'Pin'} ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${isPinned ? '★' : '☆'}</button>`;
+    <div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div>
+    <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="${isPinned ? 'Unpin' : 'Pin'} ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${icon('pin')}</button>`;
   a.querySelector('.pin').addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -36,6 +37,7 @@ function render() {
   const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
   $pinned.replaceChildren(...pinnedTools.map(tile));
   document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
+  document.getElementById('pinned-count').textContent = pinnedTools.length;
 
   let shown = pinnedTools.length;
   $sections.replaceChildren(...CATEGORIES.map((c) => {
@@ -45,7 +47,7 @@ function render() {
     sec.className = 'cat-section';
     sec.id = c.key;
     sec.hidden = tools.length === 0;
-    sec.innerHTML = `<h2 class="cat-title">${c.title}</h2><p class="cat-blurb">${c.blurb}</p>`;
+    sec.innerHTML = `<div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${tools.length}</span><p class="cat-blurb">${c.blurb}</p></div>`;
     const grid = document.createElement('div');
     grid.className = 'grid';
     grid.append(...tools.map(tile));
@@ -56,4 +58,8 @@ function render() {
 }
 
 $search.addEventListener('input', render);
+// Press / to jump to search.
+document.addEventListener('keydown', (e) => {
+  if (e.key === '/' && !e.target.matches('input, textarea, select')) { e.preventDefault(); $search.focus(); }
+});
 render();

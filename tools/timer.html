@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/timer.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Countdown Timer", "description": "Free online countdown timer with alarm sound. Set hours, minutes and seconds.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why didn't the alarm make a sound?", "acceptedAnswer": {"@type": "Answer", "text": "Some browsers block audio until you interact with the page, and phones may mute it in silent mode. Make sure your volume is on."}}, {"@type": "Question", "name": "Does it work in the background?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it's based on the clock time, so it stays accurate. Some phones pause background tabs to save battery, though."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Countdown Timer</span></nav>
     <div class="tool-head">
       <h1>Countdown Timer</h1>
       <p>Set a time and start. An alarm sounds when it reaches zero.</p>

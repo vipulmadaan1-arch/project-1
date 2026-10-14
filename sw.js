@@ -1,14 +1,18 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v4';
+const VERSION = 'v6';
 const CACHE = `tooltiles-${VERSION}`;
 const FILES = [
   './',
   'css/style.css',
+  'fonts/ibm-plex-mono-500.woff2',
+  'fonts/ibm-plex-sans.woff2',
+  'fonts/schibsted-grotesk.woff2',
   'img/icon.svg',
   'index.html',
   'js/calc.js',
   'js/config.js',
+  'js/icons.js',
   'js/layout.js',
   'js/pages/calculator.js',
   'js/pages/compound-interest.js',

@@ -9,30 +9,43 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="js/layout.js"></script>
   <script type="module" src="js/pages/home.js"></script>
 </head>
 <body>
   <main class="wrap">
     <section class="hero">
-      <h1>Everyday tools, built for Australians</h1>
-      <p>Australian calculators with current rates, plus general tools that work anywhere. Tap ☆ to pin your favourites to the top.</p>
-      <input class="search" id="search" type="search" placeholder="Search tools…" aria-label="Search tools">
+      <div class="hero-copy">
+        <p class="eyebrow">Australian rates for 2026–27</p>
+        <h1>The calculators you need for tax, property and pay.</h1>
+        <p>NSW stamp duty, take-home pay, mortgages and GST at this year's rates, plus clocks, timers and converters for everything else.</p>
+      </div>
+      <div class="hero-side">
+        <div class="search-box">
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/></svg>
+          <input class="search" id="search" type="search" placeholder="Search 14 tools" aria-label="Search tools" autocomplete="off">
+          <kbd class="kbd">/</kbd>
+        </div>
+        <div class="facts">
+          <span><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Checked against ATO and Revenue NSW</span>
+          <span><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Private, runs on your device</span>
+          <span><svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Works offline</span>
+        </div>
+      </div>
     </section>
     <div id="pinned-section" hidden>
-      <h2 class="section-title">Pinned</h2>
+      <div class="cat-head"><h2 class="cat-title">Pinned</h2><span class="cat-count" id="pinned-count"></span><p class="cat-blurb">Saved on this device.</p></div>
       <div class="grid" id="pinned"></div>
     </div>
     <div id="sections"></div>
     <p class="empty" id="empty" hidden>No tools match that search.</p>
     <section class="content">
-      <h2>Why use ToolTiles?</h2>
+      <h2>Why these calculators</h2>
       <ul>
-        <li><strong>Built for Australia:</strong> current NSW stamp duty, ATO tax rates, GST and super — in dollars, with weekly and fortnightly options.</li>
-        <li><strong>Private:</strong> every calculation runs in your browser. Nothing you type is sent or stored on a server.</li>
-        <li><strong>Fast and free:</strong> no sign-up, no pop-ups. Pin the tools you use and they stay at the top.</li>
-        <li><strong>Shareable:</strong> copy a link to your results to send to a partner, broker or accountant.</li>
+        <li><strong>Current Australian rules.</strong> NSW transfer duty, ATO tax brackets, Medicare levy, HECS/HELP, super and GST, each checked against the official source.</li>
+        <li><strong>Private by design.</strong> Every calculation runs in your browser. There is no account and nothing is sent to a server.</li>
+        <li><strong>Built for sharing.</strong> Each result has a link you can send to a partner, broker or accountant, and it opens with the same inputs.</li>
       </ul>
     </section>
   </main>

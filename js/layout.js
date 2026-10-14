@@ -1,5 +1,7 @@
 // Injects the shared header and footer, and handles the theme toggle.
 import { SITE_NAME, BMC_URL } from './config.js';
+import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
+import { icon } from './icons.js';
 
 // Hide all coffee links until a real Buy Me a Coffee handle is set in config.js.
 const HAS_BMC = !BMC_URL.includes('YOUR_HANDLE');
@@ -13,14 +15,27 @@ function safeSet(k, v) { try { localStorage.setItem(k, v); } catch { /* storage 
 const savedTheme = safeGet('theme');
 if (savedTheme) root.dataset.theme = savedTheme;
 
-const [first, ...rest] = SITE_NAME.split(/(?=[A-Z])/);
+// Brand mark: four tiles, one filled — the "pinned" tile.
+const MARK = `<svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+  <rect x="1" y="1" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="14" y="1" width="11" height="11" rx="2.5" fill="var(--accent)"/>
+  <rect x="1" y="14" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="14" y="14" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+</svg>`;
+const brand = `<a class="brand" href="${base}">${MARK}<span>${SITE_NAME}</span></a>`;
+
 const header = document.createElement('header');
 header.className = 'site-header';
 header.innerHTML = `
   <div class="wrap">
-    <a class="brand" href="${base}">${first}<span>${rest.join('')}</span></a>
-    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Light / dark">🌓</button>
-    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener">☕ Buy me a coffee</a>` : ''}
+    ${brand}
+    <nav class="nav" aria-label="Sections">
+      ${CATEGORIES.map((c) => `<a href="${base}#${c.key}">${c.key === 'au' ? 'Australian' : 'General'}</a>`).join('')}
+    </nav>
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme" title="Switch theme">
+      <span class="theme-light-only">${icon('moon')}</span><span class="theme-dark-only">${icon('sun')}</span>
+    </button>
+    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
   </div>`;
 document.body.prepend(header);
 
@@ -28,11 +43,30 @@ const footer = document.createElement('footer');
 footer.className = 'site-footer';
 footer.innerHTML = `
   <div class="wrap">
-    <p>Free tools, no sign-up. Everything runs in your browser — nothing you enter is sent anywhere.</p>
-    <p>Financial calculators give general estimates only and are not financial, tax or legal advice. Check figures with the ATO, Revenue NSW or a licensed professional.</p>
-    ${HAS_BMC ? `<p>Found this useful? <a href="${BMC_URL}" target="_blank" rel="noopener">Buy me a coffee</a> to keep it free.</p>` : ''}
+    <div class="footer-about">
+      ${brand}
+      <p>Free calculators for Australian money questions, plus everyday tools. Everything runs in your browser. Nothing you type leaves your device.</p>
+      <span class="stamp">Rates checked ${RATES_CHECKED}</span>
+    </div>
+    ${CATEGORIES.map((c) => `
+    <div>
+      <h2>${c.key === 'au' ? 'Australian' : 'General'}</h2>
+      <ul>${TOOLS.filter((t) => t.cat === c.key).map((t) => `<li><a href="${base}tools/${t.slug}.html">${t.name}</a></li>`).join('')}</ul>
+    </div>`).join('')}
+    <div class="footer-legal">
+      <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, Revenue NSW or a licensed adviser.</span>
+      ${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener">Support the site</a>` : ''}
+    </div>
   </div>`;
 document.body.append(footer);
+
+// Tool pages: add the tool's icon and source label to the page heading.
+const slug = location.pathname.match(/tools\/([^/]+)\.html$/)?.[1];
+const tool = TOOLS.find((t) => t.slug === slug);
+const head = document.querySelector('.tool-head');
+if (tool && head) {
+  head.insertAdjacentHTML('afterbegin', `<div class="ico">${icon(tool.slug)}</div><span class="tag">${tool.meta}</span>`);
+}
 
 document.getElementById('theme-toggle').addEventListener('click', () => {
   const isDark = root.dataset.theme
@@ -79,13 +113,14 @@ export function addResultActions(card) {
   const wrap = document.createElement('div');
   wrap.className = 'result-actions';
   wrap.innerHTML = `
-    <button class="btn" type="button">🔗 Copy link to these results</button>
-    ${HAS_BMC ? `<p class="nudge">Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener">Buy me a coffee ☕</a></p>` : ''}`;
+    <button class="btn" type="button">${icon('link')}<span>Copy link to these results</span></button>
+    ${HAS_BMC ? `<p class="nudge">${icon('coffee')}<span>Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener">Buy me a coffee</a></span></p>` : ''}`;
   const btn = wrap.querySelector('button');
+  const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(location.href); btn.textContent = '✓ Link copied'; }
+    try { await navigator.clipboard.writeText(location.href); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; }
     catch { prompt('Copy this link:', location.href); }
-    setTimeout(() => { btn.textContent = '🔗 Copy link to these results'; }, 2000);
+    setTimeout(() => { btn.innerHTML = idle; }, 2000);
   });
   card.append(wrap);
 }
@@ -93,3 +128,9 @@ export function addResultActions(card) {
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   navigator.serviceWorker.register(`${base}sw.js`).catch(() => { /* offline support unavailable */ });
 }
+
+// Related-tool links get their tool's icon.
+document.querySelectorAll('.related a').forEach((a) => {
+  const s = a.getAttribute('href')?.replace(/\.html$/, '');
+  if (s) a.insertAdjacentHTML('afterbegin', icon(s));
+});

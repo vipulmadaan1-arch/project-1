@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/mortgage.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Mortgage Repayment Calculator (Australia)", "description": "Calculate weekly, fortnightly or monthly home loan repayments and total interest.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this include fees or LMI?", "acceptedAnswer": {"@type": "Answer", "text": "No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."}}, {"@type": "Question", "name": "What about interest-only loans?", "acceptedAnswer": {"@type": "Answer", "text": "Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans."}}, {"@type": "Question", "name": "How much will I save with an offset account?", "acceptedAnswer": {"@type": "Answer", "text": "Use the offset account calculator to see interest and time saved with a given offset balance."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#au">Australian</a><span aria-hidden="true">/</span><span aria-current="page">Mortgage Repayments</span></nav>
     <div class="tool-head">
       <h1>Mortgage Repayment Calculator</h1>
       <p>Principal and interest repayments for an Australian home loan.</p>
@@ -32,7 +32,7 @@
         <div class="field"><label for="freq">Repayment frequency</label>
           <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
       </form>
-      <div class="card">
+      <div class="card readout">
         <div id="freq-label">Monthly repayment</div>
         <div class="result-big" aria-live="polite" id="repayment">–</div>
         <div class="kv"><span>Total interest</span><span id="interest">–</span></div>
@@ -48,7 +48,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>Does this include fees or LMI?</summary><p>No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included.</p></details><details><summary>What about interest-only loans?</summary><p>Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans.</p></details><details><summary>How much will I save with an offset account?</summary><p>Use the offset account calculator to see interest and time saved with a given offset balance.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="offset.html">Offset Account Savings</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="rental-yield.html">Rental Yield</a><a href="take-home-pay.html">Take-Home Pay (AU)</a></nav>
+      <nav class="related"><a href="offset.html">Offset Account</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="rental-yield.html">Rental Yield</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
     </section>
     <!-- content:end -->
   </main>

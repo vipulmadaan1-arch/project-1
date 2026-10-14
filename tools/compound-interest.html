@@ -12,14 +12,14 @@
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f6fde">
+  <meta name="theme-color" content="#0f2d29">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/compound-interest.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator (Australia)", "description": "Free compound interest calculator with regular deposits. See how savings grow year by year.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return — but investment returns vary year to year and aren't guaranteed."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <p class="crumbs"><a href="../">← All tools</a></p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Compound Interest</span></nav>
     <div class="tool-head">
       <h1>Compound Interest Calculator</h1>
       <p>See how savings grow with interest and regular contributions.</p>
@@ -35,7 +35,7 @@
         <div class="field"><label for="cfreq">Deposit frequency</label>
           <select id="cfreq"><option value="52">Weekly</option><option value="26">Fortnightly</option><option value="12" selected>Monthly</option><option value="1">Yearly</option></select></div>
       </form>
-      <div class="card">
+      <div class="card readout">
         <div>Final balance</div>
         <div class="result-big" aria-live="polite" id="balance">–</div>
         <div class="kv"><span>Total deposited</span><span id="contributed">–</span></div>
@@ -53,7 +53,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return — but investment returns vary year to year and aren't guaranteed.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="offset.html">Offset Account Savings</a><a href="take-home-pay.html">Take-Home Pay (AU)</a><a href="percentage.html">Percentage</a><a href="mortgage.html">Mortgage Repayments</a></nav>
+      <nav class="related"><a href="offset.html">Offset Account</a><a href="take-home-pay.html">Take-Home Pay</a><a href="percentage.html">Percentage</a><a href="mortgage.html">Mortgage Repayments</a></nav>
     </section>
     <!-- content:end -->
   </main>
