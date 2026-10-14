@@ -11,8 +11,15 @@
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f2d29">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/unit-converter.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Unit Converter — Metric and Imperial", "description": "Convert length, weight, volume, area, speed and temperature between metric and imperial units.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a cup the same everywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. This converter uses the Australian metric cup of 250 mL. A US cup is about 237 mL."}}, {"@type": "Question", "name": "How do I convert Celsius to Fahrenheit?", "acceptedAnswer": {"@type": "Answer", "text": "°F = °C × 9/5 + 32. So 25 °C is 77 °F."}}]}]</script>

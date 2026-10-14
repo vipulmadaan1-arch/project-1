@@ -1,10 +1,18 @@
 {
+  "id": "./",
   "name": "Sorted, Mate — Australian calculators and everyday tools",
   "short_name": "Sorted Mate",
+  "description": "Free Australian calculators and everyday tools. Works offline.",
+  "lang": "en-AU",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "background_color": "#f4f6f5",
   "theme_color": "#0f2d29",
-  "icons": [{ "src": "img/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "icons": [
+    { "src": "img/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "img/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
 }

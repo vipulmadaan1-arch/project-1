@@ -11,8 +11,15 @@
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f2d29">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/calculator.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Calculator", "description": "Free online calculator with brackets, percentages and keyboard support.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic."}}]}]</script>

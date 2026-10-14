@@ -11,8 +11,14 @@
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f2d29">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/world-clock.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "World Clock — Time in Cities Around the World", "description": "Live world clock. Compare the current time in Sydney, London, New York, Delhi, Tokyo and more. Add your own cities.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the time difference change during the year?", "acceptedAnswer": {"@type": "Answer", "text": "Daylight saving starts and ends on different dates in different countries — and Queensland, the NT and WA don't use it at all — so the gap between two cities can shift by an hour."}}, {"@type": "Question", "name": "Which time zone is Newcastle NSW in?", "acceptedAnswer": {"@type": "Answer", "text": "Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving."}}]}]</script>

@@ -1,7 +1,17 @@
 // Service worker: caches every file so the site works offline.
-// Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v9';
+//
+// Updating: bump VERSION whenever you change any file. The browser checks sw.js on each visit, sees it
+// changed, and installs the new version, which downloads every file in FILES fresh into a new cache.
+// It then takes over straight away (skipWaiting + clients.claim) and deletes the old cache. Taking
+// over early is safe here because every page loads all of its scripts up front (no lazy imports),
+// so a page that is already open never asks the new worker for a file from a different version.
+//
+// Serving: network first, so a deploy shows up on the next page load. The cache is the fallback when
+// the network fails, or answers slower than NETWORK_TIMEOUT_MS (a bad mobile signal). In that case
+// the network copy still finishes in the background and refreshes the cache for next time.
+const VERSION = 'v10';
 const CACHE = `sortedmate-${VERSION}`;
+const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
   './',
   'css/style.css',
@@ -51,25 +61,60 @@ const FILES = [
 ];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
+  // cache: 'reload' skips the browser's HTTP cache (GitHub Pages lets files be cached for 10 minutes),
+  // so a new VERSION stores the files just deployed, not older copies.
+  e.waitUntil(caches.open(CACHE)
+    .then((c) => c.addAll(FILES.map((f) => new Request(f, { cache: 'reload' }))))
+    .then(() => self.skipWaiting()));
 });
 
 self.addEventListener('activate', (e) => {
-  e.waitUntil(caches.keys()
-    .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
-    .then(() => self.clients.claim()));
+  e.waitUntil(Promise.all([
+    caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith('sortedmate-') && k !== CACHE).map((k) => caches.delete(k)))),
+    // Start page requests while the worker boots, rather than after.
+    self.registration.navigationPreload?.enable(),
+  ]).then(() => self.clients.claim()));
 });
 
-// Network first so updates show straight away; fall back to cache when offline.
 self.addEventListener('fetch', (e) => {
-  const url = new URL(e.request.url);
-  if (e.request.method !== 'GET' || url.origin !== location.origin) return;
-  e.respondWith(
-    fetch(e.request)
-      .then((res) => {
-        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); }
-        return res;
-      })
-      .catch(() => caches.match(e.request, { ignoreSearch: true })),
-  );
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  if (url.origin !== location.origin) return;
+  e.respondWith(respond(e, url));
 });
+
+// Cache entries are keyed on the path alone: shared result links carry their inputs in ?query, and
+// each one shouldn't become a separate cached copy of the page.
+async function respond(e, url) {
+  const key = url.origin + url.pathname;
+  const network = fromNetwork(e, key);
+  e.waitUntil(network.then(() => {}, () => {}));
+  const slow = new Promise((resolve) => { setTimeout(resolve, NETWORK_TIMEOUT_MS); });
+  try {
+    const first = await Promise.race([network, slow]);
+    if (first) return first;
+    return (await caches.match(key)) || (await network);
+  } catch {
+    const hit = await caches.match(key);
+    if (hit) return hit;
+    if (e.request.mode === 'navigate') {
+      // Offline on a page that isn't cached (e.g. /tools/gst without .html): try the .html file,
+      // otherwise send the visitor to the cached home page.
+      const html = !url.pathname.endsWith('/') && !url.pathname.endsWith('.html') && await caches.match(`${key}.html`);
+      if (html) return html;
+      if (await caches.match(self.registration.scope)) return Response.redirect(self.registration.scope, 302);
+    }
+    return Response.error();
+  }
+}
+
+async function fromNetwork(e, key) {
+  const res = (e.request.mode === 'navigate' && await e.preloadResponse) || await fetch(e.request);
+  // Only keep complete, successful, same-origin responses: never errors, redirects or opaque bodies.
+  if (res.status === 200 && res.type === 'basic' && !res.redirected) {
+    const copy = res.clone();
+    e.waitUntil(caches.open(CACHE).then((c) => c.put(key, copy)));
+  }
+  return res;
+}

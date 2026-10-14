@@ -52,14 +52,16 @@ npm run ads-txt        # writes ads.txt from ADSENSE_CLIENT
 Once you have a domain, run `npm run sitemap -- https://your-domain.com.au` and commit the result.
 Then add the site to Google Search Console and submit `sitemap.xml`.
 
-**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing.
+**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing. The comment at the top of `sw.js` explains how updates and offline fallback work.
+
+The app icons in `img/` (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png`) are PNG renders of `img/icon.svg`. If you change the SVG, re-export them at those sizes; the maskable and Apple icons are full-bleed squares (no rounded corners), as those platforms apply their own mask.
 
 ## Editing page text
 The How it works / FAQ / Related tools section of each tool page is generated from `scripts/content.py`. Edit the text there and run `python3 scripts/content.py`. It is safe to rerun.
 
 ## Adding a tool
 1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
-2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`.
+2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`. Keep the `<link rel="modulepreload">` lines in the page head matching the modules its scripts import (`npm test` checks this).
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.
 
