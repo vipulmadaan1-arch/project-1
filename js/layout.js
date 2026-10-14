@@ -33,12 +33,20 @@ header.innerHTML = `
     <nav class="nav" aria-label="Sections">
       ${CATEGORIES.map((c) => `<a href="${base}#${c.key}">${c.key === 'au' ? 'Australian' : 'General'}</a>`).join('')}
     </nav>
-    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme" title="Switch theme">
+    <button class="icon-btn" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" title="Switch theme">
       <span class="theme-light-only">${icon('moon')}</span><span class="theme-dark-only">${icon('sun')}</span>
     </button>
     ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener noreferrer">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
   </div>`;
 document.body.prepend(header);
+
+// Skip link: the first thing a keyboard user reaches, jumping past the header to the tool.
+const main = document.querySelector('main');
+if (main) {
+  main.id ||= 'main';
+  main.tabIndex = -1;
+  header.insertAdjacentHTML('beforebegin', `<a class="skip-link" href="#${main.id}">Skip to content</a>`);
+}
 
 const footer = document.createElement('footer');
 footer.className = 'site-footer';
@@ -69,13 +77,66 @@ if (tool && head) {
   head.insertAdjacentHTML('afterbegin', `<div class="ico">${icon(tool.slug)}</div><span class="tag">${tool.meta}</span>`);
 }
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  const isDark = root.dataset.theme
-    ? root.dataset.theme === 'dark'
-    : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = isDark ? 'light' : 'dark';
+// The toggle is a "Dark theme" on/off button, so screen readers hear its current state.
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+const themeBtn = document.getElementById('theme-toggle');
+const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : darkQuery.matches);
+const syncThemeBtn = () => themeBtn.setAttribute('aria-pressed', String(isDark()));
+syncThemeBtn();
+darkQuery.addEventListener('change', syncThemeBtn);
+themeBtn.addEventListener('click', () => {
+  root.dataset.theme = isDark() ? 'light' : 'dark';
   safeSet('theme', root.dataset.theme);
+  syncThemeBtn();
 });
+
+// One polite status region for the whole page. Results are read out once typing pauses,
+// with their label ("Total duty payable: $29,452"), instead of on every keystroke.
+const status = document.createElement('div');
+status.className = 'sr-only';
+status.setAttribute('role', 'status');
+document.body.append(status);
+let announceTimer = 0;
+export function announce(msg, delay = 0) {
+  clearTimeout(announceTimer);
+  announceTimer = setTimeout(() => {
+    status.textContent = '';
+    setTimeout(() => { status.textContent = msg; }, 50);
+  }, delay);
+}
+
+let userActed = false;
+for (const type of ['input', 'change', 'click']) document.addEventListener(type, () => { userActed = true; }, true);
+const resultLabel = (el) => {
+  const prev = el.previousElementSibling;
+  if (prev && !prev.classList.contains('cols')) return prev.textContent.trim();
+  return el.closest('.card')?.querySelector('h2')?.textContent.trim() || '';
+};
+const results = [...document.querySelectorAll('.result-big')];
+const lastText = new Map();
+const changed = new Set();
+const watch = new MutationObserver((records) => {
+  for (const r of records) {
+    const el = results.find((x) => x.contains(r.target));
+    const text = el?.textContent.trim();
+    if (!el || text === lastText.get(el)) continue;
+    lastText.set(el, text);
+    if (userActed && text !== '–') changed.add(el); // values filled in on page load aren't news
+  }
+  if (!changed.size) return;
+  announce([...changed].map((el) => `${resultLabel(el)}: ${el.textContent.trim()}`).join('. '), 900);
+  clearTimeout(watch.timer);
+  watch.timer = setTimeout(() => changed.clear(), 900);
+});
+results.forEach((el) => { lastText.set(el, el.textContent.trim()); watch.observe(el, { childList: true, characterData: true, subtree: true }); });
+
+// Single-key shortcuts only fire when nothing else has focus, or focus is inside the tool
+// they belong to (WCAG 2.1.4), and never with Ctrl, Alt or Cmd so browser zoom keeps working.
+export function shortcutAllowed(e, scope) {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return false;
+  const a = document.activeElement;
+  return !a || a === document.body || a === main || !!scope?.contains(a);
+}
 
 export { safeGet, safeSet };
 
@@ -269,7 +330,7 @@ export function addResultActions(card) {
   const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
     const url = `${location.origin}${location.pathname}${sharedForm ? `#${formParams(sharedForm)}` : ''}`;
-    try { await navigator.clipboard.writeText(url); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; }
+    try { await navigator.clipboard.writeText(url); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; announce('Link copied'); }
     catch { prompt('Copy this link:', url); }
     setTimeout(() => { btn.innerHTML = idle; }, 2000);
   });

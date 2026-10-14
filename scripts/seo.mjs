@@ -89,7 +89,8 @@ function stamp(html, tags) {
 // Static tool tiles. js/pages/home.js re-renders them (adding pins and search), but the plain
 // links are in the HTML so crawlers and no-JS visitors can reach every tool.
 function tiles() {
-  const tile = (t) => `<a class="tile" href="tools/${t.slug}.html"><div class="ico">${icon(t.slug)}</div><h3>${t.name}</h3><p>${t.desc}</p><div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div></a>`;
+  // Same markup as js/pages/home.js (minus the pin button, which needs JS).
+  const tile = (t) => `<div class="tile"><div class="ico">${icon(t.slug)}</div><h3><a class="tile-link" href="tools/${t.slug}.html">${t.name}</a></h3><p>${t.desc}</p><div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div></div>`;
   return CATEGORIES.map((c) => {
     const list = TOOLS.filter((t) => t.cat === c.key);
     return `      <section class="cat-section" id="${c.key}"><div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${list.length}</span><p class="cat-blurb">${c.blurb}</p></div>

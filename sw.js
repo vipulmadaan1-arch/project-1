@@ -1,6 +1,6 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v11';
+const VERSION = 'v12';
 const CACHE = `sortedmate-${VERSION}`;
 const FILES = [
   './',

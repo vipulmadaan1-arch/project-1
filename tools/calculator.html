@@ -31,17 +31,17 @@
     </div>
     <div class="calc-layout">
       <div class="card calc">
-        <div class="calc-display" aria-live="polite">
+        <div class="calc-display">
           <div class="calc-expr" id="expr"></div>
           <div class="calc-out" id="out">0</div>
         </div>
-        <div class="calc-keys" id="keys">
-          <button data-k="C">C</button><button data-k="(">(</button><button data-k=")">)</button><button class="op" data-k="÷">÷</button>
-          <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="×">×</button>
-          <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="-">−</button>
-          <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="+">+</button>
-          <button data-k="%">%</button><button data-k="0">0</button><button data-k=".">.</button><button class="eq" data-k="=">=</button>
-          <button data-k="⌫" style="grid-column: span 4">⌫ Delete</button>
+        <div class="calc-keys" id="keys" role="group" aria-label="Keypad">
+          <button data-k="C" aria-label="Clear">C</button><button data-k="(" aria-label="Open bracket">(</button><button data-k=")" aria-label="Close bracket">)</button><button class="op" data-k="÷" aria-label="Divide">÷</button>
+          <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="×" aria-label="Multiply">×</button>
+          <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="-" aria-label="Minus">−</button>
+          <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="op" data-k="+" aria-label="Plus">+</button>
+          <button data-k="%" aria-label="Percent">%</button><button data-k="0">0</button><button data-k="." aria-label="Decimal point">.</button><button class="eq" data-k="=" aria-label="Equals">=</button>
+          <button data-k="⌫" style="grid-column: span 4"><span aria-hidden="true">⌫</span> Delete</button>
         </div>
       </div>
       <div class="card">

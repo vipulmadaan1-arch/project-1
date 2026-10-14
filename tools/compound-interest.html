@@ -42,11 +42,11 @@
       </form>
       <div class="card readout">
         <div>Final balance</div>
-        <div class="result-big" aria-live="polite" id="balance">–</div>
+        <div class="result-big" id="balance">–</div>
         <div class="kv"><span>Total deposited</span><span id="contributed">–</span></div>
         <div class="kv"><span>Interest earned</span><span id="interest">–</span></div>
         <h2 class="section-title">Year by year</h2>
-        <div class="table-scroll"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Year by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div>
         <p class="disclaimer">Estimate only. Ignores tax, fees and rate changes.</p>
       </div>
     </div>

@@ -31,14 +31,14 @@
     </div>
     <div class="cols">
       <form class="card" id="form">
-        <div class="field"><label for="value">Property value ($)</label><input type="text" id="value" class="num" value="750000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small>Dutiable value is the higher of the price and market value.</small></div>
+        <div class="field"><label for="value">Property value ($)</label><input type="text" id="value" class="num" aria-describedby="value-hint" value="750000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="value-hint">Dutiable value is the higher of the price and market value.</small></div>
         <label class="check"><input type="checkbox" id="residential" checked> Residential property</label>
         <label class="check"><input type="checkbox" id="fhb"> First home buyer (home, not vacant land)</label>
         <label class="check"><input type="checkbox" id="foreign"> Foreign purchaser</label>
       </form>
       <div class="card readout">
         <div>Total duty payable</div>
-        <div class="result-big" aria-live="polite" id="total">–</div>
+        <div class="result-big" id="total">–</div>
         <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
         <div class="kv"><span>Foreign purchaser surcharge (9%)</span><span id="surcharge">–</span></div>
         <p class="note" id="note"></p>

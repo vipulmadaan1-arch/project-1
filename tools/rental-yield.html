@@ -33,12 +33,12 @@
       <form class="card" id="form">
         <div class="field"><label for="price">Purchase price ($)</label><input type="text" id="price" class="num" value="550000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="rent">Weekly rent ($)</label><input type="text" id="rent" class="num" value="520" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
-        <div class="field"><label for="costs">Annual costs ($)</label><input type="text" id="costs" class="num" value="7500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small>Council and water rates, insurance, strata, property management, maintenance.</small></div>
+        <div class="field"><label for="costs">Annual costs ($)</label><input type="text" id="costs" class="num" aria-describedby="costs-hint" value="7500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="costs-hint">Council and water rates, insurance, strata, property management, maintenance.</small></div>
         <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="text" id="vacancy" class="num" value="2" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
       </form>
       <div class="card readout">
         <div>Net rental yield</div>
-        <div class="result-big" aria-live="polite" id="net">–</div>
+        <div class="result-big" id="net">–</div>
         <div class="kv"><span>Gross rental yield</span><span id="gross">–</span></div>
         <div class="kv"><span>Annual rent received</span><span id="annual">–</span></div>
         <div class="kv"><span>Net income before mortgage and tax</span><span id="income">–</span></div>

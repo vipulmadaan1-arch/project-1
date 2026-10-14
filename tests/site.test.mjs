@@ -107,7 +107,7 @@ test('titles and descriptions are unique, with one h1 and share tags per page', 
 
 test('home page links to every tool in its static HTML (no JavaScript needed)', () => {
   const html = read('index.html');
-  for (const t of TOOLS) assert.ok(html.includes(`<a class="tile" href="tools/${t.slug}.html">`), `index.html has no static link to ${t.slug} (run npm run seo)`);
+  for (const t of TOOLS) assert.ok(html.includes(`<a class="tile-link" href="tools/${t.slug}.html">`), `index.html has no static link to ${t.slug} (run npm run seo)`);
 });
 
 test('once SITE_URL is set, pages carry canonical links and the sitemap lists them', async () => {
