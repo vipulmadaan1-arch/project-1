@@ -9,16 +9,14 @@
 // Serving: network first, so a deploy shows up on the next page load. The cache is the fallback when
 // the network fails, or answers slower than NETWORK_TIMEOUT_MS (a bad mobile signal). In that case
 // the network copy still finishes in the background and refreshes the cache for next time.
-const VERSION = 'v13';
+const VERSION = 'v14';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
   './',
   '404.html',
   'css/style.css',
-  'fonts/ibm-plex-mono-500.woff2',
-  'fonts/ibm-plex-sans.woff2',
-  'fonts/schibsted-grotesk.woff2',
+  'fonts/instrument-sans.woff2',
   'img/icon.svg',
   'index.html',
   'js/ads.js',

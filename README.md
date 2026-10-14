@@ -8,7 +8,7 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 **Time:** World Clock (with time converter) · Stopwatch · Countdown Timer
 
 ## Design
-- Type: Schibsted Grotesk (headings, figures), IBM Plex Sans (body), IBM Plex Mono (labels, stopwatch, timer and calculator digits). The fonts are self-hosted in `fonts/` (SIL Open Font License; see `fonts/LICENSE.txt`), so no request goes to Google and the site still works offline.
+- Type: one family, Instrument Sans (variable, 400–700), for headings, body and figures, the way production finance sites use a single grotesque (Stripe: Söhne; Wise: Wise Sans). Numbers use tabular figures (`--tnum`) wherever they update live or line up, and its tabular setting keeps the thousands comma narrow. No monospace or all-caps labels. A metric-matched Arial fallback prevents layout shift while the font loads. The fonts are self-hosted in `fonts/` (SIL Open Font License; see `fonts/LICENSE.txt`), so no request goes to Google and the site still works offline. To change the font, replace the file and recompute the fallback overrides in `css/style.css`.
 - Colour tokens and the type scale are at the top of `css/style.css`. Light and dark themes are defined in one place.
 - Icons are inline SVG line icons in `js/icons.js`, one per tool, keyed by slug. A new tool needs an icon added there.
 - Every result appears on the dark "readout" panel (class `readout`). It is the only high-contrast element on a page.

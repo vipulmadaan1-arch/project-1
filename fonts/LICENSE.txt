@@ -1,3 +1,2 @@
-Schibsted Grotesk (c) The Schibsted Grotesk Project Authors.
-IBM Plex Sans and IBM Plex Mono (c) IBM Corp.
-All licensed under the SIL Open Font License 1.1: https://openfontlicense.org
+Instrument Sans (c) The Instrument Sans Project Authors (https://github.com/Instrument/instrument-sans).
+Licensed under the SIL Open Font License 1.1: https://openfontlicense.org
