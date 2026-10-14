@@ -15,7 +15,7 @@
   <meta name="theme-color" content="#0f6fde">
   <script type="module" src="../js/layout.js"></script>
   <script type="module" src="../js/pages/date-calculator.js"></script>
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Date Calculator — Days Between Dates", "description": "Count days, weeks and business days between two dates, or add days to a date.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are public holidays excluded from business days?", "acceptedAnswer": {"@type": "Answer", "text": "No. Public holidays differ by state, so business days here exclude weekends only."}}, {"@type": "Question", "name": "Does daylight saving affect the count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Date Calculator — Days Between Dates", "description": "Count days, weeks and business days between two dates, or add days to a date.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are public holidays excluded from business days?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ."}}, {"@type": "Question", "name": "Does daylight saving affect the count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -30,6 +30,7 @@
         <div class="field"><label for="start">Start date</label><input type="date" id="start"></div>
         <div class="field"><label for="end">End date</label><input type="date" id="end"></div>
         <label class="check"><input type="checkbox" id="incl"> Include the end date</label>
+        <label class="check"><input type="checkbox" id="hol" checked> Exclude NSW public holidays from business days</label>
         <h2 class="section-title">Add or subtract days</h2>
         <div class="field"><label for="n">Days to add from start date (use − to subtract)</label><input type="number" id="n" value="90" inputmode="numeric"></div>
       </form>
@@ -40,16 +41,17 @@
         <div class="kv"><span>Weeks</span><span id="weeks">–</span></div>
         <div class="kv"><span>Business days (Mon–Fri)</span><span id="biz">–</span></div>
         <div class="kv"><span id="added-label">Start date + 90 days</span><span id="added">–</span></div>
-        <p class="disclaimer">Business days exclude weekends but not public holidays.</p>
+        <p class="disclaimer" id="hol-note">Business days exclude weekends and, if ticked, NSW statewide public holidays for 2026–2027 (not local holidays or the Bank Holiday).</p>
       </div>
     </div>
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
       <p>Count the days between two dates, including a breakdown into years, months and days, weeks, and business days (Monday to Friday). You can also add or subtract days from a date — handy for notice periods, settlement dates and deadlines.</p>
+<p>Business days skip weekends and NSW public holidays — useful for settlement periods and notice periods.</p>
 <p>By default the end date isn't counted (1 Jan to 2 Jan is 1 day). Tick “Include the end date” to count both.</p>
       <h2>Frequently asked questions</h2>
-      <details><summary>Are public holidays excluded from business days?</summary><p>No. Public holidays differ by state, so business days here exclude weekends only.</p></details><details><summary>Does daylight saving affect the count?</summary><p>No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.</p></details>
+      <details><summary>Are public holidays excluded from business days?</summary><p>Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ.</p></details><details><summary>Does daylight saving affect the count?</summary><p>No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.</p></details>
       <h2>Related tools</h2>
       <nav class="related"><a href="world-clock.html">World Clock</a><a href="timer.html">Countdown Timer</a><a href="calculator.html">Calculator</a><a href="stopwatch.html">Stopwatch</a></nav>
     </section>

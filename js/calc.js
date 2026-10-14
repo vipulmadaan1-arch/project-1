@@ -136,6 +136,14 @@ export const NSW_BRACKETS = [
 ];
 export const NSW_PREMIUM = { threshold: 3870000, base: 194137, rate: 0.07 };
 export const NSW_FHB = { exemptUpTo: 800000, concessionUpTo: 1000000 };
+// First home buyer concession for homes over $800,000 and under $1,000,000.
+// Formula as published by independent calculators (not on Revenue NSW's site):
+// duty on value − duty on $800,000 × ($1,000,000 − value) ÷ $200,000.
+export function nswFhbConcessionDuty(value) {
+  const full = nswTransferDuty(value);
+  const discount = nswTransferDuty(NSW_FHB.exemptUpTo) * (NSW_FHB.concessionUpTo - value) / (NSW_FHB.concessionUpTo - NSW_FHB.exemptUpTo);
+  return Math.max(0, Math.round(full - discount));
+}
 export const NSW_FOREIGN_SURCHARGE = 0.09;
 
 export function nswTransferDuty(value, { residential = true } = {}) {
@@ -159,7 +167,8 @@ export function nswDuty(value, { firstHomeBuyer = false, foreign = false, reside
       duty = 0;
       note = 'Full first home buyer exemption (homes valued at $800,000 or less), subject to eligibility.';
     } else if (value < NSW_FHB.concessionUpTo) {
-      note = 'A reduced (concessional) rate applies between $800,000 and $1 million. Figure shown is full duty — use the Revenue NSW First Home Buyer calculator for the concession amount.';
+      duty = nswFhbConcessionDuty(value);
+      note = `First home buyer concession (homes $800,000–$1 million): saves an estimated ${(general - duty).toLocaleString('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 })} on full duty of ${general.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 })}. Confirm with the Revenue NSW First Home Buyer calculator.`;
     } else {
       note = 'Over $1 million: no first home buyer concession. Full duty applies.';
     }
@@ -183,6 +192,17 @@ export const MEDICARE = { rate: 0.02, lower: 28011, upper: 35013, shadeIn: 0.10 
 export const SUPER_GUARANTEE = 0.12;
 export const SUPER_MAX_BASE = 270830; // ATO maximum contribution base 2026-27 (annual)
 
+// Study and training loan (HELP/HECS) compulsory repayments, 2026-27, marginal system.
+// Source: ATO "Study and training loan minimum repayment income and rates" (updated 13 Oct 2026).
+export const HELP = { threshold: 69528, band2: 129717, band2Base: 9028, top: 186050 };
+export function helpRepayment(repaymentIncome) {
+  const x = repaymentIncome;
+  if (x <= HELP.threshold) return 0;
+  if (x <= HELP.band2) return (x - HELP.threshold) * 0.15;
+  if (x <= HELP.top) return HELP.band2Base + (x - HELP.band2) * 0.17;
+  return x * 0.10;
+}
+
 export function incomeTax(income) {
   let tax = 0, prev = 0;
   for (const b of TAX_BRACKETS) {
@@ -204,7 +224,7 @@ export function medicareLevy(income) {
   return income * MEDICARE.rate;
 }
 
-export function takeHome(gross, { includesSuper = false } = {}) {
+export function takeHome(gross, { includesSuper = false, help = false } = {}) {
   // Super is only payable on earnings up to the maximum contribution base.
   const salary = includesSuper
     ? (gross <= SUPER_MAX_BASE * (1 + SUPER_GUARANTEE) ? gross / (1 + SUPER_GUARANTEE) : gross - SUPER_MAX_BASE * SUPER_GUARANTEE)
@@ -212,8 +232,9 @@ export function takeHome(gross, { includesSuper = false } = {}) {
   const superAmt = Math.min(salary, SUPER_MAX_BASE) * SUPER_GUARANTEE;
   const tax = Math.max(0, incomeTax(salary) - lito(salary));
   const medicare = medicareLevy(salary);
-  const net = salary - tax - medicare;
-  return { salary, super: superAmt, tax, medicare, net, effectiveRate: salary ? (tax + medicare) / salary : 0 };
+  const helpAmt = help ? helpRepayment(salary) : 0;
+  const net = salary - tax - medicare - helpAmt;
+  return { salary, super: superAmt, tax, medicare, help: helpAmt, net, effectiveRate: salary ? (tax + medicare) / salary : 0 };
 }
 
 // ---------- Unit conversion ----------
@@ -279,14 +300,27 @@ export function daysBetween(a, b, { inclusive = false } = {}) {
   const days = Math.round((toUTC(b) - toUTC(a)) / 86400000);
   return inclusive ? days + Math.sign(days || 1) : days;
 }
-export function businessDays(a, b) {
+// NSW public holidays (declared statewide), 2026–2027. Source: nsw.gov.au/about-nsw/public-holidays.
+// Bank Holiday is excluded because it isn't a declared public holiday.
+export const NSW_HOLIDAYS = new Set([
+  '2026-01-01', '2026-01-26', '2026-04-03', '2026-04-04', '2026-04-05', '2026-04-06', '2026-04-25', '2026-04-27',
+  '2026-06-08', '2026-10-05', '2026-12-25', '2026-12-26', '2026-12-28',
+  '2027-01-01', '2027-01-26', '2027-03-26', '2027-03-27', '2027-03-28', '2027-03-29', '2027-04-25', '2027-04-26',
+  '2027-06-14', '2027-10-04', '2027-12-25', '2027-12-26', '2027-12-27', '2027-12-28',
+]);
+export const NSW_HOLIDAY_YEARS = [2026, 2027];
+
+export function businessDays(a, b, { excludeHolidays = false } = {}) {
   let start = toUTC(a), end = toUTC(b);
   const sign = end < start ? -1 : 1;
   if (sign < 0) [start, end] = [end, start];
   let count = 0;
   for (let t = start; t <= end; t += 86400000) {
-    const wd = new Date(t).getUTCDay();
-    if (wd !== 0 && wd !== 6) count++;
+    const d = new Date(t);
+    const wd = d.getUTCDay();
+    if (wd === 0 || wd === 6) continue;
+    if (excludeHolidays && NSW_HOLIDAYS.has(d.toISOString().slice(0, 10))) continue;
+    count++;
   }
   return count * sign;
 }

@@ -25,11 +25,17 @@ npm test           # unit tests for all calculations
 ```
 
 ## Deploy (GitHub Pages, free)
-Repo **Settings → Pages → Deploy from a branch** → pick the branch and `/ (root)`.
+1. Merge this branch into `main`.
+2. Go to repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Every push to `main` now runs the tests and, if they pass, deploys the site (`.github/workflows/pages.yml`).
+4. For a custom domain, add a `CNAME` file containing the domain (e.g. `tooltiles.com.au`) and set the domain's DNS as GitHub Pages instructs.
 Once you have a domain, run `npm run sitemap -- https://your-domain.com.au` and commit the result.
 Then add the site to Google Search Console and submit `sitemap.xml`.
 
 **After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing.
+
+## Editing page text
+The How it works / FAQ / Related tools section of each tool page is generated from `scripts/content.py`. Edit the text there and run `python3 scripts/content.py`. It is safe to rerun.
 
 ## Adding a tool
 1. Add an entry to `js/tools.js`.
@@ -43,10 +49,14 @@ Then add the site to Google Search Console and submit `sitemap.xml`.
 | NSW transfer duty thresholds (CPI-indexed) | `NSW_BRACKETS`, `NSW_PREMIUM` in `js/calc.js` | Revenue NSW: How to calculate transfer duty |
 | Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` | ATO tax rates, Australian residents |
 | Medicare levy low-income thresholds | `MEDICARE` | ATO: Medicare levy reduction for low-income earners |
+| HECS/HELP repayment thresholds (indexed yearly) | `HELP` | ATO: Study and training loan minimum repayment income and rates |
+| NSW public holidays (add next year's dates) | `NSW_HOLIDAYS`, `NSW_HOLIDAY_YEARS` | nsw.gov.au/about-nsw/public-holidays |
 | Super guarantee rate and maximum contribution base | `SUPER_GUARANTEE`, `SUPER_MAX_BASE` | ATO: key superannuation rates and thresholds |
 
 Last checked against official sources on 14 Oct 2026. The Medicare thresholds are the 2025-26 figures, the latest the ATO has published.
-Rate tables are also written into the how-it-works text on `tools/stamp-duty-nsw.html` and `tools/take-home-pay.html`, so update those too.
+Rate tables also appear in the how-it-works text in `scripts/content.py` (stamp duty, take-home pay), so update them there too and rerun it.
+
+The NSW first home buyer concession (homes $800k–$1m) uses a formula published by independent calculators. Revenue NSW doesn't publish it, so check it against their First Home Buyer calculator.
 
 ## Disclaimer
 The financial calculators give general estimates only. They are not financial, tax or legal advice.

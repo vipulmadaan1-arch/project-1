@@ -1,5 +1,5 @@
 import { num, syncFormWithUrl, addResultActions } from '../layout.js';
-import { daysBetween, businessDays, ymdBetween, addDays } from '../calc.js';
+import { daysBetween, businessDays, ymdBetween, addDays, NSW_HOLIDAY_YEARS } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
 const today = new Date();
@@ -22,7 +22,13 @@ function update() {
   $('days').textContent = `${d.toLocaleString('en-AU')} days`;
   $('ymd').textContent = [plural(y.years, 'year'), plural(y.months, 'month'), plural(y.days, 'day')].join(', ');
   $('weeks').textContent = `${Math.floor(Math.abs(d) / 7)} weeks, ${Math.abs(d) % 7} days`;
-  $('biz').textContent = businessDays(a, b).toLocaleString('en-AU');
+  const hol = $('hol').checked;
+  $('biz').textContent = businessDays(a, b, { excludeHolidays: hol }).toLocaleString('en-AU');
+  const years = [+a.slice(0, 4), +b.slice(0, 4)];
+  const outside = hol && years.some((y) => !NSW_HOLIDAY_YEARS.includes(y));
+  $('hol-note').textContent = outside
+    ? `Public holidays are only included for ${NSW_HOLIDAY_YEARS.join('–')}. Dates outside those years count weekends only.`
+    : 'Business days exclude weekends and, if ticked, NSW statewide public holidays for 2026–2027 (not local holidays or the Bank Holiday).';
 }
 $('form').addEventListener('input', update);
 $('form').addEventListener('submit', (e) => e.preventDefault());

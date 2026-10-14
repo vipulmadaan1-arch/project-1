@@ -4,6 +4,7 @@ import {
   evaluate, nswTransferDuty, nswDuty, incomeTax, lito, medicareLevy, takeHome,
   mortgage, offsetSavings, compoundInterest, convert, formatDuration,
   gst, percent, rentalYield, daysBetween, businessDays, ymdBetween, addDays,
+  nswFhbConcessionDuty, helpRepayment,
 } from '../js/calc.js';
 
 test('calculator evaluates with precedence, brackets and percent', () => {
@@ -29,7 +30,12 @@ test('NSW duty matches Revenue NSW 2026/27 worked examples', () => {
 
 test('NSW first home buyer and foreign surcharge', () => {
   assert.equal(nswDuty(750000, { firstHomeBuyer: true }).duty, 0);
-  assert.equal(nswDuty(900000, { firstHomeBuyer: true }).duty, nswTransferDuty(900000));
+  // concession: full duty at $1m boundary behaviour, 0 at $800k, and the third-party worked saving at $850k
+  assert.equal(nswTransferDuty(800000), 30187);
+  assert.equal(nswTransferDuty(850000) - nswFhbConcessionDuty(850000), 22640);
+  assert.equal(nswFhbConcessionDuty(800000), 0);
+  assert.equal(nswDuty(900000, { firstHomeBuyer: true }).duty, nswFhbConcessionDuty(900000));
+  assert.equal(nswDuty(1000000, { firstHomeBuyer: true }).duty, nswTransferDuty(1000000));
   const f = nswDuty(1000000, { foreign: true });
   assert.equal(f.surcharge, 90000);
   assert.equal(f.total, f.duty + 90000);
@@ -124,4 +130,24 @@ test('dates', () => {
   assert.deepEqual(ymdBetween('1990-05-20', '2026-10-14'), { years: 36, months: 4, days: 24 });
   assert.deepEqual(ymdBetween('2026-01-31', '2026-03-01'), { years: 0, months: 1, days: 1 });
   assert.equal(addDays('2026-12-25', 10), '2027-01-04');
+});
+
+test('HELP repayments match ATO 2026-27 worked examples', () => {
+  assert.equal(helpRepayment(69528), 0);
+  assert.equal(Math.round(helpRepayment(86380) * 100) / 100, 2527.8);     // Christina
+  assert.equal(Math.round(helpRepayment(137064) * 100) / 100, 10276.99);  // Barry
+  assert.equal(helpRepayment(254780), 25478);                             // Priya
+  // bands join up (no cliff) at the top threshold
+  assert.ok(Math.abs(helpRepayment(186050) - helpRepayment(186051)) < 1);
+  const r = takeHome(100000, { help: true });
+  assert.equal(Math.round(r.help), Math.round((100000 - 69528) * 0.15));
+  assert.equal(Math.round(r.net), Math.round(100000 - r.tax - r.medicare - r.help));
+});
+
+test('business days can exclude NSW public holidays', () => {
+  // Week of Christmas 2026: Mon 21 – Mon 28 Dec. Weekdays 21,22,23,24,25,28 = 6; minus 25 and 28 = 4.
+  assert.equal(businessDays('2026-12-21', '2026-12-28'), 6);
+  assert.equal(businessDays('2026-12-21', '2026-12-28', { excludeHolidays: true }), 4);
+  // Easter 2027: Good Friday 26 Mar, Easter Monday 29 Mar
+  assert.equal(businessDays('2027-03-22', '2027-04-02', { excludeHolidays: true }), 8);
 });

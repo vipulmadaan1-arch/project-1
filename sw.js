@@ -1,6 +1,6 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = `tooltiles-${VERSION}`;
 const FILES = [
   './',
