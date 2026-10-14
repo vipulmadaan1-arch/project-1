@@ -58,7 +58,9 @@ npm run seo            # canonical/share tags, static tool links, sitemap.xml, r
 5. Set `SITE_URL` in `js/config.js` (e.g. `'https://sortedmate.com.au'`), run `npm run seo`, bump `VERSION` in `sw.js` and commit. See **Search and sharing** below.
 6. Add the site to Google Search Console and submit `sitemap.xml`.
 
-**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing.
+**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing. The comment at the top of `sw.js` explains how updates and offline fallback work.
+
+The app icons in `img/` (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png`) are PNG renders of `img/icon.svg`. If you change the SVG, re-export them at those sizes; the maskable and Apple icons are full-bleed squares (no rounded corners), as those platforms apply their own mask.
 
 ## Search and sharing (SEO)
 The domain is set in one place: `SITE_URL` in `js/config.js`. `npm run seo` (`scripts/seo.mjs`) reads it and writes:
@@ -74,7 +76,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 
 ## Adding a tool
 1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
-2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section, and change `data-module` on the boot script in `<head>` to `../js/pages/<slug>.js`) and `js/pages/<slug>.js`. Give it a unique `<title>` and meta description.
+2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section, and change `data-module` on the boot script in `<head>` to `../js/pages/<slug>.js`) and `js/pages/<slug>.js`. Give it a unique `<title>` and meta description. Keep the `<link rel="modulepreload">` lines in the page head matching the page module and every module it imports (`npm test` checks this).
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.
 5. Run `python3 scripts/content.py` and `npm run seo`.

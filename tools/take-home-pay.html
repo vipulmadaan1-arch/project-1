@@ -18,8 +18,17 @@
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
-  <meta name="theme-color" content="#0f2d29">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/take-home-pay.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Take-Home Pay Calculator (2026-27)", "description": "Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this include HECS/HELP repayments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — tick “I have a HECS/HELP debt”. From 2025-26 repayments are marginal: nothing up to $69,528 in 2026-27, then 15c per dollar above that, rising to 17c above $129,717, and 10% of all income above $186,050. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super, so yours may be higher."}}, {"@type": "Question", "name": "What isn't included?", "acceptedAnswer": {"@type": "Answer", "text": "The Medicare levy surcharge, salary sacrifice, deductions and offsets other than the low income tax offset."}}, {"@type": "Question", "name": "What's the difference between salary and package?", "acceptedAnswer": {"@type": "Answer", "text": "A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."}}, {"@type": "Question", "name": "Why is my payslip slightly different?", "acceptedAnswer": {"@type": "Answer", "text": "Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."}}, {"@type": "Question", "name": "Is there a cap on super?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies."}}]}]</script>
 </head>
 <body>

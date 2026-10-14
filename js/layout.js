@@ -17,6 +17,17 @@ function safeSet(k, v) { try { localStorage.setItem(k, v); } catch { /* storage 
 const savedTheme = safeGet('theme');
 if (savedTheme === 'light' || savedTheme === 'dark') root.dataset.theme = savedTheme;
 
+// Browser UI colour. The page's <meta name="theme-color"> tags follow the system light/dark setting;
+// when the visitor picks a theme with the toggle, point both tags at that theme's colour instead.
+const THEME_COLOR = { light: '#0f2d29', dark: '#0c1312' };
+function syncThemeColor() {
+  const t = root.dataset.theme;
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+    m.content = THEME_COLOR[t] || THEME_COLOR[m.media.includes('dark') ? 'dark' : 'light'];
+  });
+}
+syncThemeColor();
+
 // Brand mark: a tick in a rounded square, i.e. "sorted".
 const MARK = `<svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
   <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
@@ -88,6 +99,7 @@ themeBtn.addEventListener('click', () => {
   root.dataset.theme = isDark() ? 'light' : 'dark';
   safeSet('theme', root.dataset.theme);
   syncThemeBtn();
+  syncThemeColor();
 });
 
 // One polite status region for the whole page. Results are read out once typing pauses,
@@ -337,8 +349,12 @@ export function addResultActions(card) {
   card.append(wrap);
 }
 
+// Register after the page has loaded, so caching the site for offline use doesn't compete with this
+// page's own requests on a first visit.
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-  navigator.serviceWorker.register(`${base}sw.js`).catch(() => { /* offline support unavailable */ });
+  const register = () => navigator.serviceWorker.register(`${base}sw.js`).catch(() => { /* offline support unavailable */ });
+  if (document.readyState === 'complete') register();
+  else addEventListener('load', register, { once: true });
 }
 
 // Ad placeholder after each tool, before the explainer. Stays hidden unless ads are enabled.

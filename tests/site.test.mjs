@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { join, dirname, normalize } from 'node:path';
 import { TOOLS } from '../js/tools.js';
 
 const sw = readFileSync('sw.js', 'utf8');
@@ -73,6 +74,41 @@ test('every page has a Content-Security-Policy that allows its inline scripts', 
     }
     assert.doesNotMatch(html, /\son[a-z]+="/, `${p} has an inline event handler`);
   }
+});
+
+const HTML_PAGES = ['index.html', 'privacy.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
+
+// Each page lists every module its scripts import as <link rel="modulepreload">, so the browser fetches
+// the whole module graph at once instead of discovering imports one level at a time.
+test('modulepreload links match each page\'s import graph', () => {
+  for (const p of HTML_PAGES) {
+    const html = readFileSync(p, 'utf8');
+    // Pages load their module through the boot script's data-module attribute.
+    const entries = [...html.matchAll(/<script data-module="([^"]+)">/g)].map((m) => normalize(join(dirname(p), m[1])));
+    const seen = new Set();
+    const walk = (f) => {
+      if (seen.has(f)) return;
+      seen.add(f);
+      for (const m of readFileSync(f, 'utf8').matchAll(/^import\s[^'"]*['"](\.{1,2}\/[^'"]+)['"]/gm)) walk(normalize(join(dirname(f), m[1])));
+    };
+    entries.forEach(walk);
+    const want = [...seen].sort();
+    const have = [...html.matchAll(/<link rel="modulepreload" href="([^"]+)">/g)].map((m) => normalize(join(dirname(p), m[1]))).sort();
+    assert.deepEqual(have, want, `${p}: modulepreload links should be exactly the page module and everything it imports`);
+  }
+});
+
+test('preloaded fonts, icons and manifest icons exist', () => {
+  for (const p of HTML_PAGES) {
+    const html = readFileSync(p, 'utf8');
+    for (const m of html.matchAll(/<link rel="(?:preload|apple-touch-icon|icon)" href="([^"]+)"/g)) {
+      assert.ok(existsSync(normalize(join(dirname(p), m[1]))), `${p} links to missing ${m[1]}`);
+    }
+  }
+  const manifest = JSON.parse(readFileSync('manifest.webmanifest', 'utf8'));
+  for (const i of manifest.icons) assert.ok(existsSync(i.src), `manifest icon ${i.src} missing`);
+  for (const size of ['192x192', '512x512']) assert.ok(manifest.icons.some((i) => i.sizes === size && i.type === 'image/png'), `manifest needs a ${size} PNG icon`);
+  assert.ok(manifest.icons.some((i) => i.purpose === 'maskable'), 'manifest needs a maskable icon');
 });
 
 test('every page has a privacy link via the shared footer and the privacy page exists', () => {
