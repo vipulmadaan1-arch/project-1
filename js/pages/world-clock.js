@@ -1,4 +1,4 @@
-import { safeGet, safeSet } from '../layout.js';
+import { safeGet, safeSet, announce } from '../layout.js';
 
 const CITIES = [
   ['Sydney', 'Australia/Sydney'], ['Melbourne', 'Australia/Melbourne'], ['Brisbane', 'Australia/Brisbane'],
@@ -67,28 +67,49 @@ $at.addEventListener('input', setFixed);
 $in.addEventListener('input', setFixed);
 document.getElementById('now').addEventListener('click', () => { $at.value = ''; setFixed(); });
 
+// Cards are only rebuilt when the city list changes. Each second just the text updates,
+// so a focused Remove button keeps its focus.
+let builtFor = '';
 function render() {
   const d = fixed || new Date();
   const list = [localZone, ...zones.filter((z) => z !== localZone)];
-  $clocks.replaceChildren(...list.map((tz) => {
-    const el = document.createElement('div');
-    const isLocal = tz === localZone;
-    el.className = `card clock${isLocal ? ' local' : ''}`;
-    const time = d.toLocaleTimeString('en-AU', fixed ? { timeZone: tz, hour: 'numeric', minute: '2-digit' } : { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit' });
+  if (list.join() !== builtFor) {
+    builtFor = list.join();
+    $clocks.replaceChildren(...list.map((tz) => {
+      const el = document.createElement('div');
+      const isLocal = tz === localZone;
+      el.className = `card clock${isLocal ? ' local' : ''}`;
+      el.dataset.tz = tz;
+      el.innerHTML = `<div class="city">${isLocal ? `Your time · ${nameOf(tz)}` : nameOf(tz)}</div>
+        <div class="time"></div><div class="meta"></div>
+        ${isLocal ? '' : `<button class="remove" type="button" aria-label="Remove ${nameOf(tz)}" data-tz="${tz}">✕</button>`}`;
+      return el;
+    }));
+  }
+  for (const el of $clocks.children) {
+    const tz = el.dataset.tz;
+    el.querySelector('.time').textContent = d.toLocaleTimeString('en-AU', fixed ? { timeZone: tz, hour: 'numeric', minute: '2-digit' } : { timeZone: tz, hour: 'numeric', minute: '2-digit', second: '2-digit' });
     const date = d.toLocaleDateString('en-AU', { timeZone: tz, weekday: 'short', day: 'numeric', month: 'short' });
-    el.innerHTML = `<div class="city">${isLocal ? `Your time · ${nameOf(tz)}` : nameOf(tz)}</div>
-      <div class="time">${time}</div><div class="meta">${date} · ${isLocal ? 'Local' : diffLabel(tz, d)}</div>
-      ${isLocal ? '' : `<button class="remove" aria-label="Remove ${nameOf(tz)}" data-tz="${tz}">✕</button>`}`;
-    return el;
-  }));
+    el.querySelector('.meta').textContent = `${date} · ${tz === localZone ? 'Local' : diffLabel(tz, d)}`;
+  }
 }
 
 $clocks.addEventListener('click', (e) => {
-  const tz = e.target.closest('.remove')?.dataset.tz;
-  if (tz) { zones = zones.filter((z) => z !== tz); save(); render(); }
+  const btn = e.target.closest('.remove');
+  if (!btn) return;
+  const tz = btn.dataset.tz;
+  const index = [...$clocks.querySelectorAll('.remove')].indexOf(btn);
+  zones = zones.filter((z) => z !== tz); save(); render();
+  // Focus moves to the next Remove button, or back to the city picker when none are left.
+  const rest = $clocks.querySelectorAll('.remove');
+  (rest[Math.min(index, rest.length - 1)] || $sel).focus();
+  announce(`${nameOf(tz)} removed`);
 });
 document.getElementById('add').addEventListener('click', () => {
-  if (!zones.includes($sel.value)) { zones.push($sel.value); save(); render(); }
+  const tz = $sel.value;
+  if (zones.includes(tz) || tz === localZone) return announce(`${nameOf(tz)} is already shown`);
+  zones.push(tz); save(); render();
+  announce(`${nameOf(tz)} added`);
 });
 render();
 setInterval(() => { if (!fixed) render(); }, 1000);

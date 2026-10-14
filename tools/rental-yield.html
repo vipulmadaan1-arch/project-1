@@ -28,12 +28,12 @@
       <form class="card" id="form">
         <div class="field"><label for="price">Purchase price ($)</label><input type="number" id="price" value="550000" min="0" inputmode="decimal"></div>
         <div class="field"><label for="rent">Weekly rent ($)</label><input type="number" id="rent" value="520" min="0" inputmode="decimal"></div>
-        <div class="field"><label for="costs">Annual costs ($)</label><input type="number" id="costs" value="7500" min="0" inputmode="decimal"><small>Council and water rates, insurance, strata, property management, maintenance.</small></div>
+        <div class="field"><label for="costs">Annual costs ($)</label><input type="number" id="costs" value="7500" min="0" inputmode="decimal" aria-describedby="costs-help"><small id="costs-help">Council and water rates, insurance, strata, property management, maintenance.</small></div>
         <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="number" id="vacancy" value="2" min="0" max="52" inputmode="numeric"></div>
       </form>
       <div class="card readout">
         <div>Net rental yield</div>
-        <div class="result-big" aria-live="polite" id="net">–</div>
+        <div class="result-big" id="net">–</div>
         <div class="kv"><span>Gross rental yield</span><span id="gross">–</span></div>
         <div class="kv"><span>Annual rent received</span><span id="annual">–</span></div>
         <div class="kv"><span>Net income before mortgage and tax</span><span id="income">–</span></div>

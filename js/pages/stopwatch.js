@@ -1,4 +1,4 @@
-import '../layout.js';
+import { announce, shortcutAllowed } from '../layout.js';
 import { formatDuration } from '../calc.js';
 
 const $d = document.getElementById('display');
@@ -27,6 +27,7 @@ function lap() {
   const li = document.createElement('li');
   li.innerHTML = `<span>Lap ${++lapCount}</span><span>${formatDuration(t - lastLap)}</span><span>${formatDuration(t)}</span>`;
   $laps.prepend(li);
+  announce(`Lap ${lapCount}, ${formatDuration(t - lastLap)}`);
   lastLap = t;
 }
 function reset() {
@@ -38,8 +39,9 @@ function reset() {
 $start.addEventListener('click', toggle);
 $lap.addEventListener('click', lap);
 $reset.addEventListener('click', reset);
+const $card = $d.closest('.card');
 document.addEventListener('keydown', (e) => {
-  if (e.target.matches('input, select, textarea, button')) return;
-  if (e.code === 'Space') { e.preventDefault(); toggle(); }
+  if (!shortcutAllowed(e, $card)) return;
+  if (e.code === 'Space' && !e.target.closest('button')) { e.preventDefault(); toggle(); }
   if (e.key === 'l' || e.key === 'L') lap();
 });

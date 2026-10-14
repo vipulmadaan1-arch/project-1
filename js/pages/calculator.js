@@ -1,4 +1,4 @@
-import '../layout.js';
+import { announce, shortcutAllowed } from '../layout.js';
 import { evaluate } from '../calc.js';
 
 const $expr = document.getElementById('expr');
@@ -22,9 +22,13 @@ function press(k) {
       $expr.textContent = expr + ' =';
       expr = String(r);
       $out.textContent = r.toLocaleString('en-AU', { maximumFractionDigits: 10 });
+      announce(`Equals ${$out.textContent}`);
       justEvaluated = true;
       addToTape($expr.textContent.replace(/ =$/, ''), r);
-    } catch (e) { $out.textContent = e.message === 'Cannot divide by zero' ? 'Cannot ÷ 0' : 'Error'; }
+    } catch (e) {
+      $out.textContent = e.message === 'Cannot divide by zero' ? 'Cannot ÷ 0' : 'Error';
+      announce(e.message === 'Cannot divide by zero' ? 'Cannot divide by zero' : 'Error');
+    }
     return;
   }
   if (justEvaluated && /[0-9.(]/.test(k)) expr = '';
@@ -34,11 +38,19 @@ function press(k) {
 }
 
 document.getElementById('keys').addEventListener('click', (e) => {
-  const k = e.target.closest('button')?.dataset.k;
-  if (k) press(k);
+  const btn = e.target.closest('button');
+  if (!btn?.dataset.k) return;
+  press(btn.dataset.k);
+  // After a tap or mouse click, let go of focus so typing Enter afterwards means "=",
+  // while a keyboard user who tabbed to a key still presses it with Enter.
+  if (e.detail > 0) btn.blur();
 });
 
+const $layout = document.querySelector('.calc-layout');
 document.addEventListener('keydown', (e) => {
+  if (!shortcutAllowed(e, $layout)) return;
+  // Enter and Space on a focused key or tape entry press that button, as usual.
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('button')) return;
   const map = { '*': '×', '/': '÷', Enter: '=', '=': '=', Backspace: '⌫', Escape: 'C', Delete: 'C' };
   const k = map[e.key] || (/^[0-9.+\-()%]$/.test(e.key) ? e.key : null);
   if (k) { e.preventDefault(); press(k); }

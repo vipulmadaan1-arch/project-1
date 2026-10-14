@@ -1,5 +1,5 @@
 import { TOOLS, CATEGORIES } from '../tools.js';
-import { safeGet, safeSet } from '../layout.js';
+import { safeGet, safeSet, announce, shortcutAllowed } from '../layout.js';
 import { icon } from '../icons.js';
 
 const PIN_KEY = 'pinnedTools';
@@ -10,25 +10,27 @@ const $pinned = document.getElementById('pinned');
 const $sections = document.getElementById('sections');
 const $search = document.getElementById('search');
 
+// The card is clickable through its title link (stretched over the card in CSS); the pin
+// button sits beside the link rather than inside it, so each is its own control.
 function tile(t) {
-  const a = document.createElement('a');
-  a.className = 'tile';
-  a.href = `tools/${t.slug}.html`;
+  const el = document.createElement('div');
+  el.className = 'tile';
   const isPinned = pinned.includes(t.slug);
-  a.innerHTML = `
+  el.innerHTML = `
     <div class="ico">${icon(t.slug)}</div>
-    <h3>${t.name}</h3>
+    <h3><a class="tile-link" href="tools/${t.slug}.html">${t.name}</a></h3>
     <p>${t.desc}</p>
     <div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div>
-    <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="${isPinned ? 'Unpin' : 'Pin'} ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${icon('pin')}</button>`;
-  a.querySelector('.pin').addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="Pin ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${icon('pin')}</button>`;
+  el.querySelector('.pin').addEventListener('click', () => {
     pinned = isPinned ? pinned.filter((s) => s !== t.slug) : [...pinned, t.slug];
     safeSet(PIN_KEY, JSON.stringify(pinned));
     render();
+    // The tile moves between sections, so keep focus on its pin button.
+    document.querySelector(`.tile-link[href="tools/${t.slug}.html"]`)?.closest('.tile').querySelector('.pin').focus();
+    announce(isPinned ? `${t.name} unpinned` : `${t.name} pinned to top`);
   });
-  return a;
+  return el;
 }
 
 function render() {
@@ -55,11 +57,15 @@ function render() {
     return sec;
   }));
   document.getElementById('empty').hidden = shown > 0;
+  return shown;
 }
 
-$search.addEventListener('input', render);
+$search.addEventListener('input', () => {
+  const shown = render();
+  announce(shown ? `${shown} ${shown === 1 ? 'tool' : 'tools'} found` : 'No tools match that search.', 600);
+});
 // Press / to jump to search.
 document.addEventListener('keydown', (e) => {
-  if (e.key === '/' && !e.target.matches('input, textarea, select')) { e.preventDefault(); $search.focus(); }
+  if (e.key === '/' && shortcutAllowed(e)) { e.preventDefault(); $search.focus(); }
 });
 render();

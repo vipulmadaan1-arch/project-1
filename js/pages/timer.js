@@ -1,4 +1,4 @@
-import '../layout.js';
+import { announce } from '../layout.js';
 import { formatDuration } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
@@ -29,6 +29,7 @@ function tick() {
     remaining = 0; stop(); show(0);
     $d.classList.remove('flash'); void $d.offsetWidth; $d.classList.add('flash');
     beep();
+    announce("Time's up");
     return;
   }
   show(remaining);
