@@ -16,14 +16,13 @@ function safeSet(k, v) { try { localStorage.setItem(k, v); } catch { /* storage 
 const savedTheme = safeGet('theme');
 if (savedTheme) root.dataset.theme = savedTheme;
 
-// Brand mark: four tiles, one filled — the "pinned" tile.
+// Brand mark: a tick in a rounded square, i.e. "sorted".
 const MARK = `<svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
-  <rect x="1" y="1" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-  <rect x="14" y="1" width="11" height="11" rx="2.5" fill="var(--accent)"/>
-  <rect x="1" y="14" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
-  <rect x="14" y="14" width="11" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+  <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-const brand = `<a class="brand" href="${base}">${MARK}<span>${SITE_NAME}</span></a>`;
+const wordmark = SITE_NAME.replace(',', '<span class="brand-comma">,</span>');
+const brand = `<a class="brand" href="${base}" aria-label="${SITE_NAME} home">${MARK}<span>${wordmark}</span></a>`;
 
 const header = document.createElement('header');
 header.className = 'site-header';

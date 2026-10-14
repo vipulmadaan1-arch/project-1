@@ -88,6 +88,7 @@ main.wrap { padding-block: 0 72px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; margin-right: auto; color: var(--ink); text-decoration: none; font: 700 1.0625rem/1 var(--font-display); letter-spacing: -.02em; }
 .brand:hover { color: var(--ink); }
 .brand-mark { width: 26px; height: 26px; }
+.brand-comma { color: var(--accent); }
 .nav { display: flex; gap: 2px; margin-right: 6px; }
 .nav a { padding: 7px 10px; border-radius: var(--r-sm); color: var(--muted); text-decoration: none; font-size: var(--t-sm); font-weight: 500; }
 .nav a:hover { color: var(--ink); background: var(--sunken); }

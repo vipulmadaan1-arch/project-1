@@ -6,7 +6,8 @@ const $d = $('display'), $start = $('start');
 let remaining = 300000, endAt = 0, running = false, interval = 0, audioCtx;
 
 const inputMs = () => ((+$('h').value || 0) * 3600 + (+$('m').value || 0) * 60 + (+$('s').value || 0)) * 1000;
-const show = (ms) => { $d.textContent = formatDuration(Math.ceil(ms / 1000) * 1000, { showMs: false }); document.title = running ? `${$d.textContent} — Timer` : 'Countdown Timer | ToolTiles'; };
+const baseTitle = document.title;
+const show = (ms) => { $d.textContent = formatDuration(Math.ceil(ms / 1000) * 1000, { showMs: false }); document.title = running ? `${$d.textContent} — Timer` : baseTitle; };
 
 function beep() {
   try {

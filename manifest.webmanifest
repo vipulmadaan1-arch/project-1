@@ -1,6 +1,6 @@
 {
-  "name": "ToolTiles — Australian calculators and everyday tools",
-  "short_name": "ToolTiles",
+  "name": "Sorted, Mate — Australian calculators and everyday tools",
+  "short_name": "Sorted Mate",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -1,7 +1,7 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v8';
-const CACHE = `tooltiles-${VERSION}`;
+const VERSION = 'v9';
+const CACHE = `sortedmate-${VERSION}`;
 const FILES = [
   './',
   'css/style.css',

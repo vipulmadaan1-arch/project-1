@@ -1,4 +1,4 @@
-# ToolTiles
+# Sorted, Mate
 
 Free everyday tools on one site, as tiles, with a focus on Australian money calculators. It's a static site: no backend and no build step. Everything runs in the browser.
 
@@ -22,7 +22,7 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 
 ## Setup
 1. **Buy Me a Coffee:** create an account at buymeacoffee.com, then set `BMC_URL` in `js/config.js`. Until then all coffee links stay hidden, so the site can go live without them.
-2. **Site name:** change `SITE_NAME` in `js/config.js`, and the `| ToolTiles` suffix in the page `<title>` tags.
+2. **Site name:** change `SITE_NAME` in `js/config.js`, the `| Sorted, Mate` suffix in the page `<title>` tags, and `name`/`short_name` in `manifest.webmanifest`.
 
 ## Revenue
 **Buy Me a Coffee:** set `BMC_URL` in `js/config.js`. The header button, footer link and the prompt under results appear automatically.
@@ -48,7 +48,7 @@ npm run ads-txt        # writes ads.txt from ADSENSE_CLIENT
 1. Merge this branch into `main`.
 2. Go to repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Every push to `main` now runs the tests and, if they pass, deploys the site (`.github/workflows/pages.yml`).
-4. For a custom domain, add a `CNAME` file containing the domain (e.g. `tooltiles.com.au`) and set the domain's DNS as GitHub Pages instructs.
+4. For a custom domain, add a `CNAME` file containing the domain (e.g. `sortedmate.com.au`) and set the domain's DNS as GitHub Pages instructs.
 Once you have a domain, run `npm run sitemap -- https://your-domain.com.au` and commit the result.
 Then add the site to Google Search Console and submit `sitemap.xml`.
 
