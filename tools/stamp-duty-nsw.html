@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/stamp-duty-nsw.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>NSW Stamp Duty Calculator 2026/27 | Sorted, Mate</title>
   <meta name="description" content="Calculate NSW transfer (stamp) duty using 2026/27 Revenue NSW rates, including first home buyer exemption and foreign purchaser surcharge.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta property="og:title" content="NSW Stamp Duty Calculator 2026/27">
   <meta property="og:description" content="Calculate NSW transfer (stamp) duty using 2026/27 Revenue NSW rates, including first home buyer exemption and foreign purchaser surcharge.">
   <meta property="og:type" content="website">
@@ -13,8 +15,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/stamp-duty-nsw.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "NSW Stamp Duty Calculator 2026/27", "description": "Calculate NSW transfer (stamp) duty using 2026/27 Revenue NSW rates, including first home buyer exemption and foreign purchaser surcharge.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do first home buyers pay stamp duty in NSW?", "acceptedAnswer": {"@type": "Answer", "text": "Eligible first home buyers pay no transfer duty on a new or existing home valued at $800,000 or less, and get a reduced rate on homes valued under $1 million. Vacant land is exempt up to $350,000 with concessions under $450,000. Eligibility rules apply, including living in the home for 12 months."}}, {"@type": "Question", "name": "How is the first home buyer concession worked out?", "acceptedAnswer": {"@type": "Answer", "text": "Between $800,000 and $1 million the discount shrinks evenly: full duty minus duty-on-$800,000 × ($1,000,000 − price) ÷ $200,000. On an $850,000 home that saves about $22,640. This formula comes from independent calculators, so confirm the figure with Revenue NSW."}}, {"@type": "Question", "name": "What is the foreign purchaser surcharge?", "acceptedAnswer": {"@type": "Answer", "text": "Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."}}, {"@type": "Question", "name": "When do the rates change?", "acceptedAnswer": {"@type": "Answer", "text": "NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."}}, {"@type": "Question", "name": "Is this the exact amount I'll pay?", "acceptedAnswer": {"@type": "Answer", "text": "It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed."}}]}]</script>
 </head>
 <body>
@@ -37,7 +37,7 @@
         <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
         <div class="kv"><span>Foreign purchaser surcharge (9%)</span><span id="surcharge">–</span></div>
         <p class="note" id="note"></p>
-        <p class="disclaimer">Rates: Revenue NSW 2026/27 (contracts dated from 1 July 2026). Estimate only — exemptions and concessions depend on eligibility. The first home buyer concession uses a formula from independent sources, not from Revenue NSW. Confirm with <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener">Revenue NSW</a> or your conveyancer. <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener">First home buyer concession calculator</a>.</p>
+        <p class="disclaimer">Rates: Revenue NSW 2026/27 (contracts dated from 1 July 2026). Estimate only — exemptions and concessions depend on eligibility. The first home buyer concession uses a formula from independent sources, not from Revenue NSW. Confirm with <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a> or your conveyancer. <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener noreferrer">First home buyer concession calculator</a>.</p>
       </div>
     </div>
     <!-- content:start -->

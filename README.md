@@ -34,7 +34,12 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 4. In AdSense → Privacy & messaging, publish the European regulations message so EEA, UK and Swiss visitors get a consent banner.
 5. Set `CONTACT_EMAIL` so the privacy page lists a contact.
 
-Ads appear in one labelled slot per page: after each tool's results (before the explainer) and on the home page below the tool list. Space is reserved so the page doesn't jump when an ad loads. Calculator inputs stay out of the page address (only "Copy link" adds them), so ad scripts can't read them from the URL. The privacy policy is `privacy.html`; update it if you add other services.
+Ads appear in one labelled slot per page: after each tool's results (before the explainer) and on the home page below the tool list. Space is reserved so the page doesn't jump when an ad loads. Calculator inputs stay out of the page address (only "Copy link" adds them, after the `#`), so ad scripts can't read them from the URL. The privacy policy is `privacy.html`; update it if you add other services.
+
+## Security
+- Every page has a Content-Security-Policy `<meta>` tag in the form Google supports for AdSense (a hash plus `'strict-dynamic'`, `object-src 'none'`, `base-uri 'none'`). Injected markup can't run scripts. Scripts are loaded by one small inline boot script whose hash is in the policy, so don't add `<script src>` tags or `onclick=` attributes; `npm test` checks this. If you change the boot script, update the hash in every page (the test prints the new one).
+- Results links carry inputs after the `#`, which browsers never send to the server. Values from a link are checked against each field before use.
+- GitHub Pages can't send security headers, so `frame-ancestors`, HSTS and other header-only protections aren't set. A proxy such as Cloudflare in front of the site can add them later.
 
 ## Run locally
 ```
@@ -59,7 +64,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 
 ## Adding a tool
 1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
-2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section) and `js/pages/<slug>.js`.
+2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section, and change `data-module` on the boot script in `<head>` to `../js/pages/<slug>.js`) and `js/pages/<slug>.js`.
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.
 

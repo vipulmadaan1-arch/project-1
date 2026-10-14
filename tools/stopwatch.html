@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/stopwatch.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Stopwatch with Laps | Sorted, Mate</title>
   <meta name="description" content="Free online stopwatch with lap times. Works on phone and desktop.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta property="og:title" content="Online Stopwatch with Laps">
   <meta property="og:description" content="Free online stopwatch with lap times. Works on phone and desktop.">
   <meta property="og:type" content="website">
@@ -13,8 +15,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/stopwatch.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Online Stopwatch with Laps", "description": "Free online stopwatch with lap times. Works on phone and desktop.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it keep running if I switch tabs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It measures elapsed time from the clock, so the time stays accurate when you come back."}}, {"@type": "Question", "name": "Are my laps saved?", "acceptedAnswer": {"@type": "Answer", "text": "No. Laps clear when you reset or leave the page."}}]}]</script>
 </head>
 <body>

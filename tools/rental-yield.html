@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/rental-yield.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rental Yield Calculator (Australia) | Sorted, Mate</title>
   <meta name="description" content="Calculate gross and net rental yield for an Australian investment property from price, weekly rent and annual costs.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta property="og:title" content="Rental Yield Calculator (Australia)">
   <meta property="og:description" content="Calculate gross and net rental yield for an Australian investment property from price, weekly rent and annual costs.">
   <meta property="og:type" content="website">
@@ -13,8 +15,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/rental-yield.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Yield Calculator (Australia)", "description": "Calculate gross and net rental yield for an Australian investment property from price, weekly rent and annual costs.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What costs should I include?", "acceptedAnswer": {"@type": "Answer", "text": "Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."}}, {"@type": "Question", "name": "Does this include mortgage repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately."}}, {"@type": "Question", "name": "What's a good rental yield?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the location, property type and growth prospects. Higher-yield areas often have lower capital growth, and vice versa."}}]}]</script>
 </head>
 <body>

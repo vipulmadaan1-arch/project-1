@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/gst.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GST Calculator Australia — Add or Remove 10% GST | Sorted, Mate</title>
   <meta name="description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta property="og:title" content="GST Calculator Australia — Add or Remove 10% GST">
   <meta property="og:description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.">
   <meta property="og:type" content="website">
@@ -13,8 +15,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/gst.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator Australia — Add or Remove 10% GST", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO for your situation."}}]}]</script>
 </head>
 <body>

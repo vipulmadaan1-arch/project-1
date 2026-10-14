@@ -1,6 +1,6 @@
 // Service worker: caches every file so the site works offline.
 // Bump VERSION whenever you change any file, so visitors get the update.
-const VERSION = 'v9';
+const VERSION = 'v10';
 const CACHE = `sortedmate-${VERSION}`;
 const FILES = [
   './',
@@ -61,13 +61,16 @@ self.addEventListener('activate', (e) => {
 });
 
 // Network first so updates show straight away; fall back to cache when offline.
+// Only this site's own files are handled; ads and other sites are left to the browser.
+// An address with ?... (such as an old results link) is never stored, so figures from
+// a link aren't kept in the offline copy.
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== 'GET' || url.origin !== location.origin) return;
   e.respondWith(
     fetch(e.request)
       .then((res) => {
-        if (res.ok) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); }
+        if (res.ok && res.type === 'basic' && !url.search) { const copy = res.clone(); caches.open(CACHE).then((c) => c.put(e.request, copy)); }
         return res;
       })
       .catch(() => caches.match(e.request, { ignoreSearch: true })),

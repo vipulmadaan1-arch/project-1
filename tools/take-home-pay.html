@@ -2,10 +2,12 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/take-home-pay.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Take-Home Pay Calculator Australia 2026-27 | Sorted, Mate</title>
   <meta name="description" content="Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
   <meta property="og:title" content="Take-Home Pay Calculator Australia 2026-27">
   <meta property="og:description" content="Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.">
   <meta property="og:type" content="website">
@@ -13,8 +15,6 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="module" src="../js/layout.js"></script>
-  <script type="module" src="../js/pages/take-home-pay.js"></script>
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Take-Home Pay Calculator Australia 2026-27", "description": "Australian after-tax pay calculator using 2026-27 resident tax rates, Medicare levy and low income tax offset.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does this include HECS/HELP repayments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes — tick “I have a HECS/HELP debt”. From 2025-26 repayments are marginal: nothing up to $69,528 in 2026-27, then 15c per dollar above that, rising to 17c above $129,717, and 10% of all income above $186,050. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super, so yours may be higher."}}, {"@type": "Question", "name": "What isn't included?", "acceptedAnswer": {"@type": "Answer", "text": "The Medicare levy surcharge, salary sacrifice, deductions and offsets other than the low income tax offset."}}, {"@type": "Question", "name": "What's the difference between salary and package?", "acceptedAnswer": {"@type": "Answer", "text": "A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."}}, {"@type": "Question", "name": "Why is my payslip slightly different?", "acceptedAnswer": {"@type": "Answer", "text": "Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."}}, {"@type": "Question", "name": "Is there a cap on super?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies."}}]}]</script>
 </head>
 <body>
@@ -41,7 +41,7 @@
         <div class="kv" id="help-row" hidden><span>HECS/HELP repayment</span><span id="helpamt">–</span></div>
         <div class="kv"><span>Super (12%, paid on top)</span><span id="super">–</span></div>
         <div class="kv"><span>Effective tax rate</span><span id="eff">–</span></div>
-        <p class="disclaimer">Australian residents, 2026-27 rates (15% bracket from 1 July 2026). Medicare levy uses the latest ATO-published low-income thresholds. HECS/HELP uses 2026-27 marginal rates on salary only (your repayment income may be higher). Excludes Medicare levy surcharge, other offsets and deductions. Estimate only — check with the <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener">ATO</a>.</p>
+        <p class="disclaimer">Australian residents, 2026-27 rates (15% bracket from 1 July 2026). Medicare levy uses the latest ATO-published low-income thresholds. HECS/HELP uses 2026-27 marginal rates on salary only (your repayment income may be higher). Excludes Medicare levy surcharge, other offsets and deductions. Estimate only — check with the <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">ATO</a>.</p>
       </div>
     </div>
     <!-- content:start -->

@@ -4,7 +4,11 @@ import { icon } from '../icons.js';
 
 const PIN_KEY = 'pinnedTools';
 let pinned = [];
-try { pinned = JSON.parse(safeGet(PIN_KEY) || '[]'); } catch { pinned = []; }
+try {
+  const saved = JSON.parse(safeGet(PIN_KEY) || '[]');
+  // Keep only real tool slugs, so a damaged value in storage can't break the page.
+  if (Array.isArray(saved)) pinned = saved.filter((s) => TOOLS.some((t) => t.slug === s));
+} catch { pinned = []; }
 
 const $pinned = document.getElementById('pinned');
 const $sections = document.getElementById('sections');

@@ -5,7 +5,8 @@ import { icon } from './icons.js';
 import { mountAds } from './ads.js';
 
 // Hide all coffee links until a real Buy Me a Coffee handle is set in config.js.
-const HAS_BMC = !BMC_URL.includes('YOUR_HANDLE');
+// It must be a plain https:// link, so a typo can't put a javascript: link in the page.
+const HAS_BMC = !BMC_URL.includes('YOUR_HANDLE') && /^https:\/\/[^\s"'<>`]+$/.test(BMC_URL);
 
 const root = document.documentElement;
 const base = root.dataset.base || './';
@@ -14,7 +15,7 @@ function safeGet(k) { try { return localStorage.getItem(k); } catch { return nul
 function safeSet(k, v) { try { localStorage.setItem(k, v); } catch { /* storage unavailable */ } }
 
 const savedTheme = safeGet('theme');
-if (savedTheme) root.dataset.theme = savedTheme;
+if (savedTheme === 'light' || savedTheme === 'dark') root.dataset.theme = savedTheme;
 
 // Brand mark: a tick in a rounded square, i.e. "sorted".
 const MARK = `<svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
@@ -35,7 +36,7 @@ header.innerHTML = `
     <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch light or dark theme" title="Switch theme">
       <span class="theme-light-only">${icon('moon')}</span><span class="theme-dark-only">${icon('sun')}</span>
     </button>
-    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
+    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener noreferrer">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
   </div>`;
 document.body.prepend(header);
 
@@ -55,7 +56,7 @@ footer.innerHTML = `
     </div>`).join('')}
     <div class="footer-legal">
       <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, Revenue NSW or a licensed adviser.</span>
-      <span class="footer-links"><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener">Support the site</a>` : ''}</span>
+      <span class="footer-links"><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
     </div>
   </div>`;
 document.body.append(footer);
@@ -82,11 +83,14 @@ export const fmtMoney = (n, dp = 0) =>
   n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: dp, maximumFractionDigits: dp });
 export const num = (el) => parseFloat(String(el.value).replace(/[,$\s]/g, '')) || 0;
 
-// Shared results links carry a calculator's inputs in the page address (?field=value).
-// The figures are read once on load, then removed from the address, so they don't stay
-// visible to anything else on the page (such as ad scripts) while you use the tool.
-// They are only put back into a link when you choose "Copy link".
+// Shared results links carry a calculator's inputs after the # in the page address
+// (#field=value). Browsers never send that part of an address to a server, so the figures
+// don't reach the web host or its logs. They are read once on load, then removed from the
+// address, so they don't stay visible to anything else on the page (such as ad scripts)
+// while you use the tool. They are only put back into a link when you choose "Copy link".
+// Older links that used ?field=value still open.
 let sharedForm = null;
+let sharedOnChange = null;
 
 function formParams(form) {
   const p = new URLSearchParams();
@@ -96,18 +100,49 @@ function formParams(form) {
   return p;
 }
 
+// Puts one value from a link into a form field, only if it suits that field.
+// Returns true if the field was changed.
+function applyParam(el, v) {
+  if (v.length > 40) return false;
+  if (el.type === 'checkbox') {
+    if (v !== '0' && v !== '1') return false;
+    el.checked = v === '1';
+    return true;
+  }
+  if (el.tagName === 'SELECT') {
+    if (![...el.options].some((o) => o.value === v)) return false;
+    el.value = v;
+    return true;
+  }
+  if (el.type === 'number') {
+    let n = Number(v);
+    if (!v.trim() || !Number.isFinite(n)) return false;
+    if (el.min !== '' && n < +el.min) n = +el.min;
+    if (el.max !== '' && n > +el.max) n = +el.max;
+    el.value = String(n);
+    return true;
+  }
+  el.value = v; // date fields: the browser clears anything that isn't a valid date
+  return el.value === v;
+}
+
+function restoreFromUrl() {
+  const fromHash = location.hash.includes('=');
+  const params = new URLSearchParams(fromHash ? location.hash.slice(1) : location.search);
+  let restored = false;
+  for (const el of sharedForm.querySelectorAll('input[id], select[id]')) {
+    if (params.has(el.id) && applyParam(el, params.get(el.id))) restored = true;
+  }
+  if (restored) sharedOnChange();
+  if (location.search || fromHash) history.replaceState(null, '', location.pathname + (fromHash ? '' : location.hash));
+}
+
 export function syncFormWithUrl(form, onChange) {
   sharedForm = form;
-  const params = new URLSearchParams(location.search);
-  let restored = false;
-  for (const el of form.querySelectorAll('input[id], select[id]')) {
-    if (!params.has(el.id)) continue;
-    if (el.type === 'checkbox') el.checked = params.get(el.id) === '1';
-    else el.value = params.get(el.id);
-    restored = true;
-  }
-  if (restored) onChange();
-  if (location.search) history.replaceState(null, '', location.pathname + location.hash);
+  sharedOnChange = onChange;
+  restoreFromUrl();
+  // Opening a results link for the page you're already on only changes the part after #.
+  addEventListener('hashchange', () => { if (location.hash.includes('=')) restoreFromUrl(); });
 }
 
 // Adds "Copy link" and a gentle coffee prompt under a result card.
@@ -116,11 +151,11 @@ export function addResultActions(card) {
   wrap.className = 'result-actions';
   wrap.innerHTML = `
     <button class="btn" type="button">${icon('link')}<span>Copy link to these results</span></button>
-    ${HAS_BMC ? `<p class="nudge">${icon('coffee')}<span>Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener">Buy me a coffee</a></span></p>` : ''}`;
+    ${HAS_BMC ? `<p class="nudge">${icon('coffee')}<span>Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Buy me a coffee</a></span></p>` : ''}`;
   const btn = wrap.querySelector('button');
   const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
-    const url = `${location.origin}${location.pathname}${sharedForm ? `?${formParams(sharedForm)}` : ''}`;
+    const url = `${location.origin}${location.pathname}${sharedForm ? `#${formParams(sharedForm)}` : ''}`;
     try { await navigator.clipboard.writeText(url); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; }
     catch { prompt('Copy this link:', url); }
     setTimeout(() => { btn.innerHTML = idle; }, 2000);
