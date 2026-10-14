@@ -10,8 +10,10 @@ export function evaluate(expr) {
   function number() {
     const start = i;
     while (i < src.length && /[0-9.]/.test(src[i])) i++;
+    // Exponent, e.g. a previous result of 1e+21 carried into the next sum.
+    if (src[i] === 'e' && /^e[+-]?\d/.test(src.slice(i, i + 3))) { i += /[+-]/.test(src[i + 1]) ? 2 : 1; while (/[0-9]/.test(src[i] || '')) i++; }
     const s = src.slice(start, i);
-    if (!s || (s.match(/\./g) || []).length > 1) fail();
+    if (!s || s === '.' || s.startsWith('.e') || (s.split('e')[0].match(/\./g) || []).length > 1) fail();
     let n = parseFloat(s);
     if (peek() === '%') { i++; n /= 100; }
     return n;
@@ -31,9 +33,12 @@ export function evaluate(expr) {
   }
   function term() {
     let v = factor();
-    while (peek() === '*' || peek() === '/') {
-      const op = src[i++];
+    // A bracket straight after a number or bracket multiplies: 2(3) = 6, (2)(3) = 6, (2)3 = 6.
+    const implicit = () => peek() === '(' || (src[i - 1] === ')' && /[0-9.]/.test(peek() || ''));
+    while (peek() === '*' || peek() === '/' || implicit()) {
+      const op = peek() === '*' || peek() === '/' ? src[i++] : '*';
       const r = factor();
+      if (op === '/' && r === 0) throw new Error('Cannot divide by zero');
       v = op === '*' ? v * r : v / r;
     }
     return v;
@@ -51,8 +56,10 @@ export function evaluate(expr) {
   if (!src) return 0;
   const result = expression();
   if (i !== src.length) fail();
-  if (!Number.isFinite(result)) throw new Error('Cannot divide by zero');
-  return Math.round(result * 1e12) / 1e12;
+  if (!Number.isFinite(result)) throw new Error('Number too large');
+  // 15 significant digits hides floating-point noise (0.1 + 0.2 = 0.3) without
+  // wiping out very small results. Adding 0 turns -0 into 0.
+  return parseFloat(result.toPrecision(15)) + 0;
 }
 
 // ---------- Compound interest ----------
@@ -295,7 +302,9 @@ export function rentalYield({ price, weeklyRent, annualCosts = 0, vacancyWeeks =
 
 // ---------- Dates ----------
 // Inputs are 'YYYY-MM-DD' strings. Works in UTC to avoid daylight-saving off-by-one errors.
-const toUTC = (s) => { const [y, m, d] = s.split('-').map(Number); return Date.UTC(y, m - 1, d); };
+// Date.UTC treats years 0–99 as 1900–1999, so set the full year explicitly.
+const utc = (y, m, d) => { const t = new Date(Date.UTC(2000, 0, 1)); t.setUTCFullYear(y, m, d); return t.getTime(); };
+const toUTC = (s) => { const [y, m, d] = s.split('-').map(Number); return utc(y, m - 1, d); };
 export function daysBetween(a, b, { inclusive = false } = {}) {
   const days = Math.round((toUTC(b) - toUTC(a)) / 86400000);
   return inclusive ? days + Math.sign(days || 1) : days;
@@ -325,9 +334,9 @@ export function businessDays(a, b, { excludeHolidays = false } = {}) {
   return count * sign;
 }
 function addMonthsClamped(y, m, d, n) {
-  const target = new Date(Date.UTC(y, m - 1 + n, 1));
-  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
-  return Date.UTC(target.getUTCFullYear(), target.getUTCMonth(), Math.min(d, lastDay));
+  const target = new Date(utc(y, m - 1 + n, 1));
+  const lastDay = new Date(utc(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  return utc(target.getUTCFullYear(), target.getUTCMonth(), Math.min(d, lastDay));
 }
 export function ymdBetween(a, b) {
   if (toUTC(b) < toUTC(a)) [a, b] = [b, a];

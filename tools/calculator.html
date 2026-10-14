@@ -20,7 +20,7 @@
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calculator", "description": "Free online calculator with brackets, percentages and keyboard support. A tape keeps your last 12 calculations so you can reuse a result.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calculator", "description": "Free online calculator with brackets, percentages and keyboard support. A tape keeps your last 12 calculations so you can reuse a result.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -54,9 +54,9 @@
     <section class="content">
       <h2>How it works</h2>
       <p>A simple, fast calculator that follows the normal order of operations — brackets first, then × and ÷, then + and −. Type directly on your keyboard: use * for ×, / for ÷, Enter for equals, Backspace to delete and Esc to clear.</p>
-<p>The % key divides by 100, so <em>50% × 200</em> = 100.</p>
+<p>The % key divides by 100, so <em>50% × 200</em> = 100. A number next to a bracket multiplies, so <em>2(3 + 4)</em> = 14. Press a different operator to replace the one you just pressed.</p>
       <h2>Frequently asked questions</h2>
-      <details><summary>Is anything I type saved or sent anywhere?</summary><p>No. Everything runs in your browser.</p></details><details><summary>Why does 0.1 + 0.2 show 0.3?</summary><p>Results are rounded to 12 decimal places to hide floating-point errors common in computer arithmetic.</p></details>
+      <details><summary>Is anything I type saved or sent anywhere?</summary><p>No. Everything runs in your browser.</p></details><details><summary>Why does 0.1 + 0.2 show 0.3?</summary><p>Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0.</p></details>
       <h2>Related tools</h2>
       <nav class="related"><a href="percentage.html">Percentage</a><a href="gst.html">GST</a><a href="unit-converter.html">Unit Converter</a><a href="date-calculator.html">Date Calculator</a></nav>
     </section>

@@ -151,3 +151,26 @@ test('business days can exclude NSW public holidays', () => {
   // Easter 2027: Good Friday 26 Mar, Easter Monday 29 Mar
   assert.equal(businessDays('2027-03-22', '2027-04-02', { excludeHolidays: true }), 8);
 });
+
+test('calculator handles implicit multiplication, exponents, tiny results and bad input', () => {
+  assert.equal(evaluate('2(3)'), 6);
+  assert.equal(evaluate('(2)(3)'), 6);
+  assert.equal(evaluate('(1+1)3'), 6);
+  assert.equal(evaluate('1e+21+1'), 1e21); // a large result carried into the next sum
+  assert.equal(evaluate('2e-7*2'), 4e-7);
+  assert.equal(evaluate('0.000000001*0.000000001'), 1e-18); // was rounded to 0
+  assert.equal(evaluate('1/3'), 0.333333333333333);
+  assert.ok(Object.is(evaluate('-0'), 0)); // no "-0"
+  assert.throws(() => evaluate('.'), /Invalid/); // was reported as divide by zero
+  assert.throws(() => evaluate('1e+'), /Invalid/);
+  assert.throws(() => evaluate('5*/3'), /Invalid/);
+  assert.throws(() => evaluate('1/(3-3)'), /divide by zero/);
+  assert.throws(() => evaluate('0/0'), /divide by zero/);
+  assert.throws(() => evaluate('1e300*1e300'), /too large/);
+});
+
+test('date helpers work for years before 100', () => {
+  assert.deepEqual(ymdBetween('0001-01-01', '9999-12-31'), { years: 9998, months: 11, days: 30 });
+  assert.equal(daysBetween('0001-01-01', '0002-01-01'), 365);
+  assert.equal(addDays('0050-12-31', 1), '0051-01-01');
+});
