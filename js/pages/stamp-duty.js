@@ -7,7 +7,7 @@ function update() {
   // A disabled option is also unticked, so what's shown matches what's calculated.
   $('fhb').disabled = !home;
   if (!home) $('fhb').checked = false;
-  $('newhome').disabled = !$('fhb').checked;
+  $('newhome').disabled = !home;
   if ($('newhome').disabled) $('newhome').checked = false;
   const value = readNumber($('value'), { name: 'Property value', unit: 'money', min: 0, max: 1e12 });
   const r = value === null ? null : stampDuty({

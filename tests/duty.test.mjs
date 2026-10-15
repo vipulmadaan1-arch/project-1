@@ -75,3 +75,28 @@ test('FAQ comparison figures match the calculator ($750,000 investment)', async 
   const fmt = (n) => `$${n.toLocaleString('en-AU')}`;
   for (const s of STATES) assert.ok(html.includes(fmt(d(s.code, 750000).duty)), `${s.code} figure ${fmt(d(s.code, 750000).duty)} missing from FAQ`);
 });
+
+test('foreign buyers: no first home relief without a citizen or PR, surcharge on full value', () => {
+  const fhb = { home: true, firstHome: true, foreign: true };
+  // WA fact sheet: first home owner rate needs a citizen/PR buyer; a foreign-only buyer pays general duty plus 7%.
+  assert.equal(d('WA', 400000, fhb).duty, d('WA', 400000).duty);
+  assert.equal(d('WA', 400000, fhb).surcharge, 28000);
+  assert.equal(d('NSW', 700000, fhb).duty, d('NSW', 700000).duty);
+  assert.equal(d('VIC', 500000, fhb).duty, d('VIC', 500000, { home: true }).duty); // PPR rate still applies in Victoria
+  assert.equal(d('VIC', 500000, fhb).surcharge, 40000); // SRO example: 8% of $500,000, before concessions
+  assert.equal(d('SA', 600000, { ...fhb, newHome: true }).duty, d('SA', 600000).duty);
+  // Queensland from 1 August 2026: no home concession either, new home or not.
+  assert.equal(d('QLD', 700000, { home: true, foreign: true }).duty, d('QLD', 700000).duty);
+  assert.equal(d('QLD', 700000, { ...fhb, newHome: true }).duty, d('QLD', 700000).duty);
+  // ACT and NT set no citizenship test and no surcharge.
+  assert.equal(d('ACT', 1200000, fhb).duty, 0);
+  assert.match(d('ACT', 1200000, fhb).note, /confirm/);
+  assert.match(d('NSW', 700000, fhb).note, /citizen or permanent resident/);
+  assert.match(d('NSW', 700000, { foreign: true }).foreignNote, /share/);
+});
+
+test('NT house and land package exemption for any home buyer', () => {
+  assert.equal(d('NT', 900000, { home: true, newHome: true }).duty, 0);
+  assert.equal(d('NT', 900000, { home: true }).duty, d('NT', 900000).duty);
+  assert.equal(d('NT', 900000, { newHome: true }).duty, d('NT', 900000).duty); // must live in it
+});

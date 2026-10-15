@@ -98,12 +98,14 @@ C = {
 <tr><td>SA</td><td>New homes and vacant land: no duty, no cap</td><td>7%</td></tr>
 <tr><td>WA</td><td>No duty up to $600,000; reduced to $800,000</td><td>7%</td></tr>
 <tr><td>TAS</td><td>Established-home exemption ended 30 June 2026</td><td>8%</td></tr>
-<tr><td>ACT</td><td>No duty if eligible for the Home Buyer Concession Scheme (income tested)</td><td>None</td></tr>
-<tr><td>NT</td><td>No first home duty concession in this calculator</td><td>None</td></tr>
+<tr><td>ACT</td><td>No duty at any price under the Home Buyer Concession Scheme, if no buyer has owned property in 5 years</td><td>None</td></tr>
+<tr><td>NT</td><td>No first home concession. Any buyer of a new house and land package from a builder pays no duty (to 30 June 2027)</td><td>None</td></tr>
 </tbody></table>
-<p>Rates and thresholds were checked against each state's revenue office on 15 October 2026. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>""",
+<p>Rates and thresholds were checked against each state's revenue office on 15 October 2026. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>
+<p><strong>Foreign buyers</strong> pay the surcharge on the full dutiable value, on top of duty and before any concession. First home relief needs at least one buyer who is an Australian citizen or permanent resident in every state except the ACT and NT, and from 1 August 2026 Queensland's home concession does too. With a joint purchase the surcharge applies only to the foreign buyer's share.</p>""",
  faq=[("Which state has the cheapest stamp duty?","It depends on price and who's buying. On a $750,000 investment property the duty is $22,200 in the ACT, $26,775 in Queensland, $27,937 in NSW, $28,935 in Tasmania, $29,741 in WA, $35,080 in South Australia, $37,125 in the NT and $40,070 in Victoria. First home buyers can pay nothing in several states, depending on price and whether the home is new."),
-      ("Why does the new home box matter?","In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home."),
+      ("Why does the new home box matter?","In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home. In the NT, anyone buying a new house and land package from a builder to live in pays no duty, for contracts signed to 30 June 2027."),
+      ("Can foreign buyers get first home buyer relief?","Not on their own, except in the ACT. NSW, Victoria, Queensland, South Australia, WA and Tasmania need at least one buyer to be an Australian citizen or permanent resident (New Zealand citizens on a special category visa usually count too). If you buy with one, the surcharge applies only to the foreign buyer's share, so check the exact figure with your state's revenue office."),
       ("Are any figures estimates?","Yes. Victoria's and NSW's first home buyer tapers, and NT rates above $3 million, use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one."),
       ("Does this cover commercial property or vacant land?","No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.")],
  related=['stamp-duty-nsw','mortgage','offset','rental-yield']),

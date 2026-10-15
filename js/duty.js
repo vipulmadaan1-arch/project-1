@@ -6,6 +6,10 @@ import { nswTransferDuty, nswFhbConcessionDuty, NSW_FHB, NSW_FOREIGN_SURCHARGE }
 
 export const DUTY_CHECKED = '15 Oct 2026';
 
+// Foreign purchasers. The calculator assumes every buyer is foreign. With a joint purchase, each state
+// charges the surcharge only on the foreign buyer's share, and concessions can apply to the rest.
+// `foreignFhb: false` = first home relief needs at least one Australian citizen or permanent resident.
+
 // A bracket table: [upTo, base, from, ratePer100]. `part` = the revenue office charges
 // "for every $100 or part of $100", so the amount over the threshold rounds up to the next $100.
 function scale(table, value, { part = false } = {}) {
@@ -48,7 +52,7 @@ function qldFirstHomeDeduction(v) {
 // ---------- States ----------
 export const STATES = [
   {
-    code: 'NSW', name: 'New South Wales', foreign: NSW_FOREIGN_SURCHARGE, office: 'Revenue NSW',
+    code: 'NSW', name: 'New South Wales', foreign: NSW_FOREIGN_SURCHARGE, foreignFhb: false, office: 'Revenue NSW',
     source: 'https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty',
     calc({ value, firstHome, home }) {
       const general = nswTransferDuty(value);
@@ -61,7 +65,7 @@ export const STATES = [
     },
   },
   {
-    code: 'VIC', name: 'Victoria', foreign: 0.08, office: 'State Revenue Office Victoria',
+    code: 'VIC', name: 'Victoria', foreign: 0.08, foreignFhb: false, office: 'State Revenue Office Victoria',
     source: 'https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty',
     calc({ value, firstHome, home }) {
       const general = Math.round(VIC_GENERAL(value));
@@ -75,10 +79,12 @@ export const STATES = [
     },
   },
   {
-    code: 'QLD', name: 'Queensland', foreign: 0.08, office: 'Queensland Revenue Office',
+    code: 'QLD', name: 'Queensland', foreign: 0.08, foreignFhb: false, office: 'Queensland Revenue Office',
     source: 'https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/',
-    calc({ value, firstHome, home, newHome }) {
+    calc({ value, firstHome, home, newHome, foreign }) {
       const general = Math.round(scale(QLD_GENERAL, value, { part: true }));
+      // From 1 August 2026 the home concession also needs a citizen, permanent resident or specified foreign retiree.
+      if (home && foreign) return { duty: general, general, note: 'From 1 August 2026 foreign buyers can\'t get the Queensland home concession, unless they are a specified foreign retiree (visa 405 or 410).' };
       if (!home) return { duty: general, general };
       const homeRate = Math.round(scale(QLD_HOME, value, { part: true }));
       if (firstHome && newHome) return { duty: 0, general, note: 'First home (new home) concession: no duty on a new home, with no price cap (contracts from 1 May 2025).' };
@@ -90,7 +96,7 @@ export const STATES = [
     },
   },
   {
-    code: 'SA', name: 'South Australia', foreign: 0.07, office: 'RevenueSA',
+    code: 'SA', name: 'South Australia', foreign: 0.07, foreignFhb: false, office: 'RevenueSA',
     source: 'https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty',
     calc({ value, firstHome, home, newHome }) {
       const general = Math.round(scale(SA, value, { part: true }));
@@ -100,7 +106,7 @@ export const STATES = [
     },
   },
   {
-    code: 'WA', name: 'Western Australia', foreign: 0.07, office: 'RevenueWA',
+    code: 'WA', name: 'Western Australia', foreign: 0.07, foreignFhb: false, office: 'RevenueWA',
     source: 'https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment',
     calc({ value, firstHome, home }) {
       const general = Math.round(scale(WA_GENERAL, value, { part: true }));
@@ -113,7 +119,7 @@ export const STATES = [
     },
   },
   {
-    code: 'TAS', name: 'Tasmania', foreign: 0.08, office: 'State Revenue Office Tasmania',
+    code: 'TAS', name: 'Tasmania', foreign: 0.08, foreignFhb: false, office: 'State Revenue Office Tasmania',
     source: 'https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty',
     calc({ value, firstHome, home }) {
       const general = value <= 3000 ? 50 : Math.round(scale(TAS, value, { part: true }));
@@ -122,26 +128,27 @@ export const STATES = [
     },
   },
   {
-    code: 'ACT', name: 'Australian Capital Territory', foreign: 0, office: 'ACT Revenue Office',
+    code: 'ACT', name: 'Australian Capital Territory', foreign: 0, foreignFhb: true, office: 'ACT Revenue Office',
     source: 'https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property',
-    calc({ value, firstHome, home }) {
+    calc({ value, firstHome, home, foreign }) {
       const investor = value > 1455000 ? value * 0.0454 : scale(ACT_INVESTOR, value, { part: true });
       const owner = value > 1455000 ? value * 0.0454 : scale(ACT_OWNER, value, { part: true });
       const general = Math.round(investor);
-      if (firstHome && home) return { duty: 0, general, note: 'Home Buyer Concession Scheme: no duty from 1 July 2026, if you meet its income and eligibility tests.' };
+      if (firstHome && home) return { duty: 0, general, note: `Home Buyer Concession Scheme: no duty at any price from 1 July 2026 if no buyer has owned property anywhere in the last 5 years and one of you lives in it for a year.${foreign ? ' Its published rules don\'t require citizenship, but confirm with the ACT Revenue Office.' : ''}` };
       if (home) return { duty: Math.round(owner), general, note: 'Owner-occupier rate for a home you will live in.' };
       return { duty: general, general };
     },
   },
   {
-    code: 'NT', name: 'Northern Territory', foreign: 0, office: 'Territory Revenue Office',
+    code: 'NT', name: 'Northern Territory', foreign: 0, foreignFhb: true, office: 'Territory Revenue Office',
     source: 'https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator',
-    calc({ value }) {
+    calc({ value, home, newHome }) {
       let duty, estimate = false;
       if (value <= 525000) { const V = value / 1000; duty = 0.06571441 * V * V + 15 * V; }
       else if (value < 3000000) duty = value * 0.0495;
       else { duty = value * (value < 5000000 ? 0.0575 : 0.0595); estimate = true; }
       const general = Math.round(duty);
+      if (home && newHome) return { duty: 0, general, estimate, note: 'House and land package exemption: no duty on a new home bought from a building contractor in one contract, for contracts signed to 30 June 2027. No price cap; you don\'t need to be a first home buyer.' };
       return { duty: general, general, estimate, note: estimate ? 'Rates above $3 million come from independent calculators; the Territory Revenue Office does not publish them online.' : '' };
     },
   },
@@ -150,11 +157,14 @@ export const STATES = [
 export function stampDuty({ state, value, home = true, firstHome = false, newHome = false, foreign = false }) {
   const s = STATES.find((x) => x.code === state);
   if (!s || !(value > 0)) return null;
-  const r = s.calc({ value, home, firstHome: firstHome && home, newHome });
+  const fhbBlocked = foreign && firstHome && home && !s.foreignFhb;
+  const r = s.calc({ value, home, firstHome: firstHome && home && !fhbBlocked, newHome: newHome && home, foreign });
+  if (fhbBlocked) r.note = `First home relief in ${s.name} needs at least one buyer who is an Australian citizen or permanent resident. ${r.note || ''}`.trim();
+  // The surcharge is on the full dutiable value, before any concession.
   const surcharge = foreign ? Math.round(value * s.foreign) : 0;
   return {
     state: s, duty: r.duty, general: r.general, saving: Math.max(0, r.general - r.duty),
     surcharge, total: r.duty + surcharge, note: r.note || '', estimate: !!r.estimate,
-    foreignNote: foreign && !s.foreign ? `${s.name} has no foreign purchaser duty surcharge.` : '',
+    foreignNote: !foreign ? '' : `${s.foreign ? '' : `${s.name} has no foreign purchaser duty surcharge. `}This assumes every buyer is foreign. Buying with an Australian citizen or permanent resident? The surcharge applies only to the foreign buyer's share, and concessions may apply to the rest.`,
   };
 }
