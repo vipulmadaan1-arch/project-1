@@ -95,3 +95,5 @@ if (!pinned.length && !$search.value && staticTiles.length === TOOLS.length) {
 } else {
   render();
 }
+// The tiles are in their final places now (see .has-pins in style.css).
+document.documentElement.classList.remove('has-pins');

@@ -563,7 +563,7 @@ def trust_line(slug):
 
 # Every page's <head> has the Content-Security-Policy meta tag and one inline boot script
 # (theme + page script loader). Its hash is in the policy; npm test checks they match.
-BOOT = "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))"
+BOOT = "try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/\"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))"
 
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 

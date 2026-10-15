@@ -188,6 +188,10 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 /* home.js fills the tool sections. Until then keep the content below out of view, so it isn't
    seen jumping down when the tiles arrive (CLS). */
 #sections:empty { min-height: 100vh; }
+/* With tools pinned, home.js moves them to the top. Keep the tiles hidden until it has, so none jump
+   under a finger mid-tap. Shown after 3s regardless, in case the script never runs. */
+.has-pins #sections { visibility: hidden; animation: pins-reveal 0s 3s forwards; }
+@keyframes pins-reveal { to { visibility: visible; } }
 .tile {
   position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto 1fr auto; column-gap: 14px; row-gap: 4px;
   padding: 18px 18px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
@@ -199,8 +203,10 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
   .tile:hover { transform: translateY(-1px); }
   .tile:hover .tile-go { color: var(--accent); transform: translateX(2px); }
 }
-/* Instant feedback on tap, before the next page arrives. */
-.tile:active, .tile.is-pressed { transform: scale(.985); border-color: var(--accent); }
+/* Instant feedback on tap, before the next page arrives. :active only where there's a real hover:
+   iOS applies it to tiles a finger scrolls across. */
+@media (hover: hover) { .tile:active { transform: scale(.985); border-color: var(--accent); } }
+.tile.is-pressed { transform: scale(.985); border-color: var(--accent); }
 .tile.is-pressed .tile-go { color: var(--accent); transform: translateX(3px); }
 .tile .ico { grid-row: 1 / span 2; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; background: var(--accent-soft); color: var(--accent); }
 .tile .ico .icon { width: 22px; height: 22px; }
@@ -430,6 +436,7 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  .has-pins #sections { animation: pins-reveal 0s 3s forwards !important; }
 }
 
 /* ---------- Charts ---------- */
