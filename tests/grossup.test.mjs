@@ -14,11 +14,13 @@ for (const e of edges) for (const d of [-1, -0.01, 0, 0.01, 1, 250]) incomes.pus
 for (let g = 5000; g <= 400000; g += 7919) incomes.push(g);
 
 for (const opts of [{}, { help: true }, { includesSuper: true }, { includesSuper: true, help: true }]) {
-  test(`gross-up round-trips through takeHome within $1 ${JSON.stringify(opts)}`, () => {
+  test(`gross-up round-trips through takeHome within $3 ${JSON.stringify(opts)}`, () => {
     for (const g of incomes) {
       const target = takeHome(g, opts).net;
       const r = grossUp(target, opts);
-      assert.ok(Math.abs(r.gross - g) <= 1, `gross ${g} → net ${target} → gross ${r.gross}`);
+      // Taxable income drops cents, so a salary a dollar or two lower can take home the same (each dollar less
+      // of taxable income saves up to 57c of tax, Medicare and HELP). gross-up finds the smallest such salary.
+      assert.ok(r.gross <= g + 0.01 && g - r.gross < 3, `gross ${g} → net ${target} → gross ${r.gross}`);
       assert.ok(r.net >= target - 1e-9, `net ${r.net} below target ${target}`);
       assert.ok(r.net - target < 0.01, `net ${r.net} overshoots ${target}`);
       // Every figure is exactly what the Take-Home Pay tool shows for that gross.
@@ -29,9 +31,13 @@ for (const opts of [{}, { help: true }, { includesSuper: true }, { includesSuper
 }
 
 test('take-home pay tool default ($90,000, no HELP) round-trips', () => {
+  // Taxable income drops cents, so $89,999.68 (taxable $88,999) takes home exactly what $90,000 does
+  // (30% + 2% of the dollar less tax): the smallest salary that reaches the target.
   const net = takeHome(90000).net;
-  assert.equal(grossUp(net).gross, 90000);
-  assert.equal(grossUp(net / 26 * 26).gross, 90000);
+  assert.equal(grossUp(net).gross, 89999.68);
+  assert.equal(takeHome(89999.68).net, net);
+  assert.ok(takeHome(89999.67).net < net);
+  assert.equal(grossUp(net / 26 * 26).gross, 89999.68);
 });
 
 test('zero, negative and non-numbers give nil', () => {

@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/rent-vs-buy.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,20 +23,22 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/duty.js">
-  <link rel="modulepreload" href="../js/icons.js">
-  <link rel="modulepreload" href="../js/rentbuy.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/duty.js">
+  <link rel="modulepreload" href="../js/rentbuy.js">
   <link rel="modulepreload" href="../js/pages/rent-vs-buy.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rent vs Buy Calculator (Australia)", "description": "Compare your wealth after buying a home or renting and investing the difference, with stamp duty for every state, loan costs, growth and a break-even year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is it better to rent or buy in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $112,914 after 10 years. At 4% growth the gap is only $3,115, and at 3% growth renting and investing is ahead by $97,391."}}, {"@type": "Question", "name": "How long until buying beats renting?", "acceptedAnswer": {"@type": "Answer", "text": "In the example it takes 5 years: by year 4 the renter is still ahead, but from year 5 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind."}}, {"@type": "Question", "name": "Does being a first home buyer change the answer?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $166,719 after 10 years and from year 2."}}, {"@type": "Question", "name": "Does the calculator include tax?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $622,036 after 10 years in the example, and at 0% (pre-tax) $674,213, which shrinks buying's lead to $60,736."}}, {"@type": "Question", "name": "What investment return should I use?", "acceptedAnswer": {"@type": "Answer", "text": "It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $188,995 ahead after 10 years instead of $112,914. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Rent vs Buy</span></nav>
     <div class="tool-head">
       <h1>Rent vs Buy Calculator (Australia)</h1>

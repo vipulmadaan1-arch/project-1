@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/work-deductions.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,19 +23,20 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/deductions.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/deductions.js">
   <link rel="modulepreload" href="../js/pages/work-deductions.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "WFH & Car Expense Deduction Calculator 2026-27", "description": "Work out your working from home (70c an hour) and car (cents per km or logbook) tax deductions from 2024-25 to 2026-27, and the tax they save.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the working from home rate for 2025-26?", "acceptedAnswer": {"@type": "Answer", "text": "70 cents for each hour you work from home, the same as 2024-25. It covers internet, phone, energy and stationery. The ATO's examples round the result down to whole dollars."}}, {"@type": "Question", "name": "What is the ATO cents per km rate for 2026-27?", "acceptedAnswer": {"@type": "Answer", "text": "91 cents per kilometre, up from 88c in 2024-25 and 2025-26. You can claim up to 5,000 work-related kilometres per car."}}, {"@type": "Question", "name": "Should I claim working from home or take the $1,000 standard deduction?", "acceptedAnswer": {"@type": "Answer", "text": "From 2026-27, if your working from home, car and other work-related expenses add up to less than $1,000, it's better to take the $1,000 standard deduction. Claims above $1,000 replace it and need written evidence. Union fees and professional association fees don't count towards the $1,000: claim them as well."}}, {"@type": "Question", "name": "Can I claim my phone and internet as well as the 70c rate?", "acceptedAnswer": {"@type": "Answer", "text": "No. The fixed rate already includes home and mobile phone and internet. You can claim depreciation on equipment and furniture, such as a desk, chair or laptop."}}, {"@type": "Question", "name": "Can I claim driving to work?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. Trips between home and your normal workplace are private. You can claim trips between workplaces, to clients or to an alternative workplace, and trips carrying bulky tools you need for work."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Work From Home &amp; Car Expenses</span></nav>
     <div class="tool-head">
       <h1>WFH &amp; Car Expense Deduction Calculator <span class="nowrap">2026-27</span></h1>

@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/stamp-duty-nsw.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,18 +23,20 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/stamp-duty-nsw.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "NSW Stamp Duty Calculator 2026-27 and First Home Buyers", "description": "Calculate NSW stamp duty at 2026-27 Revenue NSW rates, with the first home buyer exemption to $800,000, the concession to $1 million and the foreign surcharge.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do first home buyers pay stamp duty in NSW?", "acceptedAnswer": {"@type": "Answer", "text": "Eligible first home buyers pay no transfer duty on a new or existing home valued at $800,000 or less, and get a reduced rate on homes valued under $1 million. Vacant land is exempt up to $350,000 with concessions under $450,000. Eligibility rules apply, including living in the home for 12 months."}}, {"@type": "Question", "name": "How is the first home buyer concession worked out?", "acceptedAnswer": {"@type": "Answer", "text": "Between $800,000 and $1 million the discount shrinks evenly: full duty minus duty-on-$800,000 × ($1,000,000 − price) ÷ $200,000. On an $850,000 home that saves about $22,640. This formula comes from independent calculators, so confirm the figure with Revenue NSW."}}, {"@type": "Question", "name": "What is the foreign purchaser surcharge?", "acceptedAnswer": {"@type": "Answer", "text": "Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."}}, {"@type": "Question", "name": "When do the rates change?", "acceptedAnswer": {"@type": "Answer", "text": "NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."}}, {"@type": "Question", "name": "Is this the exact amount I'll pay?", "acceptedAnswer": {"@type": "Answer", "text": "It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">NSW Stamp Duty</span></nav>
     <div class="tool-head">
       <h1>NSW Stamp Duty Calculator <span class="nowrap">2026-27</span> and First Home Buyers</h1>

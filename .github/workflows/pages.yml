@@ -4,14 +4,14 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Monthly test run, so CI goes red when the rates roll over (tests/rollover.test.mjs fails once the
+  # current income year has ended). Scheduled runs only test; they never deploy.
+  schedule:
+    - cron: '17 21 1 * *' # 21:17 UTC on the 1st = early morning on the 2nd in Australia
 
 # Read-only by default. Only the deploy job gets the extra Pages permissions it needs.
 permissions:
   contents: read
-
-concurrency:
-  group: pages
-  cancel-in-progress: true
 
 # Actions are pinned to a full commit SHA (the tag is in the comment) so a moved tag
 # can't change what runs. Update both together when upgrading.
@@ -22,14 +22,24 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          fetch-depth: 0 # full history: scripts/seo.mjs dates sitemap entries from each page's last commit
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
       - run: npm test
+      # Generated sections (explainers, FAQ, JSON-LD, head tags, CSP, preloads, service worker hashes) must
+      # match their generators: regenerate and fail if anything changed.
+      - name: Generated files are up to date
+        run: python3 scripts/content.py && node scripts/seo.mjs && git diff --exit-code
 
   deploy:
     needs: test
+    if: github.event_name != 'schedule'
     runs-on: ubuntu-latest
+    # One deploy at a time; a newer push cancels an older deploy still running.
+    concurrency:
+      group: pages
+      cancel-in-progress: true
     permissions:
       contents: read
       pages: write

@@ -37,7 +37,7 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 Ads appear in one labelled slot per page: after each tool's results (before the explainer) and on the home page below the tool list. Space is reserved so the page doesn't jump when an ad loads. Calculator inputs stay out of the page address (only "Copy link" adds them, after the `#`), so ad scripts can't read them from the URL. The privacy policy is `privacy.html`; update it if you add other services.
 
 ## Security
-- Every page has a Content-Security-Policy `<meta>` tag in the form Google supports for AdSense (a hash plus `'strict-dynamic'`, `object-src 'none'`, `base-uri 'none'`). Injected markup can't run scripts. Scripts are loaded by one small inline boot script whose hash is in the policy, so don't add `<script src>` tags or `onclick=` attributes; `npm test` checks this. If you change the boot script, update the hash in every page (the test prints the new one).
+- Every page has a Content-Security-Policy `<meta>` tag, written by `npm run seo` (`csp()` in `scripts/seo.mjs`): the boot script's hash plus `'strict-dynamic'`, and `'self'` only for everything else (no eval, frames or form submissions; `base-uri 'none'`). Injected markup can't run scripts. Scripts are loaded by one small inline boot script whose hash is in the policy, so don't add `<script src>` tags or `onclick=` attributes; `npm test` checks this. Turning on AdSense widens the policy the next time `npm run seo` runs.
 - Results links carry inputs after the `#`, which browsers never send to the server. Values from a link are checked against each field before use.
 - GitHub Pages can't send security headers, so `frame-ancestors`, HSTS and other header-only protections aren't set. A proxy such as Cloudflare in front of the site can add them later.
 
@@ -58,7 +58,7 @@ npm run seo            # canonical/share tags, static tool links, sitemap.xml, r
 5. Set `SITE_URL` in `js/config.js` (e.g. `'https://sortedmate.com.au'`), run `npm run seo`, bump `VERSION` in `sw.js` and commit. See **Search and sharing** below.
 6. Add the site to Google Search Console and submit `sitemap.xml`.
 
-**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update. Add new files to its `FILES` list too; `npm test` fails if one is missing. The comment at the top of `sw.js` explains how updates and offline fallback work.
+**After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update, and run `node scripts/sw-hashes.mjs` (or `npm run seo`, which runs it) so the worker downloads only the files that changed. Add new files to its `FILES` list too; `npm test` fails if one is missing or a hash is stale. The comment at the top of `sw.js` explains how updates and offline fallback work.
 
 The app icons in `img/` (`icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, `apple-touch-icon.png`) are PNG renders of `img/icon.svg`. If you change the SVG, re-export them at those sizes; the maskable and Apple icons are full-bleed squares (no rounded corners), as those platforms apply their own mask.
 
@@ -76,7 +76,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 
 ## Adding a tool
 1. Add an entry to `js/tools.js` (with `cat`, `meta`) and an icon to `js/icons.js`.
-2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section, and change `data-module` on the boot script in `<head>` to `../js/pages/<slug>.js`) and `js/pages/<slug>.js`. Give it a unique `<title>` and meta description. Keep the `<link rel="modulepreload">` lines in the page head matching the page module and every module it imports (`npm test` checks this).
+2. Create `tools/<slug>.html` (copy an existing page, including the content/FAQ section, and change `data-module` on the boot script in `<head>` to `../js/pages/<slug>.js`) and `js/pages/<slug>.js`. Give it a unique `<title>` and meta description. `npm run seo` writes the `<link rel="modulepreload">` lines for the page module and every module it imports (`npm test` checks them).
 3. Put any maths in `js/calc.js` and add a test in `tests/calc.test.mjs`.
 4. Add both files to `FILES` in `sw.js`.
 5. Run `python3 scripts/content.py` and `npm run seo`.
@@ -88,14 +88,11 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 | Other states' transfer duty tables, home and first home rules, foreign surcharges | `STATES` and the tables above it in `js/duty.js`; update `DUTY_CHECKED` | Each state's revenue office (links in `source` per state) |
 | CPI quarterly index (ABS, Sep 2025 = 100) for CGT indexation; add each quarter as published | `CPI` in `js/cgt.js` | ABS Consumer Price Index, All groups, weighted average of eight capital cities |
 | "In Aussie terms" benchmarks: minimum wage (1 July), ABS earnings, Cotality rent and home values, MCG, ABS population, DCCEEW kangaroo counts | `BENCH` and `COUNTS` in `js/aussie.js` (each has its source and date) | Fair Work, ABS, Cotality, DCCEEW, AFL, MCC |
-| Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` in `js/calc.js` and `bracketsFor` in `js/cgt.js` | ATO tax rates, Australian residents |
-| Medicare levy low-income thresholds | `MEDICARE` | ATO: Medicare levy reduction for low-income earners |
-| HECS/HELP repayment thresholds (indexed yearly) | `HELP` | ATO: Study and training loan minimum repayment income and rates |
+| Income tax brackets, Medicare levy thresholds, HECS/HELP bands, Medicare levy surcharge tiers, standard deduction, LITO, super guarantee, maximum contribution base and concessional cap, per income year; then `CURRENT_YEAR` | `YEARS` in `js/rates.js` (every engine reads them from there; each figure names its ATO page in `SOURCES`). `tests/rollover.test.mjs` fails 14 days after `CURRENT_YEAR` ends | ATO pages listed in `SOURCES` |
 | NSW public holidays (add next year's dates) | `NSW_HOLIDAYS`, `NSW_HOLIDAY_YEARS` | nsw.gov.au/about-nsw/public-holidays |
-| Super guarantee rate and maximum contribution base | `SUPER_GUARANTEE`, `SUPER_MAX_BASE` | ATO: key superannuation rates and thresholds |
 
 Last checked against official sources on 14 Oct 2026. The Medicare thresholds are the 2025-26 figures, the latest the ATO has published.
-Rate tables also appear in the how-it-works text in `scripts/content.py` (stamp duty, take-home pay), so update them there too and rerun it.
+Rate tables also appear in the how-it-works text in `scripts/content.py` (stamp duty, take-home pay), so update them there too and rerun it. Worked figures in the FAQs are recomputed from the engines by `tests/faq-figures.test.mjs`, so a rate change fails the tests until the text matches.
 
 The NSW first home buyer concession (homes $800k–$1m) uses a formula published by independent calculators. Revenue NSW doesn't publish it, so check it against their First Home Buyer calculator.
 

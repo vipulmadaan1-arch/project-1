@@ -1,20 +1,22 @@
 // Medicare levy surcharge (MLS) for people without private hospital cover. Pure functions, no DOM.
 // Source (verified 15 Oct 2026): ATO "Medicare levy surcharge income, thresholds and rates", last updated
 // 22 June 2026, https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates
+import { MLS_RATES, mlsTiersFor, ratesFor } from './rates.js';
+
 export const MLS_CHECKED = '15 Oct 2026';
 export const MLS_YEAR = '2026-27';
 export const MLS_SOURCE = 'https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates';
 
-// 2026-27 tiers (ATO, verified). Each tier starts $1 above the previous tier's upper limit.
+// 2026-27 tiers and rates come from js/rates.js (ATO, verified). Each tier starts $1 above the previous tier's limit.
 // Base tier: singles $105,000 or less, families $210,000 or less: 0%.
 // Tier 1: $105,001–$123,000 / $210,001–$246,000: 1%.
 // Tier 2: $123,001–$164,000 / $246,001–$328,000: 1.25%.
 // Tier 3: $164,001+ / $328,001+: 1.5%.
 export const MLS_TIERS = {
-  single: [105000, 123000, 164000],
-  family: [210000, 246000, 328000],
+  single: mlsTiersFor(MLS_YEAR),
+  family: mlsTiersFor(MLS_YEAR, true),
 };
-export const MLS_RATES = [0, 0.01, 0.0125, 0.015];
+export { MLS_RATES };
 // "The family income threshold is increased by $1,500 for each MLS dependent child after the first child." (ATO)
 export const CHILD_INCREMENT = 1500;
 // With a spouse all year you don't pay the MLS if "your own income for MLS purposes is $28,011 or less" (2025-26,
@@ -22,7 +24,7 @@ export const CHILD_INCREMENT = 1500;
 // https://www.ato.gov.au/forms-and-instructions/individual-tax-return-2026-instructions/medicare-levy-questions-m1-m2-individual-tax-return-2026/m2-medicare-levy-surcharge-2026
 // ("Paying the Medicare levy surcharge" still shows the 2024-25 figure, $27,222.)
 // ESTIMATE for 2026-27: the 2026-27 figure isn't published yet, so the 2025-26 one is used and the page says so.
-export const SPOUSE_EXEMPT = 28011;
+export const SPOUSE_EXEMPT = ratesFor(MLS_YEAR).medicare.lower; // $28,011 (js/rates.js)
 // Appropriate hospital cover has an excess of $750 or less (singles) or $1,500 or less (couples and families).
 // ATO "Appropriate level of private patient hospital cover", last updated 30 April 2026 (verified).
 export const MAX_EXCESS = { single: 750, family: 1500 };
@@ -57,6 +59,7 @@ export function tierFor(income, family = false, children = 0) {
 // A person with a spouse whose own income for MLS purposes is $28,011 or less doesn't pay MLS (see SPOUSE_EXEMPT).
 // o.premium: the annual premium of a hospital policy, to compare with the surcharge.
 export function medicareLevySurcharge({ own = {}, family = false, spouse = false, spouseIncome = 0, children = 0, days = 365, premium = 0 } = {}) {
+  if (![own.taxable ?? 0, own.fringe ?? 0, own.investmentLosses ?? 0, own.reportableSuper ?? 0, spouseIncome, children, days, premium].every(Number.isFinite)) return null;
   const ownIncome = mlsIncome(own);
   const hasSpouse = family && spouse;
   const income = ownIncome + (hasSpouse ? Math.max(0, spouseIncome) : 0);

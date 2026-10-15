@@ -302,6 +302,8 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 .related .icon { width: 18px; height: 18px; color: var(--accent); }
 
 /* ---------- Tool pages ---------- */
+/* Shown only with JavaScript off (written into every page by scripts/seo.mjs). */
+.noscript { margin: 20px 0 0; padding: 12px 16px; border: 1px solid var(--line-strong); border-left: 4px solid var(--ochre); border-radius: var(--r-sm); background: var(--surface); color: var(--ink); font-size: var(--t-sm); }
 .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 28px 0 0; font-size: var(--t-sm); color: var(--faint); }
 .crumbs a { color: var(--muted); text-decoration: none; }
 .crumbs a:hover { color: var(--ink); }

@@ -25,33 +25,29 @@
 // 5. s26-155(6)(a): net income from your exempt (grandfathered or new-build) dwellings also reduces the
 //    excess. This calculator models one property, plus an optional quarantined amount carried forward.
 //
-// Tax rates: 2026-27 uses js/calc.js (15% second bracket). From 2027-28 the second bracket is 14%
-// (Treasury Laws Amendment (Cost of Living Tax Cuts) legislation; ATO individual income tax rates).
-// LITO and the Medicare levy come from js/calc.js (Medicare thresholds are the latest ATO published).
+// Tax rates, LITO and the Medicare levy come from js/rates.js: the 2026-27 table (15% second bracket) for 2026-27,
+// and the 2027-28 table (14%, Treasury Laws Amendment (Cost of Living Tax Cuts) legislation) for 2027-28 and later
+// years (no later rates are legislated, so 2028-29 onwards reuse 2027-28's). Medicare thresholds are the latest the ATO has published (2025-26),
+// carried forward as an estimate.
 // The Working Australians tax offset (Schedule 3 of the same Act) isn't modelled.
-import { incomeTax, lito, medicareLevy, repayment } from './calc.js';
+import { repayment } from './calc.js';
+import { taxFor, taxAndMedicareFor } from './rates.js';
 
 export const RENTAL_CHECKED = '15 Oct 2026';
 export const LIMIT_START_FY = 2027; // the 2027-28 income year (Schedule 2 item 5)
 export const GRANDFATHER_DATE = '2026-05-12'; // before 7.30 pm AEST on this day (s26-155(2)(a))
 
-const BRACKETS_FROM_2027 = [[18200, 0], [45000, 0.14], [135000, 0.30], [190000, 0.37], [Infinity, 0.45]];
+// The js/rates.js income year whose rates apply in a year starting 1 July fyStart (2026 → 2026-27).
+export const ratesYear = (fyStart) => (fyStart <= 2026 ? '2026-27' : '2027-28');
 
 /** Basic income tax for a resident. fyStart 2026 means the 2026-27 income year. */
 export function basicTax(income, fyStart) {
-  if (fyStart <= 2026) return incomeTax(income);
-  let tax = 0, prev = 0;
-  for (const [upTo, rate] of BRACKETS_FROM_2027) {
-    if (income > prev) tax += (Math.min(income, upTo) - prev) * rate;
-    prev = upTo;
-  }
-  return tax;
+  return taxFor(ratesYear(fyStart), income);
 }
 
 /** Income tax after the low income tax offset, plus the Medicare levy. */
 export function totalTax(income, fyStart) {
-  const i = Math.max(0, income);
-  return Math.max(0, basicTax(i, fyStart) - lito(i)) + medicareLevy(i);
+  return taxAndMedicareFor(ratesYear(fyStart), Math.max(0, income));
 }
 
 export const fyLabel = (fyStart) => `${fyStart}-${String((fyStart + 1) % 100).padStart(2, '0')}`;

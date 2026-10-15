@@ -1,19 +1,22 @@
 // Super contributions and salary sacrifice for an employee, 2026-27. Pure functions, no DOM.
-// Income tax, LITO, Medicare levy, the super guarantee rate and the maximum contribution base come from calc.js.
-import { SUPER_GUARANTEE, SUPER_MAX_BASE, incomeTax, lito, medicareLevy } from './calc.js';
+// Income tax, LITO, Medicare levy, the super guarantee rate, the maximum contribution base and the concessional
+// cap come from js/rates.js (2026-27).
+import { taxAndMedicareFor, superFor } from './rates.js';
 
 export const SUPER_CHECKED = '15 Oct 2026';
 export const SUPER_YEAR = '2026-27';
+const RATES = superFor(SUPER_YEAR);
 
 // Concessional contributions cap: $32,500 from 1 July 2026 (indexed to AWOTE; was $30,000 in 2024-25 and 2025-26).
 // ATO "Contributions caps", last updated 11 Sep 2026 (verified 15 Oct 2026).
-export const CONCESSIONAL_CAP = 32500;
+export const CONCESSIONAL_CAP = RATES.concessionalCap; // $32,500
 export const CAP_SOURCE = 'https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/contributions-caps';
 // Super guarantee 12% and the 2026-27 maximum contribution base of $270,830 a year (annual from 1 July 2026 under
 // Payday Super; quarterly before then). ATO "Super guarantee", last updated 17 Apr 2026 (verified 15 Oct 2026):
 // https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/super-guarantee
-// Both constants live in calc.js; 12% × $270,830 = $32,499.60, just under the cap.
-export { SUPER_GUARANTEE, SUPER_MAX_BASE };
+// Both live in js/rates.js; 12% × $270,830 = $32,499.60, just under the cap.
+export const SUPER_GUARANTEE = RATES.sg;
+export const SUPER_MAX_BASE = RATES.maxBase;
 // Carry-forward of unused cap amounts needs a total super balance under $500,000 on 30 June of the previous year;
 // unused amounts last 5 years. ATO "Contributions caps" (verified). The available amount is shown in myGov.
 export const CARRY_FORWARD_BALANCE = 500000;
@@ -31,7 +34,7 @@ export const DIV293 = { threshold: 250000, rate: 0.15 };
 export const EXCESS_OFFSET = 0.15;
 
 // Income tax after LITO, plus the Medicare levy (no Medicare levy surcharge, HELP or other offsets).
-export const personalTax = (taxable) => Math.max(0, incomeTax(taxable) - lito(taxable)) + medicareLevy(taxable);
+export const personalTax = (taxable) => taxAndMedicareFor(SUPER_YEAR, taxable);
 
 // Division 293 tax. income: Division 293 income; contributions: low tax contributions.
 export function division293(income, contributions) {
@@ -47,7 +50,9 @@ export const superGuarantee = (salary) => Math.min(Math.max(0, salary), SUPER_MA
 // sacrifice: salary sacrificed into super. personal: personal contributions you'll claim a deduction for.
 // unusedCap: carried-forward unused cap amounts available (from myGov). otherIncome: Division 293 income other than
 // salary (reportable fringe benefits, net investment losses, other taxable income).
+// Anything that isn't a number gives null.
 export function scenario({ salary, sacrifice = 0, personal = 0, unusedCap = 0, otherIncome = 0 }) {
+  if (![salary, sacrifice, personal, unusedCap, otherIncome].every(Number.isFinite)) return null;
   const sg = superGuarantee(salary);
   const concessional = sg + sacrifice + personal;
   const cap = CONCESSIONAL_CAP + Math.max(0, unusedCap);
@@ -65,6 +70,7 @@ export function scenario({ salary, sacrifice = 0, personal = 0, unusedCap = 0, o
 export function salarySacrifice(o) {
   const withS = scenario(o);
   const without = scenario({ ...o, sacrifice: 0 });
+  if (!withS || !without) return null;
   const sacrifice = o.sacrifice || 0;
   const incomeTaxSaved = without.tax - withS.tax;
   const extraContribTax = withS.contributionsTax - without.contributionsTax;

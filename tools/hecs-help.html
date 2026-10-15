@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/hecs-help.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,19 +23,21 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/hecs.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/hecs.js">
+  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/hecs-help.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "HECS Repayment Calculator 2026-27: HELP Debt Payoff", "description": "See how long your HECS/HELP debt takes to repay, year by year, with 2026-27 compulsory repayment rates, indexation and voluntary repayments.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is HECS/HELP indexation worked out?", "acceptedAnswer": {"@type": "Answer", "text": "On 1 June each year the ATO indexes the part of your debt that's more than 11 months old, at the lower of the Consumer Price Index and the Wage Price Index. It was 2.8% on 1 June 2026, 3.2% in 2025 and 4% in 2024."}}, {"@type": "Question", "name": "What happened with the 20% HECS cut?", "acceptedAnswer": {"@type": "Answer", "text": "The Government cut study loan debts by 20%, based on your balance at 1 June 2025, before that year's indexation. The ATO applied it in late 2025. Your balance in myGov already includes it, so enter that figure."}}, {"@type": "Question", "name": "Is it worth making voluntary HECS repayments?", "acceptedAnswer": {"@type": "Answer", "text": "It saves indexation and can shorten the time you're repaying, which the calculator shows. There's no interest beyond indexation, so paying off higher-interest debt or building an offset balance often comes first. To beat a 1 June indexation, the ATO needs your payment in time; electronic payments can take up to 4 business days to arrive, so in 2026 that meant paying by Monday 25 May."}}, {"@type": "Question", "name": "When do I have to start repaying HECS?", "acceptedAnswer": {"@type": "Answer", "text": "When your repayment income is above $69,528 in 2026-27. Below that there's no compulsory repayment, but indexation still applies each year."}}, {"@type": "Question", "name": "Does my HECS debt get written off?", "acceptedAnswer": {"@type": "Answer", "text": "Not because of time or low income. HELP debts stay until repaid, apart from limited cases such as death or a special-circumstances cancellation."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">HECS/HELP Debt Payoff</span></nav>
     <div class="tool-head">
       <h1>HECS Repayment Calculator <span class="nowrap">2026-27</span>: HELP Debt Payoff</h1>

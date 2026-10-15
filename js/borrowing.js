@@ -47,6 +47,8 @@ export function presentValue(payment, ratePct, months) {
  * @param {number} o.years           loan term
  */
 export function borrowingPower({ applicants, otherIncome = 0, expenses, cardLimits = 0, otherRepayments = 0, otherDebt = 0, ratePct, years, buffer = APRA_BUFFER, shade = OTHER_INCOME_SHADE }) {
+  // Anything that isn't a number, or a loan with no term, gives null.
+  if (![otherIncome, expenses, cardLimits, otherRepayments, otherDebt, ratePct, years, ...applicants.map((a) => a.income)].every(Number.isFinite) || !(years > 0)) return null;
   const n = applicants.length;
   const shaded = otherIncome * shade;
   // Shaded other income is split evenly between applicants and taxed at each person's marginal rate.

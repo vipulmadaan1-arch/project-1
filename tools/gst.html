@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/gst.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,18 +23,20 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/gst.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate GST from a total?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09."}}, {"@type": "Question", "name": "Is GST charged on fresh food, rent or medical?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as GST-free. Renting out a home is input taxed, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list."}}, {"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO's GST guide for your situation."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">GST</span></nav>
     <div class="tool-head">
       <h1>GST Calculator</h1>

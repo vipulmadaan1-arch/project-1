@@ -3,7 +3,7 @@
 // assented 26 June 2026). For CGT events from 1 July 2027 the 50% discount is replaced by cost base
 // indexation (s114-1, s960-275) and a 30% minimum tax on post-1 July 2027 gains (Division 119).
 // Assets held across 1 July 2027 are split: the gain to that date keeps the 50% discount (Subdivision 112-E).
-import { MEDICARE, lito } from './calc.js';
+import { taxFor, taxAndMedicareFor } from './rates.js';
 
 export const CGT_CHECKED = '15 Oct 2026';
 export const REFORM_START = '2027-07-01';
@@ -14,20 +14,15 @@ export const REFORM_START = '2027-07-01';
 export const CPI = { '2025-3': 99.73, '2025-4': 100.32, '2026-1': 101.70, '2026-2': 102.31 };
 const LAST_CPI = Object.keys(CPI).at(-1);
 
-// Resident tax rates. 16% to 2025-26; 15% in 2026-27; 14% from 2027-28 (Cost of Living Tax Cuts, legislated).
-const RATES = (second) => [[18200, 0], [45000, second], [135000, 0.30], [190000, 0.37], [Infinity, 0.45]];
-export function bracketsFor(fyStart) { return RATES(fyStart <= 2025 ? 0.16 : fyStart === 2026 ? 0.15 : 0.14); }
-export function basicTax(income, fyStart) {
-  let tax = 0, prev = 0;
-  for (const [upTo, rate] of bracketsFor(fyStart)) {
-    if (income > prev) tax += (Math.min(income, upTo) - prev) * rate;
-    prev = upTo;
-  }
-  return tax;
-}
-const medicare = (i) => (i <= MEDICARE.lower ? 0 : i <= MEDICARE.upper ? (i - MEDICARE.lower) * MEDICARE.shadeIn : i * MEDICARE.rate);
+// Resident tax rates and Medicare levy from js/rates.js, by the income year of the sale: 16% second bracket to
+// 2025-26, 15% in 2026-27, 14% from 2027-28 (legislated). Sales before 1 July 2025 use the 2025-26 rates and
+// later years use 2027-28's, the earliest and latest years this calculator models (a simplification for older
+// sales). Medicare levy low-income thresholds are 2025-26's for every year (2026-27 and 2027-28 carry them
+// forward as an estimate in js/rates.js).
+export const ratesYear = (fyStart) => (fyStart <= 2025 ? '2025-26' : fyStart === 2026 ? '2026-27' : '2027-28');
+export function basicTax(income, fyStart) { return taxFor(ratesYear(fyStart), income); }
 // Tax payable after the low income tax offset, plus the Medicare levy.
-export const totalTax = (income, fyStart) => Math.max(0, basicTax(income, fyStart) - lito(income)) + medicare(income);
+export const totalTax = (income, fyStart) => taxAndMedicareFor(ratesYear(fyStart), income);
 
 // ---------- Dates ----------
 const D = (s) => new Date(`${s}T00:00:00Z`);

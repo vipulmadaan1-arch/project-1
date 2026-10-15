@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/budget.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,19 +23,20 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/budget.js">
-  <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/budget.js">
+  <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/pages/budget.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Budget Planner Australia", "description": "Free budget planner: add your take-home pay and bills at any frequency and see your surplus or shortfall each week, month or year, with each cost's share.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I convert weekly to monthly?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply by 52 and divide by 12, so $100 a week is $433.33 a month. Multiplying by 4 understates it, because most months are a little over 4 weeks."}}, {"@type": "Question", "name": "What is the 50/30/20 rule?", "acceptedAnswer": {"@type": "Answer", "text": "A rule of thumb, not an official guideline: about 50% of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example budget, needs take 60.3%, which is common where housing is expensive."}}, {"@type": "Question", "name": "Should savings count as spending?", "acceptedAnswer": {"@type": "Answer", "text": "Here, yes. Treat savings as a bill you pay yourself. In the example, $500 a month in savings is 6.4% of income, and putting the $1,906.67 left over into savings would bring it to 30.9%."}}, {"@type": "Question", "name": "Where are my numbers saved?", "acceptedAnswer": {"@type": "Answer", "text": "Only in your browser while the page is open. Copy link puts them after the # in the address, which isn't sent to our server, so you can bookmark or share them."}}, {"@type": "Question", "name": "What if I have a shortfall?", "acceptedAnswer": {"@type": "Answer", "text": "Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Budget Planner</span></nav>
     <div class="tool-head">
       <h1>Budget Planner Australia</h1>

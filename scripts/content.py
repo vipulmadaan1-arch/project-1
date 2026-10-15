@@ -10,11 +10,11 @@ C = {
 <p>Premiums are set by each lender and insurer (Helia and QBE), and no government body publishes them. This calculator uses the <strong>full-doc premium table of one lender, published by Home Loan Experts</strong> (updated May 2026), so treat the result as an <strong>estimate</strong>: your lender's quote can differ by thousands.</p>
 <p>Most states charge duty on the premium: Victoria, WA, Tasmania and the NT 10%, Queensland 9% and South Australia 11%. NSW exempts LMI premiums paid from 1 July 2017, and the ACT has abolished insurance duty.</p>
 <p>The <strong>Australian Government 5% Deposit Scheme</strong> (formerly the Home Guarantee Scheme) lets first home buyers borrow with a 5% deposit and <strong>no LMI</strong>, with no income caps since 1 October 2025, under price caps such as $1.5 million in Sydney and regional NSW centres, $950,000 in Melbourne and Geelong, $1 million in Brisbane, the Gold Coast, the Sunshine Coast and the ACT, $900,000 in Adelaide, $850,000 in Perth, $750,000 in Darwin and $700,000 in Hobart.</p>""",
- faq=[("How much is LMI on a $600,000 home?","About $11,772 with a 10% deposit in NSW, which charges no duty on LMI. With a 5% deposit it's about $22,788, and with 15% about $5,942. In Victoria, 10% duty brings those to $12,949, $25,067 and $6,536. These are estimates from one lender's published table; your quote can differ."),
+ faq=[("How much is LMI on a $600,000 home?","About $11,772 with a 10% deposit in NSW, which charges no duty on LMI. With a 5% deposit it's about $22,789, and with 15% about $5,942. In Victoria, 10% duty brings those to $12,949, $25,067 and $6,536. These are estimates from one lender's published table; your quote can differ."),
       ("Which states charge stamp duty on LMI?","Victoria, WA, Tasmania and the NT charge 10% of the premium, Queensland 9% and South Australia 11%. NSW has exempted LMI premiums paid from 1 July 2017, and the ACT has abolished duty on insurance."),
       ("Can I avoid LMI with less than a 20% deposit?","Yes, if you qualify for the Australian Government 5% Deposit Scheme: first home buyers with at least a 5% deposit (2% for single parents), buying under the price cap for the area, with no income test since 1 October 2025. A family guarantee, or some lenders' waivers for professions like doctors and nurses, can also avoid it."),
       ("Should I add LMI to my loan?","It saves cash upfront, but you pay interest on it for the life of the loan, and it raises your LVR, which some lenders cap. Paying it upfront costs less overall if you can afford it."),
-      ("Why is LMI so much higher at 95% than 90%?","The insurer's risk jumps with a thin deposit. On a $600,000 home, LMI goes from about $11,772 at 90% LVR to about $22,788 at 95% (NSW, no duty), because the rate almost doubles and applies to a bigger loan.")],
+      ("Why is LMI so much higher at 95% than 90%?","The insurer's risk jumps with a thin deposit. On a $600,000 home, LMI goes from about $11,772 at 90% LVR to about $22,789 at 95% (NSW, no duty), because the rate almost doubles and applies to a bigger loan.")],
  related=['upfront-costs','stamp-duty','borrowing-power','mortgage']),
 'upfront-costs': dict(
  how="""<p>Buying a home takes more cash than the deposit. This adds up the <strong>deposit</strong>, <strong>stamp duty</strong> (with home and first home buyer concessions), the land titles office fees to <strong>register the transfer</strong> and <strong>register the mortgage</strong>, an estimate of <strong>lenders mortgage insurance</strong> if you borrow more than 80%, and typical <strong>conveyancing, building and pest inspection and loan application</strong> costs that you can change.</p>
@@ -223,10 +223,10 @@ C = {
  how="""<p>Tell us the take-home pay you want and we work backwards to the salary you'd need to earn. It uses exactly the same 2026-27 rates as our Take-Home Pay calculator: resident income tax, the $1,000 standard deduction, the low income tax offset, the Medicare levy and, if you tick it, compulsory HECS/HELP repayments. The calculator tries salaries until the take-home pay matches yours to the cent.</p>
 <p>Employer super of 12% is paid on top of salary, so we also show your <strong>package</strong> (salary plus super). Tick <em>Show the answer as a package</em> if the job ads or offers you're comparing quote total pay including super.</p>""",
  faq=[("How much do I need to earn to take home $1,000 a week?","About $61,932 a year before tax in 2026-27, including the $1,000 standard deduction. A HECS/HELP debt doesn't change that, because compulsory repayments only start above $69,528."),
-      ("How much do I need to earn to take home $100,000 a year?","About $132,647 a year in 2026-27 with no HECS/HELP debt, or about $153,378 with one, including the $1,000 standard deduction. Employer super of 12% is paid on top."),
+      ("How much do I need to earn to take home $100,000 a year?","About $132,647 a year in 2026-27 with no HECS/HELP debt, or about $153,377 with one, including the $1,000 standard deduction. Employer super of 12% is paid on top."),
       ("Why does each extra dollar of take-home pay cost more than a dollar of salary?","Every extra dollar you earn is taxed at your marginal rate (30% from $45,001), plus the 2% Medicare levy and, with a study loan, 15% to 17% for HECS/HELP. At $90,000 with no HELP debt, an extra $1,000 in your pocket needs about $1,471 more salary."),
       ("Does this include HECS/HELP?","Yes, if you tick “I have a HECS/HELP debt”. It uses the 2026-27 marginal repayment rates on salary only. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super."),
-      ("What salary do I need to take home $80,000 a year?","About $103,235 in 2026-27 with no HECS/HELP debt, or about $112,492 with one, including the $1,000 standard deduction. As a package including 12% super, the first is about $115,624. Your payslip may differ slightly because employers use ATO withholding tables.")],
+      ("What salary do I need to take home $80,000 a year?","About $103,235 in 2026-27 with no HECS/HELP debt, or about $112,492 with one, including the $1,000 standard deduction. As a package including 12% super, the first is about $115,623. Your payslip may differ slightly because employers use ATO withholding tables.")],
  related=['take-home-pay','hecs-help','super','work-deductions']),
 'hecs-help': dict(
  how="""<p>Each year the ATO works out a compulsory repayment from your repayment income. From 2025-26 it's a marginal system: you only repay on income above the threshold.</p>
@@ -503,15 +503,31 @@ C = {
  related=['stopwatch','world-clock','date-calculator','calculator']),
 }
 
+# Every marker and tag this script reads or replaces must be there: a missing one stops the run with the file's
+# name (instead of silently skipping the page or failing with an AttributeError), and no file is written until
+# every page has been built, so a failure never leaves half the pages regenerated.
+class MissingMarker(Exception): pass
+def find(pattern, text, where, what, flags=0):
+    m = re.search(pattern, text, flags)
+    if not m: raise MissingMarker(f'{where}: can\'t find {what}')
+    return m
+def replace_once(text, old, new, where, what):
+    if text.count(old) != 1: raise MissingMarker(f'{where}: expected exactly one {what}, found {text.count(old)}')
+    return text.replace(old, new)
+def sub_once(pattern, repl, text, where, what, flags=0):
+    out, n = re.subn(pattern, repl, text, count=1, flags=flags)
+    if n != 1: raise MissingMarker(f'{where}: can\'t find {what}')
+    return out
+
 names = {}
 src = open('js/tools.js').read()
 for slug, name in re.findall(r"slug: '([^']+)', name: '([^']+)'", src): names[slug]=name
 cats = dict(re.findall(r"slug: '([^']+)'.*?cat: '([^']+)'", src))
-RATES_CHECKED = re.search(r"RATES_CHECKED = '([^']+)'", src).group(1)
+RATES_CHECKED = find(r"RATES_CHECKED = '([^']+)'", src, 'js/tools.js', 'RATES_CHECKED').group(1)
 CHECKED_ISO = datetime.strptime(RATES_CHECKED, '%d %b %Y').date().isoformat()
 config = open('js/config.js').read()
-SITE_NAME = re.search(r"SITE_NAME = '([^']*)'", config).group(1)
-SITE_URL = re.search(r"SITE_URL = '([^']*)'", config).group(1).rstrip('/')
+SITE_NAME = find(r"SITE_NAME = '([^']*)'", config, 'js/config.js', 'SITE_NAME').group(1)
+SITE_URL = find(r"SITE_URL = '([^']*)'", config, 'js/config.js', 'SITE_URL').group(1).rstrip('/')
 # The same Organization that scripts/seo.mjs describes on the home page.
 PUBLISHER = {"@type": "Organization", "name": SITE_NAME, **({"@id": f"{SITE_URL}/#organization", "url": f"{SITE_URL}/"} if SITE_URL else {})}
 
@@ -591,13 +607,17 @@ def scroll_tables(h):
 def nowrap_years(h1):
     return re.sub(r'(?<!nowrap">)\b(\d{4}-\d{2})\b', r'<span class="nowrap">\1</span>', h1)
 
-for slug, c in C.items():
+def build(slug, c):
     p = f'tools/{slug}.html'; s = open(p).read()
+    if slug not in names: raise MissingMarker(f'js/tools.js: no tool with slug {slug}')
+    for r in c['related']:
+        if r not in names: raise MissingMarker(f'scripts/content.py: {slug} lists unknown related tool {r}')
+    # The generated blocks from the last run (absent on a brand-new page).
     s = re.sub(r'\n    <!-- content:start -->.*?<!-- content:end -->', '', s, flags=re.S)
     s = re.sub(r'\n  <script type="application/ld\+json">.*?</script>', '', s, flags=re.S)
-    s = re.sub(r'<h1>(.*?)</h1>', lambda m: f'<h1>{nowrap_years(m.group(1))}</h1>', s, count=1)
-    name = html.unescape(strip_tags(re.search(r'<h1>(.*?)</h1>', s).group(1)))
-    desc = re.search(r'<meta name="description" content="(.*?)">', s).group(1)
+    s = sub_once(r'<h1>(.*?)</h1>', lambda m: f'<h1>{nowrap_years(m.group(1))}</h1>', s, p, 'the <h1>')
+    name = html.unescape(strip_tags(find(r'<h1>(.*?)</h1>', s, p, 'the <h1>').group(1)))
+    desc = find(r'<meta name="description" content="(.*?)">', s, p, 'the meta description').group(1)
     faq_html = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in c['faq'])
     rel = ''.join(f'<a href="{r}.html">{names[r]}</a>' for r in c['related'])
     block = f'''
@@ -612,19 +632,25 @@ for slug, c in C.items():
       <nav class="related" aria-label="Related tools">{rel}</nav>
     </section>
     <!-- content:end -->'''
-    s = s.replace('\n  </main>', block + '\n  </main>')
+    s = replace_once(s, '\n  </main>', block + '\n  </main>', p, '"  </main>" line')
     ld = [
       {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"FinanceApplication" if cats.get(slug) in ('tax','property','money') else "UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"dateModified":CHECKED_ISO,"publisher":PUBLISHER},
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":strip_tags(a)}} for q,a in c['faq']]},
     ]
     # Escape "</" so text in the FAQ can never close the script tag early.
     ldtag = '\n  <script type="application/ld+json">' + json.dumps(ld, ensure_ascii=False).replace('</', '<\\/') + '</script>'
-    s = s.replace('\n</head>', ldtag + '\n</head>')
+    s = replace_once(s, '\n</head>', ldtag + '\n</head>', p, '"</head>" line')
     if BOOT not in s:
-        sys.exit(f'{p} has no boot script. Copy the <head> of an existing tool page.')
+        raise MissingMarker(f'{p} has no boot script. Copy the <head> of an existing tool page.')
     # Open Graph, canonical and breadcrumb tags are written by scripts/seo.mjs (between seo:start/end).
-    open(p,'w').write(s)
-    print('ok', slug)
+    return p, s
 
-if BOOT not in open('index.html').read():
-    sys.exit('index.html has no boot script.')
+try:
+    built = [build(slug, c) for slug, c in C.items()]
+    if BOOT not in open('index.html').read():
+        raise MissingMarker('index.html has no boot script.')
+except MissingMarker as e:
+    sys.exit(f'scripts/content.py: {e}. Nothing was written.')
+for p, s in built:
+    with open(p, 'w') as f: f.write(s)
+    print('ok', p)

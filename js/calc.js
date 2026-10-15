@@ -1,4 +1,5 @@
 // Pure calculation functions. No DOM access so they can be unit-tested in Node.
+import { CURRENT_YEAR, ratesFor, taxFor, litoFor, medicareFor, helpFor } from './rates.js';
 
 // ---------- Calculator (safe expression evaluator, no eval) ----------
 // Grammar, lowest to highest precedence:
@@ -167,7 +168,12 @@ export function repayment(principal, ratePct, years, perYear = 12) {
   return (principal * i) / (1 - Math.pow(1 + i, -n));
 }
 
+// Inputs a loan can't have (no term, a negative or non-numeric amount or rate, an unknown frequency) give null.
+const badLoan = ({ principal, ratePct, years, frequency }) => !(years > 0) || !Number.isFinite(years) || !(principal >= 0)
+  || !Number.isFinite(principal) || !(ratePct >= 0) || !Number.isFinite(ratePct) || !FREQ[frequency];
+
 export function mortgage({ principal, ratePct, years, frequency = 'monthly' }) {
+  if (badLoan({ principal, ratePct, years, frequency })) return null;
   const perYear = FREQ[frequency];
   const pay = repayment(principal, ratePct, years, perYear);
   const total = pay * Math.round(years * perYear);
@@ -176,6 +182,7 @@ export function mortgage({ principal, ratePct, years, frequency = 'monthly' }) {
 
 // Year-by-year split of a P&I loan's repayments into principal and interest, with the balance left.
 export function mortgageSchedule({ principal, ratePct, years, frequency = 'monthly' }) {
+  if (badLoan({ principal, ratePct, years, frequency })) return [];
   const perYear = FREQ[frequency];
   const i = ratePct / 100 / perYear;
   const pay = repayment(principal, ratePct, years, perYear);
@@ -196,6 +203,7 @@ export function mortgageSchedule({ principal, ratePct, years, frequency = 'month
 // Simulates a P&I loan with an offset balance. Repayment stays fixed at the no-offset amount,
 // so the offset shortens the loan term.
 export function offsetSavings({ principal, ratePct, years, offset, frequency = 'monthly' }) {
+  if (badLoan({ principal, ratePct, years, frequency })) return null;
   const perYear = FREQ[frequency];
   const i = ratePct / 100 / perYear;
   const pay = repayment(principal, ratePct, years, perYear);
@@ -277,64 +285,40 @@ export function nswDuty(value, { firstHomeBuyer = false, foreign = false, reside
 }
 
 // ---------- Australian take-home pay, 2026-27 (residents) ----------
-// Rates: 15% second bracket from 1 July 2026 (legislated). Medicare thresholds are the latest
-// published by the ATO (2025-26) until 2026-27 figures are released.
-export const TAX_YEAR = '2026-27';
-export const TAX_BRACKETS = [
-  { upTo: 18200, rate: 0 },
-  { upTo: 45000, rate: 0.15 },
-  { upTo: 135000, rate: 0.30 },
-  { upTo: 190000, rate: 0.37 },
-  { upTo: Infinity, rate: 0.45 },
-];
-export const MEDICARE = { rate: 0.02, lower: 28011, upper: 35013, shadeIn: 0.10 };
-export const SUPER_GUARANTEE = 0.12;
-export const SUPER_MAX_BASE = 270830; // ATO maximum contribution base 2026-27 (annual)
+// Rates come from js/rates.js (CURRENT_YEAR): 15% second bracket from 1 July 2026 (legislated). Medicare
+// thresholds are the latest published by the ATO (2025-26) until 2026-27 figures are released.
+// The constants below keep their old names and shapes for the pages and tests that import them.
+export const TAX_YEAR = CURRENT_YEAR;
+const NOW = ratesFor(TAX_YEAR);
+export const TAX_BRACKETS = NOW.brackets.map(([upTo, rate]) => ({ upTo, rate }));
+export const MEDICARE = { rate: NOW.medicare.rate, lower: NOW.medicare.lower, upper: NOW.medicare.upper, shadeIn: NOW.medicare.shadeIn };
+export const SUPER_GUARANTEE = NOW.super.sg;
+export const SUPER_MAX_BASE = NOW.super.maxBase; // ATO maximum contribution base 2026-27 (annual)
 
-// Study and training loan (HELP/HECS) compulsory repayments, 2026-27, marginal system.
-// Source: ATO "Study and training loan minimum repayment income and rates" (updated 30 June 2026).
-export const HELP = { threshold: 69528, band2: 129717, band2Base: 9028, top: 186050 };
-export function helpRepayment(repaymentIncome) {
-  const x = repaymentIncome;
-  if (x <= HELP.threshold) return 0;
-  if (x <= HELP.band2) return (x - HELP.threshold) * 0.15;
-  if (x <= HELP.top) return HELP.band2Base + (x - HELP.band2) * 0.17;
-  return x * 0.10;
-}
-
-export function incomeTax(income) {
-  let tax = 0, prev = 0;
-  for (const b of TAX_BRACKETS) {
-    if (income > prev) tax += (Math.min(income, b.upTo) - prev) * b.rate;
-    prev = b.upTo;
-  }
-  return tax;
-}
-
-export function lito(income) {
-  if (income <= 37500) return 700;
-  if (income <= 45000) return 700 - (income - 37500) * 0.05;
-  return Math.max(0, 325 - (income - 45000) * 0.015);
-}
-
-export function medicareLevy(income) {
-  if (income <= MEDICARE.lower) return 0;
-  if (income <= MEDICARE.upper) return (income - MEDICARE.lower) * MEDICARE.shadeIn;
-  return income * MEDICARE.rate;
-}
+// Study and training loan (HELP/HECS) compulsory repayments, 2026-27, marginal system (js/rates.js).
+export const HELP = { threshold: NOW.help.threshold, band2: NOW.help.band2, band2Base: NOW.help.band2Base, top: NOW.help.top };
+export const helpRepayment = (repaymentIncome) => helpFor(TAX_YEAR, repaymentIncome);
+export const incomeTax = (income) => taxFor(TAX_YEAR, income);
+export const lito = litoFor;
+export const medicareLevy = (income) => medicareFor(TAX_YEAR, income);
 
 // From 2026-27 resident employees get a standard deduction for work-related expenses: the lower of $1,000 and
 // their labour income, applied automatically at tax time (ATO "Standard deduction for work-related expenses",
 // updated 14 Sep 2026). Payslips don't include it; it comes back when you lodge your return.
-export const STANDARD_DEDUCTION = 1000;
+export const STANDARD_DEDUCTION = NOW.standard;
+// gross: annual salary (or package, with includesSuper). A negative amount counts as nil; anything that isn't
+// a number gives null. Taxable income is rounded down to whole dollars, as on a tax return (the ATO disregards
+// cents), so tax, Medicare and HELP agree with the Tax Refund Estimator.
 export function takeHome(gross, { includesSuper = false, help = false, standardDeduction = true } = {}) {
+  if (typeof gross !== 'number' || Number.isNaN(gross)) return null;
+  gross = Math.max(0, gross);
   // Super is only payable on earnings up to the maximum contribution base.
   const salary = includesSuper
     ? (gross <= SUPER_MAX_BASE * (1 + SUPER_GUARANTEE) ? gross / (1 + SUPER_GUARANTEE) : gross - SUPER_MAX_BASE * SUPER_GUARANTEE)
     : gross;
   const superAmt = Math.min(salary, SUPER_MAX_BASE) * SUPER_GUARANTEE;
   const deduction = standardDeduction ? Math.min(STANDARD_DEDUCTION, salary) : 0;
-  const taxable = salary - deduction;
+  const taxable = Math.floor(salary - deduction);
   const tax = Math.max(0, incomeTax(taxable) - lito(taxable));
   const medicare = medicareLevy(taxable);
   const helpAmt = help ? helpRepayment(taxable) : 0;

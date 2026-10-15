@@ -1,6 +1,6 @@
 // Work-related deductions for employees: working from home (fixed rate method) and car expenses
 // (cents per kilometre or logbook method), plus the tax a deduction saves. Pure functions, no DOM.
-import { incomeTax, lito, medicareLevy, TAX_YEAR } from './calc.js';
+import { taxAndMedicareFor, ratesFor } from './rates.js';
 
 export const DEDUCTIONS_CHECKED = '15 Oct 2026';
 
@@ -20,13 +20,12 @@ export const SOURCES = {
 //            2025-26, 91c for 2026-27 (Cents per Kilometre Deduction Rate for Car Expenses 2026 Determination).
 //   standard The standard deduction for work-related expenses: up to $1,000 from 2026-27, reduced dollar
 //            for dollar by work-related expenses you claim (including working from home and car).
-//            Source: ATO "Standard deduction for work-related expenses" (last updated 14 Sep 2026).
-//   second   The 16%/15% second tax bracket rate. 2024-25 and 2025-26: 16% (Treasury Laws Amendment
-//            (Cost of Living Tax Cuts) Act 2024). 2026-27: 15%, the brackets in calc.js.
+//            From js/rates.js (ATO "Standard deduction for work-related expenses", last updated 14 Sep 2026).
+// Tax brackets and Medicare levy thresholds for each year also come from js/rates.js.
 export const YEARS = {
-  '2024-25': { wfhRate: 0.70, carRate: 0.88, standard: 0, second: 0.16 },
-  '2025-26': { wfhRate: 0.70, carRate: 0.88, standard: 0, second: 0.16 },
-  '2026-27': { wfhRate: 0.70, wfhEstimate: true, carRate: 0.91, standard: 1000, second: 0.15 },
+  '2024-25': { wfhRate: 0.70, carRate: 0.88, standard: ratesFor('2024-25').standard },
+  '2025-26': { wfhRate: 0.70, carRate: 0.88, standard: ratesFor('2025-26').standard },
+  '2026-27': { wfhRate: 0.70, wfhEstimate: true, carRate: 0.91, standard: ratesFor('2026-27').standard },
 };
 export const DEFAULT_YEAR = '2026-27';
 export const CAR_KM_CAP = 5000; // per car, per year (ATO cents per kilometre method)
@@ -56,24 +55,11 @@ export function carLogbook(totalCosts, businessPct) {
   return { pct, amount: Math.max(0, totalCosts || 0) * pct / 100 };
 }
 
-// Resident tax for a year, after LITO, plus Medicare levy. LITO is unchanged across these years.
-// Medicare low-income thresholds come from calc.js (the latest the ATO has published); they only affect
-// incomes under about $35,000.
+// Resident tax for a year, after LITO, plus the Medicare levy, with that year's brackets and Medicare levy
+// low-income thresholds (js/rates.js). LITO is unchanged across these years.
 export function taxFor(income, year = DEFAULT_YEAR) {
-  const y = YEARS[year];
-  if (!y) throw new Error(`Unknown income year ${year}`);
-  const i = Math.max(0, income);
-  let tax;
-  if (year === TAX_YEAR) tax = incomeTax(i);
-  else {
-    tax = 0;
-    let prev = 0;
-    for (const [upTo, rate] of [[18200, 0], [45000, y.second], [135000, 0.30], [190000, 0.37], [Infinity, 0.45]]) {
-      if (i > prev) tax += (Math.min(i, upTo) - prev) * rate;
-      prev = upTo;
-    }
-  }
-  return Math.max(0, tax - lito(i)) + medicareLevy(i);
+  if (!YEARS[year]) throw new Error(`Unknown income year ${year}`);
+  return taxAndMedicareFor(year, Math.max(0, income));
 }
 
 // Everything the page shows. taxableIncome is before these deductions.

@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/refinance.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,21 +23,23 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
-  <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/icons.js">
-  <link rel="modulepreload" href="../js/loans.js">
-  <link rel="modulepreload" href="../js/refinance.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/loans.js">
+  <link rel="modulepreload" href="../js/refinance.js">
+  <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/pages/refinance.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Refinance Calculator: Is Switching Home Loans Worth It?", "description": "Work out what refinancing your home loan saves each month and over the term, after discharge, application and registration fees, and when you break even.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much will I save by refinancing?", "acceptedAnswer": {"@type": "Answer", "text": "About $54,792 after costs on a $500,000 loan with 25 years left, moving from 6.5% to 5.9% with $715 in switching costs. Repayments drop from $3,376.04 to $3,191.01 a month, a $185.02 saving, and interest falls by $55,507. Even a 0.25% cut (6.5% to 6.25%) saves $77.69 a month and $22,591 overall."}}, {"@type": "Question", "name": "How long does it take to break even on refinancing?", "acceptedAnswer": {"@type": "Answer", "text": "3 months in the example above ($715 of costs, 6.5% to 5.9% on $500,000). With a smaller cut from 6.5% to 6.25%, it takes 7 months. If you add the costs to the new loan instead of paying them up front, you still break even in 3 months, but the net saving falls to $54,137 because you pay interest on the costs."}}, {"@type": "Question", "name": "Should I keep my repayments the same after refinancing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you can afford it. In the example, keeping up the old $3,376.04 a month on the 5.9% loan pays it off 2 years 10 months sooner (22 years 2 months instead of 25 years) and saves $116,191 in interest, more than double what you save by just taking the lower repayment."}}, {"@type": "Question", "name": "Is a longer loan term a good idea when refinancing?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not, if your aim is to save money. Refinancing the same $500,000 at 5.9% over a fresh 30 years cuts repayments by $410.35 a month to $2,965.68, but you pay $54,835 more interest and end up $55,550 worse off after costs. The calculator says when a lower repayment comes from stretching the loan."}}, {"@type": "Question", "name": "What does it cost to switch home loans?", "acceptedAnswer": {"@type": "Answer", "text": "Usually a discharge fee from your current lender (many big banks charge $350), any application, settlement or valuation fees from the new lender, and government fees to register the discharge and the new mortgage. In NSW for 2026-27 these are $182.73 each. Fixed-rate loans can also have break costs, and lender cashback offers can cover some or all of it."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Refinance</span></nav>
     <div class="tool-head">
       <h1>Refinance Calculator: Is Switching Home Loans Worth It?</h1>

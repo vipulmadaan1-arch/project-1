@@ -1,6 +1,6 @@
 // HECS/HELP debt payoff projection.
 //
-// Compulsory repayments use helpRepayment() from calc.js: the 2026-27 marginal system.
+// Compulsory repayments use helpFor() from js/rates.js: the 2026-27 (CURRENT_YEAR) marginal system.
 //   Source: ATO "Study and training loan minimum repayment income and rates" (updated 13 Oct 2026),
 //   https://www.ato.gov.au/tax-rates-and-codes/study-and-training-loan-minimum-repayment-income-and-rates
 // Indexation is applied on 1 June each year at the lower of CPI and WPI. 2.8% was applied on
@@ -17,17 +17,19 @@
 //     voluntary repayments are made before 1 June, indexation is applied on 1 June to what is left,
 //     then the compulsory repayment for that income year comes off when the tax return is assessed
 //     (shortly after 30 June). The starting balance is today's balance, already indexed on 1 June 2026.
-import { helpRepayment, TAX_YEAR } from './calc.js';
+import { CURRENT_YEAR, helpFor } from './rates.js';
 
 export const HELP_INDEXATION_2026 = 2.8; // % applied 1 June 2026 (ATO, Study Assist)
 export const MAX_YEARS = 60;
 
-const FIRST_YEAR = Number(TAX_YEAR.slice(0, 4)); // 2026 → income year 2026-27
+const FIRST_YEAR = Number(CURRENT_YEAR.slice(0, 4)); // 2026 → income year 2026-27
 const yearLabel = (y) => `${y}-${String((y + 1) % 100).padStart(2, '0')}`;
 
 // debt: balance now. income: 2026-27 repayment income. payRisePct: yearly income growth.
 // indexationPct: assumed indexation each 1 June. voluntary: voluntary repayment per year.
+// Anything that isn't a number gives null.
 export function helpPayoff({ debt, income, payRisePct = 0, indexationPct = HELP_INDEXATION_2026, voluntary = 0 }) {
+  if (![debt, income, payRisePct, indexationPct, voluntary].every(Number.isFinite)) return null;
   let balance = Math.max(0, debt);
   let inc = Math.max(0, income);
   const rows = [];
@@ -37,7 +39,7 @@ export function helpPayoff({ debt, income, payRisePct = 0, indexationPct = HELP_
     balance -= vol;
     const indexation = balance * indexationPct / 100;
     balance += indexation;
-    const compulsory = Math.min(helpRepayment(inc), balance);
+    const compulsory = Math.min(helpFor(CURRENT_YEAR, inc), balance);
     balance -= compulsory;
     if (balance < 0.005) balance = 0;
     totalCompulsory += compulsory; totalVoluntary += vol; totalIndexation += indexation;
@@ -61,6 +63,7 @@ export function helpPayoff({ debt, income, payRisePct = 0, indexationPct = HELP_
 export function voluntaryEffect(inputs) {
   const base = helpPayoff({ ...inputs, voluntary: 0 });
   const plan = helpPayoff(inputs);
+  if (!base || !plan) return null;
   return {
     base, plan,
     yearsSaved: base.repaid && plan.repaid ? base.years - plan.years : null,

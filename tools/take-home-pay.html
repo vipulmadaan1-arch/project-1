@@ -2,7 +2,7 @@
 <html lang="en-AU" data-base="../">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-ZC8ZN6FcJhpUpiQus9lipKGL7/M1oBzqCHCdX4/6Ubs=' 'strict-dynamic' 'unsafe-inline' https: http:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/take-home-pay.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,18 +23,20 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
-  <link rel="modulepreload" href="../js/ads.js">
-  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/config.js">
-  <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/rates.js">
+  <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/take-home-pay.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Take-Home Pay Calculator 2026-27: Salary After Tax", "description": "Work out your salary after tax in Australia for 2026-27: income tax, Medicare levy, the $1,000 standard deduction and HECS/HELP, by week, fortnight or year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much tax do I pay on $100,000 in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "$22,200 in 2026-27: $20,220 in income tax plus $1,980 Medicare levy, after the $1,000 standard deduction. That leaves a salary after tax of $77,800, or $1,496 a week. Your employer also pays $12,000 super on top."}}, {"@type": "Question", "name": "What is take-home pay on $80,000?", "acceptedAnswer": {"@type": "Answer", "text": "$64,200 a year in 2026-27, which is $1,234.62 a week or $2,469.23 a fortnight. Income tax is $14,220 and the Medicare levy $1,580, with the $1,000 standard deduction and no HECS/HELP debt."}}, {"@type": "Question", "name": "Does this include HECS/HELP repayments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes: tick “I have a HECS/HELP debt”. From 2025-26 repayments are marginal: nothing up to $69,528 in 2026-27, then 15c per dollar above that, rising to 17c above $129,717, and 10% of all income above $186,050. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super, so yours may be higher."}}, {"@type": "Question", "name": "What is the $1,000 standard deduction?", "acceptedAnswer": {"@type": "Answer", "text": "From 2026-27 the ATO automatically takes up to $1,000 off the taxable income of resident employees, with no receipts needed. It's worth $320 a year at the 30% rate (with Medicare). It isn't taken out of your pay each week, so it comes back as part of your tax return. If you claim more than $1,000 of work expenses instead, untick it."}}, {"@type": "Question", "name": "What isn't included?", "acceptedAnswer": {"@type": "Answer", "text": "The Medicare levy surcharge, salary sacrifice, and deductions and offsets other than the standard deduction and low income tax offset."}}, {"@type": "Question", "name": "What's the difference between salary and package?", "acceptedAnswer": {"@type": "Answer", "text": "A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."}}, {"@type": "Question", "name": "Why is my payslip slightly different?", "acceptedAnswer": {"@type": "Answer", "text": "Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."}}, {"@type": "Question", "name": "Is there a cap on super?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
+    <noscript><p class="noscript">The calculators on this site need JavaScript. Turn it on in your browser to use them.</p></noscript>
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Take-Home Pay</span></nav>
     <div class="tool-head">
       <h1>Take-Home Pay Calculator <span class="nowrap">2026-27</span>: Salary After Tax</h1>

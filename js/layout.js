@@ -66,7 +66,7 @@ footer.innerHTML = `
   <div class="wrap">
     <div class="footer-about">
       ${brand}
-      <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser, so the figures you enter are never sent to a server.</p>
+      <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
       <span class="stamp">Rates checked ${RATES_CHECKED}</span>
     </div>
     ${CATEGORIES.map((c) => `
@@ -255,7 +255,6 @@ export function shortcutAllowed(e, scope) {
 export { safeGet, safeSet };
 
 export { fmtMoney, parseNumber } from './format.js';
-export const num = (el) => { const n = parseNumber(el.value); return Number.isFinite(n) ? n : 0; };
 
 // Shows or clears the error message for a field, linked with aria-describedby.
 export function setError(el, msg) {

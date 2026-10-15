@@ -23,4 +23,8 @@ and the page must say so.
 ## Checks before pushing
 - `node --test tests/*.test.mjs`
 - After editing `scripts/content.py` run `python3 scripts/content.py` then `node scripts/seo.mjs`
+- `node scripts/seo.mjs` also writes each page's CSP, modulepreload list and `<noscript>` notice, then the per-file
+  hashes in `sw.js` (via `scripts/sw-hashes.mjs`). After editing any other site file (js, css, html), run
+  `node scripts/sw-hashes.mjs` (or seo.mjs); tests fail on a stale hash. CI reruns both generators and fails on any diff.
+- ATO rates for every engine live in `js/rates.js`, per income year
 - New files go in the `FILES` list in `sw.js`; bump `VERSION` on every change
