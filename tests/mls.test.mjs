@@ -48,11 +48,11 @@ test('couples: the rate uses combined income, each pays on their own income', ()
 });
 
 test('a spouse with own income for MLS purposes at or below the exemption amount pays no MLS', () => {
-  const r = medicareLevySurcharge({ own: { taxable: SPOUSE_EXEMPT }, family: true, spouse: true, spouseIncome: 300000 });
+  const r = medicareLevySurcharge({ own: { taxable: SPOUSE_EXEMPT }, family: true, spouse: true, spouseIncome: 290000 });
   assert.equal(r.tier, 2);
   assert.equal(r.lowIncome, true);
   assert.equal(r.surcharge, 0);
-  assert.ok(medicareLevySurcharge({ own: { taxable: SPOUSE_EXEMPT + 1 }, family: true, spouse: true, spouseIncome: 300000 }).surcharge > 0);
+  assert.ok(medicareLevySurcharge({ own: { taxable: SPOUSE_EXEMPT + 1 }, family: true, spouse: true, spouseIncome: 290000 }).surcharge > 0);
 });
 
 test('single parents use the family threshold', () => {
@@ -70,3 +70,9 @@ test('compares the surcharge with a hospital cover premium', () => {
 });
 
 test('checked date is exported', () => assert.equal(MLS_CHECKED, '15 Oct 2026'));
+
+test('spouse exemption is the ATO 2025-26 figure, $28,011 (M2 Medicare levy surcharge 2026)', () => {
+  assert.equal(SPOUSE_EXEMPT, 28011);
+  // $28,000 own income with a high-earning spouse: no surcharge (it was charged under the old $27,222 figure).
+  assert.equal(medicareLevySurcharge({ own: { taxable: 28000 }, family: true, spouse: true, spouseIncome: 250000 }).surcharge, 0);
+});

@@ -292,7 +292,7 @@ export const SUPER_GUARANTEE = 0.12;
 export const SUPER_MAX_BASE = 270830; // ATO maximum contribution base 2026-27 (annual)
 
 // Study and training loan (HELP/HECS) compulsory repayments, 2026-27, marginal system.
-// Source: ATO "Study and training loan minimum repayment income and rates" (updated 13 Oct 2026).
+// Source: ATO "Study and training loan minimum repayment income and rates" (updated 30 June 2026).
 export const HELP = { threshold: 69528, band2: 129717, band2Base: 9028, top: 186050 };
 export function helpRepayment(repaymentIncome) {
   const x = repaymentIncome;

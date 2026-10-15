@@ -40,7 +40,7 @@ function update() {
   if (y.standard) {
     notes.push(r.extra <= 0
       ? `These claims total ${fmtMoney(r.total)}, less than the $1,000 standard deduction you get automatically from 2026-27 without receipts, so you're better off not claiming them.`
-      : `Claiming these replaces the $1,000 standard deduction, so you're ${fmtMoney(r.extra)} ahead on deductions. You'll need written evidence for every work-related expense you claim.`);
+      : `Claims reduce the $1,000 standard deduction dollar for dollar, so you're ${fmtMoney(r.extra)} ahead on deductions. You'll need written evidence for every work-related expense you claim.`);
   } else {
     notes.push('The $1,000 standard deduction starts in 2026-27, so it doesn\'t apply to this year.');
   }

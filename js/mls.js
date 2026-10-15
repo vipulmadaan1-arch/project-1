@@ -17,11 +17,12 @@ export const MLS_TIERS = {
 export const MLS_RATES = [0, 0.01, 0.0125, 0.015];
 // "The family income threshold is increased by $1,500 for each MLS dependent child after the first child." (ATO)
 export const CHILD_INCREMENT = 1500;
-// "If you had a spouse for the full year, you do not have to pay the MLS if ... your own income for MLS purposes
-// was $27,222 or less." ATO "Paying the Medicare levy surcharge" (last updated 5 May 2026) still shows the 2025-26
-// figure: https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/paying-the-medicare-levy-surcharge
+// With a spouse all year you don't pay the MLS if "your own income for MLS purposes is $28,011 or less" (2025-26,
+// the single Medicare levy lower threshold). ATO "M2 Medicare levy surcharge 2026":
+// https://www.ato.gov.au/forms-and-instructions/individual-tax-return-2026-instructions/medicare-levy-questions-m1-m2-individual-tax-return-2026/m2-medicare-levy-surcharge-2026
+// ("Paying the Medicare levy surcharge" still shows the 2024-25 figure, $27,222.)
 // ESTIMATE for 2026-27: the 2026-27 figure isn't published yet, so the 2025-26 one is used and the page says so.
-export const SPOUSE_EXEMPT = 27222;
+export const SPOUSE_EXEMPT = 28011;
 // Appropriate hospital cover has an excess of $750 or less (singles) or $1,500 or less (couples and families).
 // ATO "Appropriate level of private patient hospital cover", last updated 30 April 2026 (verified).
 export const MAX_EXCESS = { single: 750, family: 1500 };
@@ -53,7 +54,7 @@ export function tierFor(income, family = false, children = 0) {
 // o.children: number of MLS dependent children. o.days: days in the year without cover (default 365).
 // The rate is set by the (combined) income for MLS purposes, but the surcharge is charged only on the person's
 // own taxable income plus reportable fringe benefits (ATO worked example: Tom, $90,000 + $27,000 RFB = $1,170).
-// A person with a spouse whose own income for MLS purposes is $27,222 or less doesn't pay MLS (see SPOUSE_EXEMPT).
+// A person with a spouse whose own income for MLS purposes is $28,011 or less doesn't pay MLS (see SPOUSE_EXEMPT).
 // o.premium: the annual premium of a hospital policy, to compare with the surcharge.
 export function medicareLevySurcharge({ own = {}, family = false, spouse = false, spouseIncome = 0, children = 0, days = 365, premium = 0 } = {}) {
   const ownIncome = mlsIncome(own);

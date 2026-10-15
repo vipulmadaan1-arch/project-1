@@ -43,7 +43,7 @@ function update() {
   if (r.standard > 0) {
     notes.push(r.useStandard
       ? `Your work-related deductions are less than the standard deduction, so the ATO's ${fmtMoney(r.standard)} standard deduction is used instead.`
-      : `Your work-related deductions are more than ${fmtMoney(r.standard)}, so they replace the standard deduction. Keep receipts and records.`);
+      : `Your work-related deductions are more than ${fmtMoney(r.standard)}, so you get them in full instead of the standard deduction (claims reduce it dollar for dollar). Keep receipts and records.`);
   }
   if (!$('cover').checked && !r.mls.rate) notes.push(`No Medicare levy surcharge at this income for a single person in ${year}.`);
   if (owe) notes.push('You may owe tax: pay it by the due date on your notice of assessment.');
