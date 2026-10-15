@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/balance-transfer.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Balance Transfer Calculator Australia: Is It Worth It? | Sorted, Mate</title>
+  <meta name="description" content="Compare staying on your credit card with a balance transfer: total interest and fees, months to clear the debt and how much is left when the intro rate ends.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Balance Transfer Calculator Australia: Is It Worth It?">
+  <meta property="og:description" content="Compare staying on your credit card with a balance transfer: total interest and fees, months to clear the debt and how much is left when the intro rate ends.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/balance-transfer.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/chart.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/loans.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/balance-transfer.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Balance Transfer Calculator: Is It Worth It?", "description": "Compare staying on your credit card with a balance transfer: total interest and fees, months to clear the debt and how much is left when the intro rate ends.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is a balance transfer worth it?", "acceptedAnswer": {"@type": "Answer", "text": "Usually, if you avoid new spending and keep repaying. Moving $5,000 from a 20% card to 0% for 12 months with a 2% fee, paying $300 a month, costs $183.94 in fees and interest instead of $906.81: a $722.87 saving. The card is cleared in 18 months instead of 20."}}, {"@type": "Question", "name": "What happens when the intro period ends?", "acceptedAnswer": {"@type": "Answer", "text": "Whatever's left starts attracting the revert rate. In the example above, $1,500 is still owing after 12 months, and at 21% that adds $83.94 of interest before it's cleared. Paying $425 a month would clear the whole $5,100 (fee included) within the 12 months."}}, {"@type": "Question", "name": "How much should I pay to clear it before the 0% ends?", "acceptedAnswer": {"@type": "Answer", "text": "The balance plus the fee, divided by the months in the offer. For $10,000 with a 3% fee and 24 months at 0%, that's $429.17 a month. Paying $450 a month clears it in 23 months for just the $300 fee, against $2,594.68 of interest if you stay on a 20% card."}}, {"@type": "Question", "name": "What if I only make small repayments?", "acceptedAnswer": {"@type": "Answer", "text": "The transfer still helps, but less. Paying $150 a month on $5,000, the transfer costs $1,003.24 in fees and interest, with $3,300 still owing when the 12 months at 0% end. Staying on 20% costs $2,359.09 and takes 50 months, against 41."}}, {"@type": "Question", "name": "Do new purchases get the 0% rate?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. On many balance transfer cards new purchases are charged interest straight away, and repayments may go to the 0% balance first. Avoid spending on the card and read its key fact sheet before you apply."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Balance Transfer</span></nav>
+    <div class="tool-head">
+      <h1>Balance Transfer Calculator: Is It Worth It?</h1>
+      <p>Compare staying on your card with moving the balance to a low-rate offer: interest, fees, time to clear and what’s left when the offer ends.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="balance">Card balance ($)</label><input type="text" id="balance" class="num" value="5000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Current card interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="20" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="payment">Monthly repayment ($)</label><input type="text" id="payment" class="num" value="300" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <h2 class="section-title">The balance transfer offer</h2>
+        <div class="field"><label for="fee">Balance transfer fee (% of the balance)</label><input type="text" id="fee" class="num" aria-describedby="fee-hint" value="2" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="fee-hint">A one-off fee added to the new card. Enter 0 if there isn’t one.</small></div>
+        <div class="field"><label for="intro">Intro interest rate (% p.a.)</label><input type="text" id="intro" class="num" value="0" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="months">Intro period (months)</label><input type="text" id="months" class="num" value="12" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="revert">Revert rate after the intro period (% p.a.)</label><input type="text" id="revert" class="num" aria-describedby="revert-hint" value="21" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="revert-hint">Usually the new card’s cash advance or purchase rate. Check the offer’s key fact sheet.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">You save with the transfer</div>
+        <div class="result-big" id="total">–</div>
+        <h2 class="section-title">Stay on your current card</h2>
+        <div class="kv"><span>Time to clear</span><span id="stay-time">–</span></div>
+        <div class="kv"><span>Total interest</span><span id="stay-cost">–</span></div>
+        <div class="kv"><span>Still owing after <span class="intro-n">12</span> months</span><span id="stay-left">–</span></div>
+        <h2 class="section-title">Transfer the balance</h2>
+        <div class="kv"><span>Transfer fee</span><span id="fee-out">–</span></div>
+        <div class="kv"><span>Interest</span><span id="move-interest">–</span></div>
+        <div class="kv"><span>Total interest and fees</span><span id="move-cost">–</span></div>
+        <div class="kv"><span>Time to clear</span><span id="move-time">–</span></div>
+        <div class="kv"><span>Left when the intro period ends</span><span id="move-left">–</span></div>
+        <div class="kv"><span>Repayment to clear it in the intro period</span><span id="clear">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. Assumes no new purchases, cash advances or annual fees, the same repayment every month and interest charged monthly. Not financial advice.</p>
+      </div>
+    </div>
+    <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Total cost: stay or transfer</h2><div id="chart"></div>
+      <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Cost comparison table"><table><thead><tr><th>Option</th><th>Interest</th><th>Fee</th><th>Total</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/credit-cards/credit-card-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's credit card calculator</a>, so you can cross-check a result there.</p>
+<p>Enter your card balance, its interest rate and what you can repay each month, then the offer's transfer fee, intro rate and period, and the revert rate. The calculator compares two plans with the same monthly repayment: staying on your current card, or transferring the balance.</p>
+<p>The transfer fee is a percentage of the balance, added to the new card on day one. The intro rate then applies for the intro period, and the revert rate after that. As in <a href="https://moneysmart.gov.au/credit-cards/credit-card-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's credit card calculator</a>, interest is charged monthly at the yearly rate ÷ 12, and it assumes no new purchases, cash advances or annual fees.</p>
+<p>It also shows how much will be left when the intro period ends, and the monthly repayment needed to clear the balance (fee included) before the rate goes up.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is a balance transfer worth it?</summary><p>Usually, if you avoid new spending and keep repaying. Moving $5,000 from a 20% card to 0% for 12 months with a 2% fee, paying $300 a month, costs $183.94 in fees and interest instead of $906.81: a $722.87 saving. The card is cleared in 18 months instead of 20.</p></details><details><summary>What happens when the intro period ends?</summary><p>Whatever's left starts attracting the revert rate. In the example above, $1,500 is still owing after 12 months, and at 21% that adds $83.94 of interest before it's cleared. Paying $425 a month would clear the whole $5,100 (fee included) within the 12 months.</p></details><details><summary>How much should I pay to clear it before the 0% ends?</summary><p>The balance plus the fee, divided by the months in the offer. For $10,000 with a 3% fee and 24 months at 0%, that's $429.17 a month. Paying $450 a month clears it in 23 months for just the $300 fee, against $2,594.68 of interest if you stay on a 20% card.</p></details><details><summary>What if I only make small repayments?</summary><p>The transfer still helps, but less. Paying $150 a month on $5,000, the transfer costs $1,003.24 in fees and interest, with $3,300 still owing when the 12 months at 0% end. Staying on 20% costs $2,359.09 and takes 50 months, against 41.</p></details><details><summary>Do new purchases get the 0% rate?</summary><p>Usually not. On many balance transfer cards new purchases are charged interest straight away, and repayments may go to the 0% balance first. Avoid spending on the card and read its key fact sheet before you apply.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="credit-card.html">Credit Card Payoff</a><a href="personal-loan.html">Car & Personal Loan Repayments</a><a href="savings-goal.html">Savings Goal</a><a href="compound-interest.html">Compound Interest</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

@@ -40,6 +40,9 @@ export const TOOLS = [
   { slug: 'inflation', name: 'Inflation', desc: 'What an amount from any year since 1948 is worth today, using ABS CPI.', meta: 'ABS CPI since 1948', cat: 'money' },
   { slug: 'borrowing-power', name: 'Borrowing Power', desc: 'Roughly how much a bank might lend, tested at APRA\'s 3% buffer.', meta: 'APRA 3% buffer', cat: 'property' },
   { slug: 'rental-cashflow', name: 'Rental Cashflow & Negative Gearing', desc: 'Weekly cashflow after tax, and the 2027 negative gearing limit.', meta: 'Before and after 1 July 2027', cat: 'property' },
+  { slug: 'refinance', name: 'Refinance', desc: 'What switching home loans saves after costs, and when you break even.', meta: 'Costs and break-even', cat: 'property' },
+  { slug: 'term-deposit', name: 'Term Deposit', desc: 'Interest and balance at maturity, paid monthly to at maturity, with tax.', meta: 'Monthly to maturity', cat: 'money' },
+  { slug: 'balance-transfer', name: 'Balance Transfer', desc: 'Stay or transfer: interest, fees, time to clear and what is left after the intro rate.', meta: 'Fee, intro and revert rate', cat: 'money' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';

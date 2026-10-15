@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/term-deposit.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Term Deposit Calculator Australia: Interest and Tax | Sorted, Mate</title>
+  <meta name="description" content="Work out term deposit interest and your balance at maturity, with interest paid monthly, quarterly, yearly or at maturity, plus the interest left after tax.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Term Deposit Calculator Australia: Interest and Tax">
+  <meta property="og:description" content="Work out term deposit interest and your balance at maturity, with interest paid monthly, quarterly, yearly or at maturity, plus the interest left after tax.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/term-deposit.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/term-deposit.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Term Deposit Calculator Australia", "description": "Work out term deposit interest and your balance at maturity, with interest paid monthly, quarterly, yearly or at maturity, plus the interest left after tax.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much interest will I earn on a $10,000 term deposit?", "acceptedAnswer": {"@type": "Answer", "text": "$450 over 12 months at 4.5% p.a. when interest is paid at maturity, leaving $10,450. Over 6 months at the same rate it's $225. If interest is paid monthly and reinvested it's $459.40, or $457.65 if it's paid quarterly and reinvested."}}, {"@type": "Question", "name": "Is monthly or at-maturity interest better?", "acceptedAnswer": {"@type": "Answer", "text": "Reinvested monthly interest earns slightly more: $459.40 a year on $10,000 at 4.5%, against $450 at maturity. Interest paid out to your bank account earns no interest itself, so it totals $450 ($37.50 a month), the same as at maturity. Banks often offer a slightly lower rate for monthly interest, so compare the dollar results."}}, {"@type": "Question", "name": "How is term deposit interest taxed?", "acceptedAnswer": {"@type": "Answer", "text": "As ordinary income, at your marginal rate plus the Medicare levy. On $2,250 of interest ($50,000 at 4.5% for a year), someone earning $80,000 pays $720 (32%) and keeps $1,530. On $150,000 the tax is $877.50 (39%). With no other income it's all under the tax-free threshold and no tax is payable."}}, {"@type": "Question", "name": "What about terms longer than a year?", "acceptedAnswer": {"@type": "Answer", "text": "On a 2-year term at 4.5% with interest added each year, $10,000 earns $920.25. Many banks pay interest at least once a year on terms longer than 12 months, so check how yours does it."}}, {"@type": "Question", "name": "Is my term deposit safe?", "acceptedAnswer": {"@type": "Answer", "text": "Deposits with an Australian bank, building society or credit union are covered by the government's Financial Claims Scheme up to $250,000. If you have more than that, consider spreading it across institutions. Check the provider is on APRA's list of authorised deposit-taking institutions."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Term Deposit</span></nav>
+    <div class="tool-head">
+      <h1>Term Deposit Calculator Australia</h1>
+      <p>Interest earned and the balance at maturity, whether interest is paid monthly, quarterly, yearly or at the end, and what’s left after tax.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="amount">Amount invested ($)</label><input type="text" id="amount" class="num" value="10000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="4.5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="months">Term (months)</label><input type="text" id="months" class="num" value="12" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="paid">Interest paid</label>
+          <select id="paid"><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="annually">Annually</option><option value="maturity" selected>At maturity</option></select></div>
+        <div class="field" id="reinvest-field"><label for="reinvest">What happens to the interest</label>
+          <select id="reinvest"><option value="1" selected>Added to the deposit (reinvested)</option><option value="0">Paid out to my bank account</option></select></div>
+        <div class="field"><label for="income">Your other taxable income this year ($)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="" placeholder="Optional" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Optional. Enter it to see the interest after income tax and the Medicare levy at your marginal rate.</small></div>
+      </form>
+      <div class="card readout">
+        <div>Interest earned</div>
+        <div class="result-big" id="interest">–</div>
+        <div class="kv"><span id="balance-label">Balance at maturity</span><span id="balance">–</span></div>
+        <div class="kv"><span id="per-label">Each interest payment</span><span id="per">–</span></div>
+        <div class="kv"><span>Effective yearly return</span><span id="effective">–</span></div>
+        <div class="kv"><span>Tax on the interest</span><span id="tax">–</span></div>
+        <div class="kv"><span>Interest after tax</span><span id="after">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. Counts each month as 1/12 of a year (banks usually count days, so your bank’s figure may differ by a few dollars). Tax uses <span id="tax-year">2026-27</span> resident rates and the Medicare levy, ignores offsets and assumes all the interest falls in one income year. Not financial advice.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Enter the amount, rate and term, and how often the bank pays interest. Interest paid at maturity is simple interest: amount × rate × months ÷ 12. If interest is paid monthly, quarterly or yearly, you choose whether it's paid out to your bank account (simple interest again) or added to the deposit, where it earns interest of its own (compounding).</p>
+<p>Each month counts as one-twelfth of a year. Banks usually count days, so your bank's figure may differ by a few dollars. There are no fees. If the term isn't a whole number of payment periods, the last part-period earns interest pro rata.</p>
+<p><strong>Tax:</strong> interest is taxable income. Enter your other taxable income to see the extra income tax and Medicare levy at your marginal rate, using 2026-27 resident rates. Offsets are ignored, and all the interest is counted in one income year.</p>
+<p>As <a href="https://moneysmart.gov.au/investments-paying-interest/term-deposits" target="_blank" rel="noopener noreferrer">Moneysmart</a> explains, term deposits with banks, building societies and credit unions are covered by the Financial Claims Scheme up to $250,000, and breaking one early can cost you interest.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much interest will I earn on a $10,000 term deposit?</summary><p>$450 over 12 months at 4.5% p.a. when interest is paid at maturity, leaving $10,450. Over 6 months at the same rate it's $225. If interest is paid monthly and reinvested it's $459.40, or $457.65 if it's paid quarterly and reinvested.</p></details><details><summary>Is monthly or at-maturity interest better?</summary><p>Reinvested monthly interest earns slightly more: $459.40 a year on $10,000 at 4.5%, against $450 at maturity. Interest paid out to your bank account earns no interest itself, so it totals $450 ($37.50 a month), the same as at maturity. Banks often offer a slightly lower rate for monthly interest, so compare the dollar results.</p></details><details><summary>How is term deposit interest taxed?</summary><p>As ordinary income, at your marginal rate plus the Medicare levy. On $2,250 of interest ($50,000 at 4.5% for a year), someone earning $80,000 pays $720 (32%) and keeps $1,530. On $150,000 the tax is $877.50 (39%). With no other income it's all under the tax-free threshold and no tax is payable.</p></details><details><summary>What about terms longer than a year?</summary><p>On a 2-year term at 4.5% with interest added each year, $10,000 earns $920.25. Many banks pay interest at least once a year on terms longer than 12 months, so check how yours does it.</p></details><details><summary>Is my term deposit safe?</summary><p>Deposits with an Australian bank, building society or credit union are covered by the government's Financial Claims Scheme up to $250,000. If you have more than that, consider spreading it across institutions. Check the provider is on APRA's list of authorised deposit-taking institutions.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="compound-interest.html">Compound Interest</a><a href="savings-goal.html">Savings Goal</a><a href="take-home-pay.html">Take-Home Pay</a><a href="inflation.html">Inflation</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>
