@@ -160,3 +160,12 @@ test('once SITE_URL is set, pages carry canonical links and the sitemap lists th
     assert.ok(sitemap.includes(`<loc>${url}</loc>`), `sitemap.xml is missing ${url} (run npm run seo)`);
   }
 });
+
+test('the deploy workflow publishes every file the service worker precaches', () => {
+  // One missing file makes cache.addAll() reject, so the new worker never installs and visitors stay on old rates.
+  const cp = readFileSync('.github/workflows/pages.yml', 'utf8').match(/cp -r ([^\n]+) _site\//)[1].split(/\s+/);
+  const files = [...sw.matchAll(/^\s+'([^']+)',?$/gm)].map((m) => m[1]);
+  assert.ok(files.length > 50);
+  const published = (f) => cp.some((p) => p === f || f.startsWith(`${p}/`) || (p === '*.html' && !f.includes('/') && f.endsWith('.html')));
+  assert.deepEqual(files.filter((f) => f !== './' && !published(f)), []);
+});
