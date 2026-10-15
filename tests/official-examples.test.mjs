@@ -35,3 +35,18 @@ test('2026-27 study loan repayments match the ATO worked examples (ato.gov.au, r
 test('2026-27 Medicare levy surcharge matches the ATO example (Tom, $117,000 single, 1%)', () => {
   assert.equal(medicareLevySurcharge({ own: { taxable: 117000 } }).surcharge, 1170);
 });
+
+test('SA duty matches RevenueSA rates and worked examples (revenuesa.sa.gov.au)', () => {
+  const sa = (v) => stampDuty({ state: 'SA', value: v, home: false }).total;
+  assert.equal(sa(235000), 8317.5); // self-determined document guide example
+  assert.equal(sa(150000), 4830);
+  assert.equal(sa(300000), 11330);
+  assert.equal(sa(500000), 21330);
+});
+
+test('TAS duty hits SRO Tasmania threshold amounts (sro.tas.gov.au)', () => {
+  const tas = (v) => stampDuty({ state: 'TAS', value: v, home: false }).total;
+  assert.equal(tas(3000), 50);
+  assert.equal(tas(25000), 435);
+  assert.equal(tas(75000), 1560);
+});

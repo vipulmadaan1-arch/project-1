@@ -22,8 +22,9 @@ function update() {
   });
   if (!r) { $('note').textContent = ''; $('estimate-note').textContent = ''; return blank($('total'), $('duty'), $('saving'), $('surcharge')); }
   $('total-label').textContent = `Total duty payable, ${r.state.code}`;
-  $('total').textContent = fmtMoney(r.total);
-  $('duty').textContent = fmtMoney(r.duty);
+  const dp = (n) => (Math.round(n * 100) % 100 ? 2 : 0); // SA duty can have cents
+  $('total').textContent = fmtMoney(r.total, dp(r.total));
+  $('duty').textContent = fmtMoney(r.duty, dp(r.duty));
   $('saving').textContent = r.saving ? `−${fmtMoney(r.saving)}` : fmtMoney(0);
   $('surcharge-label').textContent = r.state.foreign ? `Foreign purchaser surcharge (${Math.round(r.state.foreign * 100)}%)` : 'Foreign purchaser surcharge';
   $('surcharge').textContent = fmtMoney(r.surcharge);

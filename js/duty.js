@@ -99,7 +99,7 @@ export const STATES = [
     code: 'SA', name: 'South Australia', foreign: 0.07, foreignFhb: false, office: 'RevenueSA',
     source: 'https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty',
     calc({ value, firstHome, home, newHome }) {
-      const general = Math.round(scale(SA, value, { part: true }));
+      const general = Math.round(scale(SA, value, { part: true }) * 100) / 100; // RevenueSA quotes cents: $235,000 → $8,317.50
       if (firstHome && home && newHome) return { duty: 0, general, note: 'First home buyer relief: no stamp duty on a new home, with no price cap.' };
       if (firstHome && home) return { duty: general, general, note: 'First home buyer relief only applies to new homes and vacant land in South Australia.' };
       return { duty: general, general };
