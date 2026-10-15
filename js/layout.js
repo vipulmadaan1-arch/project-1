@@ -374,6 +374,36 @@ export function addResultActions(card) {
   card.append(wrap);
 }
 
+// Smooth page changes. Start fetching a page as soon as a finger or pointer reaches its link, so it is
+// usually loaded by the time the tap or click lands, and show a loading bar the moment a link is
+// followed, so a slow connection never looks like a missed tap (and invites a second tap elsewhere).
+const prefetched = new Set();
+const sitePage = (a) => a && a.origin === location.origin && a.pathname !== location.pathname
+  && !a.hasAttribute('download') && (!a.target || a.target === '_self') && /(\.html|\/)$/.test(a.pathname);
+const prefetch = (e) => {
+  const a = e.target.closest?.('a[href]');
+  if (!sitePage(a) || prefetched.has(a.pathname)) return;
+  prefetched.add(a.pathname);
+  const link = document.createElement('link');
+  link.rel = 'prefetch';
+  link.href = a.pathname;
+  document.head.append(link);
+};
+addEventListener('pointerover', prefetch, { passive: true });
+addEventListener('touchstart', prefetch, { passive: true });
+addEventListener('focusin', prefetch);
+addEventListener('click', (e) => {
+  const a = e.target.closest?.('a[href]');
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !sitePage(a)) return;
+  document.documentElement.classList.add('is-leaving');
+  a.closest('.tile')?.classList.add('is-pressed');
+});
+// Coming back with the Back button restores the page as it was left, so clear the loading state.
+addEventListener('pageshow', () => {
+  document.documentElement.classList.remove('is-leaving');
+  document.querySelectorAll('.is-pressed').forEach((el) => el.classList.remove('is-pressed'));
+});
+
 // Register after the page has loaded, so caching the site for offline use doesn't compete with this
 // page's own requests on a first visit.
 if ('serviceWorker' in navigator && location.protocol !== 'file:') {

@@ -3,13 +3,15 @@
 // Updating: bump VERSION whenever you change any file. The browser checks sw.js on each visit, sees it
 // changed, and installs the new version, which downloads every file in FILES fresh into a new cache.
 // It then takes over straight away (skipWaiting + clients.claim) and deletes the old cache. Taking
-// over early is safe here because every page loads all of its scripts up front (no lazy imports),
-// so a page that is already open never asks the new worker for a file from a different version.
+// over early is safe here because every page loads its scripts up front. The one lazy import, aussie.js,
+// imports nothing and only reads the page, so an open page that gets the newer copy still works.
 //
-// Serving: network first, so a deploy shows up on the next page load. The cache is the fallback when
-// the network fails, or answers slower than NETWORK_TIMEOUT_MS (a bad mobile signal). In that case
-// the network copy still finishes in the background and refreshes the cache for next time.
-const VERSION = 'v43';
+// Serving: cache first, from this version's cache, so pages open instantly with no network round trip.
+// Every file comes from the same version, so a page never mixes old and new scripts. A deploy shows up
+// once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
+// away), which is usually the next page opened. Anything not cached goes to the network, falling back
+// to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
+const VERSION = 'v44';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
@@ -162,6 +164,11 @@ self.addEventListener('fetch', (e) => {
 async function respond(e, url) {
   // Cache by path only: an address with ?... or #... (a results link) never stores its figures.
   const key = url.origin + url.pathname;
+  const cached = await caches.open(CACHE).then((c) => c.match(key));
+  if (cached) {
+    if (e.request.mode === 'navigate' && e.preloadResponse) e.waitUntil(e.preloadResponse.catch(() => {}));
+    return cached;
+  }
   const network = fromNetwork(e, key);
   e.waitUntil(network.then(() => {}, () => {}));
   const slow = new Promise((resolve) => { setTimeout(resolve, NETWORK_TIMEOUT_MS); });
