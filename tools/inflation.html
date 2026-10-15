@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/inflation.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inflation Calculator Australia, CPI Since 1948 | Sorted, Mate</title>
+  <meta name="description" content="Australian inflation calculator: see what an amount from any quarter since 1948 is worth today, using the ABS Consumer Price Index. Shows total and average yearly inflation.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Inflation Calculator Australia, CPI Since 1948">
+  <meta property="og:description" content="Australian inflation calculator: see what an amount from any quarter since 1948 is worth today, using the ABS Consumer Price Index. Shows total and average yearly inflation.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/cpi-data.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/inflation.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/inflation.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Inflation Calculator (Australian CPI)", "description": "Australian inflation calculator: see what an amount from any quarter since 1948 is worth today, using the ABS Consumer Price Index. Shows total and average yearly inflation.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is $100 from 2000 worth today?", "acceptedAnswer": {"@type": "Answer", "text": "$100 in the June quarter 2000 is worth $209.78 in the June quarter 2026. Prices rose 109.8% in total, an average of 2.89% a year."}}, {"@type": "Question", "name": "What was inflation in the year to June 2026?", "acceptedAnswer": {"@type": "Answer", "text": "3.9%, from a CPI of 98.43 in the June quarter 2025 to 102.31 in the June quarter 2026."}}, {"@type": "Question", "name": "How much have prices risen since 1948?", "acceptedAnswer": {"@type": "Answer", "text": "$100 in the September quarter 1948 is worth $3,950.19 in the June quarter 2026: a rise of 3,850.2%, or an average of 4.84% a year."}}, {"@type": "Question", "name": "When was inflation highest?", "acceptedAnswer": {"@type": "Answer", "text": "Over a year to a June quarter, the highest was 20.7% in the year to June 1952. Inflation was also high through the 1970s and early 1980s: $100 in June 1980 is worth $563.07 in June 2026."}}, {"@type": "Question", "name": "Why is the index around 100 now?", "acceptedAnswer": {"@type": "Answer", "text": "The ABS re-based the CPI to 2025. Re-basing changes every index number by the same proportion, so the ratios this calculator uses, and its results, don't change."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Inflation Calculator</span></nav>
+    <div class="tool-head">
+      <h1>Inflation Calculator (Australian CPI)</h1>
+      <p>What an amount from one year is worth in another, using the ABS Consumer Price Index back to 1948.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="amount">Amount ($)</label><input type="text" id="amount" class="num" value="100" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="from-year">Year the amount is from</label><select id="from-year"></select></div>
+        <div class="field"><label for="from-q">Quarter the amount is from</label><select id="from-q" aria-describedby="q-hint"><option value="1">March quarter</option><option value="2">June quarter</option><option value="3">September quarter</option><option value="4">December quarter</option></select></div>
+        <div class="field"><label for="to-year">Year to compare with</label><select id="to-year"></select></div>
+        <div class="field"><label for="to-q">Quarter to compare with</label><select id="to-q"><option value="1">March quarter</option><option value="2">June quarter</option><option value="3">September quarter</option><option value="4">December quarter</option></select></div>
+        <small id="q-hint" class="hint">Figures run from the September quarter 1948 to the latest the ABS has published.</small>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Equivalent value</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="change-label">Total change in prices</span><span id="change">–</span></div>
+        <div class="kv"><span>Average inflation a year</span><span id="annual">–</span></div>
+        <div class="kv"><span id="from-cpi-label">CPI, starting quarter</span><span id="from-cpi">–</span></div>
+        <div class="kv"><span id="to-cpi-label">CPI, comparison quarter</span><span id="to-cpi">–</span></div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Inflation year by year"><table><thead><tr><th scope="col">Year to</th><th scope="col">Inflation</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Uses the ABS All groups Consumer Price Index, weighted average of the eight capital cities, to the June quarter 2026 (checked 15 Oct 2026). CPI tracks average household prices, so your own costs may have changed by more or less. Source: <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia" target="_blank" rel="noopener noreferrer">ABS Consumer Price Index, Australia</a>.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Prices are tracked by the <strong>Consumer Price Index (CPI)</strong>, published every quarter by the Australian Bureau of Statistics. This calculator uses the All groups CPI for the weighted average of the eight capital cities, from the September quarter 1948 to the June quarter 2026. To convert an amount, it multiplies by the ratio of the two quarters' index numbers: <strong>value × CPI (later) ÷ CPI (earlier)</strong>.</p>
+<p>The ABS re-based the index in 2025, so the June quarter 2026 is 102.31 and the September quarter 1999 is 47.72. Only the ratio matters, so $100 in September 1999 is worth $100 × 102.31 ÷ 47.72 = <strong>$214.40</strong> in June 2026. The average yearly rate is the steady yearly increase that would give the same total change.</p>
+<p>The September quarter 2026 figure is due from the ABS in late October 2026. CPI measures average household prices, so your own costs may have risen faster or slower.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is $100 from 2000 worth today?</summary><p>$100 in the June quarter 2000 is worth $209.78 in the June quarter 2026. Prices rose 109.8% in total, an average of 2.89% a year.</p></details><details><summary>What was inflation in the year to June 2026?</summary><p>3.9%, from a CPI of 98.43 in the June quarter 2025 to 102.31 in the June quarter 2026.</p></details><details><summary>How much have prices risen since 1948?</summary><p>$100 in the September quarter 1948 is worth $3,950.19 in the June quarter 2026: a rise of 3,850.2%, or an average of 4.84% a year.</p></details><details><summary>When was inflation highest?</summary><p>Over a year to a June quarter, the highest was 20.7% in the year to June 1952. Inflation was also high through the 1970s and early 1980s: $100 in June 1980 is worth $563.07 in June 2026.</p></details><details><summary>Why is the index around 100 now?</summary><p>The ABS re-based the CPI to 2025. Re-basing changes every index number by the same proportion, so the ratios this calculator uses, and its results, don't change.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="compound-interest.html">Compound Interest</a><a href="savings-goal.html">Savings Goal</a><a href="capital-gains-tax.html">Capital Gains Tax</a><a href="percentage.html">Percentage</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

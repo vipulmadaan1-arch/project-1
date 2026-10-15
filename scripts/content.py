@@ -4,6 +4,26 @@ import json, re, html, sys, os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 C = {
+'inflation': dict(
+ how="""<p>Prices are tracked by the <strong>Consumer Price Index (CPI)</strong>, published every quarter by the Australian Bureau of Statistics. This calculator uses the All groups CPI for the weighted average of the eight capital cities, from the September quarter 1948 to the June quarter 2026. To convert an amount, it multiplies by the ratio of the two quarters' index numbers: <strong>value × CPI (later) ÷ CPI (earlier)</strong>.</p>
+<p>The ABS re-based the index in 2025, so the June quarter 2026 is 102.31 and the September quarter 1999 is 47.72. Only the ratio matters, so $100 in September 1999 is worth $100 × 102.31 ÷ 47.72 = <strong>$214.40</strong> in June 2026. The average yearly rate is the steady yearly increase that would give the same total change.</p>
+<p>The September quarter 2026 figure is due from the ABS in late October 2026. CPI measures average household prices, so your own costs may have risen faster or slower.</p>""",
+ faq=[("What is $100 from 2000 worth today?","$100 in the June quarter 2000 is worth $209.78 in the June quarter 2026. Prices rose 109.8% in total, an average of 2.89% a year."),
+      ("What was inflation in the year to June 2026?","3.9%, from a CPI of 98.43 in the June quarter 2025 to 102.31 in the June quarter 2026."),
+      ("How much have prices risen since 1948?","$100 in the September quarter 1948 is worth $3,950.19 in the June quarter 2026: a rise of 3,850.2%, or an average of 4.84% a year."),
+      ("When was inflation highest?","Over a year to a June quarter, the highest was 20.7% in the year to June 1952. Inflation was also high through the 1970s and early 1980s: $100 in June 1980 is worth $563.07 in June 2026."),
+      ("Why is the index around 100 now?","The ABS re-based the CPI to 2025. Re-basing changes every index number by the same proportion, so the ratios this calculator uses, and its results, don't change.")],
+ related=['compound-interest','savings-goal','capital-gains-tax','percentage']),
+'borrowing-power': dict(
+ how="""<p>Banks work out how much you can borrow by checking what's left of your take-home income after living expenses and existing debts, then finding the largest loan that amount could repay. APRA requires banks to test repayments at <strong>3 percentage points above the loan rate</strong> (the serviceability buffer), so a 6% loan is tested at 9%.</p>
+<p>This estimate takes your income after 2026-27 tax, the Medicare levy and any HECS/HELP repayments. It counts <strong>80% of rental or other income</strong> and treats credit cards as fully drawn at <strong>3.8% of the limit a month</strong>, the repayment that clears the limit in three years. Both are typical lender practice, not official rules. It then subtracts your living expenses and other loan repayments.</p>
+<p>From 1 February 2026, APRA limits each bank to 20% of new home loans at a <strong>debt-to-income ratio</strong> of 6 or more, so very high borrowing compared with income can be harder to get. Lenders also apply their own minimum living expenses, the Household Expenditure Measure, which isn't published. Most will lend less than this estimate.</p>""",
+ faq=[("How much can I borrow on $100,000?","On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6% loan over 30 years tested at 9% gives about $491,000. Repayments at 6% would be about $2,948 a month, and the loan would be 4.9 times income."),
+      ("How much does a credit card limit reduce borrowing power?","In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $444,000, around $47,000 less."),
+      ("What is the APRA serviceability buffer?","Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000."),
+      ("How much can a couple borrow?","Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4."),
+      ("Does rental income count?","Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000.")],
+ related=['mortgage','stamp-duty','offset','take-home-pay']),
 'car-stamp-duty': dict(
  how="""<p>Every state and territory charges <strong>motor vehicle duty</strong> (often called car stamp duty) when you register a new car or transfer a used one into your name. It's worked out on the car's <strong>dutiable value</strong>: usually the higher of the price and the market value, including GST and luxury car tax. Most states round the value up to the next $100 (Victoria to the next $200) before applying the rate.</p>
 <table><thead><tr><th>State</th><th>Passenger car rate</th></tr></thead><tbody>

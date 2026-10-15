@@ -34,6 +34,8 @@ export const TOOLS = [
   { slug: 'super', name: 'Super & Salary Sacrifice', desc: 'Employer super, tax saved by salary sacrificing and the concessional cap.', meta: 'ATO 2026-27, $32,500 cap', cat: 'tax' },
   { slug: 'medicare-levy-surcharge', name: 'Medicare Levy Surcharge', desc: 'The surcharge without hospital cover, and whether a policy costs less.', meta: 'ATO 2026-27 thresholds', cat: 'tax' },
   { slug: 'car-stamp-duty', name: 'Car Stamp Duty, All States', desc: 'Motor vehicle duty on new and used cars in every state, with electric, hybrid and luxury rates.', meta: 'All 8 states and territories', cat: 'property' },
+  { slug: 'inflation', name: 'Inflation Calculator', desc: 'What an amount from any year since 1948 is worth today, using ABS CPI.', meta: 'ABS CPI since 1948', cat: 'money' },
+  { slug: 'borrowing-power', name: 'Borrowing Power', desc: 'Roughly how much a bank might lend, tested at APRA\'s 3% buffer.', meta: 'APRA 3% buffer', cat: 'property' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';
