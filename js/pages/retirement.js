@@ -1,11 +1,13 @@
 import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
 import { project, drawdown, ASFA, PRESERVATION_AGE, CONCESSIONAL_CAP } from '../retirement.js';
-import { stackedColumns } from '../chart.js';
+import { stackedColumns, perFrame } from '../chart.js';
 
 const $ = (id) => document.getElementById(id);
 const OUT = ['total', 'future', 'paidin', 'earned', 'fees', 'lasts', 'asfa-c', 'asfa-m', 'asfa-l'];
 const pct = (n) => `${Math.round(n * 100)}%`;
 const card = $('chart').closest('.chart-card');
+// The headline figures update as you type; the chart and year table follow a frame later.
+const later = perFrame();
 
 function update() {
   const age = readNumber($('age'), { name: 'Your age', unit: 'years', min: 18, max: 74, whole: true, example: '35' });
@@ -23,7 +25,7 @@ function update() {
     inflationPct: readNumber($('inflation'), { name: 'Inflation', unit: 'percent', min: -5, max: 15, example: '2.5' }),
     income: readNumber($('income'), { name: 'Retirement income', unit: 'money', min: 0, max: 1e8, optional: true }),
   };
-  const fail = (msg = '') => { card.hidden = true; $('note').textContent = msg; return blank(...OUT.map($)); };
+  const fail = (msg = '') => { later(null); card.hidden = true; $('note').textContent = msg; return blank(...OUT.map($)); };
   if (age === null || retireAge === null || Object.values(v).includes(null)) return fail();
   if (retireAge <= age) return fail('Your retirement age needs to be later than your age now. Already retired? Enter next year as your retirement age.');
 
@@ -58,14 +60,16 @@ function update() {
   $('note').textContent = notes.join(' ');
 
   card.hidden = false;
-  stackedColumns($('chart'), {
-    title: "Super balance by age in today's dollars, split into contributions and earnings",
-    labels: r.rows.map((x) => x.age),
-    prefix: 'Age ',
-    series: [{ name: 'Starting balance and contributions', values: r.rows.map((x) => x.paidInReal) }, { name: 'Earnings after tax and fees', values: r.rows.map((x) => x.earningsReal) }],
-    format: (n) => fmtMoney(n),
+  later(() => {
+    stackedColumns($('chart'), {
+      title: "Super balance by age in today's dollars, split into contributions and earnings",
+      labels: r.rows.map((x) => x.age),
+      prefix: 'Age ',
+      series: [{ name: 'Starting balance and contributions', values: r.rows.map((x) => x.paidInReal) }, { name: 'Earnings after tax and fees', values: r.rows.map((x) => x.earningsReal) }],
+      format: (n) => fmtMoney(n),
+    });
+    $('rows').innerHTML = r.rows.map((x) => `<tr><td>${x.age}</td><td>${fmtMoney(x.paidInReal)}</td><td>${fmtMoney(x.earningsReal)}</td><td>${fmtMoney(x.balanceReal)}</td><td>${fmtMoney(x.balance)}</td></tr>`).join('');
   });
-  $('rows').innerHTML = r.rows.map((x) => `<tr><td>${x.age}</td><td>${fmtMoney(x.paidInReal)}</td><td>${fmtMoney(x.earningsReal)}</td><td>${fmtMoney(x.balanceReal)}</td><td>${fmtMoney(x.balance)}</td></tr>`).join('');
 }
 wireForm($('form'), update);
 syncFormWithUrl($('form'), update);

@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/cgt.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/capital-gains-tax.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Capital Gains Tax Calculator Australia (2027 Rules)", "description": "Work out capital gains tax on shares, crypto or property under today's 50% discount and the new 1 July 2027 rules: CPI indexation and the 30% minimum tax.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does the new CGT apply to shares I already own?", "acceptedAnswer": {"@type": "Answer", "text": "Only to growth from 1 July 2027. Gains up to 30 June 2027 keep the 50% discount when you eventually sell, if you've held the asset for more than 12 months in total. For listed shares, the value at 30 June 2027 is their market price that day."}}, {"@type": "Question", "name": "Is the new CGT law passed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The Treasury Laws Amendment (Tax Reform No. 1) Act 2026 received Royal Assent on 26 June 2026. Some details are still being finalised, including the definition of a new build and the apportioning method, so the calculator says when it relies on them."}}, {"@type": "Question", "name": "Will I pay more tax under the new rules?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on inflation, how long you hold the asset and your income. Growth well above inflation is taxed more than under the 50% discount; slow growth in high inflation can be taxed less. The 30% minimum tax mainly affects people with lower incomes, such as retirees not on the Age Pension. The calculator shows both results side by side."}}, {"@type": "Question", "name": "How much CGT will I pay on $100,000 profit?", "acceptedAnswer": {"@type": "Answer", "text": "About $16,350 if you sell before 1 July 2027, or about $33,861 under the new rules, for shares held more than 12 months by someone with $90,000 of other income. Selling before 1 July 2027 (bought 1 March 2025, sold 1 March 2027), the 50% discount means only $50,000 is taxed. Bought on 1 July 2027 and sold on 1 July 2029, indexation at an assumed 2.5% inflation (factor 1.051) reduces the taxable gain to $94,900, with no discount. Both include the Medicare levy; the 30% minimum tax adds nothing at this income."}}, {"@type": "Question", "name": "Why do I need to enter my other income?", "acceptedAnswer": {"@type": "Answer", "text": "Capital gains are added to your taxable income, so the tax depends on your marginal rate. A $50,000 gain costs much less for someone with no other income than for someone earning $200,000."}}, {"@type": "Question", "name": "What isn't covered?", "acceptedAnswer": {"@type": "Answer", "text": "Partial main residence exemptions, small business concessions, assets bought before 21 September 1999 using frozen indexation, trusts and companies, and the Working Australians Tax Offset. Ask a registered tax agent if these apply to you."}}]}]</script>
@@ -78,6 +80,7 @@
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/individuals-and-families/investments-and-assets/capital-gains-tax" target="_blank" rel="noopener noreferrer">the ATO's capital gains tax pages</a>.</p>

@@ -1,9 +1,10 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled, partsFormat } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled, partsFormat, nextStep } from '../layout.js';
 import { upfrontCosts } from '../upfront.js';
 import { SCHEME_URL } from '../lmi.js';
 
 const $ = (id) => document.getElementById(id);
 const pct = (n) => `${n.toLocaleString('en-AU', { maximumFractionDigits: 2 })}%`;
+const next = nextStep();
 const money = (id, name) => readNumber($(id), { name, unit: 'money', min: 0, max: 1e9, optional: true });
 
 function update() {
@@ -27,7 +28,7 @@ function update() {
     legal, inspection, loanFee, other, lmiToLoan: $('lmiloan').checked, scheme: $('scheme').checked,
   });
   if (!r) {
-    $('note').textContent = ''; $('estimate-note').textContent = ''; $('rows').innerHTML = '';
+    $('note').textContent = ''; $('estimate-note').textContent = ''; $('rows').innerHTML = ''; next(null);
     return blank($('cash'), $('dep'), $('costs'), $('duty'), $('loan'), $('lvr'));
   }
   // Whole dollars from $1,000 up, registration fees to the cent, unless rounding would stop the figures adding up.
@@ -40,6 +41,8 @@ function update() {
   $('loan-label').textContent = $('lmiloan').checked && r.lmiCost ? 'Loan amount, including LMI' : 'Loan amount';
   $('loan').textContent = fmtMoney(r.loanWithLmi);
   $('lvr').textContent = pct(r.lvr);
+  const loan = Math.round(r.loanWithLmi);
+  next(loan > 0 ? { principal: loan } : null);
   $('duty-source').href = r.duty.state.source; $('duty-source').textContent = r.duty.state.office;
   $('rego-source').href = r.rego.source; $('rego-source').textContent = r.rego.office;
 

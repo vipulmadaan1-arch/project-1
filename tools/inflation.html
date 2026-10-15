@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/inflation.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/inflation.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Inflation Calculator (Australian CPI)", "description": "Australian inflation calculator: what an amount from any quarter since 1948 is worth today, using the ABS Consumer Price Index, with total and yearly inflation.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is $100 from 2000 worth today?", "acceptedAnswer": {"@type": "Answer", "text": "$100 in the June quarter 2000 is worth $209.78 in the June quarter 2026. Prices rose 109.8% in total, an average of 2.89% a year."}}, {"@type": "Question", "name": "What was inflation in the year to June 2026?", "acceptedAnswer": {"@type": "Answer", "text": "3.9%, from a CPI of 98.43 in the June quarter 2025 to 102.31 in the June quarter 2026."}}, {"@type": "Question", "name": "How much have prices risen since 1948?", "acceptedAnswer": {"@type": "Answer", "text": "$100 in the September quarter 1948 is worth $3,950.19 in the June quarter 2026: a rise of 3,850.2%, or an average of 4.84% a year."}}, {"@type": "Question", "name": "When was inflation highest?", "acceptedAnswer": {"@type": "Answer", "text": "Over a year to a June quarter, the highest was 20.7% in the year to June 1952. Inflation was also high through the 1970s and early 1980s: $100 in June 1980 is worth $563.07 in June 2026."}}, {"@type": "Question", "name": "Why is the index around 100 now?", "acceptedAnswer": {"@type": "Answer", "text": "The ABS re-based the CPI to 2025. Re-basing changes every index number by the same proportion, so the ratios this calculator uses, and its results, don't change."}}]}]</script>
@@ -61,6 +63,7 @@
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia" target="_blank" rel="noopener noreferrer">ABS Consumer Price Index</a>.</p>

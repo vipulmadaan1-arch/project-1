@@ -48,10 +48,35 @@ function tile(t) {
   return el;
 }
 
+// ---------- Search ----------
+// Every word typed has to match a word in the tool's name, description, tile label or keywords (js/tools.js),
+// so "sa stamp duty" finds the stamp duty calculators. A word matches the start of a word ("mort" while
+// typing "mortgage"); words of one or two letters ("sa", "wa") must match whole, unless you're still typing
+// them; and words of five letters or more may have one typo ("mortage").
+const words = (s) => s.toLowerCase().replace(/['’]/g, '').split(/[^a-z0-9%]+/).filter(Boolean);
+const INDEX = new Map(TOOLS.map((t) => [t.slug, words(`${t.name} ${t.desc} ${t.meta} ${t.keywords || ''}`)]));
+// Edit distance of at most one, counting a swap of two neighbouring letters as one edit.
+function nearlySame(a, b) {
+  if (Math.abs(a.length - b.length) > 1) return false;
+  let i = 0;
+  while (i < a.length && a[i] === b[i]) i++;
+  if (i >= a.length || i >= b.length) return true;
+  const rest = (x, y) => a.slice(x) === b.slice(y);
+  return rest(i + 1, i + 1) || rest(i + 1, i) || rest(i, i + 1) || (a[i] === b[i + 1] && a[i + 1] === b[i] && rest(i + 2, i + 2));
+}
+function wordMatches(q, w, typing) {
+  if (q.length <= 2 && !typing) return w === q;
+  if (w.startsWith(q)) return true;
+  return q.length >= 5 && (nearlySame(q, w) || nearlySame(q, w.slice(0, q.length)));
+}
+function matcher(query) {
+  const qs = words(query);
+  const typing = !/\s$/.test(query);
+  return (t) => qs.every((q, i) => INDEX.get(t.slug).some((w) => wordMatches(q, w, typing && i === qs.length - 1)));
+}
+
 function render() {
-  const q = $search.value.trim().toLowerCase();
-  const catText = Object.fromEntries(CATEGORIES.map((c) => [c.key, `${c.title} ${c.short}`]));
-  const match = (t) => !q || `${t.name} ${t.desc} ${t.meta} ${catText[t.cat]}`.toLowerCase().includes(q);
+  const match = matcher($search.value);
   const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
   $pinned.replaceChildren(...pinnedTools.map(tile));
   document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
@@ -76,9 +101,18 @@ function render() {
   return shown;
 }
 
-$search.addEventListener('input', () => {
+function search() {
   const shown = render();
   announce(shown ? `${shown} ${shown === 1 ? 'tool' : 'tools'} found` : 'No tools match that search.', 600);
+}
+$search.addEventListener('input', search);
+// No matches: suggested searches fill the box, and Clear empties it. Focus goes back to the box either way.
+document.getElementById('empty').addEventListener('click', (e) => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  $search.value = b.dataset.q ?? '';
+  search();
+  $search.focus();
 });
 // Press / to jump to search.
 document.addEventListener('keydown', (e) => {

@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -29,6 +30,7 @@
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/loans.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/savings-goal.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Savings Goal Calculator", "description": "Find out how long it will take to reach a savings goal with weekly, fortnightly or monthly deposits, or how much to save each time to reach it by a set date.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long will it take to save $10,000?", "acceptedAnswer": {"@type": "Answer", "text": "Saving $200 a month, with $1,000 already saved, takes about 3 years 5 months at 4.5% p.a. compounded monthly, and 3 years 9 months with no interest."}}, {"@type": "Question", "name": "How much do I need to save each week to reach my goal?", "acceptedAnswer": {"@type": "Answer", "text": "About $86.54 a week saves $9,000 in 2 years with no interest, or about $82.25 a week at 5% p.a. compounded monthly. To work out your own, choose to save by a date, pick weekly and enter your date."}}, {"@type": "Question", "name": "Is interest on savings taxed in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed."}}, {"@type": "Question", "name": "Does compounding frequency make much difference?", "acceptedAnswer": {"@type": "Answer", "text": "Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more."}}, {"@type": "Question", "name": "What about saving for a home deposit?", "acceptedAnswer": {"@type": "Answer", "text": "Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan."}}]}]</script>
@@ -69,6 +71,7 @@
     <section class="card chart-card" id="chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Savings by year</h2><div id="chart"></div>
       <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Savings by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/saving/savings-goals-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's savings goals calculator</a>, so you can cross-check a result there.</p>
@@ -78,7 +81,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>How long will it take to save $10,000?</summary><p>Saving $200 a month, with $1,000 already saved, takes about 3 years 5 months at 4.5% p.a. compounded monthly, and 3 years 9 months with no interest.</p></details><details><summary>How much do I need to save each week to reach my goal?</summary><p>About $86.54 a week saves $9,000 in 2 years with no interest, or about $82.25 a week at 5% p.a. compounded monthly. To work out your own, choose to save by a date, pick weekly and enter your date.</p></details><details><summary>Is interest on savings taxed in Australia?</summary><p>Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed.</p></details><details><summary>Does compounding frequency make much difference?</summary><p>Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more.</p></details><details><summary>What about saving for a home deposit?</summary><p>Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="inflation.html">Inflation</a><a href="compound-interest.html">Compound Interest</a><a href="offset.html">Offset Account</a><a href="credit-card.html">Credit Card Payoff</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="term-deposit.html">Term Deposit</a><a href="compound-interest.html">Compound Interest</a><a href="inflation.html">Inflation</a><a href="offset.html">Offset Account</a></nav>
     </section>
     <!-- content:end -->
   </main>

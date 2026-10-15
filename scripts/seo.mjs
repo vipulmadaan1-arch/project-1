@@ -103,7 +103,11 @@ function stamp(html, tags) {
   html = html.replace(/\n {2}<!-- seo:start -->[\s\S]*?<!-- seo:end -->/, '');
   html = html.replace(/\n {2}<meta property="og:[^>]*>/g, ''); // tags from older versions of the pages
   const block = `\n  <!-- seo:start -->\n${tags.map((t) => `  ${t}`).join('\n')}\n  <!-- seo:end -->`;
-  return html.replace(/\n {2}<link rel="stylesheet"/, `${block}\n  <link rel="stylesheet"`);
+  html = html.replace(/\n {2}<link rel="stylesheet"/, `${block}\n  <link rel="stylesheet"`);
+  // The web font is preloaded straight after the stylesheet, so it's usually there for the first paint
+  // (style.css uses font-display: optional: text never swaps fonts after it's shown, so nothing shifts).
+  html = html.replace(/\n {2}<link rel="preload" href="[^"]*instrument-sans\.woff2"[^>]*>/g, '');
+  return html.replace(/(\n {2}<link rel="stylesheet" href="((?:\.\.\/)?)css\/style\.css">)/, '$1\n  <link rel="preload" href="$2fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>');
 }
 
 // Static tool tiles. js/pages/home.js re-renders them (adding pins and search), but the plain
@@ -119,6 +123,15 @@ function tiles() {
 }
 const withTiles = (html) => html.replace(/(<!-- tiles:start -->)[\s\S]*?(\s*<!-- tiles:end -->)/, `$1\n${tiles()}$2`);
 
+// The home page's "Popular" row under the search box: the four most used tools, as plain links, so on a
+// phone they're in view before any scrolling.
+const POPULAR = [['take-home-pay', 'Take-home pay'], ['stamp-duty', 'Stamp duty'], ['mortgage', 'Mortgage'], ['tax-refund', 'Tax refund']];
+const popular = () => `<nav class="popular" aria-label="Popular tools"><p class="popular-label">Popular</p><ul>${POPULAR.map(([slug, label]) => {
+  if (!TOOLS.some((t) => t.slug === slug)) throw new Error(`POPULAR lists unknown tool ${slug}`);
+  return `<li><a href="tools/${slug}.html">${icon(slug)}<span>${label}</span></a></li>`;
+}).join('')}</ul></nav>`;
+const withPopular = (html) => html.replace(/(<!-- popular:start -->)[\s\S]*?(<!-- popular:end -->)/, `$1\n        ${popular()}\n        $2`);
+
 // Each tool page's breadcrumb names its home page section, so moving a tool between sections
 // in js/tools.js is a one-line change.
 const crumbFor = (t) => { const c = CATEGORIES.find((x) => x.key === t.cat); return `<a href="../#${c.key}">${c.title}</a>`; };
@@ -128,7 +141,7 @@ for (const page of PAGES) {
   html = html.replace(/(<nav class="crumbs"[^>]*><a href="(?:\.\.\/|\.\/)">)(?:Tools|Home)(<\/a>)/, '$1Home$2');
   if (tool) html = html.replace(/(<nav class="crumbs"[^>]*><a href="\.\.\/">Home<\/a><span aria-hidden="true">\/<\/span>)<a href="\.\.\/#[a-z]+">[^<]*<\/a>/, `$1${crumbFor(tool)}`);
   html = stamp(html, headBlock(html, page));
-  if (page.file === 'index.html') html = withTiles(html);
+  if (page.file === 'index.html') html = withPopular(withTiles(html));
   writeFileSync(page.file, html);
 }
 

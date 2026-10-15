@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/compound-interest.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed."}}]}]</script>
@@ -62,6 +64,7 @@
     </div>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Balance by year</h2><div id="chart"></div></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/budgeting/compound-interest-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's compound interest calculator</a>, so you can cross-check a result there.</p>
@@ -71,7 +74,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a><a href="offset.html">Offset Account</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="term-deposit.html">Term Deposit</a><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a></nav>
     </section>
     <!-- content:end -->
   </main>

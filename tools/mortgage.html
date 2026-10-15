@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/mortgage.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Mortgage Repayment Calculator Australia", "description": "Work out weekly, fortnightly or monthly repayments and total interest on an Australian home loan, with a repayment table for $400,000 to $1 million loans.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What are the repayments on a $600,000 mortgage?", "acceptedAnswer": {"@type": "Answer", "text": "$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792."}}, {"@type": "Question", "name": "How much interest will I pay over 30 years?", "acceptedAnswer": {"@type": "Answer", "text": "$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest."}}, {"@type": "Question", "name": "Does this include fees or LMI?", "acceptedAnswer": {"@type": "Answer", "text": "No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."}}, {"@type": "Question", "name": "What about interest-only loans?", "acceptedAnswer": {"@type": "Answer", "text": "Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans."}}, {"@type": "Question", "name": "How much will I save with an offset account?", "acceptedAnswer": {"@type": "Answer", "text": "About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the offset account calculator for your own balance."}}]}]</script>
@@ -52,12 +54,14 @@
         <div class="result-big" id="repayment">–</div>
         <div class="kv"><span>Total interest</span><span id="interest">–</span></div>
         <div class="kv"><span>Total repaid</span><span id="total">–</span></div>
+        <p class="next-step"><a href="refinance.html"><span>Next: would refinancing this loan save you money?</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
         <p class="disclaimer">Estimate only. Assumes a constant rate and no fees. Not a loan offer or financial advice.</p>
       </section>
     </div>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Repayments by year</h2><div id="chart"></div>
       <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Repayments by year table"><table><thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance left</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/home-loans/mortgage-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's mortgage calculator</a>, so you can cross-check a result there.</p>
@@ -76,7 +80,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>What are the repayments on a $600,000 mortgage?</summary><p>$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792.</p></details><details><summary>How much interest will I pay over 30 years?</summary><p>$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest.</p></details><details><summary>Does this include fees or LMI?</summary><p>No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included.</p></details><details><summary>What about interest-only loans?</summary><p>Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans.</p></details><details><summary>How much will I save with an offset account?</summary><p>About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href="offset.html">offset account calculator</a> for your own balance.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="borrowing-power.html">Borrowing Power</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="offset.html">Offset Account</a><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="refinance.html">Refinance</a><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="lmi.html">LMI Calculator</a><a href="offset.html">Offset Account</a><a href="borrowing-power.html">Borrowing Power</a></nav>
     </section>
     <!-- content:end -->
   </main>

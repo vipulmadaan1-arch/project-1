@@ -1,9 +1,11 @@
 import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
 import { refinance } from '../refinance.js';
 import { describeMonths } from '../loans.js';
-import { stackedColumns } from '../chart.js';
+import { stackedColumns, perFrame } from '../chart.js';
 
 const $ = (id) => document.getElementById(id);
+// The headline figures update as you type; the year table follows a frame later.
+const later = perFrame();
 const OUT = ['net', 'pay-now', 'pay-new', 'monthly', 'interest', 'costs', 'breakeven', 'keep-sooner', 'keep-interest', 'keep-net'];
 
 function update() {
@@ -17,6 +19,7 @@ function update() {
   const card = $('chart').closest('.chart-card');
   if ([balance, currentRatePct, yearsLeft, newRatePct, newYearsIn, cashback, ...fees].includes(null)) {
     card.hidden = true;
+    later(null);
     $('note').textContent = '';
     return blank(...OUT.map($));
   }
@@ -58,7 +61,7 @@ function update() {
     series: [{ name: 'Interest', values: [r.interestCurrent, r.interestNew] }, { name: addCosts ? 'Switching costs (added to loan)' : 'Switching costs', values: [0, costs] }],
     format: (n) => fmtMoney(n),
   });
-  $('rows').innerHTML = r.years.map((y) => `<tr><td>${y.year}</td><td>${fmtMoney(y.currentBalance)}</td><td>${fmtMoney(y.newBalance)}</td><td>${fmtMoney(y.ahead)}</td></tr>`).join('');
+  later(() => { $('rows').innerHTML = r.years.map((y) => `<tr><td>${y.year}</td><td>${fmtMoney(y.currentBalance)}</td><td>${fmtMoney(y.newBalance)}</td><td>${fmtMoney(y.ahead)}</td></tr>`).join(''); });
 }
 wireForm($('form'), update);
 syncFormWithUrl($('form'), update);

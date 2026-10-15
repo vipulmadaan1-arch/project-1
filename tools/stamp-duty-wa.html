@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/duty.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/stamp-duty.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "WA Stamp Duty Calculator 2026-27 and First Home Buyers", "description": "WA transfer duty at 2026-27 RevenueWA rates, with the first home owner rate (no duty to $600,000, reduced to $800,000) and the 7% foreign buyer surcharge.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is stamp duty on a $700,000 home in WA?", "acceptedAnswer": {"@type": "Answer", "text": "$27,265 at the general rate: $11,115 plus $4.75 per $100 over $360,000. WA's owner-occupier discount stops at $200,000, so living in it doesn't change this. An eligible first home buyer pays $16,150, and a foreign buyer pays $76,265 including the 7% surcharge."}}, {"@type": "Question", "name": "Do first home buyers pay stamp duty in WA?", "acceptedAnswer": {"@type": "Answer", "text": "$0 on a home valued at $600,000 or less, from 7 May 2026. From $600,001 to $800,000 the first home owner rate is $16.15 per $100 over $600,000: $8,075 on a $650,000 home and $16,150 on $700,000, against $24,890 and $27,265 at the general rate. Above $800,000 normal duty applies."}}, {"@type": "Question", "name": "Is there a stamp duty discount for owner-occupiers in WA?", "acceptedAnswer": {"@type": "Answer", "text": "Only on homes valued at $200,000 or less, through the concessional rate: a $150,000 home costs $3,012 instead of $3,135. Above $200,000 there's no owner-occupier discount unless you're a first home buyer."}}, {"@type": "Question", "name": "How much is the foreign buyer surcharge in WA?", "acceptedAnswer": {"@type": "Answer", "text": "7% of the dutiable value, on top of normal duty: $49,000 on a $700,000 home, for a total of $76,265. A foreign buyer on their own can't use the first home owner rate."}}, {"@type": "Question", "name": "How much is stamp duty on a $1 million home in WA?", "acceptedAnswer": {"@type": "Answer", "text": "$42,616: $28,453 plus $5.15 per $100 over $725,000. No home or first home concession applies at this price."}}]}]</script>
@@ -54,10 +56,12 @@
         <div class="kv"><span>Saving from concessions</span><span id="saving">–</span></div>
         <div class="kv"><span id="surcharge-label">Foreign purchaser surcharge</span><span id="surcharge">–</span></div>
         <p class="note" id="note"></p>
+        <p class="next-step"><a href="upfront-costs.html"><span>Next: all the cash you need to buy, with this duty</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
         <p class="disclaimer">Residential purchases only. <span id="estimate-note"></span>Estimate only: exemptions and concessions depend on eligibility. Rates checked against <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a> on 15 Oct 2026. Confirm with your conveyancer.</p>
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>.</p>
@@ -78,7 +82,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>How much is stamp duty on a $700,000 home in WA?</summary><p>$27,265 at the general rate: $11,115 plus $4.75 per $100 over $360,000. WA's owner-occupier discount stops at $200,000, so living in it doesn't change this. An eligible first home buyer pays $16,150, and a foreign buyer pays $76,265 including the 7% surcharge.</p></details><details><summary>Do first home buyers pay stamp duty in WA?</summary><p>$0 on a home valued at $600,000 or less, from 7 May 2026. From $600,001 to $800,000 the first home owner rate is $16.15 per $100 over $600,000: $8,075 on a $650,000 home and $16,150 on $700,000, against $24,890 and $27,265 at the general rate. Above $800,000 normal duty applies.</p></details><details><summary>Is there a stamp duty discount for owner-occupiers in WA?</summary><p>Only on homes valued at $200,000 or less, through the concessional rate: a $150,000 home costs $3,012 instead of $3,135. Above $200,000 there's no owner-occupier discount unless you're a first home buyer.</p></details><details><summary>How much is the foreign buyer surcharge in WA?</summary><p>7% of the dutiable value, on top of normal duty: $49,000 on a $700,000 home, for a total of $76,265. A foreign buyer on their own can't use the first home owner rate.</p></details><details><summary>How much is stamp duty on a $1 million home in WA?</summary><p>$42,616: $28,453 plus $5.15 per $100 over $725,000. No home or first home concession applies at this price.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="stamp-duty-vic.html">VIC Stamp Duty</a><a href="stamp-duty-qld.html">QLD Stamp Duty</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="stamp-duty.html">Stamp Duty, All States</a><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="lmi.html">LMI Calculator</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a></nav>
     </section>
     <!-- content:end -->
   </main>

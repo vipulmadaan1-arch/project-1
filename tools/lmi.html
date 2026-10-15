@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -26,6 +27,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/lmi.js">
   <link rel="modulepreload" href="../js/pages/lmi.js">
@@ -51,7 +53,7 @@
           <select id="mode"><option value="deposit">Deposit</option><option value="loan">Loan amount</option></select></div>
         <div class="field"><label for="amount" id="amount-label">Deposit ($)</label><input type="text" id="amount" class="num" value="70000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
         <label class="check"><input type="checkbox" id="home" checked> I'll live in it (my home)</label>
-        <label class="check"><input type="checkbox" id="fhb" checked> First home buyer</label>
+        <label class="check"><input type="checkbox" id="fhb"> First home buyer</label>
       </form>
       <section class="card readout" aria-labelledby="total-label">
         <h2 class="readout-label" id="total-label">Estimated LMI, including duty</h2>
@@ -68,6 +70,7 @@
     <section class="card chart-card" aria-labelledby="deposits-title"><h2 class="section-title" id="deposits-title">LMI at different deposits</h2>
       <div class="table-scroll" tabindex="0" role="region" aria-label="LMI at different deposits table"><table><thead><tr><th scope="col">Deposit</th><th scope="col">LVR</th><th scope="col">Loan</th><th scope="col">LMI incl. duty</th></tr></thead><tbody id="rows"></tbody></table></div></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. LMI premiums are an estimate from one lender's published table; duty on LMI checked against each state revenue office; scheme price caps from <a href="https://firsthomebuyers.gov.au/australian-government-5-percent-deposit-scheme/property-price-caps" target="_blank" rel="noopener noreferrer">Housing Australia</a>.</p>

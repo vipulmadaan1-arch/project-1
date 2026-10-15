@@ -43,14 +43,36 @@ export function stackedColumns(host, data) {
   host._chart = data;
   if (!host._observed) {
     host._observed = true;
-    let last = 0;
-    new ResizeObserver(() => { const w = host.clientWidth; if (w && w !== last) { last = w; render(host); } }).observe(host);
+    // The observer reports the width, so drawing never has to measure the page (a forced layout).
+    new ResizeObserver(([entry]) => {
+      const w = Math.round(entry.contentRect.width);
+      if (w && w !== host._width) { host._width = w; drawSoon(host); }
+    }).observe(host);
   }
-  render(host);
+  drawSoon(host);
+}
+
+// Typing changes the data on every keystroke; the chart is drawn at most once per frame, with the latest data.
+function drawSoon(host) {
+  if (host._frame) return;
+  host._frame = requestAnimationFrame(() => { host._frame = 0; render(host); });
+}
+
+// Runs a job on the next animation frame; calling again before then replaces the job, and null cancels it.
+// Pages use it for work that can trail the headline figure by a frame, like a year-by-year table.
+export function perFrame() {
+  let job = null;
+  let frame = 0;
+  return (fn) => {
+    job = fn;
+    if (!fn) { cancelAnimationFrame(frame); frame = 0; return; }
+    if (!frame) frame = requestAnimationFrame(() => { frame = 0; const f = job; job = null; f?.(); });
+  };
 }
 
 function render(host) {
   const { labels, series, format, title, prefix = '' } = host._chart;
+  const width = host._width ?? host.clientWidth; // measured before the old chart is removed
   host.replaceChildren();
   const n = labels.length;
   if (!n) return;
@@ -65,7 +87,7 @@ function render(host) {
     legend.append(li);
   });
 
-  const W = Math.max(280, host.clientWidth || 600), H = 220;
+  const W = Math.max(280, width || 600), H = 220;
   const m = { l: 52, r: 8, t: 10, b: 24 };
   const pw = W - m.l - m.r, ph = H - m.t - m.b;
   const { top, step } = niceScale(Math.max(...totals));

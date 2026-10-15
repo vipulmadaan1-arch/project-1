@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -29,6 +30,7 @@
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/rentbuy.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/rent-vs-buy.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rent vs Buy Calculator (Australia)", "description": "Compare your wealth after buying a home or renting and investing the difference, with stamp duty for every state, loan costs, growth and a break-even year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is it better to rent or buy in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $112,914 after 10 years. At 4% growth the gap is only $3,115, and at 3% growth renting and investing is ahead by $97,391."}}, {"@type": "Question", "name": "How long until buying beats renting?", "acceptedAnswer": {"@type": "Answer", "text": "In the example it takes 5 years: by year 4 the renter is still ahead, but from year 5 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind."}}, {"@type": "Question", "name": "Does being a first home buyer change the answer?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $166,719 after 10 years and from year 2."}}, {"@type": "Question", "name": "Does the calculator include tax?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $622,036 after 10 years in the example, and at 0% (pre-tax) $674,213, which shrinks buying's lead to $60,736."}}, {"@type": "Question", "name": "What investment return should I use?", "acceptedAnswer": {"@type": "Answer", "text": "It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $188,995 ahead after 10 years instead of $112,914. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest."}}]}]</script>
@@ -91,6 +93,7 @@
     <section class="card" aria-labelledby="table-title"><h2 class="section-title" id="table-title">Net wealth year by year</h2>
       <div class="table-scroll is-long" tabindex="0" role="region" aria-label="Net wealth year by year table"><table><thead><tr><th>Year</th><th>Home value</th><th>Loan left</th><th>Buy: net wealth</th><th>Rent: net wealth</th><th>Buying ahead by</th></tr></thead><tbody id="rows"></tbody></table></div></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Stamp duty uses each state revenue office's rates; every other figure is an assumption you can change.</p>

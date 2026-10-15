@@ -1,8 +1,11 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, nextStep } from '../layout.js';
 import { mortgage, mortgageSchedule } from '../calc.js';
-import { stackedColumns } from '../chart.js';
+import { stackedColumns, perFrame } from '../chart.js';
 
 const $ = (id) => document.getElementById(id);
+const next = nextStep();
+// The headline figures update as you type; the year-by-year schedule, chart and table follow a frame later.
+const later = perFrame();
 function update() {
   const freq = $('freq').value;
   $('freq-label').textContent = `${freq[0].toUpperCase()}${freq.slice(1)} repayment`;
@@ -11,22 +14,27 @@ function update() {
   const years = readNumber($('years'), { name: 'Loan term', unit: 'years', min: 1, max: 40, example: '30' });
   if ([principal, ratePct, years].includes(null)) {
     $('chart').closest('.chart-card').hidden = true; // no empty chart shell while a field needs fixing
+    next(null);
+    later(null);
     return blank($('repayment'), $('interest'), $('total'));
   }
   const r = mortgage({ principal, ratePct, years, frequency: freq });
   $('repayment').textContent = fmtMoney(r.repayment, 2);
   $('interest').textContent = fmtMoney(r.interest);
   $('total').textContent = fmtMoney(r.total);
+  next(principal > 0 ? { balance: principal, rate: ratePct, years } : null);
   $('chart').closest('.chart-card').hidden = false;
-  const rows = mortgageSchedule({ principal, ratePct, years, frequency: freq });
-  stackedColumns($('chart'), {
-    title: 'Repayments each year, split into principal and interest',
-    labels: rows.map((y) => y.year),
-    prefix: 'Year ',
-    series: [{ name: 'Principal', values: rows.map((y) => y.principal) }, { name: 'Interest', values: rows.map((y) => y.interest) }],
-    format: (n) => fmtMoney(n),
+  later(() => {
+    const rows = mortgageSchedule({ principal, ratePct, years, frequency: freq });
+    stackedColumns($('chart'), {
+      title: 'Repayments each year, split into principal and interest',
+      labels: rows.map((y) => y.year),
+      prefix: 'Year ',
+      series: [{ name: 'Principal', values: rows.map((y) => y.principal) }, { name: 'Interest', values: rows.map((y) => y.interest) }],
+      format: (n) => fmtMoney(n),
+    });
+    $('rows').innerHTML = rows.map((y) => `<tr><td>${y.year}</td><td>${fmtMoney(y.principal)}</td><td>${fmtMoney(y.interest)}</td><td>${fmtMoney(y.balance)}</td></tr>`).join('');
   });
-  $('rows').innerHTML = rows.map((y) => `<tr><td>${y.year}</td><td>${fmtMoney(y.principal)}</td><td>${fmtMoney(y.interest)}</td><td>${fmtMoney(y.balance)}</td></tr>`).join('');
 }
 wireForm($('form'), update);
 syncFormWithUrl($('form'), update);

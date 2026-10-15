@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/borrowing-power.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Borrowing Power Calculator", "description": "Estimate how much you could borrow for a home loan in Australia from your income, expenses and debts, tested at APRA's 3 percentage point buffer.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much can I borrow on $100,000?", "acceptedAnswer": {"@type": "Answer", "text": "On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6% loan over 30 years tested at 9% gives about $491,000. Repayments at 6% would be about $2,948 a month, and the loan would be 4.9 times income."}}, {"@type": "Question", "name": "How much does a credit card limit reduce borrowing power?", "acceptedAnswer": {"@type": "Answer", "text": "In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $444,000, around $47,000 less."}}, {"@type": "Question", "name": "What is the APRA serviceability buffer?", "acceptedAnswer": {"@type": "Answer", "text": "Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000."}}, {"@type": "Question", "name": "How much can a couple borrow?", "acceptedAnswer": {"@type": "Answer", "text": "Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4."}}, {"@type": "Question", "name": "Does rental income count?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000."}}]}]</script>
@@ -68,10 +70,12 @@
         <div class="kv"><span>Left over for a home loan</span><span id="surplus">–</span></div>
         <div class="kv"><span>Debt-to-income ratio</span><span id="dti">–</span></div>
         <p class="note" id="note"></p>
+        <p class="next-step"><a href="upfront-costs.html"><span>Next: cash needed to buy with this loan and a 10% deposit</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
         <p class="disclaimer"><strong>Estimate only: each lender works this out differently, and most will lend less than this.</strong> Banks use their own minimum living expenses (the Household Expenditure Measure, which isn't published), their own rates for rental income and credit cards, and may count other costs. Uses 2026-27 tax rates and APRA's 3 percentage point buffer and debt-to-income limits, checked against <a href="https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain" target="_blank" rel="noopener noreferrer">APRA</a> on 15 Oct 2026. The 80% rental and 3.8% credit card rates are typical lender practice, not official figures. Not financial advice: talk to a lender or licensed mortgage broker.</p>
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain" target="_blank" rel="noopener noreferrer">APRA's serviceability buffer</a>.</p>
@@ -82,7 +86,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>How much can I borrow on $100,000?</summary><p>On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6% loan over 30 years tested at 9% gives about $491,000. Repayments at 6% would be about $2,948 a month, and the loan would be 4.9 times income.</p></details><details><summary>How much does a credit card limit reduce borrowing power?</summary><p>In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $444,000, around $47,000 less.</p></details><details><summary>What is the APRA serviceability buffer?</summary><p>Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000.</p></details><details><summary>How much can a couple borrow?</summary><p>Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4.</p></details><details><summary>Does rental income count?</summary><p>Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="lmi.html">LMI Calculator</a><a href="rent-vs-buy.html">Rent vs Buy</a><a href="mortgage.html">Mortgage Repayments</a></nav>
     </section>
     <!-- content:end -->
   </main>

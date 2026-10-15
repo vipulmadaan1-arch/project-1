@@ -1,9 +1,10 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, nextStep } from '../layout.js';
 import { borrowingPower, APRA_BUFFER, DTI_LIMIT } from '../borrowing.js';
 
 const $ = (id) => document.getElementById(id);
 const show = (id, on) => { $(id).hidden = !on; };
 const OUT = ['total', 'repay', 'assess', 'net', 'spend', 'debts', 'surplus', 'dti'];
+const next = nextStep();
 const rate = (n) => `${Number(n.toFixed(2)).toLocaleString('en-AU')}%`;
 
 function update() {
@@ -25,7 +26,7 @@ function update() {
     rate: readNumber($('rate'), { name: 'Interest rate', unit: 'percent', min: 0, max: 30, example: '6' }),
     years: readNumber($('years'), { name: 'Loan term', unit: 'years', min: 1, max: 40, whole: true, example: '30' }),
   };
-  if (Object.values(v).includes(null)) { $('note').textContent = ''; return blank(...OUT.map($)); }
+  if (Object.values(v).includes(null)) { $('note').textContent = ''; next(null); return blank(...OUT.map($)); }
 
   const applicants = [{ income: v.income1, help: $('help1').checked }];
   if (two) applicants.push({ income: v.income2, help: $('help2').checked });
@@ -34,7 +35,12 @@ function update() {
     otherRepayments: v.repayments, otherDebt: v.owing, ratePct: v.rate, years: v.years,
   });
 
-  $('total').textContent = fmtMoney(Math.floor(r.maxLoan / 1000) * 1000);
+  const maxLoan = Math.floor(r.maxLoan / 1000) * 1000;
+  $('total').textContent = fmtMoney(maxLoan);
+  // Cash needed to buy with this loan: the price is the loan plus a 10% deposit (the deposit is
+  // 10% of the price, as in the upfront costs calculator's own example).
+  const price = Math.round(maxLoan / 0.9 / 1000) * 1000;
+  next(maxLoan > 0 ? { price, deposit: price - maxLoan } : null);
   $('repay-label').textContent = `Monthly repayment at ${rate(v.rate)}`;
   $('repay').textContent = fmtMoney(r.repayment);
   $('assess-label').textContent = `Repayment the bank tests, at ${rate(r.assessRate)}`;

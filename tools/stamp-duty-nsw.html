@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -27,6 +28,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/stamp-duty-nsw.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "NSW Stamp Duty Calculator 2026-27 and First Home Buyers", "description": "Calculate NSW stamp duty at 2026-27 Revenue NSW rates, with the first home buyer exemption to $800,000, the concession to $1 million and the foreign surcharge.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do first home buyers pay stamp duty in NSW?", "acceptedAnswer": {"@type": "Answer", "text": "Eligible first home buyers pay no transfer duty on a new or existing home valued at $800,000 or less, and get a reduced rate on homes valued under $1 million. Vacant land is exempt up to $350,000 with concessions under $450,000. Eligibility rules apply, including living in the home for 12 months."}}, {"@type": "Question", "name": "How is the first home buyer concession worked out?", "acceptedAnswer": {"@type": "Answer", "text": "Between $800,000 and $1 million the discount shrinks evenly: full duty minus duty-on-$800,000 × ($1,000,000 − price) ÷ $200,000. On an $850,000 home that saves about $22,640. This formula comes from independent calculators, so confirm the figure with Revenue NSW."}}, {"@type": "Question", "name": "What is the foreign purchaser surcharge?", "acceptedAnswer": {"@type": "Answer", "text": "Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."}}, {"@type": "Question", "name": "When do the rates change?", "acceptedAnswer": {"@type": "Answer", "text": "NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."}}, {"@type": "Question", "name": "Is this the exact amount I'll pay?", "acceptedAnswer": {"@type": "Answer", "text": "It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed."}}]}]</script>
@@ -51,10 +53,12 @@
         <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
         <div class="kv"><span>Foreign purchaser surcharge (9%)</span><span id="surcharge">–</span></div>
         <p class="note" id="note"></p>
+        <p class="next-step"><a href="upfront-costs.html"><span>Next: all the cash you need to buy, with this duty</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
         <p class="disclaimer">Rates: Revenue NSW 2026-27 (contracts dated from 1 July 2026). Estimate only — exemptions and concessions depend on eligibility. The first home buyer concession uses a formula from independent sources, not from Revenue NSW. Confirm with <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a> or your conveyancer. <a href="https://www.apps09.revenue.nsw.gov.au/erevenue/calculators/fhba.php" target="_blank" rel="noopener noreferrer">First home buyer concession calculator</a>.</p>
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a>.</p>
@@ -73,7 +77,7 @@
       <h2>Frequently asked questions</h2>
       <details><summary>Do first home buyers pay stamp duty in NSW?</summary><p>Eligible first home buyers pay no transfer duty on a new or existing home valued at $800,000 or less, and get a reduced rate on homes valued under $1 million. Vacant land is exempt up to $350,000 with concessions under $450,000. Eligibility rules apply, including living in the home for 12 months.</p></details><details><summary>How is the first home buyer concession worked out?</summary><p>Between $800,000 and $1 million the discount shrinks evenly: full duty minus duty-on-$800,000 × ($1,000,000 − price) ÷ $200,000. On an $850,000 home that saves about $22,640. This formula comes from independent calculators, so confirm the figure with Revenue NSW.</p></details><details><summary>What is the foreign purchaser surcharge?</summary><p>Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies.</p></details><details><summary>When do the rates change?</summary><p>NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date.</p></details><details><summary>Is this the exact amount I'll pay?</summary><p>It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed.</p></details>
       <h2>Related tools</h2>
-      <nav class="related" aria-label="Related tools"><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-vic.html">VIC Stamp Duty</a><a href="stamp-duty-qld.html">QLD Stamp Duty</a><a href="borrowing-power.html">Borrowing Power</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="stamp-duty.html">Stamp Duty, All States</a><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="lmi.html">LMI Calculator</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a></nav>
     </section>
     <!-- content:end -->
   </main>

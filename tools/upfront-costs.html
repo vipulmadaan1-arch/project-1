@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -28,6 +29,7 @@
   <link rel="modulepreload" href="../js/duty.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/lmi.js">
   <link rel="modulepreload" href="../js/upfront.js">
@@ -73,12 +75,14 @@
         <div class="kv"><span id="loan-label">Loan amount</span><span id="loan">–</span></div>
         <div class="kv"><span>Loan to value ratio (LVR)</span><span id="lvr">–</span></div>
         <p class="note" id="note"></p>
+        <p class="next-step"><a href="mortgage.html"><span>Next: repayments on this loan</span><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
         <p class="disclaimer">Estimate only. Stamp duty and registration fees are 2026-27 government rates checked 15 Oct 2026 (<a id="duty-source" href="#" target="_blank" rel="noopener noreferrer">revenue office</a>, <a id="rego-source" href="#" target="_blank" rel="noopener noreferrer">land titles office</a>). <span id="estimate-note"></span>LMI is an estimate from one lender's published premium table; professional costs are typical amounts, not quotes. Not financial advice.</p>
       </section>
     </div>
     <section class="card chart-card" aria-labelledby="breakdown-title"><h2 class="section-title" id="breakdown-title">Breakdown of your upfront cash</h2>
       <div class="table-scroll" tabindex="0" role="region" aria-label="Breakdown of your upfront cash table"><table><thead><tr><th scope="col">Item</th><th scope="col">Amount</th><th scope="col">Source</th></tr></thead><tbody id="rows"></tbody></table></div></section>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against each state's revenue office and land titles office 2026-27 fee schedules.</p>

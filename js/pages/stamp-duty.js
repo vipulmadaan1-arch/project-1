@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setEnabled } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setEnabled, nextStep } from '../layout.js';
 import { stampDuty } from '../duty.js';
 
 const $ = (id) => document.getElementById(id);
@@ -7,6 +7,7 @@ const $ = (id) => document.getElementById(id);
 const fixedState = $('form').dataset.state;
 // The new home box only matters in some states, so a state page can leave it out.
 const newHome = $('newhome');
+const next = nextStep();
 const HOME_ONLY = "Only for a home you'll live in. Tick “I'll live in it” to use this.";
 function update() {
   const home = $('home').checked;
@@ -21,7 +22,7 @@ function update() {
   const r = value === null ? null : stampDuty({
     state: fixedState || $('state').value, value, home, firstHome: $('fhb').checked, newHome: !!newHome?.checked, foreign: $('foreign').checked,
   });
-  if (!r) { $('note').textContent = ''; $('estimate-note').textContent = ''; return blank($('total'), $('duty'), $('saving'), $('surcharge')); }
+  if (!r) { $('note').textContent = ''; $('estimate-note').textContent = ''; next(null); return blank($('total'), $('duty'), $('saving'), $('surcharge')); }
   $('total-label').textContent = `Total duty payable, ${r.state.code}`;
   const dp = (n) => (Math.round(n * 100) % 100 ? 2 : 0); // SA duty can have cents
   $('total').textContent = fmtMoney(r.total, dp(r.total));
@@ -31,6 +32,8 @@ function update() {
   $('surcharge').textContent = fmtMoney(r.surcharge);
   $('note').textContent = [r.note, r.foreignNote].filter(Boolean).join(' ');
   $('estimate-note').textContent = r.estimate ? 'Part of this result uses a formula from independent calculators, not the revenue office. ' : '';
+  // Foreign buyers are left out: the upfront costs calculator has no surcharge.
+  next(value > 0 && !$('foreign').checked ? { state: r.state.code, price: value, home, fhb: $('fhb').checked, newhome: !!newHome?.checked } : null);
   const src = $('source');
   src.href = r.state.source;
   src.textContent = r.state.office;

@@ -23,9 +23,13 @@ export const COUNTS = [
   { value: 17727700, kind: 'roo', text: 'kangaroos in Queensland’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
 ];
 
-const n0 = (n) => Math.round(n).toLocaleString('en-AU');
-const n1 = (n) => (n < 10 ? n.toLocaleString('en-AU', { maximumFractionDigits: 1 }) : n0(n));
-const money = (n) => n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 });
+// Formatters made once: the card redraws on every keystroke.
+const F0 = new Intl.NumberFormat('en-AU', { maximumFractionDigits: 0 });
+const F1 = new Intl.NumberFormat('en-AU', { maximumFractionDigits: 1 });
+const FMONEY = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 });
+const n0 = (n) => F0.format(Math.round(n));
+const n1 = (n) => (n < 10 ? F1.format(n) : n0(n));
+const money = (n) => FMONEY.format(n);
 const unit = (n, one, many = `${one}s`) => (Math.round(n * 10) / 10 === 1 ? one : many);
 
 // Up to four analogies, each a number and what it counts, chosen so the number reads sensibly.
@@ -95,12 +99,20 @@ const line = (name) => `<svg class="icon" width="22" height="22" viewBox="0 0 24
 const est = '<abbr class="aus-est" title="estimate">est.</abbr>';
 const tag = (key) => (BENCH[key].status === 'estimated' ? est : '');
 
-// A row of up to 40 silhouettes. Each one stands for a tenth of the benchmark, so ten filled icons = the whole
-// benchmark; the last icon is partly filled for the remainder.
+// What one pictogram icon stands for: about a tenth of the benchmark, rounded to 1, 2 or 5 × a power of ten
+// (the nearest on a log scale), so the key reads "Each icon is 10,000 people", not 10,002.
+export function iconUnit(value) {
+  const raw = value / 10;
+  const p = 10 ** Math.floor(Math.log10(raw));
+  return [1, 2, 5, 10].map((m) => m * p).reduce((best, x) => (Math.abs(Math.log(x / raw)) < Math.abs(Math.log(best / raw)) ? x : best));
+}
+
+// A row of up to 40 silhouettes. Outlines count out the benchmark and filled icons count out your amount,
+// each icon being iconUnit() of them; the last filled icon is partly filled for the remainder.
 function pictogram(c) {
-  const per = c.value / 10;
-  const filled = Math.min(c.ratio * 10, 40);
-  const shown = Math.max(10, Math.ceil(filled));
+  const per = iconUnit(c.value);
+  const filled = Math.min((c.ratio * c.value) / per, 40);
+  const shown = Math.min(40, Math.max(Math.round(c.value / per), Math.ceil(filled)));
   let icons = '';
   for (let i = 0; i < shown; i++) {
     const f = Math.max(0, Math.min(1, filled - i));
@@ -108,11 +120,15 @@ function pictogram(c) {
   }
   const what = { roo: 'kangaroos', koala: 'koalas', beach: 'beaches', people: 'people' }[c.kind];
   return `<div class="aus-pics" aria-hidden="true">${icons}</div>
-    <p class="aus-pic-key"><span class="aus-pic-swatch"></span>Each icon is ${n0(per)} ${what}.${c.ratio * 10 > 40 ? ` Showing the first 40 of ${n0(c.ratio * 10)}.` : ''}</p>`;
+    <p class="aus-pic-key"><span class="aus-pic-swatch"></span>Each icon is ${n0(per)} ${what}.${(c.ratio * c.value) / per > 40 ? ` Showing the first 40 of ${n0((c.ratio * c.value) / per)}.` : ''}</p>`;
 }
 
+// Below $50 the yardsticks are all fractions, and past $10 billion they stop meaning anything.
+export const MIN_AMOUNT = 50;
+export const MAX_AMOUNT = 1e10;
+
 function render(card, amount, what) {
-  const list = analogies(amount);
+  const list = Math.abs(amount) >= MIN_AMOUNT && Math.abs(amount) <= MAX_AMOUNT ? analogies(amount) : [];
   if (!list.length) { card.hidden = true; return; }
   card.hidden = false;
   const count = countComparison(amount);
@@ -135,7 +151,10 @@ export function mountAussieTerms() {
   // A page can mark the figure to translate with data-aussie; otherwise it's the headline result.
   const out = document.querySelector('[data-aussie]') || document.querySelector('.readout .result-big');
   const cols = document.querySelector('.cols');
-  if (!out || !cols) return;
+  // scripts/content.py writes an empty .aus-slot (with its height held in CSS) on the pages that get the
+  // card, so drawing it doesn't push the explainer down. Pages without a slot (the GST tool) don't get one.
+  const slot = document.querySelector('.aus-slot');
+  if (!out || !cols || !slot) return;
   const card = document.createElement('section');
   card.className = 'card aus-card';
   card.setAttribute('aria-labelledby', 'aus-title');
@@ -143,14 +162,21 @@ export function mountAussieTerms() {
   card.innerHTML = `
     <h2 class="section-title" id="aus-title">In Aussie terms: <span class="aus-amount"></span><span class="aus-what"></span> is about</h2>
     <ul class="aus-tiles"></ul>
-    <div class="aus-grid">
-      <div class="aus-count"></div>
-      <div><h3 class="aus-sub">How it stacks up</h3><ul class="aus-bars"></ul></div>
-    </div>
+    <details class="aus-more"><summary>More comparisons</summary>
+      <div class="aus-grid">
+        <div class="aus-count"></div>
+        <div><h3 class="aus-sub">How it stacks up</h3><ul class="aus-bars"></ul></div>
+      </div>
+    </details>
     <p class="aus-key">${est} marks an industry figure rather than an official statistic.</p>
     <details class="aus-sources"><summary>Where these numbers come from</summary><ul>${SOURCES()}</ul><p>“est.” marks industry figures rather than official statistics.</p></details>`;
-  // Below the chart if there is one, so drawing this card doesn't push the chart down.
-  (document.querySelector('.chart-card') || cols).after(card);
+  // Phones show just the tiles, with the pictogram and bars a tap away; wider screens show everything
+  // (style.css hides the summary there).
+  const wide = matchMedia('(min-width: 641px)');
+  const more = card.querySelector('.aus-more');
+  more.open = wide.matches;
+  wide.addEventListener('change', () => { more.open = wide.matches; });
+  slot.append(card);
   const read = () => {
     const t = out.textContent.trim();
     const m = t.match(/^(−|-)?\$([\d,]+(?:\.\d+)?)/);

@@ -11,7 +11,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v46';
+const VERSION = 'v47';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
@@ -57,6 +57,7 @@ const FILES = [
   'js/cpi-data.js',
   'js/chart.js',
   'js/aussie.js',
+  'js/format.js',
   'tools/car-stamp-duty.html',
   'js/pages/car-stamp-duty.js',
   'js/motor-duty.js',
@@ -146,8 +147,9 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(Promise.all([
     caches.keys().then((keys) => Promise.all(keys.filter((k) => k.startsWith('sortedmate-') && k !== CACHE).map((k) => caches.delete(k)))),
-    // Start page requests while the worker boots, rather than after.
-    self.registration.navigationPreload?.enable(),
+    // Navigation preload stays off: pages are served from the cache first, so a preloaded response would
+    // be a wasted request on every page open. (Turned off explicitly, since older versions turned it on.)
+    self.registration.navigationPreload?.disable(),
   ]).then(() => self.clients.claim()));
 });
 
@@ -165,10 +167,7 @@ async function respond(e, url) {
   // Cache by path only: an address with ?... or #... (a results link) never stores its figures.
   const key = url.origin + url.pathname;
   const cached = await caches.open(CACHE).then((c) => c.match(key));
-  if (cached) {
-    if (e.request.mode === 'navigate' && e.preloadResponse) e.waitUntil(e.preloadResponse.catch(() => {}));
-    return cached;
-  }
+  if (cached) return cached;
   const network = fromNetwork(e, key);
   e.waitUntil(network.then(() => {}, () => {}));
   const slow = new Promise((resolve) => { setTimeout(resolve, NETWORK_TIMEOUT_MS); });
@@ -191,7 +190,7 @@ async function respond(e, url) {
 }
 
 async function fromNetwork(e, key) {
-  const res = (e.request.mode === 'navigate' && await e.preloadResponse) || await fetch(e.request);
+  const res = await fetch(e.request);
   // Only keep complete, successful, same-origin responses: never errors, redirects or opaque bodies.
   if (res.status === 200 && res.type === 'basic' && !res.redirected) {
     const copy = res.clone();

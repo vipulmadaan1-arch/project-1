@@ -29,3 +29,12 @@ test('comparison bars include your result and three benchmarks', () => {
   assert.equal(c.length, 4);
   assert.equal(c.filter((b) => b.you).length, 1);
 });
+
+test('pictogram icons stand for a round number', async () => {
+  const { iconUnit } = await import('../js/aussie.js');
+  assert.equal(iconUnit(100024), 10000); // a sold-out MCG: "Each icon is 10,000 people", not 10,002
+  assert.equal(iconUnit(274000), 20000);
+  assert.equal(iconUnit(580700), 50000);
+  assert.equal(iconUnit(9634900), 1000000);
+  for (const c of COUNTS) assert.match(String(iconUnit(c.value)), /^[125]0*$/);
+});

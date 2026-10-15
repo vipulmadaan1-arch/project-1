@@ -17,6 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="preload" href="../fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
   <link rel="manifest" href="../manifest.webmanifest">
@@ -27,6 +28,7 @@
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/rental-yield.js">
   <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Yield Calculator", "description": "Calculate gross and net rental yield for an Australian investment property from price, weekly rent, vacancy and annual costs.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What costs should I include?", "acceptedAnswer": {"@type": "Answer", "text": "Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."}}, {"@type": "Question", "name": "Does this include mortgage repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately."}}, {"@type": "Question", "name": "What's a good rental yield?", "acceptedAnswer": {"@type": "Answer", "text": "About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule."}}]}]</script>
@@ -55,6 +57,7 @@
       </section>
     </div>
     <!-- content:start -->
+    <div class="aus-slot"></div>
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. The costs to include follow <a href="https://moneysmart.gov.au/property-investment/buying-an-investment-property" target="_blank" rel="noopener noreferrer">Moneysmart's guide to buying an investment property</a>.</p>

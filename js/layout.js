@@ -3,6 +3,7 @@ import { SITE_NAME, BMC_URL } from './config.js';
 import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
 import { icon } from './icons.js';
 import { mountAds } from './ads.js';
+import { fmtMoney, parseNumber, checkNumber, moneyFieldText } from './format.js';
 
 // Hide all coffee links until a real Buy Me a Coffee handle is set in config.js.
 // It must be a plain https:// link, so a typo can't put a javascript: link in the page.
@@ -114,11 +115,64 @@ if (readout) {
     };
     new MutationObserver(check).observe(big, { childList: true, characterData: true, subtree: true });
     document.querySelector('form')?.addEventListener('focusout', () => setTimeout(check));
+    miniResult(readout, big);
   }
 }
-// Money tools get an "In Aussie terms" card comparing the result with familiar Australian yardsticks.
-// Loaded on demand, so pages without a dollar result don't download it.
-if (tool && tool.cat !== 'general') import('./aussie.js').then((m) => m.mountAussieTerms()).catch(() => {});
+
+// Phones: the results panel sits below the form, so while you fill the form in, a slim bar fixed to the
+// bottom of the screen repeats the headline result ("Total cash needed $113,765"). Tapping it goes to
+// the full results. It shows only while the panel is further down the page and there's a result, and
+// it's a plain button: screen readers already hear results from the page's status region, so the bar
+// adds nothing to announce.
+function miniResult(panel, big) {
+  const phone = matchMedia('(max-width: 820px)');
+  const label = panel.querySelector('.readout-label') || panel.querySelector('h2');
+  const bar = document.createElement('button');
+  bar.type = 'button';
+  bar.className = 'mini-result';
+  bar.hidden = true;
+  bar.innerHTML = `<span class="mini-result-label"></span> <span class="mini-result-value"></span><span class="visually-hidden">, go to results</span>${icon('arrow', { className: 'icon mini-result-go' })}`;
+  document.body.append(bar);
+  let below = false; // the panel is below the visible part of the page
+  const sync = () => {
+    const value = big.textContent.trim();
+    bar.querySelector('.mini-result-label').textContent = label?.textContent.trim() || 'Result';
+    bar.querySelector('.mini-result-value').textContent = value;
+    const show = phone.matches && below && value !== '' && value !== '–';
+    bar.hidden = !show;
+    root.classList.toggle('has-mini-result', show);
+  };
+  new IntersectionObserver(([e]) => { below = !e.isIntersecting && e.boundingClientRect.top > 0; sync(); }).observe(panel);
+  const watch = new MutationObserver(sync);
+  watch.observe(big, { childList: true, characterData: true, subtree: true });
+  if (label) watch.observe(label, { childList: true, characterData: true, subtree: true });
+  phone.addEventListener('change', sync);
+  bar.addEventListener('click', () => {
+    const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    panel.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+    // Move focus too, so keyboard and screen reader users carry on from the results.
+    panel.tabIndex = -1;
+    panel.focus({ preventScroll: true });
+  });
+}
+
+// "Next step" link at the foot of a results panel (<p class="next-step"> in the page, so its space is held
+// from the first paint), to the tool you'd usually use next, opened with this result filled in through
+// the #field=value link format that syncFormWithUrl reads. Without JavaScript it's a plain link.
+// Returns set(params): call it after each update with the target page's field ids and values, or with
+// null to hide the link while there's no result to carry over.
+export function nextStep() {
+  const a = document.querySelector('.readout .next-step a');
+  if (!a) return () => {};
+  const page = a.getAttribute('href').split('#')[0];
+  return (params) => {
+    a.parentElement.hidden = !params;
+    if (params) a.href = `${page}#${new URLSearchParams(Object.entries(params).map(([k, v]) => [k, typeof v === 'boolean' ? (v ? '1' : '0') : String(v)]))}`;
+  };
+}
+// Money tools get an "In Aussie terms" card comparing the result with familiar Australian yardsticks, in the
+// space scripts/content.py leaves for it. Loaded on demand, so pages without a dollar result don't download it.
+if (document.querySelector('.aus-slot')) import('./aussie.js').then((m) => m.mountAussieTerms()).catch(() => {});
 const head = document.querySelector('.tool-head');
 if (tool && head) {
   head.insertAdjacentHTML('afterbegin', `<div class="ico">${icon(tool.slug)}</div><span class="tag">${tool.meta}</span>`);
@@ -200,34 +254,8 @@ export function shortcutAllowed(e, scope) {
 
 export { safeGet, safeSet };
 
-// Money for display. Shows "–" rather than NaN, avoids "-$0", and switches very large
-// figures to scientific notation so they don't run off a phone screen.
-export const fmtMoney = (n, dp = 0) => {
-  if (!Number.isFinite(n)) return '–';
-  if (Math.abs(n) >= 1e15) return n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', notation: 'scientific', maximumFractionDigits: 2 });
-  const v = Math.abs(n) < 0.5 / 10 ** dp ? 0 : n;
-  return v.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: dp, maximumFractionDigits: dp });
-};
-
-// ---------- Number fields ----------
-// Number fields are text inputs with inputmode="decimal" rather than type="number"
-// (the GOV.UK Design System advises against type="number"), so people can type or paste
-// "$750,000", "6.5%" or "1 000". Returns null when empty and NaN when it isn't a number.
-export function parseNumber(value) {
-  const s = String(value ?? '').trim().replace(/^A(UD)?(?=\$)/i, '').replace(/[\s,$%]/g, '').replace(/^\u2212/, '-');
-  if (s === '') return null;
-  return /^[-+]?(\d+\.?\d*|\.\d+)(e[-+]?\d+)?$/i.test(s) ? parseFloat(s) : NaN;
-}
+export { fmtMoney, parseNumber } from './format.js';
 export const num = (el) => { const n = parseNumber(el.value); return Number.isFinite(n) ? n : 0; };
-
-const UNIT_FMT = {
-  money: (n) => fmtMoney(n),
-  percent: (n) => `${n.toLocaleString('en-AU')}%`,
-  years: (n) => `${n.toLocaleString('en-AU')} year${n === 1 ? '' : 's'}`,
-  weeks: (n) => `${n.toLocaleString('en-AU')} week${n === 1 ? '' : 's'}`,
-  days: (n) => n.toLocaleString('en-AU'),
-  plain: (n) => n.toLocaleString('en-AU'),
-};
 
 // Shows or clears the error message for a field, linked with aria-describedby.
 export function setError(el, msg) {
@@ -254,41 +282,20 @@ export function setError(el, msg) {
 }
 
 // Reads and checks a number field. Returns the number, or null when it can't be used
-// (and shows an error that says what's wrong and how to fix it).
-// opts: name ("Loan amount"), unit (money, percent, years, weeks, days, plain), min, max,
-// above (must be more than), optional (empty counts as 0), whole (whole numbers only), example,
-// enter (message for an empty field).
-export function readNumber(el, { name, unit = 'plain', min, max, above, optional = false, whole = false, example, enter } = {}) {
-  const n = parseNumber(el.value);
-  const f = UNIT_FMT[unit];
-  const lower = name[0].toLowerCase() + name.slice(1);
-  let msg = '';
-  let quiet = false; // empty fields are only flagged once you've left them, not while you retype
-  if (n === null) {
-    if (optional) { setError(el, ''); return 0; }
-    msg = enter || `Enter the ${lower}`;
-    quiet = !el.dataset.touched || document.activeElement === el;
-  } else if (Number.isNaN(n)) {
-    msg = `${name} must be a number, like ${example ?? (unit === 'money' ? '750,000' : '5')}`;
-  } else if (whole && !Number.isInteger(n)) {
-    msg = `${name} must be a whole number`;
-  } else if ((min !== undefined && n < min) || (max !== undefined && n > max) || (above !== undefined && n <= above)) {
-    const lo = above !== undefined ? above : min;
-    // A short range reads best as "between"; for money, "$0 or more" is clearer than "between $0 and $1 trillion".
-    if (lo !== undefined && max !== undefined && above === undefined && unit !== 'money') msg = `${name} must be between ${unit === 'years' || unit === 'weeks' ? lo.toLocaleString('en-AU') : f(lo)} and ${f(max)}`;
-    else if (above !== undefined && n <= above) msg = `${name} must be more than ${f(above)}`;
-    else if (min !== undefined && n < min) msg = `${name} must be ${f(min)} or more`;
-    else msg = `${name} must be ${f(max)} or less`;
-  }
+// (and shows an error that says what's wrong and how to fix it). Options as for checkNumber in format.js.
+export function readNumber(el, opts) {
+  const { n, msg = '', empty } = checkNumber(el.value, opts);
+  // Empty fields are only flagged once you've left them, not while you retype.
+  const quiet = empty && (!el.dataset.touched || document.activeElement === el);
   setError(el, quiet ? '' : msg);
-  return msg ? null : n;
+  return n;
 }
 
 // Puts thousands separators back into money fields (when you leave the field, and on load).
 export function formatMoneyFields(form) {
   for (const el of form.querySelectorAll('input[data-money]')) {
-    const n = parseNumber(el.value);
-    if (Number.isFinite(n) && n >= 0 && n < 1e15) el.value = n.toLocaleString('en-AU', { maximumFractionDigits: 2 });
+    const text = moneyFieldText(el.value);
+    if (text !== null) el.value = text;
   }
 }
 

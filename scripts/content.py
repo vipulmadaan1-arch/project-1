@@ -132,7 +132,7 @@ C = {
       ("What is the APRA serviceability buffer?","Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000."),
       ("How much can a couple borrow?","Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4."),
       ("Does rental income count?","Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000.")],
- related=['mortgage','stamp-duty','stamp-duty-nsw','take-home-pay']),
+ related=['upfront-costs','stamp-duty','lmi','rent-vs-buy','mortgage']),
 'car-stamp-duty': dict(
  how="""<p>Every state and territory charges <strong>motor vehicle duty</strong> (often called car stamp duty) when you register a new car or transfer a used one into your name. It's worked out on the car's <strong>dutiable value</strong>: usually the higher of the price and the market value, including GST and luxury car tax. Most states round the value up to the next $100 (Victoria to the next $200) before applying the rate.</p>
 <table><thead><tr><th>State</th><th>Passenger car rate</th></tr></thead><tbody>
@@ -163,7 +163,7 @@ C = {
       ("How do I find my unused carry-forward cap?","Log in to myGov, open the ATO, then Super, Information, and Carry forward concessional contributions. You can only use it if your total super balance was under $500,000 on 30 June of the previous year. Unused amounts expire after 5 years."),
       ("What happens if I go over the cap?","The excess is added to your taxable income and taxed at your marginal rate, with a 15% offset for the tax your fund already paid. The ATO writes to you with options for paying it."),
       ("What is Division 293 tax?","An extra 15% on concessional contributions for people whose income plus contributions is over $250,000. It applies to the smaller of your contributions or the amount over $250,000. The ATO bills you separately, and you can pay it from your super.")],
- related=['take-home-pay','medicare-levy-surcharge','gross-up','compound-interest']),
+ related=['retirement','take-home-pay','medicare-levy-surcharge','gross-up']),
 'medicare-levy-surcharge': dict(
  how="""<p>The <strong>Medicare levy surcharge</strong> (MLS) is an extra 1% to 1.5% of income. You pay it on top of the 2% Medicare levy if you, your spouse and your dependent children don't have appropriate private hospital cover and your income is over the threshold.</p>
 <table><thead><tr><th>2026-27</th><th>Singles</th><th>Families</th><th>Rate</th></tr></thead><tbody>
@@ -199,7 +199,7 @@ C = {
       ("How much should I pay to clear my card in 2 years?","About $254 a month clears a $5,000 balance at 20% p.a. in 2 years, with about $1,107 in interest. For your own card, choose to work out the repayment to clear it by a set time and enter 24 months. Your statement also shows how much to pay each month to clear the balance in 3 years."),
       ("Is a balance transfer worth it?","It can be, if you clear the balance before the low-rate period ends and avoid new spending. Watch for transfer fees and the revert rate. Enter the revert rate here to see what happens to anything left over."),
       ("What if I can't afford the minimum repayment?","Contact your card provider about hardship options as soon as you can: lenders must consider you for help. Moneysmart explains how <a href=\"https://moneysmart.gov.au/managing-debt/financial-hardship\" target=\"_blank\" rel=\"noopener noreferrer\">financial hardship arrangements</a> work. You can also call the free National Debt Helpline on 1800 007 007.")],
- related=['personal-loan','savings-goal','borrowing-power','hecs-help']),
+ related=['balance-transfer','personal-loan','budget','savings-goal']),
 'savings-goal': dict(
  how="""<p>Enter your goal, what you've already saved and your interest rate. Then either enter how much you can save each week, fortnight or month to see how long it will take, or pick a date to see how much to put away each time.</p>
 <p>Like Moneysmart's savings goals calculator, it assumes you deposit at the start of each period, reinvest the interest and keep the same rate. Interest compounds daily, monthly, quarterly or yearly as you choose. It ignores tax on interest, account fees and inflation, so allow a little extra if your goal is a long way off.</p>""",
@@ -208,7 +208,7 @@ C = {
       ("Is interest on savings taxed in Australia?","Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed."),
       ("Does compounding frequency make much difference?","Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more."),
       ("What about saving for a home deposit?","Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan.")],
- related=['inflation','compound-interest','offset','credit-card']),
+ related=['term-deposit','compound-interest','inflation','offset']),
 'work-deductions': dict(
  how="""<p><strong>Working from home:</strong> the ATO's fixed rate method lets you claim a set amount for every hour you work from home: 70c an hour for 2024-25 and 2025-26. The rate covers home and mobile internet and data, phone use, electricity and gas for heating, cooling and lighting, and stationery and computer consumables, so you can't claim those separately. You can still claim depreciation on work equipment and furniture such as a desk, chair or computer. You need a record of the actual hours you worked from home (a timesheet, roster or diary kept at the time) and at least one bill for each expense the rate covers. The actual cost method isn't covered here.</p>
 <p><strong>Car:</strong> the cents per kilometre method pays a set rate for every work-related kilometre, up to 5,000 km per car: 88c for 2024-25 and 2025-26, and 91c for 2026-27. The rate covers all running costs, including fuel, rego, insurance, servicing and depreciation. If you drive more than 5,000 km for work, the logbook method (total car costs × business-use percentage from a 12-week logbook) may give a bigger claim. Driving between home and your usual workplace usually doesn't count.</p>
@@ -257,7 +257,7 @@ C = {
       ("What is the foreign purchaser surcharge?","Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."),
       ("When do the rates change?","NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."),
       ("Is this the exact amount I'll pay?","It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed.")],
- related=['stamp-duty','stamp-duty-vic','stamp-duty-qld','borrowing-power']),
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 # State stamp duty pages. Every figure comes from stampDuty() in js/duty.js (rates checked 15 Oct 2026
 # against each revenue office, linked in each entry); tests/duty.test.mjs checks the worked examples.
 'stamp-duty-vic': dict(
@@ -279,7 +279,7 @@ C = {
       ("How much does the principal place of residence concession save?","Up to $3,100, on homes valued from $440,000 to $550,000. A $500,000 home you'll live in costs $21,970 instead of $25,070. Above $550,000 there's no PPR concession, so a $600,000 home costs $31,070 whether you live in it or not."),
       ("How much is the foreign purchaser surcharge in Victoria?","8% of the dutiable value, on top of normal duty: $56,000 on a $700,000 home, for a total of $93,070. It's worked out on the full value before any concession, and a foreign buyer on their own can't get first home buyer relief."),
       ("How much is stamp duty on a $1 million home in Victoria?","$55,000. From $960,001 to $2,000,000 Victoria charges 5.5% of the whole value, not just the part over a threshold, and no home or first home concession applies at this price.")],
- related=['stamp-duty','stamp-duty-nsw','stamp-duty-qld','stamp-duty-wa','borrowing-power','mortgage']),
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'stamp-duty-qld': dict(
  how="""<p>Queensland transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the Queensland Revenue Office rates for 2026-27. There are two scales: the general rate, and a lower home concession rate for a home you'll live in.</p>
 <table><thead><tr><th>Dutiable value</th><th>General rate</th></tr></thead><tbody>
@@ -305,7 +305,7 @@ C = {
       ("Does a new home make a difference for first home buyers?","Yes: $0 on a new $1 million first home, against $30,850 for an established one at the home concession rate. The new home concession has no price cap; the established home concession ends at $800,000."),
       ("How much does the Queensland home concession save?","$7,175 on any home valued at $350,000 or more. A $1 million home you'll live in costs $30,850 instead of $38,025."),
       ("How much is the foreign buyer surcharge in Queensland?","8% of the dutiable value: $56,000 on a $700,000 home. From 1 August 2026 foreign buyers also can't get the home concession unless they are a specified foreign retiree (visa 405 or 410), so a foreign buyer's total on a $700,000 home is $80,525.")],
- related=['stamp-duty','stamp-duty-nsw','stamp-duty-vic','stamp-duty-wa','borrowing-power','mortgage']),
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'stamp-duty-wa': dict(
  how="""<p>Western Australian transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the RevenueWA rates for 2026-27.</p>
 <table><thead><tr><th>Dutiable value</th><th>Duty (general rate)</th></tr></thead><tbody>
@@ -325,7 +325,7 @@ C = {
       ("Is there a stamp duty discount for owner-occupiers in WA?","Only on homes valued at $200,000 or less, through the concessional rate: a $150,000 home costs $3,012 instead of $3,135. Above $200,000 there's no owner-occupier discount unless you're a first home buyer."),
       ("How much is the foreign buyer surcharge in WA?","7% of the dutiable value, on top of normal duty: $49,000 on a $700,000 home, for a total of $76,265. A foreign buyer on their own can't use the first home owner rate."),
       ("How much is stamp duty on a $1 million home in WA?","$42,616: $28,453 plus $5.15 per $100 over $725,000. No home or first home concession applies at this price.")],
- related=['stamp-duty','stamp-duty-nsw','stamp-duty-vic','stamp-duty-qld','borrowing-power','mortgage']),
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'take-home-pay': dict(
  how="""<p>Your take-home pay, or salary after tax, is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026, and the new <strong>$1,000 standard deduction</strong> for work-related expenses that the ATO applies automatically from 2026-27.</p>
 <table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
@@ -350,7 +350,7 @@ C = {
       ("What's the difference between salary and package?","A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."),
       ("Why is my payslip slightly different?","Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."),
       ("Is there a cap on super?","Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies.")],
- related=['gross-up','super','hecs-help','work-deductions']),
+ related=['tax-refund','budget','gross-up','super','hecs-help']),
 'mortgage': dict(
  how="""<p>Repayments on a principal and interest loan are calculated with the standard amortisation formula: each repayment covers that period's interest and pays down some principal. Early on, most of each repayment is interest.</p>
 <h3>Monthly repayments over 30 years</h3>
@@ -368,7 +368,7 @@ C = {
       ("Does this include fees or LMI?","No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."),
       ("What about interest-only loans?","Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans."),
       ("How much will I save with an offset account?","About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href=\"offset.html\">offset account calculator</a> for your own balance.")],
- related=['borrowing-power','stamp-duty','offset','rental-cashflow']),
+ related=['refinance','upfront-costs','lmi','offset','borrowing-power']),
 'offset': dict(
  how="""<p>On a $600,000 loan at 6% over 30 years, keeping $50,000 in offset saves <strong>$202,175</strong> in interest and finishes the loan <strong>4 years 8 months</strong> sooner. $100,000 in offset saves <strong>$338,658</strong> and <strong>7 years 10 months</strong>. Both assume the balance stays the same and you keep paying $3,597 a month.</p>
 <p>An offset account is a transaction account linked to your home loan. Its balance is subtracted from your loan balance before interest is calculated, so $50,000 in offset on a $600,000 loan means you're charged interest on $550,000.</p>
@@ -391,7 +391,7 @@ C = {
  faq=[("Does compounding frequency matter much?","A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."),
       ("Does this include tax?","No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."),
       ("Can I use this for investments?","Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.")],
- related=['savings-goal','inflation','super','offset']),
+ related=['term-deposit','savings-goal','inflation','super']),
 'gst': dict(
  how="""<p>Australia's GST rate is 10%.</p>
 <ul><li><strong>Add GST:</strong> price × 1.1. $100 + GST = $110.</li>
@@ -469,7 +469,7 @@ C = {
       ("Can foreign buyers get first home buyer relief?","Not on their own, except in the ACT. NSW, Victoria, Queensland, South Australia, WA and Tasmania need at least one buyer to be an Australian citizen or permanent resident (New Zealand citizens on a special category visa usually count too). If you buy with one, the surcharge applies only to the foreign buyer's share, so check the exact figure with your state's revenue office."),
       ("Are any figures estimates?","Yes. Victoria's and NSW's first home buyer tapers use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one. NT rates above $3 million (5.75%, and 5.95% from $5 million) come from NT Treasury's 2024-25 Budget Paper 2."),
       ("Does this cover commercial property or vacant land?","No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.")],
- related=['stamp-duty-nsw','stamp-duty-vic','stamp-duty-qld','stamp-duty-wa','borrowing-power','mortgage','car-stamp-duty']),
+ related=['upfront-costs','lmi','borrowing-power','mortgage','car-stamp-duty']),
 'unit-converter': dict(
  how="""<p>Convert between metric and imperial units for length, mass, volume, area, speed and temperature. Australia uses metric, but you'll still meet feet, pounds and Fahrenheit in recipes, specs and overseas listings.</p>
 <p>Australian real estate sometimes quotes house size in <strong>squares</strong>: one square is 100 square feet, or about 9.29 m².</p>""",
@@ -565,6 +565,11 @@ def trust_line(slug):
 # (theme + page script loader). Its hash is in the policy; npm test checks they match.
 BOOT = "try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/\"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))"
 
+# Space for the "In Aussie terms" card (js/aussie.js), held in CSS until the card is drawn, so it doesn't push
+# the explainer down (layout shift). Money tools only, except GST, whose result is a price, not a sum to picture.
+AUS_SLOT = '<div class="aus-slot"></div>\n    '
+NO_AUSSIE = {'gst'}
+
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 
 # Same wording as the footer in js/layout.js, shortened: shown once in each money tool's explainer
@@ -597,7 +602,7 @@ for slug, c in C.items():
     rel = ''.join(f'<a href="{r}.html">{names[r]}</a>' for r in c['related'])
     block = f'''
     <!-- content:start -->
-    <section class="content">
+    {AUS_SLOT if cats.get(slug) != 'general' and slug not in NO_AUSSIE else ''}<section class="content">
       <h2>How it works</h2>
       {trust_line(slug)}{scroll_tables(c['how'])}
       {DISCLAIMER if cats.get(slug) != 'general' else ''}
