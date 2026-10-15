@@ -38,6 +38,9 @@ const P = {
 };
 
 P['stamp-duty'] = P['stamp-duty-nsw'];
+P['stamp-duty-vic'] = P['stamp-duty-nsw'];
+P['stamp-duty-qld'] = P['stamp-duty-nsw'];
+P['stamp-duty-wa'] = P['stamp-duty-nsw'];
 
 export function icon(name, { size = 24, className = 'icon' } = {}) {
   const body = P[name];

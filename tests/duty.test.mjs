@@ -100,3 +100,20 @@ test('NT house and land package exemption for any home buyer', () => {
   assert.equal(d('NT', 900000, { home: true }).duty, d('NT', 900000).duty);
   assert.equal(d('NT', 900000, { newHome: true }).duty, d('NT', 900000).duty); // must live in it
 });
+
+test('state page worked examples and FAQ figures match the calculator', async () => {
+  const { readFileSync } = await import('node:fs');
+  const fmt = (n) => `$${n.toLocaleString('en-AU')}`;
+  const pages = {
+    VIC: [d('VIC', 700000).duty, d('VIC', 700000, { home: true, firstHome: true }).duty, d('VIC', 500000, { home: true }).duty, d('VIC', 700000, { foreign: true }).total, d('VIC', 1000000).duty],
+    QLD: [d('QLD', 700000, { home: true }).duty, d('QLD', 700000).duty, d('QLD', 750000, { home: true, firstHome: true }).duty, d('QLD', 700000, { home: true, foreign: true }).total, d('QLD', 1000000, { home: true }).duty],
+    WA: [d('WA', 700000).duty, d('WA', 700000, { home: true, firstHome: true }).duty, d('WA', 650000, { home: true, firstHome: true }).duty, d('WA', 700000, { foreign: true }).total, d('WA', 1000000).duty],
+  };
+  for (const [code, figures] of Object.entries(pages)) {
+    const html = readFileSync(`tools/stamp-duty-${code.toLowerCase()}.html`, 'utf8');
+    assert.match(html, new RegExp(`<form class="card" id="form" data-state="${code}">`));
+    for (const n of figures) assert.ok(html.includes(fmt(n)), `${code} figure ${fmt(n)} missing from tools/stamp-duty-${code.toLowerCase()}.html`);
+  }
+  assert.equal(d('QLD', 700000, { home: true, firstHome: true }).duty, 0);
+  assert.equal(d('QLD', 1000000, { home: true, firstHome: true, newHome: true }).duty, 0);
+});

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/stamp-duty.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QLD Stamp Duty Calculator 2026-27 + First Home Buyer | Sorted, Mate</title>
+  <meta name="description" content="Queensland transfer duty at 2026-27 QRO rates, with the home concession, first home relief (no duty on new homes at any price) and the 8% foreign surcharge.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QLD Stamp Duty Calculator 2026-27 + First Home Buyer">
+  <meta property="og:description" content="Queensland transfer duty at 2026-27 QRO rates, with the home concession, first home relief (no duty on new homes at any price) and the 8% foreign surcharge.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/duty.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/stamp-duty.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "QLD Stamp Duty Calculator 2026-27 and First Home Buyers", "description": "Queensland transfer duty at 2026-27 QRO rates, with the home concession, first home relief (no duty on new homes at any price) and the 8% foreign surcharge.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is stamp duty on a $700,000 home in Queensland?", "acceptedAnswer": {"@type": "Answer", "text": "$17,350 if you'll live in it (the home concession rate), or $24,525 for an investor. An eligible first home buyer pays $0, whether the home is new or established, and a foreign buyer pays $80,525 including the 8% surcharge."}}, {"@type": "Question", "name": "Do first home buyers pay stamp duty in Queensland?", "acceptedAnswer": {"@type": "Answer", "text": "$0 on a new home at any price. On an established home, $0 up to $700,000; then the first home concession shrinks, so a $750,000 home costs $10,925, and from $800,000 you pay the full home concession rate ($21,850 at $800,000)."}}, {"@type": "Question", "name": "Does a new home make a difference for first home buyers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes: $0 on a new $1 million first home, against $30,850 for an established one at the home concession rate. The new home concession has no price cap; the established home concession ends at $800,000."}}, {"@type": "Question", "name": "How much does the Queensland home concession save?", "acceptedAnswer": {"@type": "Answer", "text": "$7,175 on any home valued at $350,000 or more. A $1 million home you'll live in costs $30,850 instead of $38,025."}}, {"@type": "Question", "name": "How much is the foreign buyer surcharge in Queensland?", "acceptedAnswer": {"@type": "Answer", "text": "8% of the dutiable value: $56,000 on a $700,000 home. From 1 August 2026 foreign buyers also can't get the home concession unless they are a specified foreign retiree (visa 405 or 410), so a foreign buyer's total on a $700,000 home is $80,525."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">QLD Stamp Duty</span></nav>
+    <div class="tool-head">
+      <h1>QLD Stamp Duty Calculator 2026-27 and First Home Buyers</h1>
+      <p>Transfer duty on Queensland property at the 2026-27 Queensland Revenue Office rates, including the home concession and first home concessions.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form" data-state="QLD">
+        <div class="field"><label for="value">Property value ($)</label><input type="text" id="value" class="num" aria-describedby="value-hint" value="700000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="value-hint">Dutiable value is the higher of the price and market value.</small></div>
+        <label class="check"><input type="checkbox" id="home" checked aria-describedby="home-hint"> I'll live in it (my home)</label>
+        <small id="home-hint" class="hint">Home concession rate for a home you will live in.</small>
+        <label class="check"><input type="checkbox" id="fhb"> First home buyer</label>
+        <label class="check"><input type="checkbox" id="newhome" aria-describedby="newhome-hint"> New home (never lived in)</label>
+        <small id="newhome-hint" class="hint">First home buyers pay no duty on a new home, at any price. On an established home the first home concession ends at $800,000.</small>
+        <label class="check"><input type="checkbox" id="foreign"> Foreign purchaser</label>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Total duty payable, QLD</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
+        <div class="kv"><span>Saving from concessions</span><span id="saving">–</span></div>
+        <div class="kv"><span id="surcharge-label">Foreign purchaser surcharge</span><span id="surcharge">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Residential purchases only. <span id="estimate-note"></span>Estimate only: exemptions and concessions depend on eligibility. Rates checked against <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a> on 15 Oct 2026. Confirm with your conveyancer.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>.</p>
+<p>Queensland transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the Queensland Revenue Office rates for 2026-27. There are two scales: the general rate, and a lower home concession rate for a home you'll live in.</p>
+<table><thead><tr><th>Dutiable value</th><th>General rate</th></tr></thead><tbody>
+<tr><td>$0 – $5,000</td><td>Nil</td></tr>
+<tr><td>$5,001 – $75,000</td><td>$1.50 per $100 over $5,000</td></tr>
+<tr><td>$75,001 – $540,000</td><td>$1,050 + $3.50 per $100 over $75,000</td></tr>
+<tr><td>$540,001 – $1,000,000</td><td>$17,325 + $4.50 per $100 over $540,000</td></tr>
+<tr><td>Over $1,000,000</td><td>$38,025 + $5.75 per $100 over $1,000,000</td></tr>
+</tbody></table>
+<table><thead><tr><th>Dutiable value</th><th>Home concession rate</th></tr></thead><tbody>
+<tr><td>$0 – $350,000</td><td>$1 per $100</td></tr>
+<tr><td>$350,001 – $540,000</td><td>$3,500 + $3.50 per $100 over $350,000</td></tr>
+<tr><td>$540,001 – $1,000,000</td><td>$10,150 + $4.50 per $100 over $540,000</td></tr>
+<tr><td>Over $1,000,000</td><td>$30,850 + $5.75 per $100 over $1,000,000</td></tr>
+</tbody></table>
+<p><strong>Home concession:</strong> on any home valued at $350,000 or more it saves $7,175. From 1 August 2026 foreign buyers can't get it unless they are a specified foreign retiree (visa 405 or 410).</p>
+<p><strong>First home buyers:</strong> a <strong>new home</strong> pays no duty, with no price cap (contracts from 1 May 2025). On an <strong>established home</strong> you pay the home concession rate less the first home concession: $17,350 off for homes under $710,000, then $1,735 less for each full $10,000 over $700,000, ending at $800,000. So there's no duty on an established first home up to $700,000, and $10,925 on a $750,000 home ($19,600 home rate less $8,675). At least one buyer must be an Australian citizen or permanent resident.</p>
+<p><strong>Foreign purchasers</strong> pay an extra 8% of the dutiable value on top of duty. If you buy with an Australian citizen or permanent resident, it applies only to the foreign buyer's share.</p>
+<p><strong>Worked example:</strong> a $700,000 home you'll live in: $10,150 + $4.50 × 1,600 (the $100s over $540,000) = <strong>$17,350</strong>. An investor pays $17,325 + $7,200 = $24,525. An eligible first home buyer pays $0, and a foreign buyer pays $24,525 + $56,000 surcharge = $80,525.</p>
+<p>Confirm rates and eligibility with the <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>. Buying in another state? Use the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much is stamp duty on a $700,000 home in Queensland?</summary><p>$17,350 if you'll live in it (the home concession rate), or $24,525 for an investor. An eligible first home buyer pays $0, whether the home is new or established, and a foreign buyer pays $80,525 including the 8% surcharge.</p></details><details><summary>Do first home buyers pay stamp duty in Queensland?</summary><p>$0 on a new home at any price. On an established home, $0 up to $700,000; then the first home concession shrinks, so a $750,000 home costs $10,925, and from $800,000 you pay the full home concession rate ($21,850 at $800,000).</p></details><details><summary>Does a new home make a difference for first home buyers?</summary><p>Yes: $0 on a new $1 million first home, against $30,850 for an established one at the home concession rate. The new home concession has no price cap; the established home concession ends at $800,000.</p></details><details><summary>How much does the Queensland home concession save?</summary><p>$7,175 on any home valued at $350,000 or more. A $1 million home you'll live in costs $30,850 instead of $38,025.</p></details><details><summary>How much is the foreign buyer surcharge in Queensland?</summary><p>8% of the dutiable value: $56,000 on a $700,000 home. From 1 August 2026 foreign buyers also can't get the home concession unless they are a specified foreign retiree (visa 405 or 410), so a foreign buyer's total on a $700,000 home is $80,525.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="stamp-duty-vic.html">VIC Stamp Duty</a><a href="stamp-duty-wa.html">WA Stamp Duty</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

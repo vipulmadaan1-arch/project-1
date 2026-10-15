@@ -11,7 +11,9 @@ const listed = [...sw.match(/FILES = \[([\s\S]*?)\];/)[1].matchAll(/'([^']+)'/g)
 test('every tool in the registry has a page and a script', () => {
   for (const t of TOOLS) {
     assert.ok(existsSync(`tools/${t.slug}.html`), `missing tools/${t.slug}.html`);
-    assert.ok(existsSync(`js/pages/${t.slug}.js`), `missing js/pages/${t.slug}.js`);
+    // Usually js/pages/<slug>.js, but pages can share one (the state stamp duty pages use stamp-duty.js).
+    const mod = readFileSync(`tools/${t.slug}.html`, 'utf8').match(/<script data-module="\.\.\/(js\/pages\/[^"]+)">/)?.[1];
+    assert.ok(mod && existsSync(mod), `tools/${t.slug}.html loads a missing page script ${mod}`);
   }
 });
 

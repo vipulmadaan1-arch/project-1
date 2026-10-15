@@ -162,7 +162,75 @@ C = {
       ("What is the foreign purchaser surcharge?","Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."),
       ("When do the rates change?","NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."),
       ("Is this the exact amount I'll pay?","It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed.")],
- related=['stamp-duty','mortgage','borrowing-power','rental-yield']),
+ related=['stamp-duty','stamp-duty-vic','stamp-duty-qld','borrowing-power']),
+# State stamp duty pages. Every figure comes from stampDuty() in js/duty.js (rates checked 15 Oct 2026
+# against each revenue office, linked in each entry); tests/duty.test.mjs checks the worked examples.
+'stamp-duty-vic': dict(
+ how="""<p>Victorian land transfer duty (stamp duty) is charged on the property's <strong>dutiable value</strong>: the higher of the price you pay and the market value. This calculator uses the State Revenue Office Victoria rates for 2026-27.</p>
+<table><thead><tr><th>Dutiable value</th><th>Duty (general rate)</th></tr></thead><tbody>
+<tr><td>$0 – $25,000</td><td>1.4% of the value</td></tr>
+<tr><td>$25,001 – $130,000</td><td>$350 + 2.4% of the value over $25,000</td></tr>
+<tr><td>$130,001 – $960,000</td><td>$2,870 + 6% of the value over $130,000</td></tr>
+<tr><td>$960,001 – $2,000,000</td><td>5.5% of the whole value</td></tr>
+<tr><td>Over $2,000,000</td><td>$110,000 + 6.5% of the value over $2,000,000</td></tr>
+</tbody></table>
+<p><strong>Principal place of residence (PPR) rate:</strong> if you'll live in the home and it's valued at $550,000 or less, the band from $130,001 to $440,000 is charged at 5% instead of 6%, and from $440,001 to $550,000 duty is $18,370 + 6% of the value over $440,000. That saves up to $3,100: a $500,000 home costs $21,970 instead of $25,070. Above $550,000 the general rate applies.</p>
+<p><strong>First home buyers:</strong> no duty on a home valued at $600,000 or less. From $600,001 to $750,000 the concession tapers, from no duty at $600,000 to full duty at $750,000. <strong>The taper is an estimate:</strong> the formula used here (full duty × (value − $600,000) ÷ $150,000) comes from independent calculators, not the SRO, so confirm the figure with the SRO or your conveyancer. At least one buyer must be an Australian citizen or permanent resident.</p>
+<p><strong>Foreign purchasers</strong> pay an extra 8% of the dutiable value on top of duty, worked out on the full value before any concession. If you buy with an Australian citizen or permanent resident, it applies only to the foreign buyer's share.</p>
+<p><strong>Worked example:</strong> a $700,000 home: $2,870 + ($700,000 − $130,000) × 6% = <strong>$37,070</strong>. The PPR rate doesn't apply at this price. An eligible first home buyer pays about $24,713 (estimate), and a foreign buyer pays $37,070 + $56,000 surcharge = $93,070.</p>
+<p>Confirm rates and eligibility with the <a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Victoria</a>. Buying in another state? Use the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $700,000 home in Victoria?","$37,070 at the general rate: $2,870 plus 6% of the value over $130,000. The principal place of residence rate stops at $550,000, so it doesn't help here. An eligible first home buyer pays about $24,713 (an estimate, as the SRO doesn't publish the taper formula), and a foreign buyer pays $93,070 including the 8% surcharge."),
+      ("Do first home buyers pay stamp duty in Victoria?","$0 on a home valued at $600,000 or less. Between $600,001 and $750,000 the concession tapers: about $11,356 on a $650,000 home and $24,713 on $700,000, against $34,070 and $37,070 at full rates. From $750,000 you pay full duty ($40,070 at $750,000). The taper figures are estimates from a formula used by independent calculators, not published by the SRO."),
+      ("How much does the principal place of residence concession save?","Up to $3,100, on homes valued from $440,000 to $550,000. A $500,000 home you'll live in costs $21,970 instead of $25,070. Above $550,000 there's no PPR concession, so a $600,000 home costs $31,070 whether you live in it or not."),
+      ("How much is the foreign purchaser surcharge in Victoria?","8% of the dutiable value, on top of normal duty: $56,000 on a $700,000 home, for a total of $93,070. It's worked out on the full value before any concession, and a foreign buyer on their own can't get first home buyer relief."),
+      ("How much is stamp duty on a $1 million home in Victoria?","$55,000. From $960,001 to $2,000,000 Victoria charges 5.5% of the whole value, not just the part over a threshold, and no home or first home concession applies at this price.")],
+ related=['stamp-duty','stamp-duty-nsw','stamp-duty-qld','stamp-duty-wa','borrowing-power','mortgage']),
+'stamp-duty-qld': dict(
+ how="""<p>Queensland transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the Queensland Revenue Office rates for 2026-27. There are two scales: the general rate, and a lower home concession rate for a home you'll live in.</p>
+<table><thead><tr><th>Dutiable value</th><th>General rate</th></tr></thead><tbody>
+<tr><td>$0 – $5,000</td><td>Nil</td></tr>
+<tr><td>$5,001 – $75,000</td><td>$1.50 per $100 over $5,000</td></tr>
+<tr><td>$75,001 – $540,000</td><td>$1,050 + $3.50 per $100 over $75,000</td></tr>
+<tr><td>$540,001 – $1,000,000</td><td>$17,325 + $4.50 per $100 over $540,000</td></tr>
+<tr><td>Over $1,000,000</td><td>$38,025 + $5.75 per $100 over $1,000,000</td></tr>
+</tbody></table>
+<table><thead><tr><th>Dutiable value</th><th>Home concession rate</th></tr></thead><tbody>
+<tr><td>$0 – $350,000</td><td>$1 per $100</td></tr>
+<tr><td>$350,001 – $540,000</td><td>$3,500 + $3.50 per $100 over $350,000</td></tr>
+<tr><td>$540,001 – $1,000,000</td><td>$10,150 + $4.50 per $100 over $540,000</td></tr>
+<tr><td>Over $1,000,000</td><td>$30,850 + $5.75 per $100 over $1,000,000</td></tr>
+</tbody></table>
+<p><strong>Home concession:</strong> on any home valued at $350,000 or more it saves $7,175. From 1 August 2026 foreign buyers can't get it unless they are a specified foreign retiree (visa 405 or 410).</p>
+<p><strong>First home buyers:</strong> a <strong>new home</strong> pays no duty, with no price cap (contracts from 1 May 2025). On an <strong>established home</strong> you pay the home concession rate less the first home concession: $17,350 off for homes under $710,000, then $1,735 less for each full $10,000 over $700,000, ending at $800,000. So there's no duty on an established first home up to $700,000, and $10,925 on a $750,000 home ($19,600 home rate less $8,675). At least one buyer must be an Australian citizen or permanent resident.</p>
+<p><strong>Foreign purchasers</strong> pay an extra 8% of the dutiable value on top of duty. If you buy with an Australian citizen or permanent resident, it applies only to the foreign buyer's share.</p>
+<p><strong>Worked example:</strong> a $700,000 home you'll live in: $10,150 + $4.50 × 1,600 (the $100s over $540,000) = <strong>$17,350</strong>. An investor pays $17,325 + $7,200 = $24,525. An eligible first home buyer pays $0, and a foreign buyer pays $24,525 + $56,000 surcharge = $80,525.</p>
+<p>Confirm rates and eligibility with the <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>. Buying in another state? Use the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $700,000 home in Queensland?","$17,350 if you'll live in it (the home concession rate), or $24,525 for an investor. An eligible first home buyer pays $0, whether the home is new or established, and a foreign buyer pays $80,525 including the 8% surcharge."),
+      ("Do first home buyers pay stamp duty in Queensland?","$0 on a new home at any price. On an established home, $0 up to $700,000; then the first home concession shrinks, so a $750,000 home costs $10,925, and from $800,000 you pay the full home concession rate ($21,850 at $800,000)."),
+      ("Does a new home make a difference for first home buyers?","Yes: $0 on a new $1 million first home, against $30,850 for an established one at the home concession rate. The new home concession has no price cap; the established home concession ends at $800,000."),
+      ("How much does the Queensland home concession save?","$7,175 on any home valued at $350,000 or more. A $1 million home you'll live in costs $30,850 instead of $38,025."),
+      ("How much is the foreign buyer surcharge in Queensland?","8% of the dutiable value: $56,000 on a $700,000 home. From 1 August 2026 foreign buyers also can't get the home concession unless they are a specified foreign retiree (visa 405 or 410), so a foreign buyer's total on a $700,000 home is $80,525.")],
+ related=['stamp-duty','stamp-duty-nsw','stamp-duty-vic','stamp-duty-wa','borrowing-power','mortgage']),
+'stamp-duty-wa': dict(
+ how="""<p>Western Australian transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the RevenueWA rates for 2026-27.</p>
+<table><thead><tr><th>Dutiable value</th><th>Duty (general rate)</th></tr></thead><tbody>
+<tr><td>$0 – $120,000</td><td>$1.90 per $100</td></tr>
+<tr><td>$120,001 – $150,000</td><td>$2,280 + $2.85 per $100 over $120,000</td></tr>
+<tr><td>$150,001 – $360,000</td><td>$3,135 + $3.80 per $100 over $150,000</td></tr>
+<tr><td>$360,001 – $725,000</td><td>$11,115 + $4.75 per $100 over $360,000</td></tr>
+<tr><td>Over $725,000</td><td>$28,453 + $5.15 per $100 over $725,000</td></tr>
+</tbody></table>
+<p><strong>Concessional home rate:</strong> for a home you'll live in valued at $200,000 or less: $1.50 per $100 up to $120,000, then $1,800 + $4.04 per $100 over $120,000. A $150,000 home costs $3,012 instead of $3,135. Above $200,000 the general rate applies.</p>
+<p><strong>First home buyers</strong> (the first home owner rate): no duty on a home valued at $600,000 or less, from 7 May 2026. From $600,001 to $800,000 duty is $16.15 per $100 over $600,000: $8,075 on a $650,000 home. Above $800,000 the general rate applies. At least one buyer must be an Australian citizen or permanent resident.</p>
+<p><strong>Foreign purchasers</strong> pay an extra 7% of the dutiable value on top of duty. If you buy with an Australian citizen or permanent resident, it applies only to the foreign buyer's share.</p>
+<p><strong>Worked example:</strong> a $700,000 home: $11,115 + $4.75 × 3,400 (the $100s over $360,000) = <strong>$27,265</strong>. An eligible first home buyer pays $16.15 × 1,000 = $16,150, and a foreign buyer pays $27,265 + $49,000 surcharge = $76,265.</p>
+<p>Confirm rates and eligibility with <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>. Buying in another state? Use the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $700,000 home in WA?","$27,265 at the general rate: $11,115 plus $4.75 per $100 over $360,000. WA's owner-occupier discount stops at $200,000, so living in it doesn't change this. An eligible first home buyer pays $16,150, and a foreign buyer pays $76,265 including the 7% surcharge."),
+      ("Do first home buyers pay stamp duty in WA?","$0 on a home valued at $600,000 or less, from 7 May 2026. From $600,001 to $800,000 the first home owner rate is $16.15 per $100 over $600,000: $8,075 on a $650,000 home and $16,150 on $700,000, against $24,890 and $27,265 at the general rate. Above $800,000 normal duty applies."),
+      ("Is there a stamp duty discount for owner-occupiers in WA?","Only on homes valued at $200,000 or less, through the concessional rate: a $150,000 home costs $3,012 instead of $3,135. Above $200,000 there's no owner-occupier discount unless you're a first home buyer."),
+      ("How much is the foreign buyer surcharge in WA?","7% of the dutiable value, on top of normal duty: $49,000 on a $700,000 home, for a total of $76,265. A foreign buyer on their own can't use the first home owner rate."),
+      ("How much is stamp duty on a $1 million home in WA?","$42,616: $28,453 plus $5.15 per $100 over $725,000. No home or first home concession applies at this price.")],
+ related=['stamp-duty','stamp-duty-nsw','stamp-duty-vic','stamp-duty-qld','borrowing-power','mortgage']),
 'take-home-pay': dict(
  how="""<p>Your take-home pay, or salary after tax, is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026, and the new <strong>$1,000 standard deduction</strong> for work-related expenses that the ATO applies automatically from 2026-27.</p>
 <table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
@@ -298,7 +366,7 @@ C = {
 <tr><td>ACT</td><td>No duty at any price under the Home Buyer Concession Scheme, if no buyer has owned property in 5 years</td><td>None</td></tr>
 <tr><td>NT</td><td>No first home concession. Any buyer of a new house and land package from a builder pays no duty (to 30 June 2027)</td><td>None</td></tr>
 </tbody></table>
-<p><strong>NSW first home buyers:</strong> the <a href="stamp-duty-nsw.html">NSW stamp duty calculator</a> shows the full exemption up to $800,000, the concession to $1 million and the rate table step by step.</p>
+<p><strong>Buying in NSW, Victoria, Queensland or WA?</strong> The <a href="stamp-duty-nsw.html">NSW</a>, <a href="stamp-duty-vic.html">Victoria</a>, <a href="stamp-duty-qld.html">Queensland</a> and <a href="stamp-duty-wa.html">WA</a> stamp duty calculators show that state's rate table, home and first home buyer rules and a worked example step by step.</p>
 <p>Rates and thresholds were checked against each state's revenue office on 15 October 2026: <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a>, <a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Victoria</a>, <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>, <a href="https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty" target="_blank" rel="noopener noreferrer">RevenueSA</a>, <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>, <a href="https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Tasmania</a>, <a href="https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property" target="_blank" rel="noopener noreferrer">ACT Revenue Office</a> and <a href="https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator" target="_blank" rel="noopener noreferrer">Territory Revenue Office</a>. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>
 <p><strong>Foreign buyers</strong> pay the surcharge on the full dutiable value, on top of duty and before any concession. First home relief needs at least one buyer who is an Australian citizen or permanent resident in every state except the ACT and NT, and from 1 August 2026 Queensland's home concession does too. With a joint purchase the surcharge applies only to the foreign buyer's share.</p>""",
  faq=[("Which state has the cheapest stamp duty?","On a $750,000 investment property the ACT is cheapest ($22,200) and Victoria the dearest ($40,070). In between are Queensland ($26,775), NSW ($27,937), Tasmania ($28,935), WA ($29,741), South Australia ($35,080) and the NT ($37,125). The order changes with price and buyer: first home buyers can pay nothing in several states, depending on price and whether the home is new."),
@@ -306,7 +374,7 @@ C = {
       ("Can foreign buyers get first home buyer relief?","Not on their own, except in the ACT. NSW, Victoria, Queensland, South Australia, WA and Tasmania need at least one buyer to be an Australian citizen or permanent resident (New Zealand citizens on a special category visa usually count too). If you buy with one, the surcharge applies only to the foreign buyer's share, so check the exact figure with your state's revenue office."),
       ("Are any figures estimates?","Yes. Victoria's and NSW's first home buyer tapers, and NT rates above $3 million, use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one."),
       ("Does this cover commercial property or vacant land?","No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.")],
- related=['stamp-duty-nsw','borrowing-power','mortgage','car-stamp-duty']),
+ related=['stamp-duty-nsw','stamp-duty-vic','stamp-duty-qld','stamp-duty-wa','borrowing-power','mortgage','car-stamp-duty']),
 'unit-converter': dict(
  how="""<p>Convert between metric and imperial units for length, mass, volume, area, speed and temperature. Australia uses metric, but you'll still meet feet, pounds and Fahrenheit in recipes, specs and overseas listings.</p>
 <p>Australian real estate sometimes quotes house size in <strong>squares</strong>: one square is 100 square feet, or about 9.29 m².</p>""",
@@ -368,6 +436,9 @@ TRUST = {
   'medicare-levy-surcharge': ('rates', ext('https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates', "the ATO's surcharge thresholds")),
   'stamp-duty': ('rates', "each state and territory revenue office (links below)"),
   'stamp-duty-nsw': ('rates', ext('https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty', 'Revenue NSW')),
+  'stamp-duty-vic': ('rates', ext('https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty', 'State Revenue Office Victoria')),
+  'stamp-duty-qld': ('rates', ext('https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/', 'Queensland Revenue Office')),
+  'stamp-duty-wa': ('rates', ext('https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment', 'RevenueWA')),
   'car-stamp-duty': ('rates', "each state's revenue office or transport department"),
   'rental-cashflow': ('rates', ext('https://www.legislation.gov.au/C2026A00049/asmade/text', 'the Treasury Laws Amendment (Tax Reform No. 1) Act 2026') + ' and the ATO tax rates'),
   'borrowing-power': ('rates', ext('https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain', "APRA's serviceability buffer")),
