@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/rental-cashflow.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rental Property Cashflow and Negative Gearing Calculator 2027 | Sorted, Mate</title>
+  <meta name="description" content="Work out an investment property's weekly cashflow before and after tax, and whether you can still negatively gear it under the limit that starts on 1 July 2027.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rental Property Cashflow and Negative Gearing Calculator 2027">
+  <meta property="og:description" content="Work out an investment property's weekly cashflow before and after tax, and whether you can still negatively gear it under the limit that starts on 1 July 2027.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/rental.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/rental-cashflow.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Property Cashflow and Negative Gearing", "description": "Work out an investment property's weekly cashflow before and after tax, and whether you can still negatively gear it under the limit that starts on 1 July 2027.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I still negatively gear an investment property?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you signed the contract before 7.30 pm (AEST) on 12 May 2026 or it's a new build. Otherwise, from 2027-28 a rental loss can't reduce tax on your salary. A $650 a week rental with a $600,000 interest-only loan at 6.2% and $120,000 of other income makes a $12,475 loss. If it was bought before Budget night, that saves $3,992 in tax and costs you about $163 a week. If it was bought after, it saves nothing and costs $240 a week."}}, {"@type": "Question", "name": "What happens to a loss I can't claim?", "acceptedAnswer": {"@type": "Answer", "text": "It's carried forward with no time limit. It reduces rental profit from your caught properties in later years and capital gains on residential property. For example, a $12,475 loss carried into a year when the property makes a $3,800 profit wipes out tax on that profit and leaves $8,675 to carry on. It never reduces tax on your salary."}}, {"@type": "Question", "name": "I'm buying in 2026-27. Am I affected this year?", "acceptedAnswer": {"@type": "Answer", "text": "No. The limit starts with the 2027-28 income year, so in 2026-27 the same $12,475 loss saves $3,992 even on a property bought after Budget night. It's caught from 1 July 2027."}}, {"@type": "Question", "name": "Does interest-only or principal and interest change the tax?", "acceptedAnswer": {"@type": "Answer", "text": "Only the interest is deductible. On a $600,000 loan at 6.2% over 30 years, principal and interest repayments in the first year include $37,001 of interest and $7,097 of principal. Cashflow is $133 a week worse than interest-only, but the tax loss is slightly smaller ($12,276 against $12,475)."}}, {"@type": "Question", "name": "How much does a new build save?", "acceptedAnswer": {"@type": "Answer", "text": "With the same rent and loan plus $8,000 of depreciation, a new build's $20,475 tax loss saves $6,552 for someone earning $120,000 in 2027-28. That brings the cost down to about $114 a week after tax. Check the final definition of a new build before relying on it."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Rental Cashflow and Negative Gearing</span></nav>
+    <div class="tool-head">
+      <h1>Rental Property Cashflow and Negative Gearing</h1>
+      <p>What an investment property costs you each week, before and after tax, and whether you can still claim the loss against your salary once the negative gearing limit starts on 1 July 2027.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="fy">Income year</label>
+          <select id="fy">
+            <option value="2026">2026-27 (1 July 2026 to 30 June 2027)</option>
+            <option value="2027" selected>2027-28 (first year of the limit)</option>
+            <option value="2028">2028-29</option>
+            <option value="2029">2029-30</option>
+          </select></div>
+        <h2 class="section-title">Rent</h2>
+        <div class="field"><label for="rent">Weekly rent ($)</label><input type="text" id="rent" class="num" value="650" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="vacancy">Weeks vacant a year</label><input type="text" id="vacancy" class="num" aria-describedby="vacancy-hint" value="2" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="vacancy-hint">Time between tenants with no rent coming in.</small></div>
+        <h2 class="section-title">Purchase and loan</h2>
+        <div class="field"><label for="price">Purchase price ($)</label><input type="text" id="price" class="num" value="750,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="acquired">Date you signed the contract to buy</label><input type="date" id="acquired" aria-describedby="acquired-hint" value="2026-09-01"><small id="acquired-hint">Established homes bought before 7.30 pm (AEST) on 12 May 2026 keep negative gearing. The contract date counts, not settlement.</small></div>
+        <label class="check" id="budget-time-wrap"><input type="checkbox" id="budget-time"> Signed before 7.30 pm (AEST) that day</label>
+        <label class="check"><input type="checkbox" id="newbuild" aria-describedby="newbuild-hint"> It's a new build</label>
+        <small id="newbuild-hint" class="hint">Built on vacant land, or replacing demolished housing with more homes, and you're the first buyer (or the builder held it and it was lived in for 12 months or less). The final definition hasn't been published yet.</small>
+        <div class="field"><label for="loan">Loan amount ($)</label><input type="text" id="loan" class="num" value="600,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% a year)</label><input type="text" id="rate" class="num" value="6.2" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="loan-type">Repayments</label>
+          <select id="loan-type">
+            <option value="io">Interest only</option>
+            <option value="pi">Principal and interest</option>
+          </select></div>
+        <div class="field" id="term-field"><label for="term">Loan term (years)</label><input type="text" id="term" class="num" aria-describedby="term-hint" value="30" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="term-hint">Shows the first year of the loan. Only the interest is tax deductible.</small></div>
+        <h2 class="section-title">Yearly costs</h2>
+        <div class="field"><label for="council">Council and water rates ($ a year)</label><input type="text" id="council" class="num" value="2,200" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="strata">Strata or body corporate ($ a year)</label><input type="text" id="strata" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="insurance">Landlord and building insurance ($ a year)</label><input type="text" id="insurance" class="num" value="1,800" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="pm">Property management fee (% of rent)</label><input type="text" id="pm" class="num" aria-describedby="pm-hint" value="7" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="pm-hint">Charged on the rent collected, including GST. Use 0 if you manage it yourself.</small></div>
+        <div class="field"><label for="maintenance">Repairs and maintenance ($ a year)</label><input type="text" id="maintenance" class="num" value="1,500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="land-tax">Land tax ($ a year)</label><input type="text" id="land-tax" class="num" aria-describedby="land-tax-hint" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="land-tax-hint">From your state revenue office assessment. Thresholds and rates differ by state.</small></div>
+        <div class="field"><label for="depreciation">Depreciation ($ a year, optional)</label><input type="text" id="depreciation" class="num" aria-describedby="depreciation-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="depreciation-hint">From a quantity surveyor's schedule. It's a tax deduction, not money you spend.</small></div>
+        <h2 class="section-title">Your tax</h2>
+        <div class="field"><label for="income">Your other taxable income ($ a year)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="120,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Salary and other income after deductions, without this property.</small></div>
+        <div class="field" id="carried-field"><label for="carried">Rental losses carried forward ($, optional)</label><input type="text" id="carried" class="num" aria-describedby="carried-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="carried-hint">Losses from earlier years that the limit stopped you claiming.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">After-tax cashflow per week</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>After tax, per year</span><span id="after-year">–</span></div>
+        <div class="kv"><span>Before tax, per week</span><span id="pre-week">–</span></div>
+        <div class="kv"><span>Before tax, per year</span><span id="pre-year">–</span></div>
+        <div class="kv"><span>Rent collected</span><span id="rent-out">–</span></div>
+        <div class="kv"><span>Loan interest</span><span id="interest">–</span></div>
+        <div class="kv" id="principal-row"><span>Loan principal (not deductible)</span><span id="principal">–</span></div>
+        <div class="kv"><span>Rates, insurance, fees and upkeep</span><span id="holding">–</span></div>
+        <div class="kv"><span id="net-label">Net rental loss for tax</span><span id="net">–</span></div>
+        <div class="kv"><span id="tax-label">Tax saved on your other income</span><span id="tax-effect">–</span></div>
+        <h2 class="section-title">Negative gearing limit</h2>
+        <div class="kv"><span>Does the limit apply?</span><span id="status">–</span></div>
+        <div class="kv" id="carried-row"><span>Loss carried forward to next year</span><span id="carried-out">–</span></div>
+        <div class="kv"><span id="cmp-label">If you could negatively gear</span><span id="cmp">–</span></div>
+        <div class="kv"><span>Gross rental yield</span><span id="yield">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate for one property owned by one individual, for a full year. Uses section 26-155 of the Income Tax Assessment Act 1997 (inserted by the <a href="https://www.legislation.gov.au/C2026A00049/asmade/text" target="_blank" rel="noopener noreferrer">Treasury Laws Amendment (Tax Reform No. 1) Act 2026</a>) and ATO resident tax rates, checked on 15 Oct 2026. The definition of a new build is still to be set by the Minister, so that part is our best reading of the Budget papers. Not tax advice: confirm with a registered tax agent.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Rental income is the rent you collect, less weeks the property sits empty. Your cash costs are the loan repayments plus rates, strata, insurance, property management, repairs and land tax. For tax, only the <strong>interest</strong> part of a loan is deductible, not principal, and depreciation is deductible even though you don't spend it each year.</p>
+<p>If deductions are more than the rent, you have a <strong>net rental loss</strong>. Until 30 June 2027 that loss reduces the tax on your salary and other income: this is negative gearing.</p>
+<p><strong>From the 2027-28 income year</strong>, section 26-155 of the Income Tax Assessment Act 1997 (added by the Treasury Laws Amendment (Tax Reform No. 1) Act 2026) limits it. Losses on residential property can only reduce residential rental income and capital gains on residential property. Anything left over is carried forward to later years. The limit is worked out across all your caught properties together.</p>
+<ul><li><strong>Bought before 7.30 pm (AEST) on 12 May 2026:</strong> not caught. The contract date counts, even if you settled later.</li>
+<li><strong>New builds:</strong> not caught. The exact definition is still to be set. The Budget papers say it covers homes built on vacant land, or replacing demolished housing with more homes, bought from new.</li>
+<li><strong>Shares and commercial property:</strong> not affected.</li></ul>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Can I still negatively gear an investment property?</summary><p>Yes, if you signed the contract before 7.30 pm (AEST) on 12 May 2026 or it's a new build. Otherwise, from 2027-28 a rental loss can't reduce tax on your salary. A $650 a week rental with a $600,000 interest-only loan at 6.2% and $120,000 of other income makes a $12,475 loss. If it was bought before Budget night, that saves $3,992 in tax and costs you about $163 a week. If it was bought after, it saves nothing and costs $240 a week.</p></details><details><summary>What happens to a loss I can't claim?</summary><p>It's carried forward with no time limit. It reduces rental profit from your caught properties in later years and capital gains on residential property. For example, a $12,475 loss carried into a year when the property makes a $3,800 profit wipes out tax on that profit and leaves $8,675 to carry on. It never reduces tax on your salary.</p></details><details><summary>I'm buying in 2026-27. Am I affected this year?</summary><p>No. The limit starts with the 2027-28 income year, so in 2026-27 the same $12,475 loss saves $3,992 even on a property bought after Budget night. It's caught from 1 July 2027.</p></details><details><summary>Does interest-only or principal and interest change the tax?</summary><p>Only the interest is deductible. On a $600,000 loan at 6.2% over 30 years, principal and interest repayments in the first year include $37,001 of interest and $7,097 of principal. Cashflow is $133 a week worse than interest-only, but the tax loss is slightly smaller ($12,276 against $12,475).</p></details><details><summary>How much does a new build save?</summary><p>With the same rent and loan plus $8,000 of depreciation, a new build's $20,475 tax loss saves $6,552 for someone earning $120,000 in 2027-28. That brings the cost down to about $114 a week after tax. Check the final definition of a new build before relying on it.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="rental-yield.html">Rental Yield</a><a href="capital-gains-tax.html">Capital Gains Tax</a><a href="mortgage.html">Mortgage Repayments</a><a href="borrowing-power.html">Borrowing Power</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

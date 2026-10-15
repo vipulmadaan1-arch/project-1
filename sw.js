@@ -9,13 +9,16 @@
 // Serving: network first, so a deploy shows up on the next page load. The cache is the fallback when
 // the network fails, or answers slower than NETWORK_TIMEOUT_MS (a bad mobile signal). In that case
 // the network copy still finishes in the background and refreshes the cache for next time.
-const VERSION = 'v26';
+const VERSION = 'v27';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
   './',
   '404.html',
   'css/style.css',
+  'tools/rental-cashflow.html',
+  'js/pages/rental-cashflow.js',
+  'js/rental.js',
   'tools/borrowing-power.html',
   'tools/inflation.html',
   'js/pages/borrowing-power.js',

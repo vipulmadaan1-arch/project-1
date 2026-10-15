@@ -36,6 +36,7 @@ export const TOOLS = [
   { slug: 'car-stamp-duty', name: 'Car Stamp Duty, All States', desc: 'Motor vehicle duty on new and used cars in every state, with electric, hybrid and luxury rates.', meta: 'All 8 states and territories', cat: 'property' },
   { slug: 'inflation', name: 'Inflation Calculator', desc: 'What an amount from any year since 1948 is worth today, using ABS CPI.', meta: 'ABS CPI since 1948', cat: 'money' },
   { slug: 'borrowing-power', name: 'Borrowing Power', desc: 'Roughly how much a bank might lend, tested at APRA\'s 3% buffer.', meta: 'APRA 3% buffer', cat: 'property' },
+  { slug: 'rental-cashflow', name: 'Rental Cashflow & Negative Gearing', desc: 'Weekly cashflow after tax, and the 2027 negative gearing limit.', meta: 'Before and after 1 July 2027', cat: 'property' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';
