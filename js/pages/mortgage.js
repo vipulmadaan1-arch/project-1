@@ -10,13 +10,14 @@ function update() {
   const ratePct = readNumber($('rate'), { name: 'Interest rate', unit: 'percent', min: 0, max: 100, example: '6.25' });
   const years = readNumber($('years'), { name: 'Loan term', unit: 'years', min: 1, max: 40, example: '30' });
   if ([principal, ratePct, years].includes(null)) {
-    $('chart').replaceChildren(); $('rows').replaceChildren();
+    $('chart').closest('.chart-card').hidden = true; // no empty chart shell while a field needs fixing
     return blank($('repayment'), $('interest'), $('total'));
   }
   const r = mortgage({ principal, ratePct, years, frequency: freq });
   $('repayment').textContent = fmtMoney(r.repayment, 2);
   $('interest').textContent = fmtMoney(r.interest);
   $('total').textContent = fmtMoney(r.total);
+  $('chart').closest('.chart-card').hidden = false;
   const rows = mortgageSchedule({ principal, ratePct, years, frequency: freq });
   stackedColumns($('chart'), {
     title: 'Repayments each year, split into principal and interest',

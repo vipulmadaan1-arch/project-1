@@ -252,7 +252,7 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 .tool-head h1 { grid-column: 2; grid-row: 2; }
 .tool-head p { grid-column: 2; grid-row: 3; }
 .tool-head:not(:has(.ico))::before { content: ""; grid-column: 1; grid-row: 1 / span 3; width: 52px; height: 52px; }
-.tool-head:not(:has(.tag))::after { content: ""; grid-column: 2; grid-row: 1; height: var(--t-xs); }
+.tool-head:not(:has(.tag))::after { content: ""; grid-column: 2; grid-row: 1; height: calc(var(--t-sm) * 1.2); }
 @media (max-width: 560px) { .tool-head { align-items: start; column-gap: 14px; } .tool-head .ico, .tool-head:not(:has(.ico))::before { grid-row: 1 / span 2; width: 44px; height: 44px; } .tool-head .ico .icon { width: 24px; height: 24px; } .tool-head p { grid-column: 1 / -1; margin-top: 10px; } }
 
 .cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
@@ -436,7 +436,7 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .chart-grid line { stroke: var(--line); stroke-width: 1; }
 .chart-base { stroke: var(--line-strong); stroke-width: 1; }
 .chart-hl { fill: var(--sunken); }
-.chart-tip { position: absolute; bottom: calc(100% + 6px); transform: translateX(-50%); pointer-events: none; z-index: 2; min-width: 168px;
+.chart-tip { position: absolute; top: 4px; transform: translateX(-50%); pointer-events: none; z-index: 2; min-width: 168px;
   background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--r-sm);
   box-shadow: 0 6px 20px rgba(0, 0, 0, .12); padding: 8px 10px; font-size: var(--t-xs); display: grid; gap: 3px; }
 .chart-tip strong { font-size: var(--t-sm); }
@@ -460,7 +460,7 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .aus-count-text { margin: 0 0 12px; font-size: var(--t-base); line-height: 1.45; }
 .aus-pics { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; max-width: 340px; }
 .aus-pic { width: 100%; height: auto; aspect-ratio: 1; display: block; }
-.aus-pic-empty { fill: var(--line-strong); opacity: .55; }
+.aus-pic-empty { fill: none; stroke: var(--faint); stroke-width: 1.2; }
 .aus-pic-full { fill: var(--series-2); }
 .aus-pic .cut { fill: var(--surface); }
 .aus-pic-key { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: var(--t-xs); color: var(--muted); }
@@ -479,3 +479,19 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .aus-sources summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
 .aus-sources ul { margin: 10px 0 6px; padding-left: 18px; display: grid; gap: 4px; }
 @media (forced-colors: active) { .aus-bar, .aus-pic-empty { fill: GrayText; background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } .aus-pic-full { fill: Highlight; } }
+
+/* ---------- Touch targets (44px on touch screens) ---------- */
+@media (pointer: coarse) {
+  .pin, .icon-btn { width: 44px; height: 44px; }
+  .pin { top: 6px; right: 6px; }
+  .seg button, .angle { min-height: 44px; }
+  .crumbs a { display: inline-flex; align-items: center; min-height: 44px; }
+  .chart-table summary, .aus-sources summary { padding-block: 11px; }
+}
+@media (max-width: 640px) { .site-footer ul { gap: 0; } .site-footer ul a { display: block; padding-block: 8px; } }
+/* Reserve the chart's height so the page doesn't jump when it draws. */
+#chart:empty { min-height: 252px; }
+.chart-svg { touch-action: pan-y; }
+/* Short phone screens: keep the whole scientific keypad in view. */
+@media (max-height: 760px) and (max-width: 560px) { .calc.is-sci .calc-keys button { min-height: 40px; height: 40px; } }
+.aus-key { margin: 14px 0 0; font-size: var(--t-xs); color: var(--muted); }

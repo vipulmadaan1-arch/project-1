@@ -124,17 +124,24 @@ function render(host) {
     return Math.floor((((e.clientX - r.left) / r.width) * W - m.l) / band);
   };
   svg.addEventListener('pointermove', (e) => show(indexAt(e)));
-  svg.addEventListener('pointerleave', hide);
+  svg.addEventListener('pointerdown', (e) => show(indexAt(e))); // a tap on a phone shows that year
+  svg.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') hide(); }); // a tap leaves the tooltip up
   svg.addEventListener('blur', hide);
   svg.addEventListener('keydown', (e) => {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight' && e.key !== 'Home' && e.key !== 'End') return;
     e.preventDefault();
     const cur = host._active ?? (e.key === 'ArrowLeft' ? n : -1);
-    show(e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : Math.min(n - 1, Math.max(0, cur + (e.key === 'ArrowLeft' ? -1 : 1))));
+    const i = e.key === 'Home' ? 0 : e.key === 'End' ? n - 1 : Math.min(n - 1, Math.max(0, cur + (e.key === 'ArrowLeft' ? -1 : 1)));
+    show(i);
+    // Read the year out for screen readers, which don't see the visual tooltip.
+    live.textContent = `${prefix}${labels[i]}: ${series.map((s) => `${s.name} ${format(s.values[i])}`).join(', ')}, total ${format(totals[i])}`;
   });
 
+  const live = document.createElement('p');
+  live.className = 'visually-hidden';
+  live.setAttribute('aria-live', 'polite');
   const plot = document.createElement('div');
   plot.className = 'chart-plot';
   plot.append(svg, tip);
-  host.append(legend, plot);
+  host.append(legend, plot, live);
 }

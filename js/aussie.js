@@ -107,8 +107,8 @@ function pictogram(c) {
     icons += `<svg class="aus-pic" viewBox="0 0 24 24" aria-hidden="true"><g class="aus-pic-empty">${SHAPES[c.kind]}</g>${f > 0 ? `<g class="aus-pic-full" style="clip-path: inset(0 ${((1 - f) * 100).toFixed(0)}% 0 0)">${SHAPES[c.kind]}</g>` : ''}</svg>`;
   }
   const what = { roo: 'kangaroos', koala: 'koalas', beach: 'beaches', people: 'people' }[c.kind];
-  return `<div class="aus-pics" role="img" aria-label="${c.text}">${icons}</div>
-    <p class="aus-pic-key"><span class="aus-pic-swatch"></span>Each icon = ${n0(per)} ${what}${c.ratio * 10 > 40 ? ` · showing the first 40 of ${n0(c.ratio * 10)}` : ''}</p>`;
+  return `<div class="aus-pics" aria-hidden="true">${icons}</div>
+    <p class="aus-pic-key"><span class="aus-pic-swatch"></span>Each icon is ${n0(per)} ${what}.${c.ratio * 10 > 40 ? ` Showing the first 40 of ${n0(c.ratio * 10)}.` : ''}</p>`;
 }
 
 function render(card, amount, what) {
@@ -147,8 +147,10 @@ export function mountAussieTerms() {
       <div class="aus-count"></div>
       <div><h3 class="aus-sub">How it stacks up</h3><ul class="aus-bars"></ul></div>
     </div>
+    <p class="aus-key"><span class="aus-est">est.</span> marks an industry figure rather than an official statistic.</p>
     <details class="aus-sources"><summary>Where these numbers come from</summary><ul>${SOURCES()}</ul><p>“est.” marks industry figures rather than official statistics.</p></details>`;
-  cols.after(card);
+  // Below the chart if there is one, so drawing this card doesn't push the chart down.
+  (document.querySelector('.chart-card') || cols).after(card);
   const read = () => {
     const t = out.textContent.trim();
     const m = t.match(/^(−|-)?\$([\d,]+(?:\.\d+)?)/);

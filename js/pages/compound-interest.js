@@ -10,7 +10,7 @@ function update() {
   const contribution = readNumber($('contrib'), { name: 'Regular deposit', unit: 'money', min: 0, max: 1e12, optional: true, example: '200' });
   if ([principal, ratePct, years, contribution].includes(null)) {
     $('rows').replaceChildren();
-    $('chart').replaceChildren();
+    $('chart').closest('.chart-card').hidden = true;
     return blank($('balance'), $('contributed'), $('interest'));
   }
   const r = compoundInterest({
@@ -21,6 +21,7 @@ function update() {
   $('interest').textContent = fmtMoney(r.interest);
   $('rows').innerHTML = r.yearly.map((y) =>
     `<tr><td>${y.year}</td><td>${fmtMoney(y.contributed)}</td><td>${fmtMoney(y.interest)}</td><td>${fmtMoney(y.balance)}</td></tr>`).join('');
+  $('chart').closest('.chart-card').hidden = false;
   stackedColumns($('chart'), {
     title: 'Balance by year, split into money deposited and interest earned',
     labels: r.yearly.map((y) => y.year),
