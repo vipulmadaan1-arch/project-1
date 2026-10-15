@@ -447,14 +447,24 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 
 /* ---------- In Aussie terms ---------- */
 .aus-card { margin-top: 20px; }
-.aus-card .section-title { font-size: var(--t-md); color: var(--ink); }
+.aus-card .section-title { font-size: var(--t-md); color: var(--ink); margin-bottom: 14px; }
 .aus-amount { color: var(--accent); font-feature-settings: var(--tnum); }
-.aus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; margin-top: 4px; }
+.aus-tiles { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+@media (max-width: 900px) { .aus-tiles { grid-template-columns: repeat(2, 1fr); } }
+.aus-tile { background: var(--sunken); border-radius: var(--r); padding: 14px; display: grid; gap: 4px; align-content: start; }
+.aus-tile .icon { color: var(--accent); width: 22px; height: 22px; margin-bottom: 4px; }
+.aus-num { font: 600 clamp(1.4rem, 3.4vw, 1.75rem)/1.1 var(--font-display); letter-spacing: -.02em; font-feature-settings: var(--tnum); }
+.aus-unit { font-size: var(--t-sm); color: var(--muted); line-height: 1.35; }
+.aus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; }
 @media (max-width: 760px) { .aus-grid { grid-template-columns: 1fr; } }
-.aus-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.aus-list li { display: flex; gap: 12px; align-items: flex-start; font-size: var(--t-base); line-height: 1.45; }
-.aus-list .icon { flex: none; color: var(--accent); background: var(--accent-soft); border-radius: 8px; padding: 6px; width: 32px; height: 32px; }
-.aus-count { border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); }
+.aus-count-text { margin: 0 0 12px; font-size: var(--t-base); line-height: 1.45; }
+.aus-pics { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; max-width: 340px; }
+.aus-pic { width: 100%; height: auto; aspect-ratio: 1; display: block; }
+.aus-pic-empty { fill: var(--line-strong); opacity: .55; }
+.aus-pic-full { fill: var(--series-2); }
+.aus-pic .cut { fill: var(--surface); }
+.aus-pic-key { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: var(--t-xs); color: var(--muted); }
+.aus-pic-swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--series-2); flex: none; }
 .aus-est { font-size: var(--t-xs); color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; margin-left: 2px; white-space: nowrap; }
 .aus-sub { font: 600 var(--t-sm)/1.2 var(--font-body); color: var(--muted); margin: 0 0 12px; }
 .aus-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
@@ -468,4 +478,4 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .aus-sources { margin-top: 18px; font-size: var(--t-xs); color: var(--muted); }
 .aus-sources summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
 .aus-sources ul { margin: 10px 0 6px; padding-left: 18px; display: grid; gap: 4px; }
-@media (forced-colors: active) { .aus-bar { background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } }
+@media (forced-colors: active) { .aus-bar, .aus-pic-empty { fill: GrayText; background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } .aus-pic-full { fill: Highlight; } }

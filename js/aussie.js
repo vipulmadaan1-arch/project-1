@@ -13,32 +13,35 @@ export const BENCH = {
 };
 // Counts for "one dollar for every …" comparisons, smallest to largest.
 export const COUNTS = [
-  { value: 12000, text: 'roughly 12,000 beaches on Australia’s coastline', status: 'estimated', source: 'Surf Life Saving Australia', url: 'https://sls.com.au/surf-life-saving-australia-release-coastal-safety-brief-on-beaches' },
-  { value: 50000, text: 'people on Bondi Beach on a busy summer day', status: 'verified', source: 'Waverley Council', url: 'https://www.waverley.nsw.gov.au/recreation/beaches_and_coast/our_beaches' },
-  { value: 100024, text: 'people at a sold-out MCG', status: 'verified', source: 'Melbourne Cricket Club', url: 'https://www.mcg.org.au/plan-a-visit/seating-and-ticket-information/ticket-information' },
-  { value: 580700, text: 'people living in Tasmania', status: 'verified', source: 'ABS, 31 Mar 2026', url: 'https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release' },
-  { value: 2230500, text: 'kangaroos in Victoria’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
-  { value: 9634900, text: 'kangaroos in NSW’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
-  { value: 17727700, text: 'kangaroos in Queensland’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
+  { value: 12000, kind: 'beach', text: 'roughly 12,000 beaches on Australia’s coastline', status: 'estimated', source: 'Surf Life Saving Australia', url: 'https://sls.com.au/surf-life-saving-australia-release-coastal-safety-brief-on-beaches' },
+  { value: 50000, kind: 'people', text: 'people on Bondi Beach on a busy summer day', status: 'verified', source: 'Waverley Council', url: 'https://www.waverley.nsw.gov.au/recreation/beaches_and_coast/our_beaches' },
+  { value: 100024, kind: 'people', text: 'people at a sold-out MCG', status: 'verified', source: 'Melbourne Cricket Club', url: 'https://www.mcg.org.au/plan-a-visit/seating-and-ticket-information/ticket-information' },
+  { value: 274000, kind: 'koala', text: 'koalas in New South Wales', status: 'verified', source: 'NSW Government koala baseline survey, 2025', url: 'https://www.environment.nsw.gov.au/topics/animals-and-plants/threatened-species/programs-legislation-and-framework/nsw-koala-strategy/building-our-knowledge-about-koalas/baseline-survey' },
+  { value: 580700, kind: 'people', text: 'people living in Tasmania', status: 'verified', source: 'ABS, 31 Mar 2026', url: 'https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release' },
+  { value: 2230500, kind: 'roo', text: 'kangaroos in Victoria’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
+  { value: 9634900, kind: 'roo', text: 'kangaroos in NSW’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
+  { value: 17727700, kind: 'roo', text: 'kangaroos in Queensland’s harvest zones', status: 'verified', source: 'DCCEEW, 2023 survey', url: 'https://www.dcceew.gov.au/sites/default/files/documents/kangaroo-statistics-states-2024.pdf' },
 ];
 
 const n0 = (n) => Math.round(n).toLocaleString('en-AU');
 const n1 = (n) => (n < 10 ? n.toLocaleString('en-AU', { maximumFractionDigits: 1 }) : n0(n));
 const money = (n) => n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 });
-const plural = (n, one, many = `${one}s`) => `${n1(n)} ${Math.round(n * 10) / 10 === 1 ? one : many}`;
+const unit = (n, one, many = `${one}s`) => (Math.round(n * 10) / 10 === 1 ? one : many);
 
-// Up to four analogies, chosen so each reads as a sensible number for this amount.
+// Up to four analogies, each a number and what it counts, chosen so the number reads sensibly.
 export function analogies(amount) {
   const a = Math.abs(amount);
   if (!(a >= 1)) return [];
   const out = [];
+  const add = (icon, key, n, what, after) => out.push({ icon, key, num: n1(n), unit: `${what} ${after}`.trim(), text: `${n1(n)} ${what} ${after}`.trim() });
   const hours = a / BENCH.minWage.value;
-  out.push({ icon: 'clock', key: 'minWage', text: hours > 38 * 52 * 1.5 ? `${plural(hours / (38 * 52), 'year')} of full-time work at the minimum wage` : `${plural(hours, 'hour')} of work at the minimum wage` });
-  const weeks = (per) => { const w = a / per; return w > 104 ? plural(w / 52, 'year') : plural(w, 'week'); };
-  if (a >= BENCH.weeklyPay.value / 2) out.push({ icon: 'pay', key: 'weeklyPay', text: `${weeks(BENCH.weeklyPay.value)} of the average full-time pay packet` });
-  if (a >= BENCH.rent.value / 2) out.push({ icon: 'home', key: 'rent', text: `${weeks(BENCH.rent.value)} of median rent` });
-  if (a >= 5000) out.push({ icon: 'ticket', key: 'footy', text: `${plural(a / BENCH.footy.value, 'footy ticket')} at the ’G (general admission)` });
-  else out.push({ icon: 'snag', key: 'snag', text: `${plural(a / BENCH.snag.value, 'Bunnings snag')}` });
+  if (hours > 38 * 52 * 1.5) add('clock', 'minWage', hours / (38 * 52), unit(hours / (38 * 52), 'year'), 'of full-time work at the minimum wage');
+  else add('clock', 'minWage', hours, unit(hours, 'hour'), 'of work at the minimum wage');
+  const weeks = (per, key, icon, after) => { const w = a / per; if (w > 104) add(icon, key, w / 52, unit(w / 52, 'year'), after); else add(icon, key, w, unit(w, 'week'), after); };
+  if (a >= BENCH.weeklyPay.value / 2) weeks(BENCH.weeklyPay.value, 'weeklyPay', 'pay', 'of the average full-time pay packet');
+  if (a >= BENCH.rent.value / 2) weeks(BENCH.rent.value, 'rent', 'home', 'of median rent');
+  if (a >= 5000) add('ticket', 'footy', a / BENCH.footy.value, unit(a / BENCH.footy.value, 'footy ticket'), 'at the ’G (general admission)');
+  else add('snag', 'snag', a / BENCH.snag.value, unit(a / BENCH.snag.value, 'Bunnings snag'), '');
   return out.slice(0, 4);
 }
 
@@ -48,12 +51,10 @@ export function countComparison(amount) {
   if (!(a >= 1000)) return null;
   const c = COUNTS.reduce((best, x) => (Math.abs(Math.log(a / x.value)) < Math.abs(Math.log(a / best.value)) ? x : best));
   const r = a / c.value;
-  const text = r >= 1.15
-    ? `If every dollar were a person or a roo, that’s ${n1(r)} times the ${c.text}.`
-    : r <= 0.87
-      ? `If every dollar were a person or a roo, that’s ${Math.round(r * 100)}% of the ${c.text}.`
-      : `If every dollar were a person or a roo, that’s about as many as the ${c.text}.`;
-  return { ...c, ratio: r, text: text.replace('a person or a roo', c.text.includes('kangaroo') ? 'a kangaroo' : c.text.includes('beach') ? 'a beach' : 'a person') };
+  const each = { roo: 'kangaroo', koala: 'koala', beach: 'beach', people: 'person' }[c.kind];
+  const head = `If every dollar were a ${each}, that’s`;
+  const text = r >= 1.15 ? `${head} ${n1(r)} times the ${c.text}.` : r <= 0.87 ? `${head} ${Math.round(r * 100)}% of the ${c.text}.` : `${head} about as many as the ${c.text}.`;
+  return { ...c, ratio: r, text };
 }
 
 // Benchmarks to draw next to the amount: the ones nearest in size, so the bars are readable.
@@ -76,18 +77,39 @@ export function comparisons(amount) {
 }
 
 // ---------- Rendering ----------
-const ICONS = {
+// Line icons for the tiles; filled silhouettes for the pictogram (so a filled icon reads as "counted").
+const LINE = {
   clock: '<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
   pay: '<rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.6"/>',
   home: '<path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>',
   ticket: '<path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="1.5 2"/>',
   snag: '<path d="M5 15c3-6 11-6 14 0"/><path d="M4.5 15.5h15"/><path d="M7 12.5c1.5-1 8.5-1 10 0"/>',
-  people: '<circle cx="8" cy="8" r="2.5"/><circle cx="16" cy="8" r="2.5"/><path d="M3.5 18c.5-3 2.3-4.5 4.5-4.5s4 1.5 4.5 4.5M11.5 18c.5-3 2.3-4.5 4.5-4.5s4 1.5 4.5 4.5"/>',
-  wave: '<path d="M3 15c2 0 2-1.5 4.5-1.5S10 15 12 15s2.5-1.5 4.5-1.5S19 15 21 15"/><path d="M3 19c2 0 2-1.5 4.5-1.5S10 19 12 19s2.5-1.5 4.5-1.5S19 19 21 19"/><circle cx="16" cy="7" r="2.5"/>',
-  roo: '<path d="M6 19c1-3 3-5 6-5 2 0 3-1 3.5-3L17 6l1.5 1L19 5"/><path d="M12 14l-1 5M15 13l3 6h2"/><path d="M5 12c2 0 4 1 5 2"/>',
 };
-const svg = (name) => `<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
-const tag = (key) => (BENCH[key].status === 'estimated' ? '<span class="aus-est" title="Estimated: industry source">est.</span>' : '');
+export const SHAPES = {
+  koala: '<circle cx="6" cy="8" r="4.2"/><circle cx="18" cy="8" r="4.2"/><ellipse cx="12" cy="13.5" rx="6.6" ry="6.9"/><ellipse cx="12" cy="15" rx="1.9" ry="2.6" class="cut"/><circle cx="9" cy="11.8" r="1" class="cut"/><circle cx="15" cy="11.8" r="1" class="cut"/>',
+  roo: '<path d="M16.4 2.6l.9 2.6 1.6-.9.3 2.4c.9.5 1.3 1.3 1.1 2.1l-2.3.2-1 .9c.7 2.7.1 5.3-1.6 7.4l1.7 3.4h2.6v1.1h-4.4l-1.6-2.6-2.4.9-1 1.7H6.6l.3-1.1 1.6-.6c-1.4-1.6-1.7-3.8-.7-6-1.6.6-3 1.9-4.2 3.8L2.5 18c1.3-3 3.4-5.2 6.4-6.2 1.9-2.4 4.2-3.5 6.4-3.4l.4-1.6z"/>',
+  people: '<circle cx="12" cy="6" r="3.3"/><path d="M5.5 21v-4.2c0-3.3 2.9-5.6 6.5-5.6s6.5 2.3 6.5 5.6V21z"/>',
+  beach: '<path d="M12 3.5c4.7 0 8.5 3.2 8.5 7.2H3.5c0-4 3.8-7.2 8.5-7.2z"/><rect x="11.2" y="10.4" width="1.6" height="9"/><path d="M3 20.5c2.2-1.3 4.4-1.3 6 0s3.8 1.3 6 0 3.8-1.3 6 0V22H3z"/>',
+};
+const line = (name) => `<svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LINE[name]}</svg>`;
+const est = '<span class="aus-est" title="Estimated: industry source">est.</span>';
+const tag = (key) => (BENCH[key].status === 'estimated' ? est : '');
+
+// A row of up to 40 silhouettes. Each one stands for a tenth of the benchmark, so ten filled icons = the whole
+// benchmark; the last icon is partly filled for the remainder.
+function pictogram(c) {
+  const per = c.value / 10;
+  const filled = Math.min(c.ratio * 10, 40);
+  const shown = Math.max(10, Math.ceil(filled));
+  let icons = '';
+  for (let i = 0; i < shown; i++) {
+    const f = Math.max(0, Math.min(1, filled - i));
+    icons += `<svg class="aus-pic" viewBox="0 0 24 24" aria-hidden="true"><g class="aus-pic-empty">${SHAPES[c.kind]}</g>${f > 0 ? `<g class="aus-pic-full" style="clip-path: inset(0 ${((1 - f) * 100).toFixed(0)}% 0 0)">${SHAPES[c.kind]}</g>` : ''}</svg>`;
+  }
+  const what = { roo: 'kangaroos', koala: 'koalas', beach: 'beaches', people: 'people' }[c.kind];
+  return `<div class="aus-pics" role="img" aria-label="${c.text}">${icons}</div>
+    <p class="aus-pic-key"><span class="aus-pic-swatch"></span>Each icon = ${n0(per)} ${what}${c.ratio * 10 > 40 ? ` · showing the first 40 of ${n0(c.ratio * 10)}` : ''}</p>`;
+}
 
 function render(card, amount, what) {
   const list = analogies(amount);
@@ -98,13 +120,15 @@ function render(card, amount, what) {
   const max = Math.max(...bars.map((b) => b.value));
   card.querySelector('.aus-amount').textContent = money(Math.abs(amount));
   card.querySelector('.aus-what').textContent = what ? ` (${what[0].toLowerCase()}${what.slice(1)})` : '';
-  card.querySelector('.aus-list').innerHTML = list.map((x) => `<li>${svg(x.icon)}<span>${x.text} ${tag(x.key)}</span></li>`).join('')
-    + (count ? `<li class="aus-count">${svg(count.text.includes('kangaroo') ? 'roo' : count.text.includes('beach') ? 'wave' : 'people')}<span>${count.text}${count.status === 'estimated' ? ' <span class="aus-est">est.</span>' : ''}</span></li>` : '');
-  card.querySelector('.aus-bars').innerHTML = bars.map((b) => `<li class="${b.you ? 'is-you' : ''}"><span class="aus-bar-label">${b.label}${b.key && BENCH[b.key].status === 'estimated' ? ' <span class="aus-est">est.</span>' : ''}</span><span class="aus-bar-track"><span class="aus-bar" style="width:${Math.max(1.5, (b.value / max) * 100).toFixed(1)}%"></span></span><span class="aus-bar-value">${money(b.value)}</span></li>`).join('');
+  card.querySelector('.aus-tiles').innerHTML = list.map((x) => `<li class="aus-tile">${line(x.icon)}<span class="aus-num">${x.num}</span><span class="aus-unit">${x.unit} ${tag(x.key)}</span></li>`).join('');
+  const pic = card.querySelector('.aus-count');
+  pic.hidden = !count;
+  if (count) pic.innerHTML = `<p class="aus-count-text">${count.text}${count.status === 'estimated' ? ` ${est}` : ''}</p>${pictogram(count)}`;
+  card.querySelector('.aus-bars').innerHTML = bars.map((b) => `<li class="${b.you ? 'is-you' : ''}"><span class="aus-bar-label">${b.label}${b.key && BENCH[b.key].status === 'estimated' ? ` ${est}` : ''}</span><span class="aus-bar-track"><span class="aus-bar" style="width:${Math.max(1.5, (b.value / max) * 100).toFixed(1)}%"></span></span><span class="aus-bar-value">${money(b.value)}</span></li>`).join('');
 }
 
 const SOURCES = () => [...Object.values(BENCH), ...COUNTS.filter((c, i, all) => all.findIndex((x) => x.url === c.url) === i)]
-  .map((b) => `<li><a href="${b.url}" target="_blank" rel="noopener noreferrer">${b.source}</a>: ${b.label || b.text}${b.value >= 1000 && !b.label ? ` (${n0(b.value)})` : b.label ? ` ${b.value >= 100 ? money(b.value) : `$${b.value.toFixed(2)}`}` : ''}${b.date ? `, ${b.date}` : ''} <em>${b.status}</em></li>`).join('');
+  .map((b) => `<li><a href="${b.url}" target="_blank" rel="noopener noreferrer">${b.source}</a>: ${b.label || b.text}${b.label ? ` ${b.value >= 100 ? money(b.value) : `$${b.value.toFixed(2)}`}` : ` (${n0(b.value)})`}${b.date ? `, ${b.date}` : ''} <em>${b.status}</em></li>`).join('');
 
 // Watches the page's main dollar result and keeps the card in step with it.
 export function mountAussieTerms() {
@@ -118,8 +142,9 @@ export function mountAussieTerms() {
   card.hidden = true;
   card.innerHTML = `
     <h2 class="section-title" id="aus-title">In Aussie terms: <span class="aus-amount"></span><span class="aus-what"></span> is about</h2>
+    <ul class="aus-tiles"></ul>
     <div class="aus-grid">
-      <ul class="aus-list"></ul>
+      <div class="aus-count"></div>
       <div><h3 class="aus-sub">How it stacks up</h3><ul class="aus-bars"></ul></div>
     </div>
     <details class="aus-sources"><summary>Where these numbers come from</summary><ul>${SOURCES()}</ul><p>“est.” marks industry figures rather than official statistics.</p></details>`;
