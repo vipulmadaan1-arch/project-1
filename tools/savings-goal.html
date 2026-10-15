@@ -24,6 +24,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/loans.js">
@@ -65,6 +66,8 @@
         <p class="disclaimer">Estimate only. Like Moneysmart’s savings goals calculator, assumes you save at the start of each period, reinvest interest and keep the same rate, with no tax, fees or inflation. Not financial advice.</p>
       </div>
     </div>
+    <section class="card chart-card" id="chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Savings by year</h2><div id="chart"></div>
+      <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Savings by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>

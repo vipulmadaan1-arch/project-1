@@ -30,6 +30,7 @@
   --readout-line: rgba(234, 243, 240, .14);
   --readout-accent: #7fd1bb;
   --focus: #0e6a5b;
+  --series-1: #0b8a72; --series-2: #b8741a; /* chart series, validated for contrast and colour-blind separation */
 
   /* Type */
   /* One family for everything, as production finance sites do (Stripe: Söhne, Wise: Wise Sans).
@@ -51,6 +52,7 @@
     --line: #22302e; --line-strong: #31423f; --accent: #55bfa5; --accent-hover: #6fd0b7; --accent-ink: #062019;
     --accent-soft: #15302b; --ochre: #e1a24c; --error: #f4877b; --readout: #102f2a; --readout-ink: #e8f3f0; --readout-muted: #8fb0a8;
     --readout-line: rgba(232, 243, 240, .12); --readout-accent: #86dcc4; --focus: #6fd0b7;
+    --series-1: #38a68b; --series-2: #c4842c;
     color-scheme: dark;
   }
 }
@@ -59,6 +61,7 @@
   --line: #22302e; --line-strong: #31423f; --accent: #55bfa5; --accent-hover: #6fd0b7; --accent-ink: #062019;
   --accent-soft: #15302b; --ochre: #e1a24c; --error: #f4877b; --readout: #102f2a; --readout-ink: #e8f3f0; --readout-muted: #8fb0a8;
   --readout-line: rgba(232, 243, 240, .12); --readout-accent: #86dcc4; --focus: #6fd0b7;
+    --series-1: #38a68b; --series-2: #c4842c;
   color-scheme: dark;
 }
 
@@ -414,3 +417,30 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Charts ---------- */
+.chart-card { margin-top: 20px; }
+.chart-card .section-title { margin-bottom: 4px; }
+.chart-legend { display: flex; flex-wrap: wrap; gap: 4px 18px; list-style: none; margin: 0 0 8px; padding: 0; font-size: var(--t-sm); color: var(--muted); }
+.chart-legend li { display: flex; align-items: center; gap: 7px; }
+.chart-key { display: inline-block; width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.chart-key.s1, .chart-svg .s1 { background: var(--series-1); fill: var(--series-1); }
+.chart-key.s2, .chart-svg .s2 { background: var(--series-2); fill: var(--series-2); }
+.chart-plot { position: relative; }
+.chart-table { margin-top: 14px; }
+.chart-table summary { cursor: pointer; color: var(--accent); font-size: var(--t-sm); font-weight: 600; }
+.chart-table .table-scroll { margin-top: 10px; max-height: 360px; overflow: auto; }
+.chart-svg { display: block; max-width: 100%; height: auto; overflow: visible; border-radius: var(--r-sm); }
+.chart-svg:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.chart-svg text { fill: var(--muted); font: 500 12px var(--font-body); font-feature-settings: var(--tnum); }
+.chart-grid line { stroke: var(--line); stroke-width: 1; }
+.chart-base { stroke: var(--line-strong); stroke-width: 1; }
+.chart-hl { fill: var(--sunken); }
+.chart-tip { position: absolute; bottom: calc(100% + 6px); transform: translateX(-50%); pointer-events: none; z-index: 2; min-width: 168px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--r-sm);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .12); padding: 8px 10px; font-size: var(--t-xs); display: grid; gap: 3px; }
+.chart-tip strong { font-size: var(--t-sm); }
+.chart-tip span { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.chart-tip b { margin-left: auto; padding-left: 12px; color: var(--ink); font-weight: 600; font-feature-settings: var(--tnum); }
+.chart-tip .chart-tip-total { border-top: 1px solid var(--line); padding-top: 3px; margin-top: 2px; }
+@media (forced-colors: active) { .chart-svg .s1 { fill: CanvasText; } .chart-svg .s2 { fill: GrayText; } .chart-key.s1 { background: CanvasText; } .chart-key.s2 { background: GrayText; } }

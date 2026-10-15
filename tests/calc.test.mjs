@@ -204,3 +204,13 @@ test('scientific calculator: precedence, functions, constants and errors', () =>
   assert.throws(() => evaluate('171!'), /too large/);
   assert.throws(() => evaluate('sin30'));
 });
+
+test('mortgage schedule splits repayments and pays the loan off', async () => {
+  const { mortgageSchedule, mortgage } = await import('../js/calc.js');
+  const rows = mortgageSchedule({ principal: 500000, ratePct: 6, years: 30 });
+  assert.equal(rows.length, 30);
+  assert.ok(rows.at(-1).balance < 1);
+  const interest = rows.reduce((s, r) => s + r.interest, 0);
+  assert.ok(Math.abs(interest - mortgage({ principal: 500000, ratePct: 6, years: 30 }).interest) < 1);
+  assert.ok(rows[0].interest > rows[0].principal && rows.at(-1).principal > rows.at(-1).interest);
+});

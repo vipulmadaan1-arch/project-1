@@ -1,5 +1,6 @@
 import { fmtMoney, readNumber, setError, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
-import { FREQ, savingsTime, savingsDeposit, periodsUntil, describeMonths } from '../loans.js';
+import { FREQ, savingsTime, savingsDeposit, periodsUntil, describeMonths, periodRate, savingsBalance } from '../loans.js';
+import { stackedColumns } from '../chart.js';
 
 const $ = (id) => document.getElementById(id);
 const today = new Date();
@@ -20,6 +21,29 @@ function duration(n, perYear) {
   const weeks = n * (52 / perYear);
   if (weeks < 13) return `${weeks} week${weeks === 1 ? '' : 's'}`;
   return `About ${describeMonths((weeks * 12) / 52)}`;
+}
+
+// Balance at the end of each year (or at the goal, if sooner), split into deposits and interest.
+function drawChart({ start, deposit, ratePct, compoundsPerYear, perYear, periods }) {
+  const show = periods > 0;
+  $('chart-card').hidden = !show;
+  if (!show) return;
+  const g = periodRate(ratePct, compoundsPerYear, perYear);
+  const rows = [];
+  for (let y = 1; (y - 1) * perYear < periods; y++) {
+    const n = Math.min(y * perYear, periods);
+    const balance = savingsBalance({ start, deposit, g, n });
+    const deposited = start + deposit * n;
+    rows.push({ year: y, deposited, interest: balance - deposited, balance });
+  }
+  stackedColumns($('chart'), {
+    title: 'Savings by year, split into money deposited and interest earned',
+    labels: rows.map((r) => r.year),
+    prefix: 'Year ',
+    series: [{ name: 'Deposited', values: rows.map((r) => r.deposited) }, { name: 'Interest', values: rows.map((r) => r.interest) }],
+    format: (n) => fmtMoney(n),
+  });
+  $('rows').innerHTML = rows.map((r) => `<tr><td>${r.year}</td><td>${fmtMoney(r.deposited)}</td><td>${fmtMoney(r.interest)}</td><td>${fmtMoney(r.balance)}</td></tr>`).join('');
 }
 
 function update() {
@@ -47,7 +71,7 @@ function update() {
     }
   }
   const outs = [$('total'), $('other'), $('count'), $('deposited'), $('interest'), $('balance')];
-  if ([target, start, ratePct, deposit, periods].includes(null)) { $('note').textContent = ''; return blank(...outs); }
+  if ([target, start, ratePct, deposit, periods].includes(null)) { $('note').textContent = ''; $('chart-card').hidden = true; return blank(...outs); }
   const compoundsPerYear = +$('comp').value;
 
   let r, note = '';
@@ -61,6 +85,7 @@ function update() {
     if (!r.reached) {
       $('total').textContent = deposit > 0 || ratePct > 0 ? 'More than 100 years' : 'Never, without deposits';
       blank($('other'), $('count'), $('deposited'), $('interest'), $('balance'));
+      $('chart-card').hidden = true;
       $('note').textContent = deposit > 0 || ratePct > 0 ? 'At this rate it would take more than 100 years. Try saving more each time.' : 'Enter an amount to save each time, or an interest rate, to see how long it will take.';
       return;
     }
@@ -73,6 +98,7 @@ function update() {
   $('interest').textContent = fmtMoney(r.interest);
   $('balance').textContent = fmtMoney(r.balance);
   $('note').textContent = note;
+  drawChart({ start, deposit: byDate ? r.deposit : deposit, ratePct, compoundsPerYear, perYear, periods: r.periods });
 }
 wireForm($('form'), update);
 syncFormWithUrl($('form'), update);

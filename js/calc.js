@@ -174,6 +174,25 @@ export function mortgage({ principal, ratePct, years, frequency = 'monthly' }) {
   return { repayment: pay, total, interest: total - principal };
 }
 
+// Year-by-year split of a P&I loan's repayments into principal and interest, with the balance left.
+export function mortgageSchedule({ principal, ratePct, years, frequency = 'monthly' }) {
+  const perYear = FREQ[frequency];
+  const i = ratePct / 100 / perYear;
+  const pay = repayment(principal, ratePct, years, perYear);
+  const rows = [];
+  let bal = principal;
+  for (let y = 1; y <= Math.ceil(years); y++) {
+    let interest = 0, paid = 0;
+    for (let k = 0; k < perYear && bal > 0.005; k++) {
+      const charge = bal * i;
+      const p = Math.min(pay, bal + charge);
+      interest += charge; paid += p; bal = bal + charge - p;
+    }
+    rows.push({ year: y, principal: paid - interest, interest, balance: Math.max(0, bal) });
+  }
+  return rows;
+}
+
 // Simulates a P&I loan with an offset balance. Repayment stays fixed at the no-offset amount,
 // so the offset shortens the loan term.
 export function offsetSavings({ principal, ratePct, years, offset, frequency = 'monthly' }) {
