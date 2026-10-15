@@ -26,7 +26,7 @@ function update() {
   $('vol-row').hidden = !hasVol;
   $('saved-row').hidden = !hasVol;
   $('isaved-row').hidden = !hasVol;
-  $('saved').textContent = yearsSaved !== null ? yrs(yearsSaved) : base.repaid ? '–' : `Repaid in ${yrs(r.years ?? 0)} instead of not at all`;
+  $('saved').textContent = yearsSaved !== null ? yrs(yearsSaved) : !r.repaid || base.repaid ? '–' : `Repaid in ${yrs(r.years)} instead of not at all`;
   $('isaved').textContent = fmtMoney(indexationSaved);
   const notes = [];
   if (!r.repaid) notes.push(`At this income your repayments don't keep up with indexation, so the debt would still be ${fmtMoney(r.remaining)} after ${MAX_YEARS} years. HELP debts aren't written off while you're alive.`);

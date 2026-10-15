@@ -300,7 +300,9 @@ function applyParam(el, v) {
   }
   if (el.classList.contains('num')) {
     // Number fields accept "$750,000" etc.; the page's own validation reports out-of-range values.
-    if (!v.trim() || !Number.isFinite(parseNumber(v))) return false;
+    // An empty value is kept: a cleared optional field (say, no fees) must not come back as its default.
+    if (!v.trim()) { el.value = ''; return true; }
+    if (!Number.isFinite(parseNumber(v))) return false;
     el.value = v;
     return true;
   }

@@ -141,7 +141,8 @@ export function capitalGainsTax(o) {
     else { startValue = apportionedValue({ price, proceeds, bought, sold }); apportioned = true; }
   }
   const startCost = startValue ?? cost; // cost base from which post-2027 gains are measured
-  const indexFrom = startValue != null ? REFORM_START : bought;
+  // Only expenditure from 1 July 2027 is indexed, so a new build bought earlier is indexed from then.
+  const indexFrom = startValue != null || D(bought) < D(REFORM_START) ? REFORM_START : bought;
   const idx = held12 ? indexationFactor(indexFrom, sold, inflation) : { factor: 1, projected: false };
   // Indexation can reduce a gain to nil but never creates or increases a loss (s100-40(2)).
   const postRaw = proceeds - sellCosts - startCost;

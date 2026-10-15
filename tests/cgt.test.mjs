@@ -76,3 +76,10 @@ test('main residence is exempt; old-rules comparison', () => {
   assert.equal(capitalGainsTax({ ...base, asset: 'home', sold: '2030-01-01' }).total, 0);
   assert.equal(oldRulesTax({ ...base, sold: '2026-11-01' }), capitalGainsTax({ ...base, sold: '2026-11-01' }).tax);
 });
+
+test('a new build bought before 1 July 2027 is indexed from then, not from purchase', () => {
+  const r = capitalGainsTax({ ...base, asset: 'newbuild', bought: '2018-03-01', sold: '2029-03-01', inflation: 0.025 });
+  const fromReform = capitalGainsTax({ ...base, asset: 'newbuild', bought: '2027-07-01', sold: '2029-03-01', inflation: 0.025 });
+  assert.equal(r.factor, fromReform.factor);
+  assert.ok(r.factor < 1.06);
+});

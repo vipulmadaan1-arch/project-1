@@ -13,7 +13,7 @@ function update() {
   const r = value === null ? null : stampDuty({
     state: $('state').value, value, home, firstHome: $('fhb').checked, newHome: $('newhome').checked, foreign: $('foreign').checked,
   });
-  if (!r) { $('note').textContent = ''; return blank($('total'), $('duty'), $('saving'), $('surcharge')); }
+  if (!r) { $('note').textContent = ''; $('estimate-note').textContent = ''; return blank($('total'), $('duty'), $('saving'), $('surcharge')); }
   $('total-label').textContent = `Total duty payable, ${r.state.code}`;
   $('total').textContent = fmtMoney(r.total);
   $('duty').textContent = fmtMoney(r.duty);
