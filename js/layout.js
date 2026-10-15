@@ -70,12 +70,12 @@ footer.innerHTML = `
     </div>
     ${CATEGORIES.map((c) => `
     <div>
-      <h2>${c.short}</h2>
+      <p class="foot-head">${c.short}</p>
       <ul>${TOOLS.filter((t) => t.cat === c.key).map((t) => `<li><a href="${base}tools/${t.slug}.html">${t.name}</a></li>`).join('')}</ul>
     </div>`).join('')}
     <div class="footer-legal">
       <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
-      <span class="footer-links"><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
+      <span class="footer-links"><a href="${base}about.html">About</a><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
     </div>
   </div>`;
 document.body.append(footer);
@@ -84,6 +84,25 @@ document.body.append(footer);
 // Tool pages: add the tool's icon and source label to the page heading.
 const slug = location.pathname.match(/tools\/([^/]+)\.html$/)?.[1];
 const tool = TOOLS.find((t) => t.slug === slug);
+// Results panel: stop it sticking when it's taller than the window, and say what to do when a field
+// needs fixing (otherwise the result is just a dash).
+const readout = document.querySelector('.readout');
+if (readout) {
+  const fit = () => readout.classList.toggle('is-tall', readout.offsetHeight > innerHeight - 110);
+  new ResizeObserver(fit).observe(readout);
+  addEventListener('resize', fit);
+  const big = readout.querySelector('.result-big');
+  if (big) {
+    const hint = document.createElement('p');
+    hint.className = 'readout-hint';
+    hint.hidden = true;
+    hint.textContent = 'Check the highlighted field to see your result.';
+    big.after(hint);
+    const check = () => { hint.hidden = !(big.textContent.trim() === '–' && document.querySelector('form [aria-invalid="true"]')); };
+    new MutationObserver(check).observe(big, { childList: true, characterData: true, subtree: true });
+    document.querySelector('form')?.addEventListener('focusout', () => setTimeout(check));
+  }
+}
 // Money tools get an "In Aussie terms" card comparing the result with familiar Australian yardsticks.
 // Loaded on demand, so pages without a dollar result don't download it.
 if (tool && tool.cat !== 'general') import('./aussie.js').then((m) => m.mountAussieTerms()).catch(() => {});

@@ -7,13 +7,13 @@
   <script data-module="../js/pages/compound-interest.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Compound Interest Calculator (Australia) | Sorted, Mate</title>
-  <meta name="description" content="Free compound interest calculator with regular deposits. See how savings grow year by year.">
+  <meta name="description" content="Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.">
   <!-- seo:start -->
   <meta property="og:site_name" content="Sorted, Mate">
   <meta property="og:locale" content="en_AU">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Compound Interest Calculator (Australia)">
-  <meta property="og:description" content="Free compound interest calculator with regular deposits. See how savings grow year by year.">
+  <meta property="og:description" content="Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.">
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
   <link rel="stylesheet" href="../css/style.css">
@@ -30,11 +30,11 @@
   <link rel="modulepreload" href="../js/tools.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/compound-interest.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free compound interest calculator with regular deposits. See how savings grow year by year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return — but investment returns vary year to year and aren't guaranteed."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Compound Interest</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Compound Interest</span></nav>
     <div class="tool-head">
       <h1>Compound Interest Calculator</h1>
       <p>See how savings grow with interest and regular contributions.</p>
@@ -64,12 +64,13 @@
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
-      <p>Compound interest means you earn interest on your interest. The balance grows by <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the annual rate, n the compounding periods per year and t the years. Regular deposits are added each period.</p>
-<p>The year-by-year table shows how much of your balance comes from deposits and how much from interest — over long periods, interest usually overtakes deposits.</p>
+      <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/budgeting/compound-interest-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's compound interest calculator</a>, so you can cross-check a result there.</p>
+<p>Compound interest means you earn interest on your interest. The balance grows by <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the annual rate, n the compounding periods per year and t the years. Regular deposits are added each period.</p>
+<p>The year-by-year table shows how much of your balance comes from deposits and how much from interest. Over long periods, interest usually overtakes deposits.</p>
       <h2>Frequently asked questions</h2>
-      <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return — but investment returns vary year to year and aren't guaranteed.</p></details>
+      <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="offset.html">Offset Account</a><a href="take-home-pay.html">Take-Home Pay</a><a href="percentage.html">Percentage</a><a href="mortgage.html">Mortgage Repayments</a></nav>
+      <nav class="related"><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a><a href="offset.html">Offset Account</a></nav>
     </section>
     <!-- content:end -->
   </main>

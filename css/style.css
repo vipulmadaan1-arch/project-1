@@ -133,12 +133,19 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 }
 .bmc:hover { color: var(--accent-ink); background: var(--accent); }
 .bmc .icon { width: 17px; height: 17px; }
-@media (max-width: 640px) { .nav { display: none; } .bmc span { display: none; } .bmc { padding: 0 10px; } }
+@media (max-width: 640px) {
+  .bmc span { display: none; } .bmc { padding: 0 10px; }
+  /* Phones: the section links become a swipeable row under the brand, so every page can reach every section. */
+  :root { --header-h: 96px; } html { scroll-padding-top: 112px; }
+  .site-header .wrap { height: auto; flex-wrap: wrap; padding-block: 8px 0; row-gap: 2px; }
+  .nav { order: 5; flex-basis: 100%; margin: 0 -10px; overflow-x: auto; scrollbar-width: none; }
+  .nav a { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
+}
 
 /* ---------- Footer ---------- */
 .site-footer { border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: var(--t-sm); }
 .site-footer .wrap { padding-block: 44px 36px; display: grid; gap: 32px; grid-template-columns: 1.4fr repeat(4, 1fr); }
-.site-footer h2 { font: 600 var(--t-sm)/1.2 var(--font-body); color: var(--ink); margin-bottom: 14px; letter-spacing: 0; }
+.site-footer .foot-head { font: 600 var(--t-sm)/1.2 var(--font-body); color: var(--ink); margin: 0 0 14px; letter-spacing: 0; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
 .site-footer a { color: var(--muted); text-decoration: none; }
 .site-footer a:hover { color: var(--ink); }
@@ -495,3 +502,8 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 /* Short phone screens: keep the whole scientific keypad in view. */
 @media (max-height: 760px) and (max-width: 560px) { .calc.is-sci .calc-keys button { min-height: 40px; height: 40px; } }
 .aus-key { margin: 14px 0 0; font-size: var(--t-xs); color: var(--muted); }
+
+.checked-line { font-size: var(--t-sm); color: var(--muted); border-left: 3px solid var(--accent-soft); padding-left: 12px; }
+.readout-hint { margin: -6px 0 12px; font-size: var(--t-sm); color: var(--readout-muted); }
+/* A results panel taller than the window scrolls with the page instead of sticking, so nothing is cut off. */
+.readout.is-tall { position: static; }

@@ -6,13 +6,13 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <script data-module="../js/pages/gst.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GST Calculator Australia — Add or Remove 10% GST | Sorted, Mate</title>
+  <title>GST Calculator Australia: Add or Remove 10% GST | Sorted, Mate</title>
   <meta name="description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.">
   <!-- seo:start -->
   <meta property="og:site_name" content="Sorted, Mate">
   <meta property="og:locale" content="en_AU">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GST Calculator Australia — Add or Remove 10% GST">
+  <meta property="og:title" content="GST Calculator Australia: Add or Remove 10% GST">
   <meta property="og:description" content="Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.">
   <meta name="twitter:card" content="summary_large_image">
   <!-- seo:end -->
@@ -29,11 +29,11 @@
   <link rel="modulepreload" href="../js/tools.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/gst.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO for your situation."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate GST from a total?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09."}}, {"@type": "Question", "name": "Is GST charged on fresh food, rent or medical?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as GST-free. Renting out a home is input taxed, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list."}}, {"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO's GST guide for your situation."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">GST</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">GST</span></nav>
     <div class="tool-head">
       <h1>GST Calculator</h1>
       <p>Add 10% GST to a price, or find the GST included in a GST-inclusive amount.</p>
@@ -55,15 +55,30 @@
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
-      <p>Australia's GST rate is 10%.</p>
+      <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">the ATO's GST guide</a>.</p>
+<p>Australia's GST rate is 10%.</p>
 <ul><li><strong>Add GST:</strong> price × 1.1. $100 + GST = $110.</li>
 <li><strong>Remove GST:</strong> price ÷ 1.1. $110 includes $10 GST.</li>
 <li><strong>GST in a GST-inclusive price:</strong> price ÷ 11. For $220, GST is $20.</li></ul>
-<p>A common mistake is taking 10% off a GST-inclusive price — $110 − 10% = $99, not $100.</p>
+<p>A common mistake is taking 10% off a GST-inclusive price: $110 − 10% = $99, not $100.</p>
+<h3>Adding GST</h3>
+<table><thead><tr><th>Price before GST</th><th>GST</th><th>Total</th></tr></thead><tbody>
+<tr><td>$50</td><td>$5.00</td><td>$55.00</td></tr>
+<tr><td>$99</td><td>$9.90</td><td>$108.90</td></tr>
+<tr><td>$1,000</td><td>$100.00</td><td>$1,100.00</td></tr>
+<tr><td>$5,500</td><td>$550.00</td><td>$6,050.00</td></tr>
+</tbody></table>
+<h3>Removing GST from a total</h3>
+<table><thead><tr><th>Total with GST</th><th>GST inside</th><th>Price before GST</th></tr></thead><tbody>
+<tr><td>$50</td><td>$4.55</td><td>$45.45</td></tr>
+<tr><td>$99</td><td>$9.00</td><td>$90.00</td></tr>
+<tr><td>$1,000</td><td>$90.91</td><td>$909.09</td></tr>
+<tr><td>$5,500</td><td>$500.00</td><td>$5,000.00</td></tr>
+</tbody></table>
       <h2>Frequently asked questions</h2>
-      <details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO for your situation.</p></details>
+      <details><summary>How do I calculate GST from a total?</summary><p>Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09.</p></details><details><summary>Is GST charged on fresh food, rent or medical?</summary><p>Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/gst-free-sales" target="_blank" rel="noopener noreferrer">GST-free</a>. Renting out a home is <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/input-taxed-sales" target="_blank" rel="noopener noreferrer">input taxed</a>, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list.</p></details><details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">ATO's GST guide</a> for your situation.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="percentage.html">Percentage</a><a href="calculator.html">Calculator</a><a href="take-home-pay.html">Take-Home Pay</a><a href="compound-interest.html">Compound Interest</a></nav>
+      <nav class="related"><a href="percentage.html">Percentage</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
     </section>
     <!-- content:end -->
   </main>

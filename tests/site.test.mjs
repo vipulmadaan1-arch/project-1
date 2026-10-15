@@ -27,7 +27,7 @@ test('service worker caches every site file', () => {
     ...readdirSync('js').filter((f) => f.endsWith('.js')).map((f) => `js/${f}`),
     ...readdirSync('js/pages').map((f) => `js/pages/${f}`),
     ...readdirSync('fonts').filter((f) => f.endsWith('.woff2')).map((f) => `fonts/${f}`),
-    'index.html', 'privacy.html', '404.html', 'css/style.css',
+    'index.html', 'privacy.html', 'about.html', '404.html', 'css/style.css',
   ];
   for (const f of files) assert.ok(listed.includes(f), `${f} missing from sw.js FILES`);
   for (const f of listed) if (f !== './') assert.ok(existsSync(f), `sw.js lists missing file ${f}`);
@@ -55,7 +55,7 @@ test('ads stay off until AdSense IDs are set', async () => {
 });
 
 test('every page has a Content-Security-Policy that allows its inline scripts', () => {
-  const pages = ['index.html', 'privacy.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
+  const pages = ['index.html', 'privacy.html', 'about.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
   for (const p of pages) {
     const html = readFileSync(p, 'utf8');
     const csp = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/)?.[1];
@@ -76,7 +76,7 @@ test('every page has a Content-Security-Policy that allows its inline scripts', 
   }
 });
 
-const HTML_PAGES = ['index.html', 'privacy.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
+const HTML_PAGES = ['index.html', 'privacy.html', 'about.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
 
 // Each page lists every module its scripts import as <link rel="modulepreload">, so the browser fetches
 // the whole module graph at once instead of discovering imports one level at a time.
@@ -111,13 +111,15 @@ test('preloaded fonts, icons and manifest icons exist', () => {
   assert.ok(manifest.icons.some((i) => i.purpose === 'maskable'), 'manifest needs a maskable icon');
 });
 
-test('every page has a privacy link via the shared footer and the privacy page exists', () => {
+test('every page has privacy and about links via the shared footer, and both pages exist', () => {
   assert.ok(existsSync('privacy.html'));
+  assert.ok(existsSync('about.html'));
   assert.match(readFileSync('js/layout.js', 'utf8'), /privacy\.html/);
+  assert.match(readFileSync('js/layout.js', 'utf8'), /about\.html/);
 });
 
 // ---------- SEO ----------
-const PAGES = ['index.html', 'privacy.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)];
+const PAGES = ['index.html', 'privacy.html', 'about.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)];
 const read = (f) => readFileSync(f, 'utf8');
 
 test('every page has valid JSON-LD', () => {

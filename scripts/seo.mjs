@@ -2,7 +2,9 @@
 // so the domain lives in one place: SITE_URL in js/config.js.
 //   - <head> tags between <!-- seo:start --> and <!-- seo:end -->: canonical link, Open Graph,
 //     Twitter card, BreadcrumbList JSON-LD (built from each page's visible breadcrumb) and,
-//     on the home page, WebSite JSON-LD for the site name.
+//     on the home page, WebSite and Organization JSON-LD. Tool pages' WebApplication JSON-LD
+//     (written by scripts/content.py) points at the same Organization as its publisher.
+//   - The visible breadcrumb's first link is always "Home".
 //   - The static tool list between <!-- tiles:start --> and <!-- tiles:end --> on the home and
 //     404 pages, so every tool has a plain link even before JavaScript runs.
 //   - sitemap.xml (lastmod = date of each page's last commit) and robots.txt.
@@ -29,8 +31,22 @@ const unesc = (s) => s.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&g
 const PAGES = [
   { file: 'index.html', path: '' },
   ...TOOLS.map((t) => ({ file: `tools/${t.slug}.html`, path: `tools/${t.slug}.html` })),
+  { file: 'about.html', path: 'about.html' },
   { file: 'privacy.html', path: 'privacy.html' },
 ];
+
+// Sitemap lastmod = date of each page's last commit, or today if it has uncommitted changes (or no
+// history). Worked out before any page is rewritten below, so rerunning this script doesn't make
+// every page look modified today.
+const today = new Date().toISOString().slice(0, 10);
+const git = (args) => execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+function lastmod(file) {
+  try {
+    if (git(['status', '--porcelain', '--', file])) return today;
+    return git(['log', '-1', '--format=%cs', '--', file]) || today;
+  } catch { return today; }
+}
+const LASTMOD = new Map(PAGES.map((p) => [p.file, lastmod(p.file)]));
 
 function headBlock(html, page) {
   const url = base ? `${base}/${page.path}` : '';
@@ -58,8 +74,10 @@ function headBlock(html, page) {
 
   // Structured data that needs absolute URLs.
   const ld = [];
-  if (url && page.path === '') {
-    ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_NAME.replace(',', ''), url });
+  if (page.path === '') {
+    // Same @id as the publisher in each tool page's WebApplication JSON-LD (scripts/content.py).
+    ld.push({ '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, ...(url ? { '@id': `${url}#organization`, url } : {}) });
+    if (url) ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_NAME.replace(',', ''), url, publisher: { '@id': `${url}#organization` } });
   }
   const crumbs = html.match(/<nav class="crumbs"[^>]*>([\s\S]*?)<\/nav>/);
   if (url && crumbs) {
@@ -71,7 +89,9 @@ function headBlock(html, page) {
         '@type': 'ListItem',
         position: i + 1,
         name: unesc(m[2] || m[3]),
-        ...(m[1] !== undefined ? { item: new URL(m[1], url).href } : {}),
+        // Section crumbs link to a #fragment of the home page, which isn't a page of its own,
+        // so they're listed by name only.
+        ...(m[1] !== undefined && !m[1].includes('#') ? { item: new URL(m[1], url).href } : {}),
       })),
     });
   }
@@ -105,14 +125,15 @@ const crumbFor = (t) => { const c = CATEGORIES.find((x) => x.key === t.cat); ret
 for (const page of PAGES) {
   let html = readFileSync(page.file, 'utf8');
   const tool = TOOLS.find((t) => page.file === `tools/${t.slug}.html`);
-  if (tool) html = html.replace(/(<nav class="crumbs"[^>]*><a href="\.\.\/">Tools<\/a><span aria-hidden="true">\/<\/span>)<a href="\.\.\/#[a-z]+">[^<]*<\/a>/, `$1${crumbFor(tool)}`);
+  html = html.replace(/(<nav class="crumbs"[^>]*><a href="(?:\.\.\/|\.\/)">)(?:Tools|Home)(<\/a>)/, '$1Home$2');
+  if (tool) html = html.replace(/(<nav class="crumbs"[^>]*><a href="\.\.\/">Home<\/a><span aria-hidden="true">\/<\/span>)<a href="\.\.\/#[a-z]+">[^<]*<\/a>/, `$1${crumbFor(tool)}`);
   html = stamp(html, headBlock(html, page));
   if (page.file === 'index.html') html = withTiles(html);
   writeFileSync(page.file, html);
 }
 
 // 404 page: GitHub Pages serves it for any missing address, so its links need a fixed base.
-let notFound = readFileSync('404.html', 'utf8');
+let notFound = readFileSync('404.html', 'utf8').replace(/(<nav class="crumbs"[^>]*><a href="\.\/">)Tools(<\/a>)/, '$1Home$2');
 const basePath = base ? new URL(`${base}/`).pathname : '/';
 notFound = stamp(notFound, [`<base href="${basePath}">`, '<meta name="robots" content="noindex">']);
 writeFileSync('404.html', withTiles(notFound));
@@ -122,16 +143,9 @@ if (!base) {
   process.exit(0);
 }
 
-const today = new Date().toISOString().slice(0, 10);
-function lastmod(file) {
-  try {
-    if (execFileSync('git', ['status', '--porcelain', '--', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim()) return today;
-    return execFileSync('git', ['log', '-1', '--format=%cs', '--', file], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || today;
-  } catch { return today; }
-}
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PAGES.map((p) => `  <url><loc>${base}/${p.path}</loc><lastmod>${lastmod(p.file)}</lastmod></url>`).join('\n')}
+${PAGES.map((p) => `  <url><loc>${base}/${p.path}</loc><lastmod>${LASTMOD.get(p.file)}</lastmod></url>`).join('\n')}
 </urlset>
 `);
 writeFileSync('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);

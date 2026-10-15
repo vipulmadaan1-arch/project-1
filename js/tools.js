@@ -16,7 +16,7 @@ export const TOOLS = [
   { slug: 'hecs-help', name: 'HECS/HELP Debt Payoff', desc: 'Years to repay your study loan, with indexation and extra repayments.', meta: 'ATO 2026-27 rates', cat: 'tax' },
   { slug: 'gst', name: 'GST', desc: 'Add GST to a price or find the GST inside a total.', meta: '10% rate', cat: 'tax' },
   { slug: 'stamp-duty', name: 'Stamp Duty, All States', desc: 'Transfer duty for every state and territory, with home and first home concessions.', meta: 'All 8 states and territories', cat: 'property' },
-  { slug: 'stamp-duty-nsw', name: 'NSW Stamp Duty', desc: 'Transfer duty, first home buyer concessions and foreign surcharge.', meta: 'Revenue NSW 2026/27', cat: 'property' },
+  { slug: 'stamp-duty-nsw', name: 'NSW Stamp Duty', desc: 'Transfer duty, first home buyer concessions and foreign surcharge.', meta: 'Revenue NSW 2026-27', cat: 'property' },
   { slug: 'mortgage', name: 'Mortgage Repayments', desc: 'Home loan repayments and total interest, weekly to monthly.', meta: 'Weekly to monthly', cat: 'property' },
   { slug: 'offset', name: 'Offset Account', desc: 'Interest and years saved by money held in offset.', meta: 'Same repayment', cat: 'property' },
   { slug: 'rental-yield', name: 'Rental Yield', desc: 'Gross and net yield from weekly rent and annual costs.', meta: 'Per-week rent', cat: 'property' },
@@ -34,7 +34,7 @@ export const TOOLS = [
   { slug: 'super', name: 'Super & Salary Sacrifice', desc: 'Employer super, tax saved by salary sacrificing and the concessional cap.', meta: 'ATO 2026-27, $32,500 cap', cat: 'tax' },
   { slug: 'medicare-levy-surcharge', name: 'Medicare Levy Surcharge', desc: 'The surcharge without hospital cover, and whether a policy costs less.', meta: 'ATO 2026-27 thresholds', cat: 'tax' },
   { slug: 'car-stamp-duty', name: 'Car Stamp Duty, All States', desc: 'Motor vehicle duty on new and used cars in every state, with electric, hybrid and luxury rates.', meta: 'All 8 states and territories', cat: 'property' },
-  { slug: 'inflation', name: 'Inflation Calculator', desc: 'What an amount from any year since 1948 is worth today, using ABS CPI.', meta: 'ABS CPI since 1948', cat: 'money' },
+  { slug: 'inflation', name: 'Inflation', desc: 'What an amount from any year since 1948 is worth today, using ABS CPI.', meta: 'ABS CPI since 1948', cat: 'money' },
   { slug: 'borrowing-power', name: 'Borrowing Power', desc: 'Roughly how much a bank might lend, tested at APRA\'s 3% buffer.', meta: 'APRA 3% buffer', cat: 'property' },
   { slug: 'rental-cashflow', name: 'Rental Cashflow & Negative Gearing', desc: 'Weekly cashflow after tax, and the 2027 negative gearing limit.', meta: 'Before and after 1 July 2027', cat: 'property' },
 ];
