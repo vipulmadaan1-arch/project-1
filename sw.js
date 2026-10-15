@@ -9,7 +9,7 @@
 // Serving: network first, so a deploy shows up on the next page load. The cache is the fallback when
 // the network fails, or answers slower than NETWORK_TIMEOUT_MS (a bad mobile signal). In that case
 // the network copy still finishes in the background and refreshes the cache for next time.
-const VERSION = 'v27';
+const VERSION = 'v28';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 const FILES = [
@@ -27,6 +27,7 @@ const FILES = [
   'js/inflation.js',
   'js/cpi-data.js',
   'js/chart.js',
+  'js/aussie.js',
   'tools/car-stamp-duty.html',
   'js/pages/car-stamp-duty.js',
   'js/motor-duty.js',

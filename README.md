@@ -87,6 +87,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 | NSW transfer duty thresholds (CPI-indexed) | `NSW_BRACKETS`, `NSW_PREMIUM` in `js/calc.js` | Revenue NSW: How to calculate transfer duty |
 | Other states' transfer duty tables, home and first home rules, foreign surcharges | `STATES` and the tables above it in `js/duty.js`; update `DUTY_CHECKED` | Each state's revenue office (links in `source` per state) |
 | CPI quarterly index (ABS, Sep 2025 = 100) for CGT indexation; add each quarter as published | `CPI` in `js/cgt.js` | ABS Consumer Price Index, All groups, weighted average of eight capital cities |
+| "In Aussie terms" benchmarks: minimum wage (1 July), ABS earnings, Cotality rent and home values, MCG, ABS population, DCCEEW kangaroo counts | `BENCH` and `COUNTS` in `js/aussie.js` (each has its source and date) | Fair Work, ABS, Cotality, DCCEEW, AFL, MCC |
 | Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` in `js/calc.js` and `bracketsFor` in `js/cgt.js` | ATO tax rates, Australian residents |
 | Medicare levy low-income thresholds | `MEDICARE` | ATO: Medicare levy reduction for low-income earners |
 | HECS/HELP repayment thresholds (indexed yearly) | `HELP` | ATO: Study and training loan minimum repayment income and rates |

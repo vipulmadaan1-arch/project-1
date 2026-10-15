@@ -80,9 +80,13 @@ footer.innerHTML = `
   </div>`;
 document.body.append(footer);
 
+
 // Tool pages: add the tool's icon and source label to the page heading.
 const slug = location.pathname.match(/tools\/([^/]+)\.html$/)?.[1];
 const tool = TOOLS.find((t) => t.slug === slug);
+// Money tools get an "In Aussie terms" card comparing the result with familiar Australian yardsticks.
+// Loaded on demand, so pages without a dollar result don't download it.
+if (tool && tool.cat !== 'general') import('./aussie.js').then((m) => m.mountAussieTerms()).catch(() => {});
 const head = document.querySelector('.tool-head');
 if (tool && head) {
   head.insertAdjacentHTML('afterbegin', `<div class="ico">${icon(tool.slug)}</div><span class="tag">${tool.meta}</span>`);

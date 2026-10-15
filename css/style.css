@@ -444,3 +444,28 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .chart-tip b { margin-left: auto; padding-left: 12px; color: var(--ink); font-weight: 600; font-feature-settings: var(--tnum); }
 .chart-tip .chart-tip-total { border-top: 1px solid var(--line); padding-top: 3px; margin-top: 2px; }
 @media (forced-colors: active) { .chart-svg .s1 { fill: CanvasText; } .chart-svg .s2 { fill: GrayText; } .chart-key.s1 { background: CanvasText; } .chart-key.s2 { background: GrayText; } }
+
+/* ---------- In Aussie terms ---------- */
+.aus-card { margin-top: 20px; }
+.aus-card .section-title { font-size: var(--t-md); color: var(--ink); }
+.aus-amount { color: var(--accent); font-feature-settings: var(--tnum); }
+.aus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; margin-top: 4px; }
+@media (max-width: 760px) { .aus-grid { grid-template-columns: 1fr; } }
+.aus-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.aus-list li { display: flex; gap: 12px; align-items: flex-start; font-size: var(--t-base); line-height: 1.45; }
+.aus-list .icon { flex: none; color: var(--accent); background: var(--accent-soft); border-radius: 8px; padding: 6px; width: 32px; height: 32px; }
+.aus-count { border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); }
+.aus-est { font-size: var(--t-xs); color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; margin-left: 2px; white-space: nowrap; }
+.aus-sub { font: 600 var(--t-sm)/1.2 var(--font-body); color: var(--muted); margin: 0 0 12px; }
+.aus-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.aus-bars li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "label value" "track track"; gap: 4px 12px; font-size: var(--t-sm); }
+.aus-bar-label { grid-area: label; color: var(--muted); }
+.aus-bar-value { grid-area: value; font-weight: 600; font-feature-settings: var(--tnum); }
+.aus-bar-track { grid-area: track; height: 10px; background: var(--sunken); border-radius: 5px; overflow: hidden; }
+.aus-bar { display: block; height: 100%; background: var(--line-strong); border-radius: 5px; }
+.aus-bars .is-you .aus-bar { background: var(--series-1); }
+.aus-bars .is-you .aus-bar-label { color: var(--ink); font-weight: 600; }
+.aus-sources { margin-top: 18px; font-size: var(--t-xs); color: var(--muted); }
+.aus-sources summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
+.aus-sources ul { margin: 10px 0 6px; padding-left: 18px; display: grid; gap: 4px; }
+@media (forced-colors: active) { .aus-bar { background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } }
