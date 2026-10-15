@@ -30,6 +30,8 @@ const P = {
   'refinance': '<path d="M3 11 9 5.5l6 5.5"/><path d="M5 9.5V19h8V9.5"/><path d="M17 7h4M19 5v4"/><path d="M17.5 14.5a3 3 0 1 1 1 4.2"/><path d="M17 20.5l1.5-1.8-2.2-.6"/>',
   'term-deposit': '<rect x="4" y="5" width="16" height="15" rx="1.5"/><path d="M4 9.5h16M8.5 3v4M15.5 3v4"/><circle cx="12" cy="14.5" r="2.6"/><path d="M12 13.3v1.2l.9.6"/>',
   'balance-transfer': '<rect x="2.5" y="4" width="12" height="8" rx="1.2"/><path d="M2.5 7h12"/><rect x="9.5" y="12" width="12" height="8" rx="1.2"/><path d="M9.5 15h12"/><path d="M18 5.5h1.5a1.5 1.5 0 0 1 1.5 1.5v2.5M19.5 8l1.5 1.5L22.5 8"/>',
+  'tax-refund': '<path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21z"/><path d="M9 9h6M9 12.5h3"/><path d="M15.5 17.5h-5"/><path d="M12.5 15.5l-2 2 2 2"/>',
+  'rent-vs-buy': '<path d="M2.5 11 7 7l4.5 4"/><path d="M4 10v8h6v-8"/><path d="M13 11l4.5-4 4.5 4"/><path d="M14.5 10v8h6v-8"/><path d="M17.5 18v-3"/><circle cx="7" cy="13.5" r="1.2"/>',
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   pin: '<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',

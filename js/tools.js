@@ -43,6 +43,8 @@ export const TOOLS = [
   { slug: 'refinance', name: 'Refinance', desc: 'What switching home loans saves after costs, and when you break even.', meta: 'Costs and break-even', cat: 'property' },
   { slug: 'term-deposit', name: 'Term Deposit', desc: 'Interest and balance at maturity, paid monthly to at maturity, with tax.', meta: 'Monthly to maturity', cat: 'money' },
   { slug: 'balance-transfer', name: 'Balance Transfer', desc: 'Stay or transfer: interest, fees, time to clear and what is left after the intro rate.', meta: 'Fee, intro and revert rate', cat: 'money' },
+  { slug: 'tax-refund', name: 'Tax Refund Estimator', desc: 'Your tax refund or bill for 2025-26 or 2026-27, from your income statement.', meta: 'ATO 2025-26 & 2026-27', cat: 'tax' },
+  { slug: 'rent-vs-buy', name: 'Rent vs Buy', desc: 'Your wealth after buying a home or renting and investing the difference.', meta: 'Stamp duty, all states', cat: 'property' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';

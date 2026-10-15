@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/tax-refund.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tax Refund Calculator 2025-26 and 2026-27 | Sorted, Mate</title>
+  <meta name="description" content="Estimate your Australian tax refund or bill for 2025-26 or 2026-27 from your income statement, deductions, private health cover and HECS/HELP debt.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tax Refund Calculator 2025-26 and 2026-27">
+  <meta property="og:description" content="Estimate your Australian tax refund or bill for 2025-26 or 2026-27 from your income statement, deductions, private health cover and HECS/HELP debt.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/cgt.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/refund.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/tax-refund.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Tax Refund Calculator 2025-26 and 2026-27", "description": "Estimate your Australian tax refund or bill for 2025-26 or 2026-27 from your income statement, deductions, private health cover and HECS/HELP debt.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much tax do I pay on $85,000 in 2025-26?", "acceptedAnswer": {"@type": "Answer", "text": "$17,988: $16,288 income tax plus a $1,700 Medicare levy, with no deductions. In 2026-27 the same salary pays $17,400 ($15,720 tax plus $1,680 Medicare levy), $588 less, thanks to the 15% bracket and the $1,000 standard deduction."}}, {"@type": "Question", "name": "How much does the $1,000 standard deduction save?", "acceptedAnswer": {"@type": "Answer", "text": "$320 at a $85,000 salary in 2026-27 (30% tax plus 2% Medicare levy on $1,000). It isn't in your pay; it comes back when you lodge, so it adds to your refund. It doesn't exist for 2025-26."}}, {"@type": "Question", "name": "Will I pay the Medicare levy surcharge without private health insurance?", "acceptedAnswer": {"@type": "Answer", "text": "Only above the surcharge threshold. A single person with $110,000 taxable income and no hospital cover pays $1,100 (1%) in 2025-26. In 2026-27 the same salary pays $1,090, because the $1,000 standard deduction takes taxable income to $109,000, still above the $105,000 threshold."}}, {"@type": "Question", "name": "How much HECS/HELP comes out of my refund?", "acceptedAnswer": {"@type": "Answer", "text": "$2,700 on $85,000 in 2025-26: 15c for each $1 over $67,000. In 2026-27 it's $2,170.80, because the threshold rises to $69,528 and the standard deduction lowers taxable income to $84,000. Employers withhold extra for HELP during the year, so include that in tax withheld."}}, {"@type": "Question", "name": "Why do I get a refund if I earn under $45,000?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly the low income tax offset, which the ATO applies at tax time, not in your pay. On $30,000 in 2025-26 the $700 offset cuts income tax from $1,888 to $1,188. With a $198.90 Medicare levy and $1,500 withheld, the refund is $113.10."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Tax Refund</span></nav>
+    <div class="tool-head">
+      <h1>Tax Refund Calculator 2025-26 and 2026-27</h1>
+      <p>Estimate your tax refund, or what you'll owe, from your income statement, other income and deductions, using ATO rates for Australian residents.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="year">Income year</label>
+          <select id="year" aria-describedby="year-hint"><option value="2025-26" selected>2025-26 (1 July 2025 to 30 June 2026)</option><option value="2026-27">2026-27 (1 July 2026 to 30 June 2027)</option></select>
+          <small id="year-hint">2025-26 is the return you lodge now. 2026-27 has the 15% bracket and the $1,000 standard deduction.</small></div>
+        <div class="field"><label for="salary">Salary and wages, before tax ($)</label><input type="text" id="salary" class="num" value="85,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="salary-hint"><small id="salary-hint">Gross payments on your income statement (in myGov) or payment summaries.</small></div>
+        <div class="field"><label for="withheld">Tax withheld ($)</label><input type="text" id="withheld" class="num" value="18,500" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="withheld-hint"><small id="withheld-hint">The PAYG tax withheld amount on the same income statement.</small></div>
+        <div class="field"><label for="interest">Bank interest ($)</label><input type="text" id="interest" class="num" value="500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="dividends">Dividends received ($)</label><input type="text" id="dividends" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="dividends-hint"><small id="dividends-hint">The cash amount paid to you (unfranked plus franked amounts).</small></div>
+        <div class="field"><label for="franking">Franking credits ($)</label><input type="text" id="franking" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="franking-hint"><small id="franking-hint">From your dividend statements. They count as income and come back as a credit.</small></div>
+        <div class="field"><label for="work">Work-related deductions ($)</label><input type="text" id="work" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="work-hint"><small id="work-hint">Working from home, car, tools, uniforms, courses and the like.</small></div>
+        <div class="field"><label for="other">Other deductions ($)</label><input type="text" id="other" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="other-hint"><small id="other-hint">Donations, cost of managing tax affairs, income protection and the like.</small></div>
+        <label class="check"><input type="checkbox" id="cover" checked aria-describedby="cover-hint"> I had private hospital cover all year</label>
+        <small id="cover-hint" class="hint">Without it, singles earning over the Medicare levy surcharge threshold pay an extra 1% to 1.5%.</small>
+        <label class="check"><input type="checkbox" id="help"> I have a HECS/HELP or other study loan</label>
+      </form>
+      <div class="card readout">
+        <div id="refund-label">Estimated refund</div>
+        <div class="result-big" id="refund">–</div>
+        <div class="kv"><span>Total income</span><span id="income">–</span></div>
+        <div class="kv"><span id="deductions-label">Deductions</span><span id="deductions">–</span></div>
+        <div class="kv"><span>Taxable income</span><span id="taxable">–</span></div>
+        <div class="kv"><span>Income tax before offsets</span><span id="gross">–</span></div>
+        <div class="kv"><span>Low income tax offset</span><span id="lito">–</span></div>
+        <div class="kv"><span>Medicare levy</span><span id="medicare">–</span></div>
+        <div class="kv" id="mls-row" hidden><span id="mls-label">Medicare levy surcharge</span><span id="mls">–</span></div>
+        <div class="kv" id="help-row" hidden><span>HECS/HELP repayment</span><span id="helpamt">–</span></div>
+        <div class="kv" id="franking-row" hidden><span>Franking credits</span><span id="frankingamt">–</span></div>
+        <div class="kv"><span>Tax and levies for the year</span><span id="liability">–</span></div>
+        <div class="kv"><span>Less tax withheld</span><span id="withheldamt">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only, not tax advice. Australian residents for the full year, single, using ATO rates checked 15 Oct 2026. Assumes no fringe benefits, investment losses or reportable super, so your income for the surcharge and HECS/HELP is your taxable income. Doesn't cover capital gains, rental income, business income, other offsets or family Medicare thresholds. <span id="estimate-note"></span>Your actual result comes from your <a href="https://www.ato.gov.au/calculators-and-tools/income-tax-estimator" target="_blank" rel="noopener noreferrer">ATO notice of assessment</a>.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">the ATO's resident tax rates</a> and the ATO Medicare levy, surcharge and study loan pages.</p>
+<p>Your refund is the tax your employer withheld minus the tax you actually owe for the year. We add your salary, interest, dividends and franking credits, take off your deductions to get your <strong>taxable income</strong>, then work out income tax at Australian resident rates, take off the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667), and add the <strong>Medicare levy</strong> (2%, reduced below $35,013), the <strong>Medicare levy surcharge</strong> if you had no private hospital cover, and any compulsory <strong>HECS/HELP</strong> repayment. Franking credits come off what you owe and can be refunded.</p>
+<table><thead><tr><th>Taxable income</th><th>2025-26</th><th>2026-27</th></tr></thead><tbody>
+<tr><td>$0 to $18,200</td><td>Nil</td><td>Nil</td></tr><tr><td>$18,201 to $45,000</td><td>16%</td><td>15%</td></tr><tr><td>$45,001 to $135,000</td><td>30%</td><td>30%</td></tr>
+<tr><td>$135,001 to $190,000</td><td>37%</td><td>37%</td></tr><tr><td>$190,001 and over</td><td>45%</td><td>45%</td></tr></tbody></table>
+<p><strong>2026-27</strong> adds a $1,000 standard deduction for employees, applied automatically. If your work-related expenses are bigger, claiming them replaces it. The Medicare levy surcharge thresholds rise from $101,000 (2025-26) to $105,000 (2026-27) for singles, and the HECS/HELP repayment threshold from $67,000 to $69,528. The ATO hasn't published 2026-27 Medicare levy low-income thresholds yet, so 2025-26 figures ($28,011 and $35,013) are used.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much tax do I pay on $85,000 in 2025-26?</summary><p>$17,988: $16,288 income tax plus a $1,700 Medicare levy, with no deductions. In 2026-27 the same salary pays $17,400 ($15,720 tax plus $1,680 Medicare levy), $588 less, thanks to the 15% bracket and the $1,000 standard deduction.</p></details><details><summary>How much does the $1,000 standard deduction save?</summary><p>$320 at a $85,000 salary in 2026-27 (30% tax plus 2% Medicare levy on $1,000). It isn't in your pay; it comes back when you lodge, so it adds to your refund. It doesn't exist for 2025-26.</p></details><details><summary>Will I pay the Medicare levy surcharge without private health insurance?</summary><p>Only above the surcharge threshold. A single person with $110,000 taxable income and no hospital cover pays $1,100 (1%) in 2025-26. In 2026-27 the same salary pays $1,090, because the $1,000 standard deduction takes taxable income to $109,000, still above the $105,000 threshold.</p></details><details><summary>How much HECS/HELP comes out of my refund?</summary><p>$2,700 on $85,000 in 2025-26: 15c for each $1 over $67,000. In 2026-27 it's $2,170.80, because the threshold rises to $69,528 and the standard deduction lowers taxable income to $84,000. Employers withhold extra for HELP during the year, so include that in tax withheld.</p></details><details><summary>Why do I get a refund if I earn under $45,000?</summary><p>Mostly the low income tax offset, which the ATO applies at tax time, not in your pay. On $30,000 in 2025-26 the $700 offset cuts income tax from $1,888 to $1,188. With a $198.90 Medicare levy and $1,500 withheld, the refund is $113.10.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a><a href="medicare-levy-surcharge.html">Medicare Levy Surcharge</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

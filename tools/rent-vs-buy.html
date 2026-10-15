@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/rent-vs-buy.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rent vs Buy Calculator Australia | Sorted, Mate</title>
+  <meta name="description" content="Compare your wealth after buying a home or renting and investing the difference, with stamp duty for every state, loan costs, growth and a break-even year.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rent vs Buy Calculator Australia">
+  <meta property="og:description" content="Compare your wealth after buying a home or renting and investing the difference, with stamp duty for every state, loan costs, growth and a break-even year.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/duty.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/rentbuy.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/rent-vs-buy.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rent vs Buy Calculator (Australia)", "description": "Compare your wealth after buying a home or renting and investing the difference, with stamp duty for every state, loan costs, growth and a break-even year.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is it better to rent or buy in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $112,914 after 10 years. At 4% growth the gap is only $3,115, and at 3% growth renting and investing is ahead by $97,391."}}, {"@type": "Question", "name": "How long until buying beats renting?", "acceptedAnswer": {"@type": "Answer", "text": "In the example it takes 5 years: by year 4 the renter is still ahead, but from year 5 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind."}}, {"@type": "Question", "name": "Does being a first home buyer change the answer?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $166,719 after 10 years and from year 2."}}, {"@type": "Question", "name": "Does the calculator include tax?", "acceptedAnswer": {"@type": "Answer", "text": "Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $622,036 after 10 years in the example, and at 0% (pre-tax) $674,213, which shrinks buying's lead to $60,736."}}, {"@type": "Question", "name": "What investment return should I use?", "acceptedAnswer": {"@type": "Answer", "text": "It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $188,995 ahead after 10 years instead of $112,914. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Rent vs Buy</span></nav>
+    <div class="tool-head">
+      <h1>Rent vs Buy Calculator (Australia)</h1>
+      <p>Compare your net wealth if you buy a home, or rent and invest the deposit and any savings instead. Every default below is an assumption you can change.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <h2 class="section-title">Buying</h2>
+        <div class="field"><label for="price">Home price ($)</label><input type="text" id="price" class="num" value="800,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="deposit">Deposit ($)</label><input type="text" id="deposit" class="num" value="160,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="deposit-hint"><small id="deposit-hint">Cash you put in. The rest is borrowed.</small></div>
+        <div class="field"><label for="state">State or territory (for stamp duty)</label>
+          <select id="state">
+            <option value="NSW">New South Wales</option><option value="VIC">Victoria</option><option value="QLD">Queensland</option><option value="SA">South Australia</option>
+            <option value="WA">Western Australia</option><option value="TAS">Tasmania</option><option value="ACT">Australian Capital Territory</option><option value="NT">Northern Territory</option>
+          </select></div>
+        <label class="check"><input type="checkbox" id="home" checked> I'll live in it (owner occupier)</label>
+        <label class="check"><input type="checkbox" id="fhb"> First home buyer</label>
+        <div class="field"><label for="upfront">Other upfront costs ($)</label><input type="text" id="upfront" class="num" value="3,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="upfront-hint"><small id="upfront-hint">Assumption: conveyancing, inspections, loan fees. Add lenders mortgage insurance here if your deposit is under 20%.</small></div>
+        <div class="field"><label for="rate">Loan interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="rate-hint"><small id="rate-hint">Assumption: stays the same for the whole period.</small></div>
+        <div class="field"><label for="term">Loan term (years)</label><input type="text" id="term" class="num" value="30" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+        <h2 class="section-title">Owning costs (a year, today's dollars)</h2>
+        <div class="field"><label for="council">Council and water rates ($ a year)</label><input type="text" id="council" class="num" value="2,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="council-hint"><small id="council-hint">Assumption: check your council for the real figure.</small></div>
+        <div class="field"><label for="strata">Strata levies ($ a year)</label><input type="text" id="strata" class="num" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="strata-hint"><small id="strata-hint">Units and townhouses usually pay strata.</small></div>
+        <div class="field"><label for="insurance">Home insurance ($ a year)</label><input type="text" id="insurance" class="num" value="1,800" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="insurance-hint"><small id="insurance-hint">Assumption: building insurance.</small></div>
+        <div class="field"><label for="maint">Maintenance (% of home value a year)</label><input type="text" id="maint" class="num" value="1" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="maint-hint"><small id="maint-hint">Assumption: repairs and upkeep, rising with the home's value.</small></div>
+        <div class="field"><label for="costinf">Rates, strata and insurance rise by (% a year)</label><input type="text" id="costinf" class="num" value="3" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="costinf-hint"><small id="costinf-hint">Assumption: roughly in line with inflation.</small></div>
+        <div class="field"><label for="growth">Home price growth (% a year)</label><input type="text" id="growth" class="num" value="5" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="growth-hint"><small id="growth-hint">Assumption: nobody knows future prices; try a few values.</small></div>
+        <div class="field"><label for="selling">Selling costs (% of sale price)</label><input type="text" id="selling" class="num" value="2.5" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="selling-hint"><small id="selling-hint">Assumption: agent commission and marketing if you sold at the end.</small></div>
+        <h2 class="section-title">Renting</h2>
+        <div class="field"><label for="rent">Rent ($ a week)</label><input type="text" id="rent" class="num" value="650" inputmode="decimal" data-money spellcheck="false" autocomplete="off" aria-describedby="rent-hint"><small id="rent-hint">For a similar home.</small></div>
+        <div class="field"><label for="rentgrowth">Rent increases (% a year)</label><input type="text" id="rentgrowth" class="num" value="4" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="rentgrowth-hint"><small id="rentgrowth-hint">Assumption: the same rise every year.</small></div>
+        <h2 class="section-title">Investing and time frame</h2>
+        <div class="field"><label for="ret">Investment return (% a year, before tax)</label><input type="text" id="ret" class="num" value="7" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="ret-hint"><small id="ret-hint">Assumption: earned on the renter's invested deposit and savings (and the buyer's, if owning is cheaper).</small></div>
+        <div class="field"><label for="drag">Tax on investment earnings (% of earnings)</label><input type="text" id="drag" class="num" value="15" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="drag-hint"><small id="drag-hint">Assumption: share of each year's earnings lost to tax. Enter 0 to compare pre-tax returns. Your home is CGT-free.</small></div>
+        <div class="field"><label for="years">Years to compare</label><input type="text" id="years" class="num" value="10" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+      </form>
+      <div class="card readout">
+        <div id="result-label">After 10 years</div>
+        <div class="result-big" id="diff">–</div>
+        <div class="kv"><span>Net wealth if you buy</span><span id="buy">–</span></div>
+        <div class="kv"><span>Net wealth if you rent and invest</span><span id="rentw">–</span></div>
+        <div class="kv"><span>Break-even year</span><span id="breakeven">–</span></div>
+        <h2 class="section-title">Starting out</h2>
+        <div class="kv"><span>Stamp duty</span><span id="duty">–</span></div>
+        <div class="kv"><span>Upfront cash to buy</span><span id="upfrontamt">–</span></div>
+        <div class="kv"><span>Loan</span><span id="loan">–</span></div>
+        <div class="kv"><span>Monthly loan repayment</span><span id="repay">–</span></div>
+        <div class="kv"><span>Monthly owning costs (first year)</span><span id="owncosts">–</span></div>
+        <div class="kv"><span>Monthly rent (first year)</span><span id="rentmonth">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only, not financial advice. Stamp duty uses state revenue office rates checked 15 Oct 2026<span id="estimate-note"></span>. Everything else is an assumption you enter: rates, growth, rent and returns are held steady, which real life won't be. Net wealth for buying is the home's value less selling costs and the loan left, plus any investments. A main residence is generally <a href="https://www.ato.gov.au/individuals-and-families/investments-and-assets/capital-gains-tax/property-and-capital-gains-tax/your-main-residence-home" target="_blank" rel="noopener noreferrer">exempt from capital gains tax</a>; investment earnings are taxed using the rate you enter.</p>
+      </div>
+    </div>
+    <section class="card" aria-labelledby="table-title"><h2 class="section-title" id="table-title">Net wealth year by year</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Net wealth year by year table"><table><thead><tr><th>Year</th><th>Home value</th><th>Loan left</th><th>Buy: net wealth</th><th>Rent: net wealth</th><th>Buying ahead by</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Checked 15 Oct 2026. Stamp duty uses each state revenue office's rates; every other figure is an assumption you can change.</p>
+<p>The calculator follows two versions of you, month by month. <strong>The buyer</strong> pays the deposit, stamp duty (worked out for your state) and other upfront costs, then the loan repayments plus council rates, strata, insurance and maintenance. <strong>The renter</strong> invests the same upfront cash on day one and pays rent. Each month, whoever has the cheaper housing invests the difference.</p>
+<p>At the end, the buyer's net wealth is the home's value less selling costs and the loan still owing, plus any investments. The renter's is their investments. The <strong>break-even year</strong> is the first year buying comes out ahead and stays ahead.</p>
+<p><strong>Every number except stamp duty is an assumption you choose:</strong> home price growth, rent rises, investment returns, interest rates and costs are held steady, which real life won't be. Try a few values. Your home is generally exempt from capital gains tax; the renter's investment earnings are reduced by the tax rate you enter (0% compares pre-tax returns). Lenders mortgage insurance isn't added automatically: put an estimate in other upfront costs if your deposit is under 20%.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is it better to rent or buy in Australia?</summary><p>It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $112,914 after 10 years. At 4% growth the gap is only $3,115, and at 3% growth renting and investing is ahead by $97,391.</p></details><details><summary>How long until buying beats renting?</summary><p>In the example it takes 5 years: by year 4 the renter is still ahead, but from year 5 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind.</p></details><details><summary>Does being a first home buyer change the answer?</summary><p>Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $166,719 after 10 years and from year 2.</p></details><details><summary>Does the calculator include tax?</summary><p>Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $622,036 after 10 years in the example, and at 0% (pre-tax) $674,213, which shrinks buying's lead to $60,736.</p></details><details><summary>What investment return should I use?</summary><p>It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $188,995 ahead after 10 years instead of $112,914. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="borrowing-power.html">Borrowing Power</a><a href="rental-yield.html">Rental Yield</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>
