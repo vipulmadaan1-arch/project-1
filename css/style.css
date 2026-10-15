@@ -142,8 +142,11 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
   .nav { order: 5; flex-basis: 100%; flex-wrap: wrap; margin: 0 -10px; }
   .nav a { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
 }
-/* Small phones: the four section links take two rows, so the header (and the space held for it) is taller. */
-@media (max-width: 409px) { :root { --header-h: 136px; } html { scroll-padding-top: 152px; } }
+/* Small phones: tighter link padding keeps the four section links on one row down to 375px. Narrower than that
+   they take two rows, so the header (and the space held for it) is taller. */
+@media (max-width: 409px) { .nav { margin: 0 -6px; } .nav a { padding-inline: 6px; } }
+@media (max-width: 379px) { .nav { margin: 0 -4px; } .nav a { padding-inline: 4px; } }
+@media (max-width: 374px) { :root { --header-h: 136px; } html { scroll-padding-top: 152px; } }
 
 /* Short windows (a landscape phone, or high zoom): a sticky header would cover much of the page, so it scrolls away. */
 @media (max-height: 500px) {
