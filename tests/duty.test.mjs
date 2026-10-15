@@ -61,7 +61,7 @@ test('Northern Territory formula joins up with the 4.95% rate at $525,000', () =
   const at = d('NT', 525000).duty;
   assert.ok(Math.abs(at - 525000 * 0.0495) < 1);
   assert.equal(d('NT', 500000).duty, Math.round(0.06571441 * 500 * 500 + 15 * 500));
-  assert.equal(d('NT', 4000000).estimate, true);
+  assert.equal(d('NT', 4000000).estimate, false); // rates confirmed by NT Treasury BP2 2024-25
 });
 
 test('"or part of $100" rounds the amount over a threshold up', () => {
