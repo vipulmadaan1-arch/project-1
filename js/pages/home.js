@@ -16,17 +16,16 @@ const $search = document.getElementById('search');
 
 // The card is clickable through its title link (stretched over the card in CSS); the pin
 // button sits beside the link rather than inside it, so each is its own control.
-function tile(t) {
-  const el = document.createElement('div');
-  el.className = 'tile';
+function pinButton(t) {
   const isPinned = pinned.includes(t.slug);
-  el.innerHTML = `
-    <div class="ico">${icon(t.slug)}</div>
-    <h3><a class="tile-link" href="tools/${t.slug}.html">${t.name}</a></h3>
-    <p>${t.desc}</p>
-    <div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div>
-    <button class="pin" type="button" aria-pressed="${isPinned}" aria-label="Pin ${t.name}" title="${isPinned ? 'Unpin' : 'Pin to top'}">${icon('pin')}</button>`;
-  el.querySelector('.pin').addEventListener('click', () => {
+  const b = document.createElement('button');
+  b.className = 'pin';
+  b.type = 'button';
+  b.setAttribute('aria-pressed', String(isPinned));
+  b.setAttribute('aria-label', `Pin ${t.name}`);
+  b.title = isPinned ? 'Unpin' : 'Pin to top';
+  b.innerHTML = icon('pin');
+  b.addEventListener('click', () => {
     pinned = isPinned ? pinned.filter((s) => s !== t.slug) : [...pinned, t.slug];
     safeSet(PIN_KEY, JSON.stringify(pinned));
     render();
@@ -34,6 +33,18 @@ function tile(t) {
     document.querySelector(`.tile-link[href="tools/${t.slug}.html"]`)?.closest('.tile').querySelector('.pin').focus();
     announce(isPinned ? `${t.name} unpinned` : `${t.name} pinned to top`);
   });
+  return b;
+}
+
+function tile(t) {
+  const el = document.createElement('div');
+  el.className = 'tile';
+  el.innerHTML = `
+    <div class="ico">${icon(t.slug)}</div>
+    <h3><a class="tile-link" href="tools/${t.slug}.html">${t.name}</a></h3>
+    <p>${t.desc}</p>
+    <div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div>`;
+  el.append(pinButton(t));
   return el;
 }
 
@@ -73,4 +84,14 @@ $search.addEventListener('input', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && shortcutAllowed(e)) { e.preventDefault(); $search.focus(); }
 });
-render();
+// The tiles are already in the HTML (written by scripts/seo.mjs). With nothing pinned and no search
+// (a restored search box counts), just add the pin buttons instead of rebuilding every tile.
+const staticTiles = [...$sections.querySelectorAll('.tile')];
+if (!pinned.length && !$search.value && staticTiles.length === TOOLS.length) {
+  for (const el of staticTiles) {
+    const t = TOOLS.find((x) => el.querySelector('.tile-link')?.getAttribute('href') === `tools/${x.slug}.html`);
+    if (t) el.append(pinButton(t));
+  }
+} else {
+  render();
+}
