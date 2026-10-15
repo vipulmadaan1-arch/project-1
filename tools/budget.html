@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/budget.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Budget Planner Australia: Weekly, Monthly or Yearly | Sorted, Mate</title>
+  <meta name="description" content="Free budget planner: add your take-home pay and bills at any frequency and see your surplus or shortfall each week, month or year, with each cost's share.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Budget Planner Australia: Weekly, Monthly or Yearly">
+  <meta property="og:description" content="Free budget planner: add your take-home pay and bills at any frequency and see your surplus or shortfall each week, month or year, with each cost's share.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/budget.js">
+  <link rel="modulepreload" href="../js/chart.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/budget.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Budget Planner Australia", "description": "Free budget planner: add your take-home pay and bills at any frequency and see your surplus or shortfall each week, month or year, with each cost's share.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I convert weekly to monthly?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply by 52 and divide by 12, so $100 a week is $433.33 a month. Multiplying by 4 understates it, because most months are a little over 4 weeks."}}, {"@type": "Question", "name": "What is the 50/30/20 rule?", "acceptedAnswer": {"@type": "Answer", "text": "A rule of thumb, not an official guideline: about 50% of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example budget, needs take 60.3%, which is common where housing is expensive."}}, {"@type": "Question", "name": "Should savings count as spending?", "acceptedAnswer": {"@type": "Answer", "text": "Here, yes. Treat savings as a bill you pay yourself. In the example, $500 a month in savings is 6.4% of income, and putting the $1,906.67 left over into savings would bring it to 30.9%."}}, {"@type": "Question", "name": "Where are my numbers saved?", "acceptedAnswer": {"@type": "Answer", "text": "Only in your browser while the page is open. Copy link puts them after the # in the address, which isn't sent to our server, so you can bookmark or share them."}}, {"@type": "Question", "name": "What if I have a shortfall?", "acceptedAnswer": {"@type": "Answer", "text": "Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#money">Loans and savings</a><span aria-hidden="true">/</span><span aria-current="page">Budget Planner</span></nav>
+    <div class="tool-head">
+      <h1>Budget Planner Australia</h1>
+      <p>Add your take-home pay and spending, each at its own frequency, to see what's left over and where your money goes.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="income">Take-home pay ($)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="1,800" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">After tax, for your household. Add any other regular income. <a href="take-home-pay.html">Work out take-home pay</a>.</small></div>
+        <div class="field"><label for="income-per">Paid every</label>
+          <select id="income-per"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></div>
+        <div class="field"><label for="view">Show amounts per</label>
+          <select id="view"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="yearly">Year</option></select></div>
+        <table>
+          <caption class="visually-hidden">Your spending: amount and how often</caption>
+          <colgroup><col width="55%"><col width="45%"></colgroup>
+          <thead><tr><th scope="col">Spending amount ($)</th><th scope="col">Per</th></tr></thead>
+          <tbody>
+            <tr><th colspan="2" scope="colgroup"><label for="housing">Housing</label> <small id="housing-hint">Rent or mortgage, rates, strata</small></th></tr>
+            <tr><td><input type="text" id="housing" class="num" aria-describedby="housing-hint" value="2,400" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="housing-per" aria-label="Housing: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="groceries">Groceries</label> <small id="groceries-hint">Food and household supplies</small></th></tr>
+            <tr><td><input type="text" id="groceries" class="num" aria-describedby="groceries-hint" value="250" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="groceries-per" aria-label="Groceries: how often"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="transport">Transport</label> <small id="transport-hint">Fuel, rego, public transport, tolls</small></th></tr>
+            <tr><td><input type="text" id="transport" class="num" aria-describedby="transport-hint" value="120" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="transport-per" aria-label="Transport: how often"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="utilities">Utilities</label> <small id="utilities-hint">Electricity, gas, water</small></th></tr>
+            <tr><td><input type="text" id="utilities" class="num" aria-describedby="utilities-hint" value="600" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="utilities-per" aria-label="Utilities: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly" selected>Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="insurance">Insurance</label> <small id="insurance-hint">Car, home, contents, life</small></th></tr>
+            <tr><td><input type="text" id="insurance" class="num" aria-describedby="insurance-hint" value="2,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="insurance-per" aria-label="Insurance: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly" selected>Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="phone">Phone and internet</label></th></tr>
+            <tr><td><input type="text" id="phone" class="num" value="130" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="phone-per" aria-label="Phone and internet: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="health">Health</label> <small id="health-hint">Private health, doctors, chemist</small></th></tr>
+            <tr><td><input type="text" id="health" class="num" aria-describedby="health-hint" value="200" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="health-per" aria-label="Health: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="kids">Kids</label> <small id="kids-hint">Childcare, school fees, activities</small></th></tr>
+            <tr><td><input type="text" id="kids" class="num" aria-describedby="kids-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="kids-per" aria-label="Kids: how often"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="debt">Debt repayments</label> <small id="debt-hint">Car loan, credit card, personal loan, buy now pay later</small></th></tr>
+            <tr><td><input type="text" id="debt" class="num" aria-describedby="debt-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="debt-per" aria-label="Debt repayments: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="entertainment">Entertainment</label> <small id="entertainment-hint">Eating out, streaming, hobbies, holidays</small></th></tr>
+            <tr><td><input type="text" id="entertainment" class="num" aria-describedby="entertainment-hint" value="100" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="entertainment-per" aria-label="Entertainment: how often"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="savings">Savings</label> <small id="savings-hint">Money you set aside or invest</small></th></tr>
+            <tr><td><input type="text" id="savings" class="num" aria-describedby="savings-hint" value="500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="savings-per" aria-label="Savings: how often"><option value="weekly">Week</option><option value="fortnightly">Fortnight</option><option value="monthly" selected>Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+            <tr><th colspan="2" scope="colgroup"><label for="other">Other</label> <small id="other-hint">Clothes, gifts, pets, anything else</small></th></tr>
+            <tr><td><input type="text" id="other" class="num" aria-describedby="other-hint" value="60" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></td><td><select id="other-per" aria-label="Other: how often"><option value="weekly" selected>Week</option><option value="fortnightly">Fortnight</option><option value="monthly">Month</option><option value="quarterly">Quarter</option><option value="yearly">Year</option></select></td></tr>
+          </tbody>
+        </table>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Left over each month</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="income-label">Income</span><span id="income-out">–</span></div>
+        <div class="kv"><span id="spend-label">Spending and savings</span><span id="spend">–</span></div>
+        <div class="kv"><span>Share of income spent or saved</span><span id="spent-share">–</span></div>
+        <div class="kv"><span>Needs (50/30/20 guide: 50%)</span><span id="needs">–</span></div>
+        <div class="kv"><span>Wants (guide: 30%)</span><span id="wants">–</span></div>
+        <div class="kv"><span>Savings (guide: 20%)</span><span id="saving">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">The 50/30/20 split is a popular rule of thumb, not an official standard: half your take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. Debt repayments count as needs here. Your inputs stay in your browser; "Copy link" puts them in the link only when you choose to share it. For a more detailed budget, try the <a href="https://moneysmart.gov.au/budgeting/budget-planner" target="_blank" rel="noopener noreferrer">Moneysmart budget planner</a>.</p>
+      </div>
+    </div>
+    <section class="card chart-card" aria-labelledby="breakdown-title"><h2 class="section-title" id="breakdown-title">Where your money goes</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="breakdown-title"><table><thead><tr><th scope="col">Category</th><th scope="col" id="amount-head">Per month</th><th scope="col">Share of income</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+    <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Your spending against the 50/30/20 rule of thumb</h2><div id="chart"></div></section>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/budgeting/budget-planner" target="_blank" rel="noopener noreferrer">Moneysmart's budget planner</a>, so you can cross-check a result there.</p>
+<p>Enter your take-home pay and each cost at whatever frequency you pay it: weekly, fortnightly, monthly, quarterly or yearly. Everything is converted to a yearly figure (52 weeks or 26 fortnights a year, as Moneysmart's budget planner does) and then shown per week, fortnight, month or year. So $100 a week is $433.33 a month, and $2,000 a month is $461.54 a week.</p>
+<p>The main result is what's <strong>left over</strong> (or your <strong>shortfall</strong>) after spending and savings. The table lists each category from largest to smallest with its share of your income. With the example figures ($1,800 a week take-home pay), $5,893.33 of the $7,800.00 a month is spent or saved, leaving $1,906.67.</p>
+<p>The <strong>50/30/20 rule</strong> is a popular rule of thumb, not an official standard: about half of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example, needs take 60.3%, wants 8.9% and savings 6.4%. Your figures stay in your browser and only go into a link if you choose Copy link.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How do I convert weekly to monthly?</summary><p>Multiply by 52 and divide by 12, so $100 a week is $433.33 a month. Multiplying by 4 understates it, because most months are a little over 4 weeks.</p></details><details><summary>What is the 50/30/20 rule?</summary><p>A rule of thumb, not an official guideline: about 50% of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example budget, needs take 60.3%, which is common where housing is expensive.</p></details><details><summary>Should savings count as spending?</summary><p>Here, yes. Treat savings as a bill you pay yourself. In the example, $500 a month in savings is 6.4% of income, and putting the $1,906.67 left over into savings would bring it to 30.9%.</p></details><details><summary>Where are my numbers saved?</summary><p>Only in your browser while the page is open. Copy link puts them after the # in the address, which isn't sent to our server, so you can bookmark or share them.</p></details><details><summary>What if I have a shortfall?</summary><p>Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="savings-goal.html">Savings Goal</a><a href="credit-card.html">Credit Card Payoff</a><a href="compound-interest.html">Compound Interest</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

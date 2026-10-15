@@ -5,6 +5,26 @@ from datetime import datetime
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 C = {
+'retirement': dict(
+ how="""<p>The calculator projects your super year by year to your retirement age. Each year your employer pays <strong>12%</strong> of your salary (up to the maximum contribution base), plus any salary sacrifice. Your fund takes <strong>15% contributions tax</strong>. Salary sacrifice is cut back if your employer super plus sacrifice would go over the <strong>$32,500 concessional cap</strong>. Earnings are taxed at an assumed effective <strong>7%</strong>, then fees come off. Salary grows 3.7% a year by default (Moneysmart's 2.5% inflation plus 1.2% for rising living standards).</p>
+<p>Results are in <strong>today's dollars</strong>: future balances are divided by inflation (2.5% by default) so you can compare them with prices now. With the defaults (age 35, $80,000 in super, $90,000 salary), you'd retire at 67 with about $827,116 in today's dollars, or $1,822,763 in 2058 dollars. Moneysmart also takes off the 1.2% for rising living standards, which would show $569,546.</p>
+<p>In retirement we draw your chosen income at the start of each year. The balance keeps earning the same return after fees, with no tax on earnings (an assumption for a retirement-phase pension). The <strong>ASFA Retirement Standard</strong> (June quarter 2026) puts a comfortable retirement at $56,166 a year for a single homeowner and $78,998 for a couple, and a modest one at $36,548 and $52,690. The Age Pension (from age 67) isn't included, so super alone runs out sooner than your full retirement income would.</p>""",
+ faq=[("How much super do I need to retire comfortably?","ASFA says $630,000 for a single homeowner and $730,000 for a couple at 67, in today's dollars. That assumes you also get a part Age Pension and spend the whole balance. On its own, without the pension, $630,000 drawing $56,166 a year lasts about 14 years here."),
+      ("How long will my super last?","It depends on the income you draw and your returns. With the default inputs, $827,116 at 67 drawing ASFA's comfortable $56,166 a year lasts about 20 years, to age 87, before any Age Pension."),
+      ("How much difference does salary sacrifice make?","With the defaults, an extra $5,000 a year (rising with wages) adds about $278,063 in today's dollars by 67, after the 15% contributions tax. Your employer super plus sacrifice must stay within the $32,500 concessional cap."),
+      ("Do fees really matter?","Yes. With the defaults, an extra 0.5% a year in fees leaves you about $80,047 less at 67 in today's dollars. Compare your fund's fees and costs summary with Moneysmart's defaults of $59 a year plus 0.11%."),
+      ("When can I get my super and the Age Pension?","You can usually take your super from 60 (your preservation age, if you were born after 30 June 1964) once you retire, or at 65 even if you keep working. The Age Pension starts at 67 and is means-tested. Check your rate with Services Australia.")],
+ related=['super','take-home-pay','compound-interest','inflation']),
+'budget': dict(
+ how="""<p>Enter your take-home pay and each cost at whatever frequency you pay it: weekly, fortnightly, monthly, quarterly or yearly. Everything is converted to a yearly figure (52 weeks or 26 fortnights a year, as Moneysmart's budget planner does) and then shown per week, fortnight, month or year. So $100 a week is $433.33 a month, and $2,000 a month is $461.54 a week.</p>
+<p>The main result is what's <strong>left over</strong> (or your <strong>shortfall</strong>) after spending and savings. The table lists each category from largest to smallest with its share of your income. With the example figures ($1,800 a week take-home pay), $5,893.33 of the $7,800.00 a month is spent or saved, leaving $1,906.67.</p>
+<p>The <strong>50/30/20 rule</strong> is a popular rule of thumb, not an official standard: about half of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example, needs take 60.3%, wants 8.9% and savings 6.4%. Your figures stay in your browser and only go into a link if you choose Copy link.</p>""",
+ faq=[("How do I convert weekly to monthly?","Multiply by 52 and divide by 12, so $100 a week is $433.33 a month. Multiplying by 4 understates it, because most months are a little over 4 weeks."),
+      ("What is the 50/30/20 rule?","A rule of thumb, not an official guideline: about 50% of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example budget, needs take 60.3%, which is common where housing is expensive."),
+      ("Should savings count as spending?","Here, yes. Treat savings as a bill you pay yourself. In the example, $500 a month in savings is 6.4% of income, and putting the $1,906.67 left over into savings would bring it to 30.9%."),
+      ("Where are my numbers saved?","Only in your browser while the page is open. Copy link puts them after the # in the address, which isn't sent to our server, so you can bookmark or share them."),
+      ("What if I have a shortfall?","Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it.")],
+ related=['take-home-pay','savings-goal','credit-card','compound-interest']),
 'tax-refund': dict(
  how="""<p>Your refund is the tax your employer withheld minus the tax you actually owe for the year. We add your salary, interest, dividends and franking credits, take off your deductions to get your <strong>taxable income</strong>, then work out income tax at Australian resident rates, take off the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667), and add the <strong>Medicare levy</strong> (2%, reduced below $35,013), the <strong>Medicare levy surcharge</strong> if you had no private hospital cover, and any compulsory <strong>HECS/HELP</strong> repayment. Franking credits come off what you owe and can be refunded.</p>
 <table><thead><tr><th>Taxable income</th><th>2025-26</th><th>2026-27</th></tr></thead><tbody>
@@ -508,6 +528,8 @@ TRUST = {
   'balance-transfer': ('method', ext('https://moneysmart.gov.au/credit-cards/credit-card-calculator', "Moneysmart's credit card calculator")),
   'tax-refund': ('rates', ext('https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents', "the ATO's resident tax rates") + ' and the ATO Medicare levy, surcharge and study loan pages'),
   'rent-vs-buy': ('note', 'Stamp duty uses each state revenue office\'s rates; every other figure is an assumption you can change.'),
+  'retirement': ('note', 'Defaults follow ' + ext('https://moneysmart.gov.au/how-super-works/superannuation-calculator', "Moneysmart's superannuation calculator") + '; ASFA standard as published by ' + ext('https://moneysmart.gov.au/glossary/asfa-retirement-standard', 'Moneysmart') + '.'),
+  'budget': ('method', ext('https://moneysmart.gov.au/budgeting/budget-planner', "Moneysmart's budget planner")),
 }
 def trust_line(slug):
     if slug not in TRUST: return ''

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/retirement.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super &amp; Retirement Calculator Australia | Sorted, Mate</title>
+  <meta name="description" content="Project your super balance at retirement in today's dollars, see how long it lasts, and compare your income with the ASFA comfortable and modest standards.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Super &amp; Retirement Calculator Australia">
+  <meta property="og:description" content="Project your super balance at retirement in today's dollars, see how long it lasts, and compare your income with the ASFA comfortable and modest standards.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/chart.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/retirement.js">
+  <link rel="modulepreload" href="../js/super.js">
+  <link rel="modulepreload" href="../js/pages/retirement.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Super &amp; Retirement Calculator Australia", "description": "Project your super balance at retirement in today's dollars, see how long it lasts, and compare your income with the ASFA comfortable and modest standards.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much super do I need to retire comfortably?", "acceptedAnswer": {"@type": "Answer", "text": "ASFA says $630,000 for a single homeowner and $730,000 for a couple at 67, in today's dollars. That assumes you also get a part Age Pension and spend the whole balance. On its own, without the pension, $630,000 drawing $56,166 a year lasts about 14 years here."}}, {"@type": "Question", "name": "How long will my super last?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the income you draw and your returns. With the default inputs, $827,116 at 67 drawing ASFA's comfortable $56,166 a year lasts about 20 years, to age 87, before any Age Pension."}}, {"@type": "Question", "name": "How much difference does salary sacrifice make?", "acceptedAnswer": {"@type": "Answer", "text": "With the defaults, an extra $5,000 a year (rising with wages) adds about $278,063 in today's dollars by 67, after the 15% contributions tax. Your employer super plus sacrifice must stay within the $32,500 concessional cap."}}, {"@type": "Question", "name": "Do fees really matter?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. With the defaults, an extra 0.5% a year in fees leaves you about $80,047 less at 67 in today's dollars. Compare your fund's fees and costs summary with Moneysmart's defaults of $59 a year plus 0.11%."}}, {"@type": "Question", "name": "When can I get my super and the Age Pension?", "acceptedAnswer": {"@type": "Answer", "text": "You can usually take your super from 60 (your preservation age, if you were born after 30 June 1964) once you retire, or at 65 even if you keep working. The Age Pension starts at 67 and is means-tested. Check your rate with Services Australia."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Super &amp; Retirement</span></nav>
+    <div class="tool-head">
+      <h1>Super &amp; Retirement Calculator Australia</h1>
+      <p>How much super you could retire with in today's dollars, how long it lasts, and how it compares with the ASFA Retirement Standard.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="age">Your age now (years)</label><input type="text" id="age" class="num" value="35" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="retire">Age you plan to retire</label><input type="text" id="retire" class="num" aria-describedby="retire-hint" value="67" inputmode="numeric" spellcheck="false" autocomplete="off"><small id="retire-hint">Age Pension age is 67. You can usually take your super from 60 once you retire, or at 65 even if you keep working.</small></div>
+        <div class="field"><label for="balance">Super balance now ($)</label><input type="text" id="balance" class="num" value="80,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="salary">Yearly salary before super ($)</label><input type="text" id="salary" class="num" aria-describedby="salary-hint" value="90,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="salary-hint">Before tax and before any salary sacrifice.</small></div>
+        <div class="field"><label for="sg">Employer super (% of salary)</label><input type="text" id="sg" class="num" aria-describedby="sg-hint" value="12" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="sg-hint">The super guarantee is 12%, paid on salary up to $270,830 in 2026-27.</small></div>
+        <div class="field"><label for="sacrifice">Extra salary sacrifice ($ a year, optional)</label><input type="text" id="sacrifice" class="num" aria-describedby="sacrifice-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="sacrifice-hint">Cut back if your employer super plus this goes over the $32,500 concessional cap.</small></div>
+        <div class="field"><label for="return">Investment return (% a year)</label><input type="text" id="return" class="num" aria-describedby="return-hint" value="6.5" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="return-hint">After investment fees, before tax on earnings. Moneysmart assumes 6.1% after tax for a balanced option.</small></div>
+        <div class="field"><label for="etax">Tax on earnings (% of earnings)</label><input type="text" id="etax" class="num" aria-describedby="etax-hint" value="7" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="etax-hint">An assumption: funds pay up to 15%, less after franking credits and capital gains discounts.</small></div>
+        <div class="field"><label for="feepct">Admin fee (% of balance a year)</label><input type="text" id="feepct" class="num" aria-describedby="feepct-hint" value="0.11" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="feepct-hint">Moneysmart default 0.11%. Check your fund’s fees and costs summary.</small></div>
+        <div class="field"><label for="feedollar">Admin fee ($ a year)</label><input type="text" id="feedollar" class="num" aria-describedby="feedollar-hint" value="59" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="feedollar-hint">Moneysmart default $59. Add insurance premiums here if you pay them from super.</small></div>
+        <div class="field"><label for="wage">Wage growth (% a year)</label><input type="text" id="wage" class="num" value="3.7" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="inflation">Inflation (% a year)</label><input type="text" id="inflation" class="num" aria-describedby="inflation-hint" value="2.5" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="inflation-hint">Used to show results in today’s dollars.</small></div>
+        <div class="field"><label for="household">Compare with ASFA for a</label>
+          <select id="household"><option value="single" selected>Single</option><option value="couple">Couple</option></select></div>
+        <div class="field"><label for="income">Income you want in retirement ($ a year, today’s dollars)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="56,166" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Defaults to the ASFA comfortable standard for a single homeowner.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Super at retirement, in today's dollars</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="future-label">In future dollars</span><span id="future">–</span></div>
+        <div class="kv"><span>Starting balance and contributions after tax</span><span id="paidin">–</span></div>
+        <div class="kv"><span>Investment earnings after tax and fees</span><span id="earned">–</span></div>
+        <div class="kv"><span>Fees paid over the years</span><span id="fees">–</span></div>
+        <div class="kv"><span id="lasts-label">Drawing your income, it lasts</span><span id="lasts">–</span></div>
+        <div class="kv"><span id="asfa-c-label">ASFA comfortable, per year</span><span id="asfa-c">–</span></div>
+        <div class="kv"><span id="asfa-m-label">ASFA modest, per year</span><span id="asfa-m">–</span></div>
+        <div class="kv"><span id="asfa-l-label">ASFA lump sum for comfortable at 67</span><span id="asfa-l">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only, not financial advice. Returns, fees and inflation stay the same every year here, which they won't. Super rates checked against the ATO on 15 Oct 2026; ASFA figures are the <a href="https://moneysmart.gov.au/glossary/asfa-retirement-standard" target="_blank" rel="noopener noreferrer">June quarter 2026 standard as published by Moneysmart</a>. The Age Pension isn't included: check yours with <a href="https://www.servicesaustralia.gov.au/how-much-age-pension-you-can-get" target="_blank" rel="noopener noreferrer">Services Australia</a> or the <a href="https://moneysmart.gov.au/plan-for-your-retirement/retirement-planner" target="_blank" rel="noopener noreferrer">Moneysmart retirement planner</a>.</p>
+      </div>
+    </div>
+    <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Your super by age, in today's dollars</h2><div id="chart"></div>
+      <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Super by age table"><table><thead><tr><th>Age</th><th>Contributions</th><th>Earnings</th><th>Balance</th><th>Future dollars</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Checked 15 Oct 2026. Defaults follow <a href="https://moneysmart.gov.au/how-super-works/superannuation-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's superannuation calculator</a>; ASFA standard as published by <a href="https://moneysmart.gov.au/glossary/asfa-retirement-standard" target="_blank" rel="noopener noreferrer">Moneysmart</a>.</p>
+<p>The calculator projects your super year by year to your retirement age. Each year your employer pays <strong>12%</strong> of your salary (up to the maximum contribution base), plus any salary sacrifice. Your fund takes <strong>15% contributions tax</strong>. Salary sacrifice is cut back if your employer super plus sacrifice would go over the <strong>$32,500 concessional cap</strong>. Earnings are taxed at an assumed effective <strong>7%</strong>, then fees come off. Salary grows 3.7% a year by default (Moneysmart's 2.5% inflation plus 1.2% for rising living standards).</p>
+<p>Results are in <strong>today's dollars</strong>: future balances are divided by inflation (2.5% by default) so you can compare them with prices now. With the defaults (age 35, $80,000 in super, $90,000 salary), you'd retire at 67 with about $827,116 in today's dollars, or $1,822,763 in 2058 dollars. Moneysmart also takes off the 1.2% for rising living standards, which would show $569,546.</p>
+<p>In retirement we draw your chosen income at the start of each year. The balance keeps earning the same return after fees, with no tax on earnings (an assumption for a retirement-phase pension). The <strong>ASFA Retirement Standard</strong> (June quarter 2026) puts a comfortable retirement at $56,166 a year for a single homeowner and $78,998 for a couple, and a modest one at $36,548 and $52,690. The Age Pension (from age 67) isn't included, so super alone runs out sooner than your full retirement income would.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much super do I need to retire comfortably?</summary><p>ASFA says $630,000 for a single homeowner and $730,000 for a couple at 67, in today's dollars. That assumes you also get a part Age Pension and spend the whole balance. On its own, without the pension, $630,000 drawing $56,166 a year lasts about 14 years here.</p></details><details><summary>How long will my super last?</summary><p>It depends on the income you draw and your returns. With the default inputs, $827,116 at 67 drawing ASFA's comfortable $56,166 a year lasts about 20 years, to age 87, before any Age Pension.</p></details><details><summary>How much difference does salary sacrifice make?</summary><p>With the defaults, an extra $5,000 a year (rising with wages) adds about $278,063 in today's dollars by 67, after the 15% contributions tax. Your employer super plus sacrifice must stay within the $32,500 concessional cap.</p></details><details><summary>Do fees really matter?</summary><p>Yes. With the defaults, an extra 0.5% a year in fees leaves you about $80,047 less at 67 in today's dollars. Compare your fund's fees and costs summary with Moneysmart's defaults of $59 a year plus 0.11%.</p></details><details><summary>When can I get my super and the Age Pension?</summary><p>You can usually take your super from 60 (your preservation age, if you were born after 30 June 1964) once you retire, or at 65 even if you keep working. The Age Pension starts at 67 and is means-tested. Check your rate with Services Australia.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="super.html">Super & Salary Sacrifice</a><a href="take-home-pay.html">Take-Home Pay</a><a href="compound-interest.html">Compound Interest</a><a href="inflation.html">Inflation</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

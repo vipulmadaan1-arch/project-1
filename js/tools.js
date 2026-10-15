@@ -45,6 +45,8 @@ export const TOOLS = [
   { slug: 'balance-transfer', name: 'Balance Transfer', desc: 'Stay or transfer: interest, fees, time to clear and what is left after the intro rate.', meta: 'Fee, intro and revert rate', cat: 'money' },
   { slug: 'tax-refund', name: 'Tax Refund Estimator', desc: 'Your tax refund or bill for 2025-26 or 2026-27, from your income statement.', meta: 'ATO 2025-26 & 2026-27', cat: 'tax' },
   { slug: 'rent-vs-buy', name: 'Rent vs Buy', desc: 'Your wealth after buying a home or renting and investing the difference.', meta: 'Stamp duty, all states', cat: 'property' },
+  { slug: 'retirement', name: 'Super & Retirement', desc: 'Super at retirement in today\'s dollars, how long it lasts, and the ASFA standard.', meta: 'ASFA June qtr 2026', cat: 'tax' },
+  { slug: 'budget', name: 'Budget Planner', desc: 'Income and bills at any frequency, with your surplus or shortfall and where it goes.', meta: 'Weekly to yearly', cat: 'money' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';
