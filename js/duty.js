@@ -143,13 +143,15 @@ export const STATES = [
     code: 'NT', name: 'Northern Territory', foreign: 0, foreignFhb: true, office: 'Territory Revenue Office',
     source: 'https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator',
     calc({ value, home, newHome }) {
-      let duty, estimate = false;
+      // Over $525,000: flat rates from NT Treasury Budget 2024-25, Budget Paper 2, Table 6.4
+      // (4.95% under $3M, 5.75% to under $5M, 5.95% from $5M). Under $525,000: TRO formula (I-GEN-001).
+      let duty;
       if (value <= 525000) { const V = value / 1000; duty = 0.06571441 * V * V + 15 * V; }
       else if (value < 3000000) duty = value * 0.0495;
-      else { duty = value * (value < 5000000 ? 0.0575 : 0.0595); estimate = true; }
+      else duty = value * (value < 5000000 ? 0.0575 : 0.0595);
       const general = Math.round(duty);
-      if (home && newHome) return { duty: 0, general, estimate, note: 'House and land package exemption: no duty on a new home bought from a building contractor in one contract, for contracts signed to 30 June 2027. No price cap; you don\'t need to be a first home buyer.' };
-      return { duty: general, general, estimate, note: estimate ? 'Rates above $3 million come from independent calculators; the Territory Revenue Office does not publish them online.' : '' };
+      if (home && newHome) return { duty: 0, general, note: 'House and land package exemption: no duty on a new home bought from a building contractor in one contract, for contracts signed to 30 June 2027. No price cap; you don\'t need to be a first home buyer.' };
+      return { duty: general, general, note: '' };
     },
   },
 ];

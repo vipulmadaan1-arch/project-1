@@ -61,6 +61,10 @@ test('NT duty follows the Territory Revenue Office formula (treasury.nt.gov.au, 
   for (const v of [300000, 500000]) assert.ok(Math.abs(nt(v) - formula(v)) < 0.5);
   assert.equal(nt(600000), 29700);
   assert.equal(nt(2000000), 99000);
+  // NT Treasury Budget 2024-25, BP2 Table 6.4: 5.75% from $3M to under $5M, 5.95% from $5M.
+  assert.equal(nt(4000000), 230000);
+  assert.equal(nt(6000000), 357000);
+  assert.ok(!stampDuty({ state: 'NT', value: 4000000, home: false }).estimate);
 });
 
 test('ACT owner-occupier duty matches ACT Revenue Office rates (revenue.act.gov.au)', () => {
