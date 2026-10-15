@@ -2,8 +2,8 @@
 
 Free everyday tools on one site, as tiles, with a focus on Australian money calculators. It's a static site: no backend and no build step. Everything runs in the browser.
 
-## Tools (15)
-**Money:** Stamp Duty, all 8 states and territories · NSW Stamp Duty (2026/27) · Take-Home Pay AU (2026-27) · Mortgage Repayments · Offset Account Savings · Rental Yield · Compound Interest · GST
+## Tools (16)
+**Money:** Stamp Duty, all 8 states and territories · NSW Stamp Duty (2026/27) · Capital Gains Tax (2027 rules) · Take-Home Pay AU (2026-27) · Mortgage Repayments · Offset Account Savings · Rental Yield · Compound Interest · GST
 **Everyday:** Calculator (basic and scientific) · Percentage · Unit Converter · Date Calculator
 **Time:** World Clock (with time converter) · Stopwatch · Countdown Timer
 
@@ -86,7 +86,8 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 |---|---|---|
 | NSW transfer duty thresholds (CPI-indexed) | `NSW_BRACKETS`, `NSW_PREMIUM` in `js/calc.js` | Revenue NSW: How to calculate transfer duty |
 | Other states' transfer duty tables, home and first home rules, foreign surcharges | `STATES` and the tables above it in `js/duty.js`; update `DUTY_CHECKED` | Each state's revenue office (links in `source` per state) |
-| Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` | ATO tax rates, Australian residents |
+| CPI quarterly index (ABS, Sep 2025 = 100) for CGT indexation; add each quarter as published | `CPI` in `js/cgt.js` | ABS Consumer Price Index, All groups, weighted average of eight capital cities |
+| Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` in `js/calc.js` and `bracketsFor` in `js/cgt.js` | ATO tax rates, Australian residents |
 | Medicare levy low-income thresholds | `MEDICARE` | ATO: Medicare levy reduction for low-income earners |
 | HECS/HELP repayment thresholds (indexed yearly) | `HELP` | ATO: Study and training loan minimum repayment income and rates |
 | NSW public holidays (add next year's dates) | `NSW_HOLIDAYS`, `NSW_HOLIDAY_YEARS` | nsw.gov.au/about-nsw/public-holidays |

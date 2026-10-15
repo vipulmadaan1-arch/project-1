@@ -9,6 +9,7 @@ export const CATEGORIES = [
 export const TOOLS = [
   { slug: 'stamp-duty', name: 'Stamp Duty, All States', desc: 'Transfer duty for every state and territory, with home and first home concessions.', meta: 'All 8 states and territories', cat: 'au' },
   { slug: 'stamp-duty-nsw', name: 'NSW Stamp Duty', desc: 'Transfer duty, first home buyer concessions and foreign surcharge.', meta: 'Revenue NSW 2026/27', cat: 'au' },
+  { slug: 'capital-gains-tax', name: 'Capital Gains Tax', desc: 'Tax on selling shares, crypto or property, with the new 2027 rules.', meta: 'Indexation and 30% minimum', cat: 'au' },
   { slug: 'take-home-pay', name: 'Take-Home Pay', desc: 'Pay after income tax, Medicare levy and HECS/HELP.', meta: 'ATO 2026-27', cat: 'au' },
   { slug: 'mortgage', name: 'Mortgage Repayments', desc: 'Principal and interest repayments and total interest.', meta: 'Weekly to monthly', cat: 'au' },
   { slug: 'offset', name: 'Offset Account', desc: 'Interest and years saved by money held in offset.', meta: 'Same repayment', cat: 'au' },

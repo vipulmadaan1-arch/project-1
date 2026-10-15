@@ -1,6 +1,7 @@
 // Line icons drawn on a 24px grid with a 1.6 stroke. They inherit colour from the text.
 const P = {
   'stamp-duty-nsw': '<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 15.5h5"/><circle cx="16.5" cy="18.5" r="0.6" fill="currentColor"/>',
+  'capital-gains-tax': '<path d="M4 20h16"/><path d="M5 16l4-4 3 3 6-7"/><path d="M14.5 8H18v3.5"/><path d="M7 20v-2M11 20v-3M15 20v-4"/>',
   'take-home-pay': '<rect x="3" y="6" width="18" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5v5M17.5 9.5v5"/>',
   mortgage: '<path d="M4 11 12 4l8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>',
   offset: '<path d="M4 7h11"/><path d="M12 4l3 3-3 3"/><path d="M20 17H9"/><path d="M12 14l-3 3 3 3"/>',

@@ -280,7 +280,7 @@ form > .card + .card { margin-top: 12px; }
 .card:not(.readout) .result-big { color: var(--accent); font-size: clamp(1.6rem, 5vw, 2rem); margin: 0; }
 .kv { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .kv span:first-child { color: var(--muted); font-size: var(--t-sm); }
-.kv span:last-child { font: 600 var(--t-base)/1.4 var(--font-display); font-feature-settings: var(--tnum); text-align: right; min-width: 0; overflow-wrap: anywhere; }
+.kv span:last-child { font: 600 var(--t-base)/1.4 var(--font-display); font-feature-settings: var(--tnum); text-align: right; flex-shrink: 0; white-space: nowrap; }
 .note { font-size: var(--t-sm); color: var(--muted); margin-top: 12px; }
 .disclaimer { font-size: var(--t-xs); line-height: 1.55; color: var(--muted); margin-top: 16px; }
 
