@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/credit-card.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Credit Card Payoff Calculator (Australia) | Sorted, Mate</title>
+  <meta name="description" content="See how long it takes to pay off your credit card and how much interest you’ll pay, find the repayment to clear it by a set time, and compare with paying only the minimum.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Credit Card Payoff Calculator (Australia)">
+  <meta property="og:description" content="See how long it takes to pay off your credit card and how much interest you’ll pay, find the repayment to clear it by a set time, and compare with paying only the minimum.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/loans.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/credit-card.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Credit Card Payoff Calculator", "description": "See how long it takes to pay off your credit card and how much interest you’ll pay, find the repayment to clear it by a set time, and compare with paying only the minimum.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long will it take to pay off my credit card with minimum payments?", "acceptedAnswer": {"@type": "Answer", "text": "Often decades. A $5,000 balance at 20% p.a., paying a minimum of 2% or $25, takes about 40 years and costs around $18,500 in interest. Paying a fixed $200 a month clears it in 2 years 9 months with about $1,500 in interest."}}, {"@type": "Question", "name": "How is the minimum repayment on a credit card calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Usually as a percentage of your closing balance (often 2% to 3%) or a minimum dollar amount, whichever is higher. If you owe less than that amount, you pay the whole balance. Your statement shows your card's exact terms."}}, {"@type": "Question", "name": "How much should I pay to clear my card in 2 years?", "acceptedAnswer": {"@type": "Answer", "text": "Choose to work out the repayment to clear it by a set time and enter 24 months. For $5,000 at 20% p.a. it's about $254 a month. Your statement also shows how much to pay each month to clear the balance in 3 years."}}, {"@type": "Question", "name": "Is a balance transfer worth it?", "acceptedAnswer": {"@type": "Answer", "text": "It can be, if you clear the balance before the low-rate period ends and avoid new spending. Watch for transfer fees and the revert rate. Enter the revert rate here to see what happens to anything left over."}}, {"@type": "Question", "name": "What if I can't afford the minimum repayment?", "acceptedAnswer": {"@type": "Answer", "text": "Contact your card provider about hardship options as soon as you can. You can also call the free National Debt Helpline on 1800 007 007."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Credit Card Payoff</span></nav>
+    <div class="tool-head">
+      <h1>Credit Card Payoff Calculator</h1>
+      <p>How long it will take to clear your card, what it costs, and what paying only the minimum really means.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="balance">Card balance ($)</label><input type="text" id="balance" class="num" value="5000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" aria-describedby="rate-hint" value="20" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="rate-hint">Your purchase rate, from your statement.</small></div>
+        <div class="field"><label for="mode">What do you want to work out?</label>
+          <select id="mode"><option value="payment" selected>How long my repayment will take</option><option value="months">The repayment to clear it by a set time</option></select></div>
+        <div class="field" id="payment-field"><label for="payment">Monthly repayment ($)</label><input type="text" id="payment" class="num" value="200" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field" id="months-field" hidden><label for="months">Pay it off in (months)</label><input type="text" id="months" class="num" value="24" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="minpct">Minimum repayment (% of balance)</label><input type="text" id="minpct" class="num" aria-describedby="minpct-hint" value="2" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="minpct-hint">Check your statement. Moneysmart’s calculator offers 2% to 5%.</small></div>
+        <div class="field"><label for="minfloor">Minimum repayment floor ($)</label><input type="text" id="minfloor" class="num" aria-describedby="minfloor-hint" value="25" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="minfloor-hint">The least you must pay when the percentage works out lower. Moneysmart’s calculator offers $5 to $30.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Time to pay off</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="other-label">Monthly repayment</span><span id="other">–</span></div>
+        <div class="kv"><span>Total interest</span><span id="interest">–</span></div>
+        <div class="kv"><span>Total you’ll pay</span><span id="paid">–</span></div>
+        <h2 class="section-title">If you pay only the minimum</h2>
+        <div class="kv"><span>First minimum repayment</span><span id="min-first">–</span></div>
+        <div class="kv"><span>Time to pay off</span><span id="min-time">–</span></div>
+        <div class="kv"><span>Total interest</span><span id="min-interest">–</span></div>
+        <div class="kv"><span>Interest you save with your plan</span><span id="saved">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. Assumes no new purchases, cash advances, fees or rate changes, and interest charged monthly. Not financial advice.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Interest is charged each month at the yearly rate ÷ 12 on the balance, then your repayment comes off. Like Moneysmart's credit card calculator, it assumes no new purchases, cash advances or fees.</p>
+<p><strong>Minimum repayments</strong> are usually a percentage of the closing balance or a set dollar amount, whichever is higher. By default this calculator uses 2% or $25; check your statement and change them to match. Because the minimum shrinks as the balance falls, paying only the minimum can take decades and cost several times the original balance in interest.</p>
+<p>If your repayment doesn't cover the month's interest, the balance never goes down. The calculator warns you when that happens.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How long will it take to pay off my credit card with minimum payments?</summary><p>Often decades. A $5,000 balance at 20% p.a., paying a minimum of 2% or $25, takes about 40 years and costs around $18,500 in interest. Paying a fixed $200 a month clears it in 2 years 9 months with about $1,500 in interest.</p></details><details><summary>How is the minimum repayment on a credit card calculated?</summary><p>Usually as a percentage of your closing balance (often 2% to 3%) or a minimum dollar amount, whichever is higher. If you owe less than that amount, you pay the whole balance. Your statement shows your card's exact terms.</p></details><details><summary>How much should I pay to clear my card in 2 years?</summary><p>Choose to work out the repayment to clear it by a set time and enter 24 months. For $5,000 at 20% p.a. it's about $254 a month. Your statement also shows how much to pay each month to clear the balance in 3 years.</p></details><details><summary>Is a balance transfer worth it?</summary><p>It can be, if you clear the balance before the low-rate period ends and avoid new spending. Watch for transfer fees and the revert rate. Enter the revert rate here to see what happens to anything left over.</p></details><details><summary>What if I can't afford the minimum repayment?</summary><p>Contact your card provider about hardship options as soon as you can. You can also call the free National Debt Helpline on 1800 007 007.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="personal-loan.html">Car & Personal Loan Repayments</a><a href="savings-goal.html">Savings Goal</a><a href="percentage.html">Percentage</a><a href="compound-interest.html">Compound Interest</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

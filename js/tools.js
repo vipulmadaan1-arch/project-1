@@ -26,6 +26,9 @@ export const TOOLS = [
   { slug: 'gross-up', name: 'Salary Needed for Take-Home Pay', desc: 'The salary you need to earn a set take-home pay, after tax and HECS.', meta: 'ATO 2026-27', cat: 'au' },
   { slug: 'hecs-help', name: 'HECS/HELP Debt Payoff', desc: 'Years to repay your study loan, with indexation and extra repayments.', meta: 'ATO 2026-27 rates', cat: 'au' },
   { slug: 'work-deductions', name: 'Work From Home & Car Expenses', desc: 'Your working from home and work car tax deductions, and the tax they save.', meta: 'ATO 70c/hr and 91c/km', cat: 'au' },
+  { slug: 'personal-loan', name: 'Car & Personal Loan Repayments', desc: 'Repayments and true cost with fees and an optional balloon.', meta: 'Fees and balloon', cat: 'general' },
+  { slug: 'credit-card', name: 'Credit Card Payoff', desc: 'Time and interest to clear your card, versus minimum repayments.', meta: 'Minimum vs fixed', cat: 'general' },
+  { slug: 'savings-goal', name: 'Savings Goal', desc: 'How long to reach a goal, or how much to save by a date.', meta: 'Weekly to monthly', cat: 'general' },
 ];
 
 export const RATES_CHECKED = '14 Oct 2026';

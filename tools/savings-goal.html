@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/savings-goal.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Savings Goal Calculator (Australia) | Sorted, Mate</title>
+  <meta name="description" content="Find out how long it will take to reach a savings goal with weekly, fortnightly or monthly deposits, or how much to save each time to reach it by a set date.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Savings Goal Calculator (Australia)">
+  <meta property="og:description" content="Find out how long it will take to reach a savings goal with weekly, fortnightly or monthly deposits, or how much to save each time to reach it by a set date.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/loans.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/savings-goal.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Savings Goal Calculator", "description": "Find out how long it will take to reach a savings goal with weekly, fortnightly or monthly deposits, or how much to save each time to reach it by a set date.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long will it take to save $10,000?", "acceptedAnswer": {"@type": "Answer", "text": "Saving $200 a month, with $1,000 already saved, takes about 3 years 5 months at 4.5% p.a. compounded monthly, and 3 years 9 months with no interest."}}, {"@type": "Question", "name": "How much do I need to save each week to reach my goal?", "acceptedAnswer": {"@type": "Answer", "text": "Choose to work out how much to save by a date, pick weekly and enter your date. For example, $9,000 in 2 years is about $86.50 a week with no interest, or about $82 a week at 5% p.a."}}, {"@type": "Question", "name": "Is interest on savings taxed in Australia?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed."}}, {"@type": "Question", "name": "Does compounding frequency make much difference?", "acceptedAnswer": {"@type": "Answer", "text": "Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more."}}, {"@type": "Question", "name": "What about saving for a home deposit?", "acceptedAnswer": {"@type": "Answer", "text": "Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Savings Goal</span></nav>
+    <div class="tool-head">
+      <h1>Savings Goal Calculator</h1>
+      <p>How long until you hit your goal, or how much to put away to get there by a date.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="target">Savings goal ($)</label><input type="text" id="target" class="num" value="10000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="start">Already saved ($)</label><input type="text" id="start" class="num" value="1000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="4.5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="comp">Interest compounds</label>
+          <select id="comp"><option value="365">Daily</option><option value="12" selected>Monthly</option><option value="4">Quarterly</option><option value="1">Annually</option></select></div>
+        <div class="field"><label for="mode">What do you want to work out?</label>
+          <select id="mode"><option value="deposit" selected>How long it will take</option><option value="date">How much to save to reach it by a date</option></select></div>
+        <div class="field"><label for="freq">How often you save</label>
+          <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
+        <div class="field" id="deposit-field"><label for="deposit">Amount you save each time ($)</label><input type="text" id="deposit" class="num" value="200" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <div class="field" id="date-field" hidden><label for="by">Reach my goal by</label><input type="date" id="by"></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Time to reach your goal</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="other-label">Goal reached around</span><span id="other">–</span></div>
+        <div class="kv"><span>Number of deposits</span><span id="count">–</span></div>
+        <div class="kv"><span>Your money in, including what’s already saved</span><span id="deposited">–</span></div>
+        <div class="kv"><span>Interest earned</span><span id="interest">–</span></div>
+        <div class="kv"><span>Final balance</span><span id="balance">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. Like Moneysmart’s savings goals calculator, assumes you save at the start of each period, reinvest interest and keep the same rate, with no tax, fees or inflation. Not financial advice.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Enter your goal, what you've already saved and your interest rate. Then either enter how much you can save each week, fortnight or month to see how long it will take, or pick a date to see how much to put away each time.</p>
+<p>Like Moneysmart's savings goals calculator, it assumes you deposit at the start of each period, reinvest the interest and keep the same rate. Interest compounds daily, monthly, quarterly or yearly as you choose. It ignores tax on interest, account fees and inflation, so allow a little extra if your goal is a long way off.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How long will it take to save $10,000?</summary><p>Saving $200 a month, with $1,000 already saved, takes about 3 years 5 months at 4.5% p.a. compounded monthly, and 3 years 9 months with no interest.</p></details><details><summary>How much do I need to save each week to reach my goal?</summary><p>Choose to work out how much to save by a date, pick weekly and enter your date. For example, $9,000 in 2 years is about $86.50 a week with no interest, or about $82 a week at 5% p.a.</p></details><details><summary>Is interest on savings taxed in Australia?</summary><p>Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed.</p></details><details><summary>Does compounding frequency make much difference?</summary><p>Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more.</p></details><details><summary>What about saving for a home deposit?</summary><p>Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="compound-interest.html">Compound Interest</a><a href="offset.html">Offset Account</a><a href="credit-card.html">Credit Card Payoff</a><a href="stamp-duty.html">Stamp Duty, All States</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/personal-loan.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car &amp; Personal Loan Repayment Calculator (Australia) | Sorted, Mate</title>
+  <meta name="description" content="Work out weekly, fortnightly or monthly repayments on a car or personal loan, with upfront and monthly fees, an optional balloon payment and the true cost including fees.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Car &amp; Personal Loan Repayment Calculator (Australia)">
+  <meta property="og:description" content="Work out weekly, fortnightly or monthly repayments on a car or personal loan, with upfront and monthly fees, an optional balloon payment and the true cost including fees.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/loans.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/personal-loan.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Car &amp; Personal Loan Calculator", "description": "Work out weekly, fortnightly or monthly repayments on a car or personal loan, with upfront and monthly fees, an optional balloon payment and the true cost including fees.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a comparison rate?", "acceptedAnswer": {"@type": "Answer", "text": "It's the interest rate plus most upfront and ongoing fees, shown as one yearly rate. Lenders must show it next to an advertised rate. For personal and car loans it's worked out on a standard $30,000 loan over 5 years, so a loan of a different size or term can cost more or less than the comparison rate suggests. This calculator's true cost rate uses your own figures."}}, {"@type": "Question", "name": "Is a balloon payment a good idea on a car loan?", "acceptedAnswer": {"@type": "Answer", "text": "It lowers your repayments, but you pay more interest because part of the loan is never paid down during the term. At the end you must pay the balloon in one go, refinance it, or sell the car. If the car is worth less than the balloon by then, you'll need to make up the difference."}}, {"@type": "Question", "name": "Are weekly repayments cheaper than monthly?", "acceptedAnswer": {"@type": "Answer", "text": "Slightly. You pay down the loan sooner, so less interest builds up. The bigger savings come from a lower rate, lower fees, a shorter term or extra repayments."}}, {"@type": "Question", "name": "Does this include early repayment fees?", "acceptedAnswer": {"@type": "Answer", "text": "No. It assumes a fixed rate and that you make every repayment on time with no extra repayments. Check your loan contract for early exit or break fees, especially on fixed-rate loans."}}, {"@type": "Question", "name": "Should I add the establishment fee to the loan?", "acceptedAnswer": {"@type": "Answer", "text": "Adding it means you don't pay it upfront, but you pay interest on it for the whole term. Tick or untick the box to compare the total cost."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Car &amp; Personal Loan Repayments</span></nav>
+    <div class="tool-head">
+      <h1>Car &amp; Personal Loan Calculator</h1>
+      <p>Repayments, total interest and the true cost of a car or personal loan, including fees and any balloon.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="amount">Amount to borrow ($)</label><input type="text" id="amount" class="num" aria-describedby="amount-hint" value="30000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="amount-hint">The price less any deposit or trade-in.</small></div>
+        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="9" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="term">Loan term</label><input type="text" id="term" class="num" value="5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="unit">Loan term is in</label>
+          <select id="unit"><option value="years" selected>Years</option><option value="months">Months</option></select></div>
+        <div class="field"><label for="freq">Repayment frequency</label>
+          <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
+        <div class="field"><label for="upfront">Upfront fee ($)</label><input type="text" id="upfront" class="num" aria-describedby="upfront-hint" value="250" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="upfront-hint">Establishment or application fee. Enter 0 if none.</small></div>
+        <label class="check"><input type="checkbox" id="finance" checked> Add the upfront fee to the loan</label>
+        <div class="field"><label for="monthly">Monthly fee ($)</label><input type="text" id="monthly" class="num" aria-describedby="monthly-hint" value="10" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="monthly-hint">Account-keeping or service fee. Enter 0 if none.</small></div>
+        <div class="field"><label for="balloon">Balloon or residual at the end ($)</label><input type="text" id="balloon" class="num" aria-describedby="balloon-hint" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="balloon-hint">Optional. A lump sum you still owe at the end, common on car loans and leases. It lowers your repayments, but you pay interest on it for the whole term.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Monthly repayment</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="with-fees-label">Repayment including fees</span><span id="with-fees">–</span></div>
+        <div class="kv"><span>Balloon to pay at the end</span><span id="balloon-out">–</span></div>
+        <div class="kv"><span>Total interest</span><span id="interest">–</span></div>
+        <div class="kv"><span>Total fees</span><span id="fees">–</span></div>
+        <div class="kv"><span>Total cost of the loan</span><span id="cost">–</span></div>
+        <div class="kv"><span>Total you’ll pay</span><span id="paid">–</span></div>
+        <div class="kv"><span>True cost rate, including fees</span><span id="true-rate">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. Assumes a fixed rate, interest charged at your repayment frequency (as in Moneysmart’s personal loan calculator) and no early or extra repayments. Not a loan offer or financial advice.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Repayments use the standard amortisation formula, with interest charged at your repayment frequency (the same assumption as Moneysmart's personal loan calculator). Each repayment covers that period's interest and pays off some of the loan.</p>
+<p><strong>Fees:</strong> an upfront (establishment) fee can be added to the loan, so you pay interest on it, or paid at the start. A monthly account-keeping fee is added to every repayment. The <strong>true cost rate</strong> is the interest rate that would cost the same with no fees. It's worked out like a comparison rate, but on your own loan amount and term.</p>
+<p><strong>Balloon (residual) payments</strong> are common on car loans and novated leases. A balloon is a lump sum still owing after the last regular repayment. It lowers your repayments, but you pay interest on it for the whole term, so the loan costs more overall. Plan how you'll pay it: with cash, by refinancing, or by selling or trading in the car.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is a comparison rate?</summary><p>It's the interest rate plus most upfront and ongoing fees, shown as one yearly rate. Lenders must show it next to an advertised rate. For personal and car loans it's worked out on a standard $30,000 loan over 5 years, so a loan of a different size or term can cost more or less than the comparison rate suggests. This calculator's true cost rate uses your own figures.</p></details><details><summary>Is a balloon payment a good idea on a car loan?</summary><p>It lowers your repayments, but you pay more interest because part of the loan is never paid down during the term. At the end you must pay the balloon in one go, refinance it, or sell the car. If the car is worth less than the balloon by then, you'll need to make up the difference.</p></details><details><summary>Are weekly repayments cheaper than monthly?</summary><p>Slightly. You pay down the loan sooner, so less interest builds up. The bigger savings come from a lower rate, lower fees, a shorter term or extra repayments.</p></details><details><summary>Does this include early repayment fees?</summary><p>No. It assumes a fixed rate and that you make every repayment on time with no extra repayments. Check your loan contract for early exit or break fees, especially on fixed-rate loans.</p></details><details><summary>Should I add the establishment fee to the loan?</summary><p>Adding it means you don't pay it upfront, but you pay interest on it for the whole term. Tick or untick the box to compare the total cost.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="credit-card.html">Credit Card Payoff</a><a href="savings-goal.html">Savings Goal</a><a href="compound-interest.html">Compound Interest</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>
