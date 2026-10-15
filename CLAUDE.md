@@ -2,9 +2,11 @@
 
 ## Web research
 Use research tools in this order, moving to the next only when the current one is exhausted or failing:
-1. Firecrawl MCP (account has ~1,000 credits; switch when it reports credits/quota exhausted)
-2. TinyFish MCP (search, fetch_content; it runs a cloud browser, so it reaches sites this environment's network blocks)
-3. Tavily MCP (rate-limits with HTTP 429; space calls out)
+1. TinyFish MCP: `search` and `fetch_content` are free and return full pages with tables intact, including sites
+   this environment's network blocks. Its browser automation (`run_web_automation*`) is paid per step from a small
+   wallet: use it only when fetch_content can't get the content (e.g. a calculator that only renders after input).
+2. Tavily MCP (rate-limits with HTTP 429; space calls out)
+3. Firecrawl MCP (out of credits as of 15 Oct 2026; use only if it has been topped up)
 
 Don't call Apify actors: the owner won't approve them.
 
