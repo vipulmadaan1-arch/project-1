@@ -2,7 +2,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { stampDuty } from '../js/duty.js';
-import { incomeTax } from '../js/calc.js';
+import { incomeTax, helpRepayment } from '../js/calc.js';
+import { medicareLevySurcharge } from '../js/mls.js';
 
 test('VIC non-home duty matches SRO worked examples (sro.vic.gov.au, fixtures and duty)', () => {
   // $2,870 + 6% × ($500,000 − $130,000) = $25,070; over $960,000 to $2 million is 5.5% of the whole value.
@@ -23,4 +24,14 @@ test('2026-27 resident income tax hits ATO bracket amounts (ato.gov.au)', () => 
   assert.equal(Math.round(incomeTax(45000)), 4020);
   assert.equal(Math.round(incomeTax(135000)), 31020);
   assert.equal(Math.round(incomeTax(190000)), 51370);
+});
+
+test('2026-27 study loan repayments match the ATO worked examples (ato.gov.au, repayment thresholds)', () => {
+  assert.equal(helpRepayment(86380).toFixed(2), '2527.80'); // Christina
+  assert.equal(helpRepayment(137064).toFixed(2), '10276.99'); // Barry
+  assert.equal(helpRepayment(254780).toFixed(2), '25478.00'); // Priya
+});
+
+test('2026-27 Medicare levy surcharge matches the ATO example (Tom, $117,000 single, 1%)', () => {
+  assert.equal(medicareLevySurcharge({ own: { taxable: 117000 } }).surcharge, 1170);
 });
