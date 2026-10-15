@@ -1,11 +1,60 @@
 // Pure calculation functions. No DOM access so they can be unit-tested in Node.
 
-// ---------- Basic calculator (safe expression evaluator, no eval) ----------
-export function evaluate(expr) {
-  const src = String(expr).replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/\s+/g, '');
+// ---------- Calculator (safe expression evaluator, no eval) ----------
+// Grammar, lowest to highest precedence:
+//   expression := term (('+' | '-') term)*
+//   term       := unary (('*' | '/' | implicit ×) unary)*      2(3), 2π, 3sin(30) multiply
+//   unary      := ('-' | '+') unary | power                     so -2^2 = -4
+//   power      := postfix ('^' unary)?                          right-associative: 2^3^2 = 2^9
+//   postfix    := primary ('!' | '%')*
+//   primary    := number | constant | function '(' expression ')' | '(' expression ')'
+// Constants are π and ℯ (the symbol, so "2ℯ-1" is 2×ℯ−1, not 2×10⁻¹). Plain "e" still reads
+// a carried result like 1e+21. Trig functions use degrees or radians (options.angle).
+const FUNCS = {
+  sin: (x, d) => trig(Math.sin(d ? x * Math.PI / 180 : x)),
+  cos: (x, d) => trig(Math.cos(d ? x * Math.PI / 180 : x)),
+  tan: (x, d) => {
+    const r = d ? x * Math.PI / 180 : x;
+    if (Math.abs(trig(Math.cos(r))) === 0) throw new Error('Math error'); // tan 90°
+    return trig(Math.tan(r));
+  },
+  asin: (x, d) => fromRad(domain(Math.asin(x)), d),
+  acos: (x, d) => fromRad(domain(Math.acos(x)), d),
+  atan: (x, d) => fromRad(Math.atan(x), d),
+  ln: (x) => domain(x <= 0 ? NaN : Math.log(x)),
+  log: (x) => domain(x <= 0 ? NaN : Math.log10(x)),
+  sqrt: (x) => domain(Math.sqrt(x)),
+  cbrt: (x) => Math.cbrt(x),
+  abs: (x) => Math.abs(x),
+  exp: (x) => Math.exp(x),
+};
+const ALIASES = { '√': 'sqrt', '∛': 'cbrt' };
+const FUNC_NAMES = Object.keys(FUNCS).sort((a, b) => b.length - a.length); // match "asin" before "sin"
+function trig(v) { return Math.abs(v) < 1e-12 ? 0 : v; } // sin 180° = 0, not 1.2e-16
+function fromRad(v, d) { return d ? v * 180 / Math.PI : v; }
+function domain(v) { if (Number.isNaN(v)) throw new Error('Math error'); return v; }
+function factorial(n) {
+  if (n < 0 || !Number.isInteger(n)) throw new Error('Math error');
+  if (n > 170) throw new Error('Number too large');
+  let r = 1;
+  for (let k = 2; k <= n; k++) r *= k;
+  return r;
+}
+
+export function evaluate(expr, { angle = 'deg' } = {}) {
+  const deg = angle === 'deg';
+  const src = String(expr).replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-').replace(/\s+/g, '')
+    .replace(/pi/gi, 'π');
   let i = 0;
   const peek = () => src[i];
   const fail = () => { throw new Error('Invalid expression'); };
+  const funcAt = () => {
+    if (ALIASES[peek()]) return { name: ALIASES[peek()], len: 1 };
+    const name = FUNC_NAMES.find((f) => src.startsWith(f, i));
+    return name ? { name, len: name.length } : null;
+  };
+  // Something that can start a primary straight after a value, for implicit multiplication.
+  const startsPrimary = () => peek() === '(' || peek() === 'π' || peek() === 'ℯ' || !!funcAt();
 
   function number() {
     const start = i;
@@ -14,30 +63,54 @@ export function evaluate(expr) {
     if (src[i] === 'e' && /^e[+-]?\d/.test(src.slice(i, i + 3))) { i += /[+-]/.test(src[i + 1]) ? 2 : 1; while (/[0-9]/.test(src[i] || '')) i++; }
     const s = src.slice(start, i);
     if (!s || s === '.' || s.startsWith('.e') || (s.split('e')[0].match(/\./g) || []).length > 1) fail();
-    let n = parseFloat(s);
-    if (peek() === '%') { i++; n /= 100; }
-    return n;
+    return parseFloat(s);
   }
-  function factor() {
-    if (peek() === '-') { i++; return -factor(); }
-    if (peek() === '+') { i++; return factor(); }
+  function primary() {
     if (peek() === '(') {
       i++;
       const v = expression();
       if (peek() !== ')') fail();
       i++;
-      if (peek() === '%') { i++; return v / 100; }
       return v;
     }
+    if (peek() === 'π') { i++; return Math.PI; }
+    const f = funcAt(); // before the constant e, so "exp" is a function
+    if (f) {
+      i += f.len;
+      // √9 and √(9) both work; other functions need brackets: sin(30).
+      if (peek() !== '(' && f.len !== 1) fail();
+      const arg = peek() === '(' ? primary() : postfix();
+      return FUNCS[f.name](arg, deg);
+    }
+    if (peek() === 'ℯ' || (peek() === 'e' && !/[0-9]/.test(src[i + 1] || ''))) { i++; return Math.E; }
     return number();
   }
+  function postfix() {
+    let v = primary();
+    while (peek() === '!' || peek() === '%') v = src[i++] === '!' ? factorial(v) : v / 100;
+    return v;
+  }
+  function power() {
+    const base = postfix();
+    if (peek() !== '^') return base;
+    i++;
+    const exp = unary();
+    const r = base ** exp;
+    if (Number.isNaN(r)) throw new Error('Math error'); // (-8)^0.5
+    return r;
+  }
+  function unary() {
+    if (peek() === '-') { i++; return -unary(); }
+    if (peek() === '+') { i++; return unary(); }
+    return power();
+  }
   function term() {
-    let v = factor();
-    // A bracket straight after a number or bracket multiplies: 2(3) = 6, (2)(3) = 6, (2)3 = 6.
-    const implicit = () => peek() === '(' || (src[i - 1] === ')' && /[0-9.]/.test(peek() || ''));
+    let v = unary();
+    // A bracket, constant or function straight after a value multiplies: 2(3), 2π, (2)3.
+    const implicit = () => startsPrimary() || (src[i - 1] === ')' && /[0-9.]/.test(peek() || ''));
     while (peek() === '*' || peek() === '/' || implicit()) {
       const op = peek() === '*' || peek() === '/' ? src[i++] : '*';
-      const r = factor();
+      const r = unary();
       if (op === '/' && r === 0) throw new Error('Cannot divide by zero');
       v = op === '*' ? v * r : v / r;
     }

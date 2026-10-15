@@ -21,7 +21,7 @@ C = {
       ("What is the foreign purchaser surcharge?","Foreign persons buying residential-related property in NSW generally pay surcharge purchaser duty of 9% of the dutiable value, on top of normal transfer duty, unless an exemption applies."),
       ("When do the rates change?","NSW transfer duty thresholds are indexed to CPI and change each financial year from 1 July. The rate year that applies is based on your contract date."),
       ("Is this the exact amount I'll pay?","It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed.")],
- related=['mortgage','offset','rental-yield','take-home-pay']),
+ related=['stamp-duty','mortgage','offset','rental-yield']),
 'take-home-pay': dict(
  how="""<p>Your take-home pay is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026.</p>
 <table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
@@ -81,11 +81,32 @@ C = {
       ("What's the difference between percent and percentage points?","If a rate goes from 5% to 6%, it rose by 1 percentage point, which is a 20% increase.")],
  related=['gst','calculator','compound-interest','unit-converter']),
 'calculator': dict(
- how="""<p>A simple, fast calculator that follows the normal order of operations — brackets first, then × and ÷, then + and −. Type directly on your keyboard: use * for ×, / for ÷, Enter for equals, Backspace to delete and Esc to clear.</p>
-<p>The % key divides by 100, so <em>50% × 200</em> = 100. A number next to a bracket multiplies, so <em>2(3 + 4)</em> = 14. Press a different operator to replace the one you just pressed.</p>""",
- faq=[("Is anything I type saved or sent anywhere?","No. Everything runs in your browser."),
-      ("Why does 0.1 + 0.2 show 0.3?","Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0.")],
- related=['percentage','gst','unit-converter','date-calculator']),
+ how="""<p>Switch between <strong>Basic</strong> for everyday sums and <strong>Scientific</strong> for trigonometry, logarithms, powers, roots and factorials. It follows the normal order of operations: brackets, then powers, then × and ÷, then + and −. So <em>−2²</em> is −4 and <em>2³²</em> (2^3^2) is 512.</p>
+<p>Trig functions work in degrees or radians: tap the angle button to switch. A number next to a bracket, π or a function multiplies, so <em>2π</em> and <em>3 sin(30)</em> work as written. The % key divides by 100, so <em>50% × 200</em> = 100.</p>
+<p>On a keyboard, use * for ×, / for ÷, ^ for powers, ! for factorial, Enter for equals, Backspace to delete and Esc to clear.</p>""",
+ faq=[("Does it use degrees or radians?","Degrees by default, which suits most school and trade maths. Tap the Degrees button to switch to radians; your choice is remembered on this device."),
+      ("Why does it say Math error?","The input has no real answer, such as the square root of a negative number, the log of 0, tan 90° or the factorial of a fraction."),
+      ("Is anything I type saved or sent anywhere?","No. Everything runs in your browser. The tape of recent sums is cleared when you leave the page."),
+      ("Why does 0.1 + 0.2 show 0.3?","Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation.")],
+ related=['percentage','unit-converter','compound-interest','gst']),
+'stamp-duty': dict(
+ how="""<p>Each state and territory sets its own transfer (stamp) duty on property purchases, charged on the <strong>dutiable value</strong>: usually the higher of the price and the market value. Rates step up in brackets, and most states charge less if you'll live in the home or are buying your first home.</p>
+<table><thead><tr><th>State</th><th>First home buyers</th><th>Foreign buyer surcharge</th></tr></thead><tbody>
+<tr><td>NSW</td><td>No duty up to $800,000; reduced to $1 million</td><td>9%</td></tr>
+<tr><td>VIC</td><td>No duty up to $600,000; reduced to $750,000</td><td>8%</td></tr>
+<tr><td>QLD</td><td>New homes: no duty, no cap. Others: concession under $800,000</td><td>8%</td></tr>
+<tr><td>SA</td><td>New homes and vacant land: no duty, no cap</td><td>7%</td></tr>
+<tr><td>WA</td><td>No duty up to $600,000; reduced to $800,000</td><td>7%</td></tr>
+<tr><td>TAS</td><td>Established-home exemption ended 30 June 2026</td><td>8%</td></tr>
+<tr><td>ACT</td><td>No duty if eligible for the Home Buyer Concession Scheme (income tested)</td><td>None</td></tr>
+<tr><td>NT</td><td>No first home duty concession in this calculator</td><td>None</td></tr>
+</tbody></table>
+<p>Rates and thresholds were checked against each state's revenue office on 15 October 2026. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>""",
+ faq=[("Which state has the cheapest stamp duty?","It depends on price and who's buying. On a $750,000 investment property the duty is $22,200 in the ACT, $26,775 in Queensland, $27,937 in NSW, $28,935 in Tasmania, $29,741 in WA, $35,080 in South Australia, $37,125 in the NT and $40,070 in Victoria. First home buyers can pay nothing in several states, depending on price and whether the home is new."),
+      ("Why does the new home box matter?","In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home."),
+      ("Are any figures estimates?","Yes. Victoria's and NSW's first home buyer tapers, and NT rates above $3 million, use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one."),
+      ("Does this cover commercial property or vacant land?","No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.")],
+ related=['stamp-duty-nsw','mortgage','offset','rental-yield']),
 'unit-converter': dict(
  how="""<p>Convert between metric and imperial units for length, mass, volume, area, speed and temperature. Australia uses metric, but you'll still meet feet, pounds and Fahrenheit in recipes, specs and overseas listings.</p>
 <p>Australian real estate sometimes quotes house size in <strong>squares</strong> — one square is 100 square feet, or about 9.29 m².</p>""",

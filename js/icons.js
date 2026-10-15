@@ -24,6 +24,8 @@ const P = {
   coffee: '<path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10.5h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 3.5v2.5M11.5 3.5v2.5"/>',
 };
 
+P['stamp-duty'] = P['stamp-duty-nsw'];
+
 export function icon(name, { size = 24, className = 'icon' } = {}) {
   const body = P[name];
   if (!body) return '';

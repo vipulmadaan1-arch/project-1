@@ -74,7 +74,7 @@ footer.innerHTML = `
       <ul>${TOOLS.filter((t) => t.cat === c.key).map((t) => `<li><a href="${base}tools/${t.slug}.html">${t.name}</a></li>`).join('')}</ul>
     </div>`).join('')}
     <div class="footer-legal">
-      <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, Revenue NSW or a licensed adviser.</span>
+      <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
       <span class="footer-links"><a href="${base}privacy.html">Privacy</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
     </div>
   </div>`;

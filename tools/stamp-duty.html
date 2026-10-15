@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/stamp-duty.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stamp Duty Calculator Australia 2026-27, All States | Sorted, Mate</title>
+  <meta name="description" content="Stamp duty calculator for every Australian state and territory: NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Includes home and first home buyer concessions and foreign buyer surcharges.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stamp Duty Calculator Australia 2026-27, All States">
+  <meta property="og:description" content="Stamp duty calculator for every Australian state and territory: NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Includes home and first home buyer concessions and foreign buyer surcharges.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/duty.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/stamp-duty.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Stamp Duty Calculator Australia", "description": "Stamp duty calculator for every Australian state and territory: NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Includes home and first home buyer concessions and foreign buyer surcharges.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which state has the cheapest stamp duty?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on price and who's buying. On a $750,000 investment property the duty is $22,200 in the ACT, $26,775 in Queensland, $27,937 in NSW, $28,935 in Tasmania, $29,741 in WA, $35,080 in South Australia, $37,125 in the NT and $40,070 in Victoria. First home buyers can pay nothing in several states, depending on price and whether the home is new."}}, {"@type": "Question", "name": "Why does the new home box matter?", "acceptedAnswer": {"@type": "Answer", "text": "In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home."}}, {"@type": "Question", "name": "Are any figures estimates?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Victoria's and NSW's first home buyer tapers, and NT rates above $3 million, use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one."}}, {"@type": "Question", "name": "Does this cover commercial property or vacant land?", "acceptedAnswer": {"@type": "Answer", "text": "No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#au">Australian</a><span aria-hidden="true">/</span><span aria-current="page">Stamp Duty, All States</span></nav>
+    <div class="tool-head">
+      <h1>Stamp Duty Calculator Australia</h1>
+      <p>Transfer duty for every state and territory, including home and first home buyer concessions.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="state">State or territory</label>
+          <select id="state">
+            <option value="NSW">New South Wales</option><option value="VIC">Victoria</option><option value="QLD">Queensland</option><option value="SA">South Australia</option>
+            <option value="WA">Western Australia</option><option value="TAS">Tasmania</option><option value="ACT">Australian Capital Territory</option><option value="NT">Northern Territory</option>
+          </select></div>
+        <div class="field"><label for="value">Property value ($)</label><input type="text" id="value" class="num" aria-describedby="value-hint" value="750000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="value-hint">Dutiable value is the higher of the price and market value.</small></div>
+        <label class="check"><input type="checkbox" id="home" checked> I'll live in it (my home)</label>
+        <label class="check"><input type="checkbox" id="fhb"> First home buyer</label>
+        <label class="check"><input type="checkbox" id="newhome" aria-describedby="newhome-hint"> New home (never lived in)</label>
+        <small id="newhome-hint" class="hint">Matters in Queensland and South Australia, where first home relief depends on it.</small>
+        <label class="check"><input type="checkbox" id="foreign"> Foreign purchaser</label>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Total duty payable</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
+        <div class="kv"><span>Saving from concessions</span><span id="saving">–</span></div>
+        <div class="kv"><span id="surcharge-label">Foreign purchaser surcharge</span><span id="surcharge">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Residential purchases only. <span id="estimate-note"></span>Estimate only: exemptions and concessions depend on eligibility. Rates checked against <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a> on 15 Oct 2026. Confirm with your conveyancer.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Each state and territory sets its own transfer (stamp) duty on property purchases, charged on the <strong>dutiable value</strong>: usually the higher of the price and the market value. Rates step up in brackets, and most states charge less if you'll live in the home or are buying your first home.</p>
+<table><thead><tr><th>State</th><th>First home buyers</th><th>Foreign buyer surcharge</th></tr></thead><tbody>
+<tr><td>NSW</td><td>No duty up to $800,000; reduced to $1 million</td><td>9%</td></tr>
+<tr><td>VIC</td><td>No duty up to $600,000; reduced to $750,000</td><td>8%</td></tr>
+<tr><td>QLD</td><td>New homes: no duty, no cap. Others: concession under $800,000</td><td>8%</td></tr>
+<tr><td>SA</td><td>New homes and vacant land: no duty, no cap</td><td>7%</td></tr>
+<tr><td>WA</td><td>No duty up to $600,000; reduced to $800,000</td><td>7%</td></tr>
+<tr><td>TAS</td><td>Established-home exemption ended 30 June 2026</td><td>8%</td></tr>
+<tr><td>ACT</td><td>No duty if eligible for the Home Buyer Concession Scheme (income tested)</td><td>None</td></tr>
+<tr><td>NT</td><td>No first home duty concession in this calculator</td><td>None</td></tr>
+</tbody></table>
+<p>Rates and thresholds were checked against each state's revenue office on 15 October 2026. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Which state has the cheapest stamp duty?</summary><p>It depends on price and who's buying. On a $750,000 investment property the duty is $22,200 in the ACT, $26,775 in Queensland, $27,937 in NSW, $28,935 in Tasmania, $29,741 in WA, $35,080 in South Australia, $37,125 in the NT and $40,070 in Victoria. First home buyers can pay nothing in several states, depending on price and whether the home is new.</p></details><details><summary>Why does the new home box matter?</summary><p>In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home.</p></details><details><summary>Are any figures estimates?</summary><p>Yes. Victoria's and NSW's first home buyer tapers, and NT rates above $3 million, use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one.</p></details><details><summary>Does this cover commercial property or vacant land?</summary><p>No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="mortgage.html">Mortgage Repayments</a><a href="offset.html">Offset Account</a><a href="rental-yield.html">Rental Yield</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

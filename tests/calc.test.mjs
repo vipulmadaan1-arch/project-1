@@ -174,3 +174,29 @@ test('date helpers work for years before 100', () => {
   assert.equal(daysBetween('0001-01-01', '0002-01-01'), 365);
   assert.equal(addDays('0050-12-31', 1), '0051-01-01');
 });
+
+test('scientific calculator: precedence, functions, constants and errors', () => {
+  assert.equal(evaluate('-2^2'), -4);
+  assert.equal(evaluate('2^3^2'), 512);
+  assert.equal(evaluate('2^-1'), 0.5);
+  assert.equal(evaluate('5!'), 120);
+  assert.equal(evaluate('10!/8!'), 90);
+  assert.equal(evaluate('sin(30)'), 0.5);
+  assert.equal(evaluate('sin(180)'), 0);
+  assert.equal(evaluate('cos(60)'), 0.5);
+  assert.equal(evaluate('asin(1)'), 90);
+  assert.equal(evaluate('sin(π/2)', { angle: 'rad' }), 1);
+  assert.equal(evaluate('ln(ℯ)'), 1);
+  assert.equal(evaluate('log(1000)'), 3);
+  assert.equal(evaluate('√9'), 3);
+  assert.equal(evaluate('∛(-8)'), -2);
+  assert.equal(evaluate('3sin(30)'), 1.5);
+  assert.equal(evaluate('2π'), parseFloat((2 * Math.PI).toPrecision(15)));
+  assert.equal(evaluate('2ℯ-1'), parseFloat((2 * Math.E - 1).toPrecision(15))); // ℯ is the constant, not an exponent
+  assert.equal(evaluate('exp(0)'), 1); // exp is a function, not ℯ × xp
+  assert.equal(evaluate('2exp(1)'), parseFloat((2 * Math.E).toPrecision(15)));
+  assert.equal(evaluate('1e+21+1'), 1e21); // carried results still read as exponents
+  for (const bad of ['tan(90)', '√(-1)', 'ln(0)', '3.5!', '(-8)^(1/3)']) assert.throws(() => evaluate(bad), /Math error/);
+  assert.throws(() => evaluate('171!'), /too large/);
+  assert.throws(() => evaluate('sin30'));
+});

@@ -2,9 +2,9 @@
 
 Free everyday tools on one site, as tiles, with a focus on Australian money calculators. It's a static site: no backend and no build step. Everything runs in the browser.
 
-## Tools (14)
-**Money:** NSW Stamp Duty (2026/27) · Take-Home Pay AU (2026-27) · Mortgage Repayments · Offset Account Savings · Rental Yield · Compound Interest · GST
-**Everyday:** Calculator · Percentage · Unit Converter · Date Calculator
+## Tools (15)
+**Money:** Stamp Duty, all 8 states and territories · NSW Stamp Duty (2026/27) · Take-Home Pay AU (2026-27) · Mortgage Repayments · Offset Account Savings · Rental Yield · Compound Interest · GST
+**Everyday:** Calculator (basic and scientific) · Percentage · Unit Converter · Date Calculator
 **Time:** World Clock (with time converter) · Stopwatch · Countdown Timer
 
 ## Design
@@ -85,6 +85,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 | What | Where | Source |
 |---|---|---|
 | NSW transfer duty thresholds (CPI-indexed) | `NSW_BRACKETS`, `NSW_PREMIUM` in `js/calc.js` | Revenue NSW: How to calculate transfer duty |
+| Other states' transfer duty tables, home and first home rules, foreign surcharges | `STATES` and the tables above it in `js/duty.js`; update `DUTY_CHECKED` | Each state's revenue office (links in `source` per state) |
 | Income tax brackets (14% from 1 July 2027) | `TAX_BRACKETS` | ATO tax rates, Australian residents |
 | Medicare levy low-income thresholds | `MEDICARE` | ATO: Medicare levy reduction for low-income earners |
 | HECS/HELP repayment thresholds (indexed yearly) | `HELP` | ATO: Study and training loan minimum repayment income and rates |
@@ -95,6 +96,8 @@ Last checked against official sources on 14 Oct 2026. The Medicare thresholds ar
 Rate tables also appear in the how-it-works text in `scripts/content.py` (stamp duty, take-home pay), so update them there too and rerun it.
 
 The NSW first home buyer concession (homes $800k–$1m) uses a formula published by independent calculators. Revenue NSW doesn't publish it, so check it against their First Home Buyer calculator.
+
+Other figures marked as estimates on the all-states page: the Victorian first home buyer taper ($600k–$750k) and Northern Territory rates from $3 million. Check them against the SRO Victoria and Territory Revenue Office calculators each year. The FAQ's $750k comparison table in `scripts/content.py` is locked to the calculator by a test, so rate changes fail the build until the FAQ is updated.
 
 ## Disclaimer
 The financial calculators give general estimates only. They are not financial, tax or legal advice.

@@ -29,20 +29,32 @@
   <link rel="modulepreload" href="../js/tools.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/calculator.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calculator", "description": "Free online calculator with brackets, percentages and keyboard support. A tape keeps your last 12 calculations so you can reuse a result.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Calculator", "description": "Free online calculator with brackets, percentages and keyboard support. A tape keeps your last 12 calculations so you can reuse a result.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it use degrees or radians?", "acceptedAnswer": {"@type": "Answer", "text": "Degrees by default, which suits most school and trade maths. Tap the Degrees button to switch to radians; your choice is remembered on this device."}}, {"@type": "Question", "name": "Why does it say Math error?", "acceptedAnswer": {"@type": "Answer", "text": "The input has no real answer, such as the square root of a negative number, the log of 0, tan 90° or the factorial of a fraction."}}, {"@type": "Question", "name": "Is anything I type saved or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. The tape of recent sums is cleared when you leave the page."}}, {"@type": "Question", "name": "Why does 0.1 + 0.2 show 0.3?", "acceptedAnswer": {"@type": "Answer", "text": "Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#general">General</a><span aria-hidden="true">/</span><span aria-current="page">Calculator</span></nav>
     <div class="tool-head">
       <h1>Calculator</h1>
-      <p>Type on your keyboard or tap the keys. Supports brackets and percentages.</p>
+      <p>Everyday sums or scientific functions. Type on your keyboard or tap the keys.</p>
     </div>
     <div class="calc-layout">
       <div class="card calc">
+        <div class="calc-modes">
+          <div class="seg" role="group" aria-label="Calculator mode">
+            <button type="button" id="mode-basic" aria-pressed="true">Basic</button><button type="button" id="mode-sci" aria-pressed="false">Scientific</button>
+          </div>
+          <button type="button" class="angle" id="angle" aria-pressed="true" title="Switch between degrees and radians" hidden>Degrees</button>
+        </div>
         <div class="calc-display">
           <div class="calc-expr" id="expr"></div>
           <div class="calc-out" id="out">0</div>
+        </div>
+        <div class="calc-keys sci-keys" id="sci-keys" role="group" aria-label="Scientific functions" hidden>
+          <button data-k="sin(">sin</button><button data-k="cos(">cos</button><button data-k="tan(">tan</button><button data-k="ln(" aria-label="Natural log">ln</button><button data-k="log(" aria-label="Log base 10">log</button>
+          <button data-k="asin(" aria-label="Inverse sine">sin⁻¹</button><button data-k="acos(" aria-label="Inverse cosine">cos⁻¹</button><button data-k="atan(" aria-label="Inverse tangent">tan⁻¹</button><button data-k="√(" aria-label="Square root">√</button><button data-k="∛(" aria-label="Cube root">∛</button>
+          <button data-k="^2" aria-label="Square">x²</button><button data-k="^" aria-label="Power">xʸ</button><button data-k="^(-1)" aria-label="Reciprocal">1/x</button><button data-k="!" aria-label="Factorial">x!</button><button data-k="abs(" aria-label="Absolute value">|x|</button>
+          <button data-k="π" aria-label="Pi">π</button><button data-k="ℯ" aria-label="Euler's number">ℯ</button><button data-k="10^" aria-label="Ten to the power">10ˣ</button><button data-k="ℯ^" aria-label="e to the power">ℯˣ</button><button data-k="ANS" aria-label="Last answer">Ans</button>
         </div>
         <div class="calc-keys" id="keys" role="group" aria-label="Keypad">
           <button data-k="C" aria-label="Clear">C</button><button data-k="(" aria-label="Open bracket">(</button><button data-k=")" aria-label="Close bracket">)</button><button class="op" data-k="÷" aria-label="Divide">÷</button>
@@ -62,12 +74,13 @@
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
-      <p>A simple, fast calculator that follows the normal order of operations — brackets first, then × and ÷, then + and −. Type directly on your keyboard: use * for ×, / for ÷, Enter for equals, Backspace to delete and Esc to clear.</p>
-<p>The % key divides by 100, so <em>50% × 200</em> = 100. A number next to a bracket multiplies, so <em>2(3 + 4)</em> = 14. Press a different operator to replace the one you just pressed.</p>
+      <p>Switch between <strong>Basic</strong> for everyday sums and <strong>Scientific</strong> for trigonometry, logarithms, powers, roots and factorials. It follows the normal order of operations: brackets, then powers, then × and ÷, then + and −. So <em>−2²</em> is −4 and <em>2³²</em> (2^3^2) is 512.</p>
+<p>Trig functions work in degrees or radians: tap the angle button to switch. A number next to a bracket, π or a function multiplies, so <em>2π</em> and <em>3 sin(30)</em> work as written. The % key divides by 100, so <em>50% × 200</em> = 100.</p>
+<p>On a keyboard, use * for ×, / for ÷, ^ for powers, ! for factorial, Enter for equals, Backspace to delete and Esc to clear.</p>
       <h2>Frequently asked questions</h2>
-      <details><summary>Is anything I type saved or sent anywhere?</summary><p>No. Everything runs in your browser.</p></details><details><summary>Why does 0.1 + 0.2 show 0.3?</summary><p>Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation, so 1 ÷ 100,000,000,000 shows as 1e-11 rather than 0.</p></details>
+      <details><summary>Does it use degrees or radians?</summary><p>Degrees by default, which suits most school and trade maths. Tap the Degrees button to switch to radians; your choice is remembered on this device.</p></details><details><summary>Why does it say Math error?</summary><p>The input has no real answer, such as the square root of a negative number, the log of 0, tan 90° or the factorial of a fraction.</p></details><details><summary>Is anything I type saved or sent anywhere?</summary><p>No. Everything runs in your browser. The tape of recent sums is cleared when you leave the page.</p></details><details><summary>Why does 0.1 + 0.2 show 0.3?</summary><p>Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="percentage.html">Percentage</a><a href="gst.html">GST</a><a href="unit-converter.html">Unit Converter</a><a href="date-calculator.html">Date Calculator</a></nav>
+      <nav class="related"><a href="percentage.html">Percentage</a><a href="unit-converter.html">Unit Converter</a><a href="compound-interest.html">Compound Interest</a><a href="gst.html">GST</a></nav>
     </section>
     <!-- content:end -->
   </main>
