@@ -49,4 +49,16 @@ test('TAS duty hits SRO Tasmania threshold amounts (sro.tas.gov.au)', () => {
   assert.equal(tas(3000), 50);
   assert.equal(tas(25000), 435);
   assert.equal(tas(75000), 1560);
+  assert.equal(tas(200000), 5935);
+  assert.equal(tas(375000), 12935);
+  assert.equal(tas(725000), 27810);
+});
+
+test('NT duty follows the Territory Revenue Office formula (treasury.nt.gov.au, I-GEN-001)', () => {
+  // Under $525,000: D = 0.06571441 × V² + 15V, V = value / 1,000. $525,000 to under $3 million: 4.95%.
+  const nt = (v) => stampDuty({ state: 'NT', value: v, home: false }).total;
+  const formula = (v) => 0.06571441 * (v / 1000) ** 2 + 15 * (v / 1000);
+  for (const v of [300000, 500000]) assert.ok(Math.abs(nt(v) - formula(v)) < 0.5);
+  assert.equal(nt(600000), 29700);
+  assert.equal(nt(2000000), 99000);
 });
