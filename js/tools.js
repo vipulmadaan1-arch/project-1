@@ -47,6 +47,8 @@ export const TOOLS = [
   { slug: 'rent-vs-buy', name: 'Rent vs Buy', desc: 'Your wealth after buying a home or renting and investing the difference.', meta: 'Stamp duty, all states', cat: 'property' },
   { slug: 'retirement', name: 'Super & Retirement', desc: 'Super at retirement in today\'s dollars, how long it lasts, and the ASFA standard.', meta: 'ASFA June qtr 2026', cat: 'tax' },
   { slug: 'budget', name: 'Budget Planner', desc: 'Income and bills at any frequency, with your surplus or shortfall and where it goes.', meta: 'Weekly to yearly', cat: 'money' },
+  { slug: 'lmi', name: 'LMI Calculator', desc: 'Estimate lenders mortgage insurance and state duty on it, and check if the 5% Deposit Scheme avoids it.', meta: 'Estimate, all states', cat: 'property' },
+  { slug: 'upfront-costs', name: 'Upfront Costs of Buying a Home', desc: 'Cash needed to buy: deposit, stamp duty, registration fees, LMI and typical costs.', meta: 'All 8 states, 2026-27', cat: 'property' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';

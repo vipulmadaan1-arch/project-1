@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/lmi.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LMI Calculator Australia 2026: Lenders Mortgage Insurance | Sorted, Mate</title>
+  <meta name="description" content="Estimate lenders mortgage insurance from your deposit and LVR, plus state duty on the premium, and check if the 5% Deposit Scheme lets you skip LMI.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LMI Calculator Australia 2026: Lenders Mortgage Insurance">
+  <meta property="og:description" content="Estimate lenders mortgage insurance from your deposit and LVR, plus state duty on the premium, and check if the 5% Deposit Scheme lets you skip LMI.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/lmi.js">
+  <link rel="modulepreload" href="../js/pages/lmi.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "LMI Calculator: Lenders Mortgage Insurance Estimate", "description": "Estimate lenders mortgage insurance from your deposit and LVR, plus state duty on the premium, and check if the 5% Deposit Scheme lets you skip LMI.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is LMI on a $600,000 home?", "acceptedAnswer": {"@type": "Answer", "text": "About $11,772 with a 10% deposit in NSW, which charges no duty on LMI. With a 5% deposit it's about $22,788, and with 15% about $5,942. In Victoria, 10% duty brings those to $12,949, $25,067 and $6,536. These are estimates from one lender's published table; your quote can differ."}}, {"@type": "Question", "name": "Which states charge stamp duty on LMI?", "acceptedAnswer": {"@type": "Answer", "text": "Victoria, WA, Tasmania and the NT charge 10% of the premium, Queensland 9% and South Australia 11%. NSW has exempted LMI premiums paid from 1 July 2017, and the ACT has abolished duty on insurance."}}, {"@type": "Question", "name": "Can I avoid LMI with less than a 20% deposit?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if you qualify for the Australian Government 5% Deposit Scheme: first home buyers with at least a 5% deposit (2% for single parents), buying under the price cap for the area, with no income test since 1 October 2025. A family guarantee, or some lenders' waivers for professions like doctors and nurses, can also avoid it."}}, {"@type": "Question", "name": "Should I add LMI to my loan?", "acceptedAnswer": {"@type": "Answer", "text": "It saves cash upfront, but you pay interest on it for the life of the loan, and it raises your LVR, which some lenders cap. Paying it upfront costs less overall if you can afford it."}}, {"@type": "Question", "name": "Why is LMI so much higher at 95% than 90%?", "acceptedAnswer": {"@type": "Answer", "text": "The insurer's risk jumps with a thin deposit. On a $600,000 home, LMI goes from about $11,772 at 90% LVR to about $22,788 at 95% (NSW, no duty), because the rate almost doubles and applies to a bigger loan."}}]}]</script>
+</head><body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">LMI Calculator</span></nav>
+    <div class="tool-head">
+      <h1>LMI Calculator: Lenders Mortgage Insurance Estimate</h1>
+      <p>Estimate lenders mortgage insurance for a deposit under 20%, the state duty on top, and whether the 5% Deposit Scheme could save you paying it.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="state">State or territory</label>
+          <select id="state">
+            <option value="NSW">New South Wales</option><option value="VIC">Victoria</option><option value="QLD">Queensland</option><option value="SA">South Australia</option>
+            <option value="WA">Western Australia</option><option value="TAS">Tasmania</option><option value="ACT">Australian Capital Territory</option><option value="NT">Northern Territory</option>
+          </select></div>
+        <div class="field"><label for="area">Area</label>
+          <select id="area" aria-describedby="area-hint"><option value="city">Capital city or regional centre</option><option value="other">Rest of the state</option></select><small id="area-hint">Sets the 5% Deposit Scheme price cap. Regional centres include Newcastle, Central Coast, Illawarra, Geelong, Gold Coast and Sunshine Coast.</small></div>
+        <div class="field"><label for="value">Property value ($)</label><input type="text" id="value" class="num" aria-describedby="value-hint" value="700000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="value-hint">The lender's valuation, if it's lower than the price.</small></div>
+        <div class="field"><label for="mode">I'll enter my</label>
+          <select id="mode"><option value="deposit">Deposit</option><option value="loan">Loan amount</option></select></div>
+        <div class="field"><label for="amount" id="amount-label">Deposit ($)</label><input type="text" id="amount" class="num" value="70000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
+        <label class="check"><input type="checkbox" id="home" checked> I'll live in it (my home)</label>
+        <label class="check"><input type="checkbox" id="fhb" checked> First home buyer</label>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Estimated LMI, including duty</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Loan to value ratio (LVR)</span><span id="lvr">–</span></div>
+        <div class="kv"><span>Loan amount</span><span id="loan">–</span></div>
+        <div class="kv"><span id="premium-label">LMI premium (estimate)</span><span id="premium">–</span></div>
+        <div class="kv"><span id="duty-label">Duty on the premium</span><span id="duty">–</span></div>
+        <div class="kv"><span>5% Deposit Scheme</span><span id="scheme">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Estimate only. LMI premiums are set by each lender and insurer and aren't published by government. This uses <a href="https://www.homeloanexperts.com.au/lenders-mortgage-insurance/lmi-premium-rates" target="_blank" rel="noopener noreferrer">one lender's premium table published by Home Loan Experts</a> (updated May 2026), so your quote can differ by thousands. Duty rates from <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a>, checked 15 Oct 2026. Not financial advice.</p>
+      </div>
+    </div>
+    <section class="card chart-card" aria-labelledby="deposits-title"><h2 class="section-title" id="deposits-title">LMI at different deposits</h2>
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="deposits-title"><table><thead><tr><th scope="col">Deposit</th><th scope="col">LVR</th><th scope="col">Loan</th><th scope="col">LMI incl. duty</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p class="checked-line">Checked 15 Oct 2026. LMI premiums are an estimate from one lender's published table; duty on LMI checked against each state revenue office; scheme price caps from <a href="https://firsthomebuyers.gov.au/australian-government-5-percent-deposit-scheme/property-price-caps" target="_blank" rel="noopener noreferrer">Housing Australia</a>.</p>
+<p><strong>Lenders mortgage insurance (LMI)</strong> protects the lender, not you, if you borrow more than 80% of the property's value (an LVR over 80%). It's a one-off premium, paid at settlement or added to the loan, and it rises steeply with the LVR and the loan size.</p>
+<p>Premiums are set by each lender and insurer (Helia and QBE), and no government body publishes them. This calculator uses the <strong>full-doc premium table of one lender, published by Home Loan Experts</strong> (updated May 2026), so treat the result as an <strong>estimate</strong>: your lender's quote can differ by thousands.</p>
+<p>Most states charge duty on the premium: Victoria, WA, Tasmania and the NT 10%, Queensland 9% and South Australia 11%. NSW exempts LMI premiums paid from 1 July 2017, and the ACT has abolished insurance duty.</p>
+<p>The <strong>Australian Government 5% Deposit Scheme</strong> (formerly the Home Guarantee Scheme) lets first home buyers borrow with a 5% deposit and <strong>no LMI</strong>, with no income caps since 1 October 2025, under price caps such as $1.5 million in Sydney and regional NSW centres, $950,000 in Melbourne and Geelong, $1 million in Brisbane, the Gold Coast, the Sunshine Coast and the ACT, $900,000 in Adelaide, $850,000 in Perth, $750,000 in Darwin and $700,000 in Hobart.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much is LMI on a $600,000 home?</summary><p>About $11,772 with a 10% deposit in NSW, which charges no duty on LMI. With a 5% deposit it's about $22,788, and with 15% about $5,942. In Victoria, 10% duty brings those to $12,949, $25,067 and $6,536. These are estimates from one lender's published table; your quote can differ.</p></details><details><summary>Which states charge stamp duty on LMI?</summary><p>Victoria, WA, Tasmania and the NT charge 10% of the premium, Queensland 9% and South Australia 11%. NSW has exempted LMI premiums paid from 1 July 2017, and the ACT has abolished duty on insurance.</p></details><details><summary>Can I avoid LMI with less than a 20% deposit?</summary><p>Yes, if you qualify for the Australian Government 5% Deposit Scheme: first home buyers with at least a 5% deposit (2% for single parents), buying under the price cap for the area, with no income test since 1 October 2025. A family guarantee, or some lenders' waivers for professions like doctors and nurses, can also avoid it.</p></details><details><summary>Should I add LMI to my loan?</summary><p>It saves cash upfront, but you pay interest on it for the life of the loan, and it raises your LVR, which some lenders cap. Paying it upfront costs less overall if you can afford it.</p></details><details><summary>Why is LMI so much higher at 95% than 90%?</summary><p>The insurer's risk jumps with a thin deposit. On a $600,000 home, LMI goes from about $11,772 at 90% LVR to about $22,788 at 95% (NSW, no duty), because the rate almost doubles and applies to a bigger loan.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

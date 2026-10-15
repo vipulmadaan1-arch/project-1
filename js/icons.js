@@ -34,6 +34,8 @@ const P = {
   'rent-vs-buy': '<path d="M2.5 11 7 7l4.5 4"/><path d="M4 10v8h6v-8"/><path d="M13 11l4.5-4 4.5 4"/><path d="M14.5 10v8h6v-8"/><path d="M17.5 18v-3"/><circle cx="7" cy="13.5" r="1.2"/>',
   'retirement': '<path d="M12 3.5c-3.6 0-6.5 5-6.5 9.5a6.5 6.5 0 0 0 13 0c0-4.5-2.9-9.5-6.5-9.5z"/><path d="M9.5 14.5h5M12 12v5"/>',
   'budget': '<path d="M4 7.5h14a2 2 0 0 1 2 2V18a2 2 0 0 1-2 2H5a1 1 0 0 1-1-1z"/><path d="M4 7.5 15 4v3.5"/><path d="M16 13.5h4"/><circle cx="16.5" cy="13.5" r="0.6" fill="currentColor"/>',
+  'lmi': '<path d="M12 3.5 19 6v5.5c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9V6z"/><path d="M8.5 12.5 12 9.5l3.5 3"/><path d="M9.8 11.4V15h4.4v-3.6"/>',
+  'upfront-costs': '<path d="M3 11 10 5l7 6"/><path d="M5 9.5V20h10V9.5"/><path d="M8.5 20v-4h3v4"/><rect x="16" y="13" width="5.5" height="7" rx="1"/><path d="M17.5 15.5h2.5M17.5 18h2.5"/>',
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   pin: '<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',
