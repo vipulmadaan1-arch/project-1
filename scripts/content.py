@@ -4,6 +4,26 @@ import json, re, html, sys, os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 C = {
+'car-stamp-duty': dict(
+ how="""<p>Every state and territory charges <strong>motor vehicle duty</strong> (often called car stamp duty) when you register a new car or transfer a used one into your name. It's worked out on the car's <strong>dutiable value</strong>: usually the higher of the price and the market value, including GST and luxury car tax. Most states round the value up to the next $100 (Victoria to the next $200) before applying the rate.</p>
+<table><thead><tr><th>State</th><th>Passenger car rate</th></tr></thead><tbody>
+<tr><td>NSW</td><td>$3 per $100; from $45,000: $1,350 + $5 per $100 over $45,000</td></tr>
+<tr><td>VIC</td><td>$8.40 per $200 up to $80,809; $10.40 to $100,000; $14 to $150,000; $18 above (whole value). Green cars (120 g/km CO2 or less): $8.40 at any price</td></tr>
+<tr><td>QLD</td><td>Per $100: hybrid/electric $2, 1–4 cylinders $3, 5–6 cylinders $3.50, 7+ cylinders $4; $2 more per $100 on the whole value above $100,000</td></tr>
+<tr><td>SA</td><td>$60 + $4 per $100 over $3,000</td></tr>
+<tr><td>WA</td><td>2.75% up to $25,000, sliding to 6.5% at $50,000 and above</td></tr>
+<tr><td>TAS</td><td>$3 per $100 to $35,000; $1,050 + $11 per $100 to $40,000; $4 per $100 above</td></tr>
+<tr><td>ACT</td><td>By CO2 emissions: new cars $2.50–$4.83 per $100 under $45,000, rising above $45,000 and $80,000. Used cars: zero-emission or standard rate</td></tr>
+<tr><td>NT</td><td>$3 per $100; plug-in electric cars pay nothing on the first $50,000 to 30 June 2027</td></tr>
+</tbody></table>
+<p><strong>Example:</strong> a $60,000 petrol car in NSW: $1,350 + ($15,000 ÷ 100 × $5) = <strong>$2,100</strong>.</p>
+<p>Rates were checked against each state's revenue office or transport department on 15 October 2026. Utes, vans, motorcycles, heavy vehicles and exemptions aren't covered.</p>""",
+ faq=[("How much is stamp duty on a car?","It depends on the state, the car's value and sometimes its engine or emissions. On a $45,000 petrol car it's $1,350 in NSW, $1,890 in Victoria, $1,350 in Queensland (4 cylinders), $1,740 in South Australia, $2,587.50 in WA, $1,800 in Tasmania, $1,426.50 in the ACT (new, non-rated) and $1,350 in the NT."),
+      ("Do you pay stamp duty on a used car?","Yes. You pay duty when you transfer the registration into your name, on the higher of the price and the market value. Only the ACT charges used cars a different rate from new ones; elsewhere the rate is the same."),
+      ("Do electric cars pay stamp duty?","In most states, yes. Victoria charges its lower green car rate, Queensland its lowest hybrid and electric rate, and the ACT its lowest rate. The NT removes duty on the first $50,000 for plug-in electric cars until 30 June 2027. NSW's and Tasmania's EV exemptions have ended."),
+      ("Is stamp duty included in a drive-away price?","Usually, yes. Drive-away prices include duty, registration and dealer delivery. In Victoria the SRO publishes factors to convert a drive-away price back to the dutiable value, so enter the car's price before on-road costs."),
+      ("What is Victoria's luxury car stamp duty?","For 2026-27, passenger cars over $80,809 pay $10.40 per $200, over $100,000 pay $14 and over $150,000 pay $18, on the whole value. Green cars pay $8.40 per $200 at any price.")],
+ related=['personal-loan','stamp-duty','gst','work-deductions']),
 'super': dict(
  how="""<p>Your employer must pay <strong>12%</strong> of your salary into super (the super guarantee), up to the <strong>maximum contribution base of $270,830</strong> for 2026-27. With Payday Super this is now a yearly limit, so the most an employer must pay is $32,499.60. Salary you sacrifice still counts, so sacrificing doesn't reduce your employer's 12%.</p>
 <p><strong>Salary sacrifice</strong> means asking your employer to pay part of your pre-tax salary into super. It isn't taxed at your marginal rate. Instead your fund takes <strong>15% contributions tax</strong>. If your marginal rate plus the 2% Medicare levy is more than 15%, you save the difference. On $100,000, sacrificing $10,000 saves $3,200 in income tax and Medicare, costs $1,500 in contributions tax, and cuts take-home pay by $6,800. That puts $8,500 more in super.</p>

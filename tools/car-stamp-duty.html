@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/car-stamp-duty.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Stamp Duty Calculator Australia 2026-27, All States | Sorted, Mate</title>
+  <meta name="description" content="Car stamp duty calculator for NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Motor vehicle duty on new and used cars, with electric, hybrid, emissions and luxury rates.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Car Stamp Duty Calculator Australia 2026-27, All States">
+  <meta property="og:description" content="Car stamp duty calculator for NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Motor vehicle duty on new and used cars, with electric, hybrid, emissions and luxury rates.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/motor-duty.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/pages/car-stamp-duty.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Car Stamp Duty Calculator", "description": "Car stamp duty calculator for NSW, VIC, QLD, SA, WA, TAS, ACT and NT. Motor vehicle duty on new and used cars, with electric, hybrid, emissions and luxury rates.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much is stamp duty on a car?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the state, the car's value and sometimes its engine or emissions. On a $45,000 petrol car it's $1,350 in NSW, $1,890 in Victoria, $1,350 in Queensland (4 cylinders), $1,740 in South Australia, $2,587.50 in WA, $1,800 in Tasmania, $1,426.50 in the ACT (new, non-rated) and $1,350 in the NT."}}, {"@type": "Question", "name": "Do you pay stamp duty on a used car?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You pay duty when you transfer the registration into your name, on the higher of the price and the market value. Only the ACT charges used cars a different rate from new ones; elsewhere the rate is the same."}}, {"@type": "Question", "name": "Do electric cars pay stamp duty?", "acceptedAnswer": {"@type": "Answer", "text": "In most states, yes. Victoria charges its lower green car rate, Queensland its lowest hybrid and electric rate, and the ACT its lowest rate. The NT removes duty on the first $50,000 for plug-in electric cars until 30 June 2027. NSW's and Tasmania's EV exemptions have ended."}}, {"@type": "Question", "name": "Is stamp duty included in a drive-away price?", "acceptedAnswer": {"@type": "Answer", "text": "Usually, yes. Drive-away prices include duty, registration and dealer delivery. In Victoria the SRO publishes factors to convert a drive-away price back to the dutiable value, so enter the car's price before on-road costs."}}, {"@type": "Question", "name": "What is Victoria's luxury car stamp duty?", "acceptedAnswer": {"@type": "Answer", "text": "For 2026-27, passenger cars over $80,809 pay $10.40 per $200, over $100,000 pay $14 and over $150,000 pay $18, on the whole value. Green cars pay $8.40 per $200 at any price."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Car Stamp Duty, All States</span></nav>
+    <div class="tool-head">
+      <h1>Car Stamp Duty Calculator</h1>
+      <p>Motor vehicle duty you pay when you register a new car or transfer a used one, in every state and territory.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="state">State or territory where it's registered</label>
+          <select id="state">
+            <option value="NSW">New South Wales</option>
+            <option value="VIC">Victoria</option>
+            <option value="QLD">Queensland</option>
+            <option value="SA">South Australia</option>
+            <option value="WA">Western Australia</option>
+            <option value="TAS">Tasmania</option>
+            <option value="ACT">Australian Capital Territory</option>
+            <option value="NT">Northern Territory</option>
+          </select></div>
+        <div class="field"><label for="value">Car value ($)</label><input type="text" id="value" class="num" aria-describedby="value-hint" value="45000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="value-hint">Usually the higher of the price you pay and the car's market value, including GST and luxury car tax. Not including registration or insurance.</small></div>
+        <div class="field"><label for="used">New or used</label>
+          <select id="used" aria-describedby="used-hint">
+            <option value="new">New (never registered)</option>
+            <option value="used">Used (registered before)</option>
+          </select><small id="used-hint"></small></div>
+        <div class="field"><label for="fuel">Engine type</label>
+          <select id="fuel" aria-describedby="fuel-hint">
+            <option value="petrol">Petrol, diesel or LPG</option>
+            <option value="hybrid">Hybrid (not plug-in)</option>
+            <option value="phev">Plug-in hybrid</option>
+            <option value="ev">Fully electric or hydrogen</option>
+          </select><small id="fuel-hint"></small></div>
+        <div class="field" id="cyl-field" hidden><label for="cyl">Number of cylinders</label>
+          <select id="cyl" aria-describedby="cyl-hint">
+            <option value="4">1 to 4 cylinders (or 2 rotors)</option>
+            <option value="6">5 or 6 cylinders (or 3 rotors)</option>
+            <option value="8">7 or more cylinders</option>
+          </select><small id="cyl-hint">Queensland charges more for bigger engines. It's on your registration papers.</small></div>
+        <div class="field" id="co2-field" hidden><label for="co2">CO2 emissions in grams per km (optional)</label><input type="text" id="co2" class="num" aria-describedby="co2-hint" inputmode="numeric" spellcheck="false" autocomplete="off"><small id="co2-hint">The "combined" figure from the <a href="https://www.greenvehicleguide.gov.au/" target="_blank" rel="noopener noreferrer">Green Vehicle Guide</a> or the windscreen label. Leave blank if you don't know.</small></div>
+        <div class="field" id="actdate-field" hidden><label for="actdate">When will you register it?</label>
+          <select id="actdate" aria-describedby="actdate-hint">
+            <option value="now">Before 1 February 2027</option>
+            <option value="2027">On or after 1 February 2027</option>
+          </select><small id="actdate-hint">ACT rates for most petrol and diesel cars rise on 1 February 2027.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Motor vehicle duty</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Duty worked out on</span><span id="charged">–</span></div>
+        <div class="kv"><span>Share of car value</span><span id="eff">–</span></div>
+        <div class="kv" id="saving-row" hidden><span>Electric vehicle concession</span><span id="saving">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Private passenger cars and SUVs only: not utes, vans, motorcycles or heavy vehicles. Exemptions (such as transfers between partners, deceased estates and disability) aren't included. Registration, insurance and transfer fees are extra. Rates checked against <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a> on 15 Oct 2026. Confirm with your state's registration authority.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Every state and territory charges <strong>motor vehicle duty</strong> (often called car stamp duty) when you register a new car or transfer a used one into your name. It's worked out on the car's <strong>dutiable value</strong>: usually the higher of the price and the market value, including GST and luxury car tax. Most states round the value up to the next $100 (Victoria to the next $200) before applying the rate.</p>
+<table><thead><tr><th>State</th><th>Passenger car rate</th></tr></thead><tbody>
+<tr><td>NSW</td><td>$3 per $100; from $45,000: $1,350 + $5 per $100 over $45,000</td></tr>
+<tr><td>VIC</td><td>$8.40 per $200 up to $80,809; $10.40 to $100,000; $14 to $150,000; $18 above (whole value). Green cars (120 g/km CO2 or less): $8.40 at any price</td></tr>
+<tr><td>QLD</td><td>Per $100: hybrid/electric $2, 1–4 cylinders $3, 5–6 cylinders $3.50, 7+ cylinders $4; $2 more per $100 on the whole value above $100,000</td></tr>
+<tr><td>SA</td><td>$60 + $4 per $100 over $3,000</td></tr>
+<tr><td>WA</td><td>2.75% up to $25,000, sliding to 6.5% at $50,000 and above</td></tr>
+<tr><td>TAS</td><td>$3 per $100 to $35,000; $1,050 + $11 per $100 to $40,000; $4 per $100 above</td></tr>
+<tr><td>ACT</td><td>By CO2 emissions: new cars $2.50–$4.83 per $100 under $45,000, rising above $45,000 and $80,000. Used cars: zero-emission or standard rate</td></tr>
+<tr><td>NT</td><td>$3 per $100; plug-in electric cars pay nothing on the first $50,000 to 30 June 2027</td></tr>
+</tbody></table>
+<p><strong>Example:</strong> a $60,000 petrol car in NSW: $1,350 + ($15,000 ÷ 100 × $5) = <strong>$2,100</strong>.</p>
+<p>Rates were checked against each state's revenue office or transport department on 15 October 2026. Utes, vans, motorcycles, heavy vehicles and exemptions aren't covered.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How much is stamp duty on a car?</summary><p>It depends on the state, the car's value and sometimes its engine or emissions. On a $45,000 petrol car it's $1,350 in NSW, $1,890 in Victoria, $1,350 in Queensland (4 cylinders), $1,740 in South Australia, $2,587.50 in WA, $1,800 in Tasmania, $1,426.50 in the ACT (new, non-rated) and $1,350 in the NT.</p></details><details><summary>Do you pay stamp duty on a used car?</summary><p>Yes. You pay duty when you transfer the registration into your name, on the higher of the price and the market value. Only the ACT charges used cars a different rate from new ones; elsewhere the rate is the same.</p></details><details><summary>Do electric cars pay stamp duty?</summary><p>In most states, yes. Victoria charges its lower green car rate, Queensland its lowest hybrid and electric rate, and the ACT its lowest rate. The NT removes duty on the first $50,000 for plug-in electric cars until 30 June 2027. NSW's and Tasmania's EV exemptions have ended.</p></details><details><summary>Is stamp duty included in a drive-away price?</summary><p>Usually, yes. Drive-away prices include duty, registration and dealer delivery. In Victoria the SRO publishes factors to convert a drive-away price back to the dutiable value, so enter the car's price before on-road costs.</p></details><details><summary>What is Victoria's luxury car stamp duty?</summary><p>For 2026-27, passenger cars over $80,809 pay $10.40 per $200, over $100,000 pay $14 and over $150,000 pay $18, on the whole value. Green cars pay $8.40 per $200 at any price.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="personal-loan.html">Car & Personal Loan Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="gst.html">GST</a><a href="work-deductions.html">Work From Home & Car Expenses</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>
