@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v50';
+const VERSION = 'v51';
 const CACHE = `sortedmate-${VERSION}`;
 const NETWORK_TIMEOUT_MS = 4000;
 // Each version's cache also holds the HASHES it was built from, under this key.
@@ -153,7 +153,7 @@ const FILES = [
 const HASHES = {
   './': '8c62ea9f64036849',
   '404.html': '75d58d5649a42415',
-  'css/style.css': '995e2a19352700e5',
+  'css/style.css': 'af70317ca18d5d58',
   'tools/upfront-costs.html': '885a8ca6c550c83b',
   'tools/lmi.html': '951114e17be66073',
   'js/pages/upfront-costs.js': '605f91de49f15a12',

@@ -654,6 +654,8 @@ html.is-leaving body::before {
    the link that reopens the result. */
 .print-only { display: none; }
 @media print {
+  /* Browsers drop backgrounds when printing; the legend swatches carry the series colours, so keep them. */
+  .chart-key { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   :root:not(#_) {
     --bg: #fff; --surface: #fff; --sunken: #fff; --ink: #000; --muted: #333; --faint: #444; --line: #bbb; --line-strong: #888;
     --accent: #0b5a4d; --accent-soft: #ccc; --readout: #fff; --readout-ink: #000; --readout-muted: #333; --readout-line: #bbb;
