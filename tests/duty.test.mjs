@@ -117,3 +117,21 @@ test('state page worked examples and FAQ figures match the calculator', async ()
   assert.equal(d('QLD', 700000, { home: true, firstHome: true }).duty, 0);
   assert.equal(d('QLD', 1000000, { home: true, firstHome: true, newHome: true }).duty, 0);
 });
+
+test('QLD first home concession matches the QRO worked examples', () => {
+  // https://qro.qld.gov.au/duties/transfer-duty/concessions/homes/first-home (checked 15 Oct 2026)
+  const fhb = (value) => stampDuty({ state: 'QLD', value, home: true, firstHome: true }).duty;
+  assert.equal(fhb(650000), 0);
+  assert.equal(fhb(730000), 6555);
+  assert.equal(fhb(850000), 24100);
+});
+
+test('WA first home owner rate from 7 May 2026 is one statewide scale', () => {
+  // https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment (checked 15 Oct 2026):
+  // $0–$600,000 no duty; $600,001–$800,000 $16.15 per $100 or part above $600,000. The Perth/regional split ended 6 May 2026.
+  const fhb = (value) => stampDuty({ state: 'WA', value, home: true, firstHome: true }).duty;
+  assert.equal(fhb(600000), 0);
+  assert.equal(fhb(600001), 16); // $1 over is one "part of $100": $16.15, shown to the dollar
+  assert.equal(fhb(700000), 16150);
+  assert.equal(fhb(800000), 32300);
+});
