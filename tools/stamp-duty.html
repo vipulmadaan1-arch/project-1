@@ -36,7 +36,7 @@
   <main class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#property">Property and cars</a><span aria-hidden="true">/</span><span aria-current="page">Stamp Duty, All States</span></nav>
     <div class="tool-head">
-      <h1>Stamp Duty Calculator 2026-27: All Australian States</h1>
+      <h1>Stamp Duty Calculator <span class="nowrap">2026-27</span>: All Australian States</h1>
       <p>Transfer duty for every state and territory, including home and first home buyer concessions.</p>
     </div>
     <div class="cols">
@@ -53,22 +53,22 @@
         <small id="newhome-hint" class="hint">Matters for first home buyers in Queensland and South Australia, and for house and land packages in the Northern Territory.</small>
         <label class="check"><input type="checkbox" id="foreign"> Foreign purchaser</label>
       </form>
-      <div class="card readout">
-        <div id="total-label">Total duty payable</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Total duty payable</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span>Transfer duty</span><span id="duty">–</span></div>
         <div class="kv"><span>Saving from concessions</span><span id="saving">–</span></div>
         <div class="kv"><span id="surcharge-label">Foreign purchaser surcharge</span><span id="surcharge">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">Residential purchases only. <span id="estimate-note"></span>Estimate only: exemptions and concessions depend on eligibility. Rates checked against <a id="source" href="#" target="_blank" rel="noopener noreferrer">the revenue office</a> on 15 Oct 2026. Confirm with your conveyancer.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against each state and territory revenue office (links below).</p>
 <p>Each state and territory sets its own transfer (stamp) duty on property purchases, charged on the <strong>dutiable value</strong>: usually the higher of the price and the market value. Rates step up in brackets, and most states charge less if you'll live in the home or are buying your first home.</p>
-<table><thead><tr><th>State</th><th>First home buyers</th><th>Foreign buyer surcharge</th></tr></thead><tbody>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Table: State, First home buyers, Foreign buyer surcharge"><table><thead><tr><th>State</th><th>First home buyers</th><th>Foreign buyer surcharge</th></tr></thead><tbody>
 <tr><td>NSW</td><td>No duty up to $800,000; reduced to $1 million</td><td>9%</td></tr>
 <tr><td>VIC</td><td>No duty up to $600,000; reduced to $750,000</td><td>8%</td></tr>
 <tr><td>QLD</td><td>New homes: no duty, no cap. Others: concession under $800,000</td><td>8%</td></tr>
@@ -77,14 +77,15 @@
 <tr><td>TAS</td><td>Established-home exemption ended 30 June 2026</td><td>8%</td></tr>
 <tr><td>ACT</td><td>No duty at any price under the Home Buyer Concession Scheme, if no buyer has owned property in 5 years</td><td>None</td></tr>
 <tr><td>NT</td><td>No first home concession. Any buyer of a new house and land package from a builder pays no duty (to 30 June 2027)</td><td>None</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p><strong>Buying in NSW, Victoria, Queensland or WA?</strong> The <a href="stamp-duty-nsw.html">NSW</a>, <a href="stamp-duty-vic.html">Victoria</a>, <a href="stamp-duty-qld.html">Queensland</a> and <a href="stamp-duty-wa.html">WA</a> stamp duty calculators show that state's rate table, home and first home buyer rules and a worked example step by step.</p>
 <p>Rates and thresholds were checked against each state's revenue office on 15 October 2026: <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a>, <a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Victoria</a>, <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>, <a href="https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty" target="_blank" rel="noopener noreferrer">RevenueSA</a>, <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>, <a href="https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Tasmania</a>, <a href="https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property" target="_blank" rel="noopener noreferrer">ACT Revenue Office</a> and <a href="https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator" target="_blank" rel="noopener noreferrer">Territory Revenue Office</a>. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>
 <p><strong>Foreign buyers</strong> pay the surcharge on the full dutiable value, on top of duty and before any concession. First home relief needs at least one buyer who is an Australian citizen or permanent resident in every state except the ACT and NT, and from 1 August 2026 Queensland's home concession does too. With a joint purchase the surcharge applies only to the foreign buyer's share.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Which state has the cheapest stamp duty?</summary><p>On a $750,000 investment property the ACT is cheapest ($22,200) and Victoria the dearest ($40,070). In between are Queensland ($26,775), NSW ($27,937), Tasmania ($28,935), WA ($29,741), South Australia ($35,080) and the NT ($37,125). The order changes with price and buyer: first home buyers can pay nothing in several states, depending on price and whether the home is new.</p></details><details><summary>Why does the new home box matter?</summary><p>In Queensland and South Australia, first home buyers pay no duty on a new home regardless of price, but get less or no relief on an established home. In the NT, anyone buying a new house and land package from a builder to live in pays no duty, for contracts signed to 30 June 2027.</p></details><details><summary>Can foreign buyers get first home buyer relief?</summary><p>Not on their own, except in the ACT. NSW, Victoria, Queensland, South Australia, WA and Tasmania need at least one buyer to be an Australian citizen or permanent resident (New Zealand citizens on a special category visa usually count too). If you buy with one, the surcharge applies only to the foreign buyer's share, so check the exact figure with your state's revenue office.</p></details><details><summary>Are any figures estimates?</summary><p>Yes. Victoria's and NSW's first home buyer tapers use formulas published by independent calculators because the revenue offices don't publish them. The page tells you when a result uses one. NT rates above $3 million (5.75%, and 5.95% from $5 million) come from NT Treasury's 2024-25 Budget Paper 2.</p></details><details><summary>Does this cover commercial property or vacant land?</summary><p>No. It covers residential purchases. Vacant land and commercial property often have different rules; check your state's revenue office.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="stamp-duty-vic.html">VIC Stamp Duty</a><a href="stamp-duty-qld.html">QLD Stamp Duty</a><a href="stamp-duty-wa.html">WA Stamp Duty</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="stamp-duty-vic.html">VIC Stamp Duty</a><a href="stamp-duty-qld.html">QLD Stamp Duty</a><a href="stamp-duty-wa.html">WA Stamp Duty</a><a href="borrowing-power.html">Borrowing Power</a><a href="mortgage.html">Mortgage Repayments</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a></nav>
     </section>
     <!-- content:end -->
   </main>

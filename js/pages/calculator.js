@@ -11,6 +11,8 @@ const MAX_LEN = 120;
 // Basic or scientific keypad, and degrees or radians for trig. Both are remembered on this device.
 let angle = safeGet('calcAngle') === 'rad' ? 'rad' : 'deg';
 const $angle = document.getElementById('angle');
+const $deg = document.getElementById('angle-deg');
+const $rad = document.getElementById('angle-rad');
 const $sciKeys = document.getElementById('sci-keys');
 const $basic = document.getElementById('mode-basic');
 const $sci = document.getElementById('mode-sci');
@@ -24,8 +26,8 @@ function setMode(sci) {
 }
 function setAngle(a) {
   angle = a;
-  $angle.textContent = a === 'deg' ? 'Degrees' : 'Radians';
-  $angle.setAttribute('aria-pressed', String(a === 'deg'));
+  $deg.setAttribute('aria-pressed', String(a === 'deg'));
+  $rad.setAttribute('aria-pressed', String(a === 'rad'));
   safeSet('calcAngle', a);
   show();
 }
@@ -33,7 +35,8 @@ function setAngle(a) {
 const blurIfClicked = (e) => { if (e.detail > 0) e.currentTarget.blur(); };
 $basic.addEventListener('click', (e) => { setMode(false); blurIfClicked(e); });
 $sci.addEventListener('click', (e) => { setMode(true); blurIfClicked(e); });
-$angle.addEventListener('click', (e) => { setAngle(angle === 'deg' ? 'rad' : 'deg'); announce(angle === 'deg' ? 'Degrees' : 'Radians'); blurIfClicked(e); });
+$deg.addEventListener('click', (e) => { setAngle('deg'); blurIfClicked(e); });
+$rad.addEventListener('click', (e) => { setAngle('rad'); blurIfClicked(e); });
 $sciKeys.addEventListener('click', (e) => {
   const btn = e.target.closest('button');
   if (!btn?.dataset.k) return;
@@ -49,6 +52,21 @@ function fmt(n) {
   return n.toLocaleString('en-AU', { maximumFractionDigits: 10, maximumSignificantDigits: 15, roundingPriority: 'lessPrecision' });
 }
 const errorText = (e) => (e.message === 'Cannot divide by zero' ? 'Cannot ÷ 0' : e.message === 'Number too large' ? 'Too large' : e.message === 'Math error' ? 'Math error' : 'Error');
+// The same messages in words, for screen readers.
+const errorWords = (e) => (e.message === 'Cannot divide by zero' ? 'Cannot divide by zero' : e.message === 'Number too large' ? 'The answer is too large' : e.message === 'Math error' ? 'Math error' : 'Error');
+
+// The expression in words, read out once keys pause: "12 times open bracket 3 plus 4 close bracket".
+const WORDS = [
+  [/\^\(-1\)/g, ' to the power of minus 1 '], [/\^2(?!\d)/g, ' squared '], [/\^/g, ' to the power of '],
+  [/asin\(/g, ' inverse sine of '], [/acos\(/g, ' inverse cosine of '], [/atan\(/g, ' inverse tangent of '],
+  [/sin\(/g, ' sine of '], [/cos\(/g, ' cosine of '], [/tan\(/g, ' tangent of '], [/ln\(/g, ' natural log of '],
+  [/log\(/g, ' log of '], [/abs\(/g, ' absolute value of '], [/exp\(/g, ' e to the power of '],
+  [/√\(/g, ' square root of '], [/∛\(/g, ' cube root of '], [/π/g, ' pi '], [/ℯ/g, ' e '],
+  [/×/g, ' times '], [/÷/g, ' divided by '], [/\+/g, ' plus '], [/-/g, ' minus '], [/%/g, ' percent '], [/!/g, ' factorial '],
+  [/\(/g, ' open bracket '], [/\)/g, ' close bracket '],
+];
+const spoken = (s) => WORDS.reduce((t, [re, w]) => t.replace(re, w), s).replace(/\s+/g, ' ').trim();
+const sayExpr = () => announce(expr ? spoken(expr) : 'Cleared', 500);
 
 function show() {
   $expr.textContent = expr;
@@ -59,12 +77,13 @@ function show() {
 
 const OPS = '+-×÷';
 function press(k) {
-  if (k === 'C') { expr = ''; justEvaluated = false; return show(); }
+  if (k === 'C') { expr = ''; justEvaluated = false; sayExpr(); return show(); }
   if (k === '⌫') {
     // Delete a whole function name at once ("sin(" rather than "(").
     const fn = expr.match(/(?:asin|acos|atan|sin|cos|tan|ln|log|abs|exp)\($/);
     expr = justEvaluated && /e/.test(expr) ? '' : expr.slice(0, fn ? -fn[0].length : -1);
     justEvaluated = false;
+    sayExpr();
     return show();
   }
   if (k === 'ANS') k = String(lastAnswer);
@@ -80,8 +99,8 @@ function press(k) {
       justEvaluated = true;
       addToTape($expr.textContent.replace(/ =$/, ''), r);
     } catch (e) {
-      $out.textContent = errorText(e);
-      announce($out.textContent);
+      $out.innerHTML = `<span aria-hidden="true">${errorText(e)}</span><span class="visually-hidden">${errorWords(e)}</span>`;
+      announce(errorWords(e));
     }
     return;
   }
@@ -100,6 +119,7 @@ function press(k) {
   if (k === '.' && /\d*\.\d*$/.test(expr.split(/[+\-×÷()%^!]/).pop())) return; // one decimal point per number
   if (expr.length + k.length > MAX_LEN) return;
   expr += k;
+  sayExpr();
   show();
 }
 

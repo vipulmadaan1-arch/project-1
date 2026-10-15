@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled } from '../layout.js';
 import { lmi, SCHEME_URL } from '../lmi.js';
 
 const $ = (id) => document.getElementById(id);
@@ -15,7 +15,7 @@ function update() {
   const home = $('home').checked;
   const state = $('state').value;
   // The ACT has one price cap for the whole territory, so the area choice doesn't matter there.
-  $('area').disabled = state === 'ACT';
+  setEnabled($('area'), state !== 'ACT', 'The ACT has one price cap for the whole territory, so this doesn\'t apply.');
   const value = readNumber($('value'), { name: 'Property value', unit: 'money', above: 0, max: 1e9 });
   const amount = readNumber($('amount'), { name: isLoan ? 'Loan amount' : 'Deposit', unit: 'money', min: 0, max: 1e9 });
   let loan = null;

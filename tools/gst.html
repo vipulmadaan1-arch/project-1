@@ -44,13 +44,13 @@
           <select id="mode"><option value="add">Add GST to an amount</option><option value="remove">Remove GST from an amount</option></select></div>
         <div class="field"><label for="amount" id="amount-label">Amount excluding GST ($)</label><input type="text" id="amount" class="num" value="100" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
       </form>
-      <div class="card readout">
-        <div id="headline-label">Total including GST</div>
+      <section class="card readout" aria-labelledby="headline-label">
+        <h2 class="readout-label" id="headline-label">Total including GST</h2>
         <div class="result-big" id="headline">–</div>
         <div class="kv"><span>Amount excluding GST</span><span id="ex">–</span></div>
         <div class="kv"><span>GST (10%)</span><span id="g">–</span></div>
         <div class="kv"><span>Amount including GST</span><span id="inc">–</span></div>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -62,23 +62,24 @@
 <li><strong>GST in a GST-inclusive price:</strong> price ÷ 11. For $220, GST is $20.</li></ul>
 <p>A common mistake is taking 10% off a GST-inclusive price: $110 − 10% = $99, not $100.</p>
 <h3>Adding GST</h3>
-<table><thead><tr><th>Price before GST</th><th>GST</th><th>Total</th></tr></thead><tbody>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Adding GST"><table><thead><tr><th>Price before GST</th><th>GST</th><th>Total</th></tr></thead><tbody>
 <tr><td>$50</td><td>$5.00</td><td>$55.00</td></tr>
 <tr><td>$99</td><td>$9.90</td><td>$108.90</td></tr>
 <tr><td>$1,000</td><td>$100.00</td><td>$1,100.00</td></tr>
 <tr><td>$5,500</td><td>$550.00</td><td>$6,050.00</td></tr>
-</tbody></table>
+</tbody></table></div>
 <h3>Removing GST from a total</h3>
-<table><thead><tr><th>Total with GST</th><th>GST inside</th><th>Price before GST</th></tr></thead><tbody>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Removing GST from a total"><table><thead><tr><th>Total with GST</th><th>GST inside</th><th>Price before GST</th></tr></thead><tbody>
 <tr><td>$50</td><td>$4.55</td><td>$45.45</td></tr>
 <tr><td>$99</td><td>$9.00</td><td>$90.00</td></tr>
 <tr><td>$1,000</td><td>$90.91</td><td>$909.09</td></tr>
 <tr><td>$5,500</td><td>$500.00</td><td>$5,000.00</td></tr>
-</tbody></table>
+</tbody></table></div>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>How do I calculate GST from a total?</summary><p>Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09.</p></details><details><summary>Is GST charged on fresh food, rent or medical?</summary><p>Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/gst-free-sales" target="_blank" rel="noopener noreferrer">GST-free</a>. Renting out a home is <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/input-taxed-sales" target="_blank" rel="noopener noreferrer">input taxed</a>, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list.</p></details><details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">ATO's GST guide</a> for your situation.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="percentage.html">Percentage</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="percentage.html">Percentage</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
     </section>
     <!-- content:end -->
   </main>

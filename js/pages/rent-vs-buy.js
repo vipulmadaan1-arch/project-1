@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled } from '../layout.js';
 import { rentVsBuy } from '../rentbuy.js';
 
 const $ = (id) => document.getElementById(id);
@@ -9,7 +9,7 @@ const table = $('rows').closest('section');
 
 function update() {
   const home = $('home').checked;
-  $('fhb').disabled = !home;
+  setEnabled($('fhb'), home, "Only for a home you'll live in. Tick “I'll live in it” to use this.");
   if (!home) $('fhb').checked = false;
   const v = {
     price: money('price', 'Home price', { above: 0, max: 1e9 }),

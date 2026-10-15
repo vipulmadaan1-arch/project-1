@@ -45,14 +45,14 @@
         <div class="field"><label for="costs">Annual costs ($)</label><input type="text" id="costs" class="num" aria-describedby="costs-hint" value="7500" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="costs-hint">Council and water rates, insurance, strata, property management, maintenance.</small></div>
         <div class="field"><label for="vacancy">Vacancy (weeks per year)</label><input type="text" id="vacancy" class="num" value="2" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
       </form>
-      <div class="card readout">
-        <div>Net rental yield</div>
+      <section class="card readout" aria-labelledby="result-label">
+        <h2 class="readout-label" id="result-label">Net rental yield</h2>
         <div class="result-big" id="net">–</div>
         <div class="kv"><span>Gross rental yield</span><span id="gross">–</span></div>
         <div class="kv"><span>Annual rent received</span><span id="annual">–</span></div>
         <div class="kv"><span>Net income before mortgage and tax</span><span id="income">–</span></div>
         <p class="disclaimer">Estimate only. Excludes mortgage interest, depreciation, tax and purchase costs such as stamp duty. Not financial advice.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -61,10 +61,11 @@
 <p><strong>Gross yield</strong> = annual rent ÷ purchase price × 100. It's the quick comparison figure used in listings.</p>
 <p><strong>Net yield</strong> = (annual rent after vacancy − annual costs) ÷ purchase price × 100. It's a better guide to what the property actually earns before mortgage interest and tax.</p>
 <p><strong>Example:</strong> $520/week on a $550,000 property is $27,040 a year: a 4.92% gross yield. With 2 weeks' vacancy and $7,500 of yearly costs, net income is $18,500, a 3.36% net yield.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>What costs should I include?</summary><p>Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies.</p></details><details><summary>Does this include mortgage repayments?</summary><p>No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately.</p></details><details><summary>What's a good rental yield?</summary><p>About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
     </section>
     <!-- content:end -->
   </main>

@@ -40,27 +40,33 @@
     </div>
     <form id="form">
       <div class="card" style="margin-bottom:14px">
-        <h2 class="section-title" style="margin-top:0">What is X% of Y?</h2>
-        <div class="cols">
-          <div class="field"><label for="a1">Percent (%)</label><input type="text" id="a1" class="num" value="15" spellcheck="false" autocomplete="off"></div>
-          <div class="field"><label for="a2">Of</label><input type="text" id="a2" class="num" value="200" spellcheck="false" autocomplete="off"></div>
-        </div>
+        <fieldset class="plain">
+          <legend><h2 class="section-title" style="margin-top:0">What is X% of Y?</h2></legend>
+          <div class="cols">
+            <div class="field"><label for="a1">Percent (%)</label><input type="text" id="a1" class="num" inputmode="decimal" value="15" spellcheck="false" autocomplete="off"></div>
+            <div class="field"><label for="a2">Of</label><input type="text" id="a2" class="num" inputmode="decimal" value="200" spellcheck="false" autocomplete="off"></div>
+          </div>
+        </fieldset>
         <div class="result-big" id="r1">–</div>
       </div>
       <div class="card" style="margin-bottom:14px">
-        <h2 class="section-title" style="margin-top:0">X is what percent of Y?</h2>
-        <div class="cols">
-          <div class="field"><label for="b1">Value</label><input type="text" id="b1" class="num" value="30" spellcheck="false" autocomplete="off"></div>
-          <div class="field"><label for="b2">Total</label><input type="text" id="b2" class="num" value="120" spellcheck="false" autocomplete="off"></div>
-        </div>
+        <fieldset class="plain">
+          <legend><h2 class="section-title" style="margin-top:0">X is what percent of Y?</h2></legend>
+          <div class="cols">
+            <div class="field"><label for="b1">Value</label><input type="text" id="b1" class="num" inputmode="decimal" value="30" spellcheck="false" autocomplete="off"></div>
+            <div class="field"><label for="b2">Total</label><input type="text" id="b2" class="num" inputmode="decimal" value="120" spellcheck="false" autocomplete="off"></div>
+          </div>
+        </fieldset>
         <div class="result-big" id="r2">–</div>
       </div>
       <div class="card">
-        <h2 class="section-title" style="margin-top:0">Percentage change from X to Y</h2>
-        <div class="cols">
-          <div class="field"><label for="c1">From</label><input type="text" id="c1" class="num" value="80" spellcheck="false" autocomplete="off"></div>
-          <div class="field"><label for="c2">To</label><input type="text" id="c2" class="num" value="100" spellcheck="false" autocomplete="off"></div>
-        </div>
+        <fieldset class="plain">
+          <legend><h2 class="section-title" style="margin-top:0">Percentage change from X to Y</h2></legend>
+          <div class="cols">
+            <div class="field"><label for="c1">From</label><input type="text" id="c1" class="num" inputmode="decimal" value="80" spellcheck="false" autocomplete="off"></div>
+            <div class="field"><label for="c2">To</label><input type="text" id="c2" class="num" inputmode="decimal" value="100" spellcheck="false" autocomplete="off"></div>
+          </div>
+        </fieldset>
         <div class="result-big" id="r3">–</div>
       </div>
     </form>
@@ -71,10 +77,11 @@
 <li><strong>X is what % of Y</strong> = X ÷ Y × 100. 30 is 25% of 120.</li>
 <li><strong>Percentage change</strong> = (new − old) ÷ old × 100. From 80 to 100 is +25%.</li></ul>
 <p>Note that a 25% increase followed by a 25% decrease doesn't get you back to where you started: 80 → 100 → 75.</p>
+      
       <h2>Frequently asked questions</h2>
       <details><summary>How do I add a percentage to a number?</summary><p>Multiply by (1 + percent ÷ 100). To add 15% to 200: 200 × 1.15 = 230.</p></details><details><summary>What's the difference between percent and percentage points?</summary><p>If a rate goes from 5% to 6%, it rose by 1 percentage point, which is a 20% increase.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="gst.html">GST</a><a href="calculator.html">Calculator</a><a href="unit-converter.html">Unit Converter</a><a href="date-calculator.html">Date Calculator</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="gst.html">GST</a><a href="calculator.html">Calculator</a><a href="unit-converter.html">Unit Converter</a><a href="date-calculator.html">Date Calculator</a></nav>
     </section>
     <!-- content:end -->
   </main>

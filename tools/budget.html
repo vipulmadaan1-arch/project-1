@@ -78,8 +78,8 @@
           </tbody>
         </table>
       </form>
-      <div class="card readout">
-        <div id="total-label">Left over each month</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Left over each month</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span id="income-label">Income</span><span id="income-out">–</span></div>
         <div class="kv"><span id="spend-label">Spending and savings</span><span id="spend">–</span></div>
@@ -89,10 +89,10 @@
         <div class="kv"><span>Savings (guide: 20%)</span><span id="saving">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">The 50/30/20 split is a popular rule of thumb, not an official standard: half your take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. Debt repayments count as needs here. Your inputs stay in your browser; "Copy link" puts them in the link only when you choose to share it. For a more detailed budget, try the <a href="https://moneysmart.gov.au/budgeting/budget-planner" target="_blank" rel="noopener noreferrer">Moneysmart budget planner</a>.</p>
-      </div>
+      </section>
     </div>
     <section class="card chart-card" aria-labelledby="breakdown-title"><h2 class="section-title" id="breakdown-title">Where your money goes</h2>
-      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="breakdown-title"><table><thead><tr><th scope="col">Category</th><th scope="col" id="amount-head">Per month</th><th scope="col">Share of income</th></tr></thead><tbody id="rows"></tbody></table></div></section>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="Where your money goes table"><table><thead><tr><th scope="col">Category</th><th scope="col" id="amount-head">Per month</th><th scope="col">Share of income</th></tr></thead><tbody id="rows"></tbody></table></div></section>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Your spending against the 50/30/20 rule of thumb</h2><div id="chart"></div></section>
     <!-- content:start -->
     <section class="content">
@@ -101,10 +101,11 @@
 <p>Enter your take-home pay and each cost at whatever frequency you pay it: weekly, fortnightly, monthly, quarterly or yearly. Everything is converted to a yearly figure (52 weeks or 26 fortnights a year, as Moneysmart's budget planner does) and then shown per week, fortnight, month or year. So $100 a week is $433.33 a month, and $2,000 a month is $461.54 a week.</p>
 <p>The main result is what's <strong>left over</strong> (or your <strong>shortfall</strong>) after spending and savings. The table lists each category from largest to smallest with its share of your income. With the example figures ($1,800 a week take-home pay), $5,893.33 of the $7,800.00 a month is spent or saved, leaving $1,906.67.</p>
 <p>The <strong>50/30/20 rule</strong> is a popular rule of thumb, not an official standard: about half of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example, needs take 60.3%, wants 8.9% and savings 6.4%. Your figures stay in your browser and only go into a link if you choose Copy link.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>How do I convert weekly to monthly?</summary><p>Multiply by 52 and divide by 12, so $100 a week is $433.33 a month. Multiplying by 4 understates it, because most months are a little over 4 weeks.</p></details><details><summary>What is the 50/30/20 rule?</summary><p>A rule of thumb, not an official guideline: about 50% of take-home pay on needs, 30% on wants and 20% on savings and extra debt repayments. In the example budget, needs take 60.3%, which is common where housing is expensive.</p></details><details><summary>Should savings count as spending?</summary><p>Here, yes. Treat savings as a bill you pay yourself. In the example, $500 a month in savings is 6.4% of income, and putting the $1,906.67 left over into savings would bring it to 30.9%.</p></details><details><summary>Where are my numbers saved?</summary><p>Only in your browser while the page is open. Copy link puts them after the # in the address, which isn't sent to our server, so you can bookmark or share them.</p></details><details><summary>What if I have a shortfall?</summary><p>Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="savings-goal.html">Savings Goal</a><a href="credit-card.html">Credit Card Payoff</a><a href="compound-interest.html">Compound Interest</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="take-home-pay.html">Take-Home Pay</a><a href="savings-goal.html">Savings Goal</a><a href="credit-card.html">Credit Card Payoff</a><a href="compound-interest.html">Compound Interest</a></nav>
     </section>
     <!-- content:end -->
   </main>

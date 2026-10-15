@@ -28,6 +28,12 @@ function column(x, y, w, h, r) {
   return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`;
 }
 
+// Where the chart's numbers are as text: its "Show the numbers" table if it has one, otherwise the page's own table.
+function tableHint(host) {
+  const summary = host.closest('.chart-card')?.querySelector('.chart-table summary')?.textContent.trim();
+  return summary ? `Every value is in the “${summary}” table below.` : 'Every value is in the table on this page.';
+}
+
 /**
  * @param {HTMLElement} host  an empty element; the chart fills its width
  * @param {object} data  { labels, series: [{ name, values: number[] }, …], format(n), title, prefix }
@@ -68,7 +74,7 @@ function render(host) {
   const bw = Math.max(2, Math.min(24, band * 0.72));
 
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: 'chart-svg', role: 'img', tabindex: '0',
-    'aria-label': `${title}. ${prefix}${labels[0]} to ${prefix}${labels[n - 1]}, ending at ${format(totals[n - 1])}. Use the left and right arrow keys to read each year; the table below lists every value.` });
+    'aria-label': `${title}. ${prefix}${labels[0]} to ${prefix}${labels[n - 1]}, ending at ${format(totals[n - 1])}. ${tableHint(host)} With a keyboard, you can also step through it with the left and right arrow keys.` });
   const grid = el('g', { class: 'chart-grid' });
   for (let v = 0; v <= top + 1e-9; v += step) {
     grid.append(el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }));
@@ -108,6 +114,7 @@ function render(host) {
 
   const tip = document.createElement('div');
   tip.className = 'chart-tip';
+  tip.setAttribute('aria-hidden', 'true'); // a visual copy of what the live region below reads out
   tip.hidden = true;
   const show = (i) => {
     if (i < 0 || i >= n) return hide();

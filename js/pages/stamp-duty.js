@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setEnabled } from '../layout.js';
 import { stampDuty } from '../duty.js';
 
 const $ = (id) => document.getElementById(id);
@@ -7,13 +7,14 @@ const $ = (id) => document.getElementById(id);
 const fixedState = $('form').dataset.state;
 // The new home box only matters in some states, so a state page can leave it out.
 const newHome = $('newhome');
+const HOME_ONLY = "Only for a home you'll live in. Tick “I'll live in it” to use this.";
 function update() {
   const home = $('home').checked;
   // A disabled option is also unticked, so what's shown matches what's calculated.
-  $('fhb').disabled = !home;
+  setEnabled($('fhb'), home, HOME_ONLY);
   if (!home) $('fhb').checked = false;
   if (newHome) {
-    newHome.disabled = !home;
+    setEnabled(newHome, home, HOME_ONLY);
     if (newHome.disabled) newHome.checked = false;
   }
   const value = readNumber($('value'), { name: 'Property value', unit: 'money', min: 0, max: 1e12 });

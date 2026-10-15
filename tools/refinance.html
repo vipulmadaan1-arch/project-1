@@ -45,10 +45,10 @@
       <form class="card" id="form">
         <h2 class="section-title">Your loan now</h2>
         <div class="field"><label for="balance">Loan balance ($)</label><input type="text" id="balance" class="num" value="500000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
-        <div class="field"><label for="rate">Current interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="6.5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Current interest rate (% a year)</label><input type="text" id="rate" class="num" value="6.5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="years">Years left on the loan</label><input type="text" id="years" class="num" value="25" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <h2 class="section-title">The new loan</h2>
-        <div class="field"><label for="newrate">New interest rate (% p.a.)</label><input type="text" id="newrate" class="num" value="5.9" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="newrate">New interest rate (% a year)</label><input type="text" id="newrate" class="num" value="5.9" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="newyears">New loan term (years)</label><input type="text" id="newyears" class="num" aria-describedby="newyears-hint" value="" placeholder="Same as years left" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="newyears-hint">Leave blank to keep the years you have left. A longer term lowers repayments but usually costs more interest.</small></div>
         <h2 class="section-title">Switching costs</h2>
         <div class="field"><label for="discharge">Discharge fee from your current lender ($)</label><input type="text" id="discharge" class="num" aria-describedby="discharge-hint" value="350" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="discharge-hint">Estimate: $350 is what several big banks charge (Mozo, June 2026), some charge less or nothing. Ask your lender, and check for break costs if your rate is fixed.</small></div>
@@ -58,8 +58,8 @@
         <label class="check"><input type="checkbox" id="addcosts" aria-describedby="addcosts-hint"> Add the switching costs to the new loan</label>
         <small id="addcosts-hint" class="hint">Moneysmart’s switching calculator assumes this. You’ll pay interest on the costs.</small>
       </form>
-      <div class="card readout">
-        <div id="net-label">Net saving over the loan</div>
+      <section class="card readout" aria-labelledby="net-label">
+        <h2 class="readout-label" id="net-label">Net saving over the loan</h2>
         <div class="result-big" id="net">–</div>
         <div class="kv"><span>Monthly repayment now</span><span id="pay-now">–</span></div>
         <div class="kv"><span>Monthly repayment after switching</span><span id="pay-new">–</span></div>
@@ -67,13 +67,13 @@
         <div class="kv"><span id="interest-label">Interest saved</span><span id="interest">–</span></div>
         <div class="kv"><span>Switching costs</span><span id="costs">–</span></div>
         <div class="kv"><span>Break-even</span><span id="breakeven">–</span></div>
-        <h2 class="section-title">Keep paying your current repayment</h2>
+        <h3 class="section-title">Keep paying your current repayment</h3>
         <div class="kv"><span>Loan paid off</span><span id="keep-sooner">–</span></div>
         <div class="kv"><span>Interest saved</span><span id="keep-interest">–</span></div>
         <div class="kv"><span id="keep-net-label">Net saving after costs</span><span id="keep-net">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">Estimate only. Assumes both rates stay the same, monthly repayments and interest charged monthly. The default discharge fee is an estimate, not an official figure; government fees are NSW’s. Not financial advice: check the new loan’s comparison rate and ongoing fees.</p>
-      </div>
+      </section>
     </div>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Cost of each loan</h2><div id="chart"></div>
       <details class="chart-table"><summary>Show the numbers year by year</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Loan balances by year table"><table><thead><tr><th>Year</th><th>Owing on current loan</th><th>Owing on new loan</th><th>You’re ahead by</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
@@ -85,10 +85,11 @@
 <p><strong>Break-even</strong> is the first month from which you stay ahead for good. It counts the cash you save on repayments plus how much less you owe on the new loan, so stretching the loan over a longer term can't look like a saving just because repayments are lower. If the new term is longer, the calculator says so.</p>
 <p><strong>Switching costs:</strong> the discharge fee default of $350 is an estimate (several big banks charge this; some charge less or nothing). Government fees default to NSW's 2026-27 fees from <a href="https://nswlrs.com.au/assets/f/1129775276948026/x/5fed3e7cd6/2026-2027_nsw-lrs-fees_final.pdf" target="_blank" rel="noopener noreferrer">NSW Land Registry Services</a>: $182.73 to register the discharge and $182.73 for the new mortgage. Other states charge different amounts. If you're on a fixed rate, ask about break costs too. Tick the box to add the costs to the new loan, as <a href="https://moneysmart.gov.au/home-loans/mortgage-switching-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's mortgage switching calculator</a> assumes.</p>
 <p><strong>Pay it off sooner:</strong> if you keep paying your current repayment on the cheaper loan, the extra goes off the balance. The calculator shows how much sooner the loan is paid off and the interest that saves.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>How much will I save by refinancing?</summary><p>About $54,792 after costs on a $500,000 loan with 25 years left, moving from 6.5% to 5.9% with $715 in switching costs. Repayments drop from $3,376.04 to $3,191.01 a month, a $185.02 saving, and interest falls by $55,507. Even a 0.25% cut (6.5% to 6.25%) saves $77.69 a month and $22,591 overall.</p></details><details><summary>How long does it take to break even on refinancing?</summary><p>3 months in the example above ($715 of costs, 6.5% to 5.9% on $500,000). With a smaller cut from 6.5% to 6.25%, it takes 7 months. If you add the costs to the new loan instead of paying them up front, you still break even in 3 months, but the net saving falls to $54,137 because you pay interest on the costs.</p></details><details><summary>Should I keep my repayments the same after refinancing?</summary><p>Yes, if you can afford it. In the example, keeping up the old $3,376.04 a month on the 5.9% loan pays it off 2 years 10 months sooner (22 years 2 months instead of 25 years) and saves $116,191 in interest, more than double what you save by just taking the lower repayment.</p></details><details><summary>Is a longer loan term a good idea when refinancing?</summary><p>Usually not, if your aim is to save money. Refinancing the same $500,000 at 5.9% over a fresh 30 years cuts repayments by $410.35 a month to $2,965.68, but you pay $54,835 more interest and end up $55,550 worse off after costs. The calculator says when a lower repayment comes from stretching the loan.</p></details><details><summary>What does it cost to switch home loans?</summary><p>Usually a discharge fee from your current lender (many big banks charge $350), any application, settlement or valuation fees from the new lender, and government fees to register the discharge and the new mortgage. In NSW for 2026-27 these are $182.73 each. Fixed-rate loans can also have break costs, and lender cashback offers can cover some or all of it.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="offset.html">Offset Account</a><a href="borrowing-power.html">Borrowing Power</a><a href="stamp-duty.html">Stamp Duty, All States</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="mortgage.html">Mortgage Repayments</a><a href="offset.html">Offset Account</a><a href="borrowing-power.html">Borrowing Power</a><a href="stamp-duty.html">Stamp Duty, All States</a></nav>
     </section>
     <!-- content:end -->
   </main>

@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, partsFormat } from '../layout.js';
 import { taxRefund } from '../refund.js';
 
 const $ = (id) => document.getElementById(id);
@@ -21,23 +21,29 @@ function update() {
   const r = taxRefund({ year, ...v, privateCover: $('cover').checked, help: $('help').checked });
   const owe = r.refund < -0.005;
   $('refund-label').textContent = owe ? `Estimated amount you owe, ${year}` : `Estimated refund, ${year}`;
-  $('refund').textContent = fmtMoney(Math.abs(r.refund));
+  // Tax and levies, then the refund: whole dollars from $1,000 up, cents below that, unless rounding would
+  // stop the lines adding up (then every line keeps its cents).
+  const dollars = partsFormat(
+    [[r.gross, -r.lito, r.medicare, r.mls.amount, r.help, -r.franking], r.liability],
+    [[r.withheld, -r.liability], r.refund],
+  );
+  $('refund').textContent = dollars(Math.abs(r.refund));
   $('income').textContent = fmtMoney(r.income);
   $('deductions-label').textContent = r.useStandard ? `Deductions (incl. ${fmtMoney(r.standard)} standard deduction)` : 'Deductions';
   $('deductions').textContent = r.deductions ? `−${fmtMoney(r.deductions)}` : fmtMoney(0);
   $('taxable').textContent = fmtMoney(r.taxable);
-  $('gross').textContent = fmtMoney(r.gross, 2);
-  $('lito').textContent = r.lito ? `−${fmtMoney(r.lito, 2)}` : fmtMoney(0);
-  $('medicare').textContent = fmtMoney(r.medicare, 2);
+  $('gross').textContent = dollars(r.gross);
+  $('lito').textContent = r.lito ? `−${dollars(r.lito)}` : fmtMoney(0);
+  $('medicare').textContent = dollars(r.medicare);
   $('mls-row').hidden = $('cover').checked;
   $('mls-label').textContent = r.mls.rate ? `Medicare levy surcharge (${(r.mls.rate * 100).toLocaleString('en-AU')}%)` : 'Medicare levy surcharge';
-  $('mls').textContent = fmtMoney(r.mls.amount, 2);
+  $('mls').textContent = dollars(r.mls.amount);
   $('help-row').hidden = !$('help').checked;
-  $('helpamt').textContent = fmtMoney(r.help, 2);
+  $('helpamt').textContent = dollars(r.help);
   $('franking-row').hidden = !r.franking;
-  $('frankingamt').textContent = `−${fmtMoney(r.franking, 2)}`;
-  $('liability').textContent = fmtMoney(r.liability, 2);
-  $('withheldamt').textContent = `−${fmtMoney(r.withheld, 2)}`;
+  $('frankingamt').textContent = `−${dollars(r.franking)}`;
+  $('liability').textContent = dollars(r.liability);
+  $('withheldamt').textContent = `−${dollars(r.withheld)}`;
 
   const notes = [];
   if (r.standard > 0) {

@@ -36,7 +36,7 @@
   <main class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Home</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Salary Needed for Take-Home Pay</span></nav>
     <div class="tool-head">
-      <h1>Reverse Salary Calculator 2026-27: Pay Needed After Tax</h1>
+      <h1>Reverse Salary Calculator <span class="nowrap">2026-27</span>: Pay Needed After Tax</h1>
       <p>Enter the pay you want in your bank account and see the salary you'd need to earn at 2026-27 tax rates.</p>
     </div>
     <div class="cols">
@@ -50,8 +50,8 @@
         <label class="check"><input type="checkbox" id="incl" aria-describedby="incl-hint"> Show the answer as a package (salary includes super)</label>
         <small id="incl-hint" class="hint">Tick this if job ads or offers you're comparing quote total pay including super.</small>
       </form>
-      <div class="card readout">
-        <div id="total-label">Salary needed per year</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Salary needed per year</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span id="per-label">Salary per fortnight</span><span id="per">–</span></div>
         <div class="kv"><span>Take-home pay per year</span><span id="net">–</span></div>
@@ -62,7 +62,7 @@
         <div class="kv"><span>Package (salary plus super)</span><span id="package">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">Yearly figures. Uses exactly the same rates as our <a href="take-home-pay.html">Take-Home Pay calculator</a>: Australian residents, 2026-27 tax rates, Medicare levy using the latest ATO-published low-income thresholds, and 2026-27 HECS/HELP marginal rates on salary only. Excludes the Medicare levy surcharge, other offsets, deductions and salary sacrifice. Estimate only — check with the <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">ATO</a>.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -70,10 +70,11 @@
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">the ATO's resident tax rates</a>.</p>
 <p>Tell us the take-home pay you want and we work backwards to the salary you'd need to earn. It uses exactly the same 2026-27 rates as our Take-Home Pay calculator: resident income tax, the $1,000 standard deduction, the low income tax offset, the Medicare levy and, if you tick it, compulsory HECS/HELP repayments. The calculator tries salaries until the take-home pay matches yours to the cent.</p>
 <p>Employer super of 12% is paid on top of salary, so we also show your <strong>package</strong> (salary plus super). Tick <em>Show the answer as a package</em> if the job ads or offers you're comparing quote total pay including super.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>How much do I need to earn to take home $1,000 a week?</summary><p>About $61,932 a year before tax in 2026-27, including the $1,000 standard deduction. A HECS/HELP debt doesn't change that, because compulsory repayments only start above $69,528.</p></details><details><summary>How much do I need to earn to take home $100,000 a year?</summary><p>About $132,647 a year in 2026-27 with no HECS/HELP debt, or about $153,378 with one, including the $1,000 standard deduction. Employer super of 12% is paid on top.</p></details><details><summary>Why does each extra dollar of take-home pay cost more than a dollar of salary?</summary><p>Every extra dollar you earn is taxed at your marginal rate (30% from $45,001), plus the 2% Medicare levy and, with a study loan, 15% to 17% for HECS/HELP. At $90,000 with no HELP debt, an extra $1,000 in your pocket needs about $1,471 more salary.</p></details><details><summary>Does this include HECS/HELP?</summary><p>Yes, if you tick “I have a HECS/HELP debt”. It uses the 2026-27 marginal repayment rates on salary only. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super.</p></details><details><summary>What salary do I need to take home $80,000 a year?</summary><p>About $103,235 in 2026-27 with no HECS/HELP debt, or about $112,492 with one, including the $1,000 standard deduction. As a package including 12% super, the first is about $115,624. Your payslip may differ slightly because employers use ATO withholding tables.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a><a href="super.html">Super & Salary Sacrifice</a><a href="work-deductions.html">Work From Home & Car Expenses</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="take-home-pay.html">Take-Home Pay</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a><a href="super.html">Super & Salary Sacrifice</a><a href="work-deductions.html">Work From Home & Car Expenses</a></nav>
     </section>
     <!-- content:end -->
   </main>

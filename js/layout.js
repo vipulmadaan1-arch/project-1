@@ -84,8 +84,18 @@ document.body.append(footer);
 // Tool pages: add the tool's icon and source label to the page heading.
 const slug = location.pathname.match(/tools\/([^/]+)\.html$/)?.[1];
 const tool = TOOLS.find((t) => t.slug === slug);
-// Results panel: stop it sticking when it's taller than the window, and say what to do when a field
-// needs fixing (otherwise the result is just a dash).
+// The first field with an error, and what to call it in a sentence: "Interest rate (% a year)" becomes
+// "the interest rate", "Your age" stays "your age", and abbreviations such as "CO2 emissions" keep their capitals.
+const lowerFirst = (t) => (/^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
+const invalidField = () => document.querySelector('form [aria-invalid="true"]');
+function fieldName(el) {
+  const name = lowerFirst((el.labels?.[0]?.textContent || el.getAttribute('aria-label') || 'highlighted field').replace(/\s*\([^)]*\)\s*$/, '').trim());
+  return /^(your|my|the)\b/i.test(name) ? name : `the ${name}`;
+}
+const errorText = (el) => document.getElementById(`${el.id}-error`)?.textContent.replace(/^Error: /, '').trim() || '';
+
+// Results panel: stop it sticking when it's taller than the window, and say which field needs fixing
+// (otherwise the result is just a dash).
 const readout = document.querySelector('.readout');
 if (readout) {
   const fit = () => readout.classList.toggle('is-tall', readout.offsetHeight > innerHeight - 110);
@@ -96,9 +106,12 @@ if (readout) {
     const hint = document.createElement('p');
     hint.className = 'readout-hint';
     hint.hidden = true;
-    hint.textContent = 'Check the highlighted field to see your result.';
     big.after(hint);
-    const check = () => { hint.hidden = !(big.textContent.trim() === '–' && document.querySelector('form [aria-invalid="true"]')); };
+    const check = () => {
+      const bad = big.textContent.trim() === '–' && invalidField();
+      hint.hidden = !bad;
+      if (bad) hint.textContent = `Fix ${fieldName(bad)} to see your result.`;
+    };
     new MutationObserver(check).observe(big, { childList: true, characterData: true, subtree: true });
     document.querySelector('form')?.addEventListener('focusout', () => setTimeout(check));
   }
@@ -126,7 +139,9 @@ themeBtn.addEventListener('click', () => {
 });
 
 // One polite status region for the whole page. Results are read out once typing pauses,
-// with their label ("Total duty payable: $29,452"), instead of on every keystroke.
+// with their label ("Total duty payable: $29,452"), instead of on every keystroke. When a result
+// can't be worked out because a field has an error, that's read out instead of a dash:
+// "Can't work out total duty payable yet: Property value must be a number, like 750,000".
 const status = document.createElement('div');
 status.className = 'sr-only';
 status.setAttribute('role', 'status');
@@ -144,24 +159,34 @@ let userActed = false;
 for (const type of ['input', 'change', 'click']) document.addEventListener(type, () => { userActed = true; }, true);
 const resultLabel = (el) => {
   const prev = el.previousElementSibling;
-  if (prev && !prev.classList.contains('cols')) return prev.textContent.trim();
+  if (prev && !prev.matches('.cols, fieldset')) return prev.textContent.trim();
   return el.closest('.card')?.querySelector('h2')?.textContent.trim() || '';
 };
 const results = [...document.querySelectorAll('.result-big')];
 const lastText = new Map();
 const changed = new Set();
+// The message is put together when typing pauses, from what's on screen then, so a result that has
+// since changed or gone back to a dash is never read out.
+function resultsMessage() {
+  const els = [...changed];
+  changed.clear();
+  const shown = els.filter((el) => el.textContent.trim() !== '–');
+  if (shown.length) return shown.map((el) => `${resultLabel(el)}: ${el.textContent.trim()}`).join('. ');
+  const bad = invalidField();
+  const why = bad && errorText(bad);
+  return why ? `Can't work out ${lowerFirst(resultLabel(els[0]))} yet: ${why}` : '';
+}
 const watch = new MutationObserver((records) => {
   for (const r of records) {
     const el = results.find((x) => x.contains(r.target));
     const text = el?.textContent.trim();
     if (!el || text === lastText.get(el)) continue;
     lastText.set(el, text);
-    if (userActed && text !== '–') changed.add(el); // values filled in on page load aren't news
+    if (userActed) changed.add(el); // values filled in on page load aren't news
   }
   if (!changed.size) return;
-  announce([...changed].map((el) => `${resultLabel(el)}: ${el.textContent.trim()}`).join('. '), 900);
   clearTimeout(watch.timer);
-  watch.timer = setTimeout(() => changed.clear(), 900);
+  watch.timer = setTimeout(() => { const msg = resultsMessage(); if (msg) announce(msg); }, 900);
 });
 results.forEach((el) => { lastText.set(el, el.textContent.trim()); watch.observe(el, { childList: true, characterData: true, subtree: true }); });
 
@@ -281,6 +306,37 @@ export function wireForm(form, update) {
     update();
   });
   update();
+}
+
+// Readouts that list the parts of a total (chains of [parts, total], with amounts taken off as negatives):
+// whole dollars from $1,000 up, cents below that (a registration fee, say), as long as the rounded figures
+// still add up to the total shown. If they wouldn't, every figure keeps its cents, so the sum on screen
+// is never out by a dollar. Returns the formatter to use for all of them.
+export function partsFormat(...chains) {
+  const cents = (n) => !Number.isInteger(Math.round(n * 100) / 100);
+  const dp = (n) => (Math.abs(n) >= 1000 || !cents(n) ? 0 : 2);
+  const shown = (n) => Math.sign(n) * Math.round(Math.abs(n) * 10 ** dp(n)) / 10 ** dp(n);
+  const adds = chains.every(([parts, total]) => Math.abs(parts.reduce((s, n) => s + shown(n), 0) - shown(total)) < 0.005);
+  return (n) => fmtMoney(n, adds ? dp(n) : cents(n) ? 2 : 0);
+}
+
+// Switches a control on or off, and when it's off says why in a hint tied to it with aria-describedby
+// (a greyed-out box with no reason given is a dead end). why: the reason, shown only while it's off.
+export function setEnabled(el, on, why) {
+  el.disabled = !on;
+  const id = `${el.id}-off`;
+  let hint = document.getElementById(id);
+  if (!hint) {
+    hint = document.createElement('small');
+    hint.id = id;
+    const check = el.closest('label.check');
+    if (check) { hint.className = 'hint'; check.after(hint); } else el.closest('.field').append(hint);
+  }
+  hint.textContent = on ? '' : why;
+  hint.hidden = on;
+  const ids = (el.getAttribute('aria-describedby') || '').split(' ').filter((x) => x && x !== id);
+  if (!on) ids.unshift(id);
+  if (ids.length) el.setAttribute('aria-describedby', ids.join(' ')); else el.removeAttribute('aria-describedby');
 }
 
 // Sets several outputs to the same placeholder.

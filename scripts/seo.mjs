@@ -113,7 +113,7 @@ function tiles() {
   const tile = (t) => `<div class="tile"><div class="ico">${icon(t.slug)}</div><h3><a class="tile-link" href="tools/${t.slug}.html">${t.name}</a></h3><p>${t.desc}</p><div class="tile-foot"><span class="tag">${t.meta}</span>${icon('arrow', { className: 'icon tile-go' })}</div></div>`;
   return CATEGORIES.map((c) => {
     const list = TOOLS.filter((t) => t.cat === c.key);
-    return `      <section class="cat-section" id="${c.key}"><div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${list.length}</span><p class="cat-blurb">${c.blurb}</p></div>
+    return `      <section class="cat-section" id="${c.key}"><div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${list.length}<span class="visually-hidden"> tools</span></span><p class="cat-blurb">${c.blurb}</p></div>
         <div class="grid">${list.map(tile).join('')}</div></section>`;
   }).join('\n');
 }

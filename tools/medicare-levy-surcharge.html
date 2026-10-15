@@ -51,8 +51,8 @@
         <div class="field"><label for="days">Days without hospital cover this year</label><input type="text" id="days" class="num" aria-describedby="days-hint" value="365" inputmode="numeric" spellcheck="false" autocomplete="off"><small id="days-hint">The surcharge is charged only for days you (or anyone in your family) had no appropriate hospital cover.</small></div>
         <div class="field" id="premium-field"><label for="premium">Yearly hospital cover premium ($, optional)</label><input type="text" id="premium" class="num" aria-describedby="premium-hint" value="1,400" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="premium-hint">After the private health insurance rebate. Needs an excess of $750 or less for singles, $1,500 or less for couples and families.</small></div>
       </form>
-      <div class="card readout">
-        <div id="total-label">Medicare levy surcharge</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Medicare levy surcharge</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span id="income-label">Income for MLS purposes</span><span id="income">–</span></div>
         <div class="kv"><span>Surcharge rate</span><span id="rate">–</span></div>
@@ -62,25 +62,26 @@
         <div class="kv"><span id="diff-label">Cover compared with the surcharge</span><span id="diff">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">2026-27 thresholds and rates. <span id="estimate-note"></span>Thresholds checked against the <a href="https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates" target="_blank" rel="noopener noreferrer">ATO</a> on 15 Oct 2026. The surcharge is on top of the 2% Medicare levy. General information only.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates" target="_blank" rel="noopener noreferrer">the ATO's surcharge thresholds</a>.</p>
 <p>The <strong>Medicare levy surcharge</strong> (MLS) is an extra 1% to 1.5% of income. You pay it on top of the 2% Medicare levy if you, your spouse and your dependent children don't have appropriate private hospital cover and your income is over the threshold.</p>
-<table><thead><tr><th>2026-27</th><th>Singles</th><th>Families</th><th>Rate</th></tr></thead><tbody>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Table: 2026-27, Singles, Families"><table><thead><tr><th>2026-27</th><th>Singles</th><th>Families</th><th>Rate</th></tr></thead><tbody>
 <tr><td>Base tier</td><td>$105,000 or less</td><td>$210,000 or less</td><td>0%</td></tr>
 <tr><td>Tier 1</td><td>$105,001 to $123,000</td><td>$210,001 to $246,000</td><td>1%</td></tr>
 <tr><td>Tier 2</td><td>$123,001 to $164,000</td><td>$246,001 to $328,000</td><td>1.25%</td></tr>
-<tr><td>Tier 3</td><td>$164,001 or more</td><td>$328,001 or more</td><td>1.5%</td></tr></tbody></table>
+<tr><td>Tier 3</td><td>$164,001 or more</td><td>$328,001 or more</td><td>1.5%</td></tr></tbody></table></div>
 <p>Family thresholds go up by $1,500 for each dependent child after the first. Couples and single parents use the family thresholds.</p>
 <p>Your tier depends on your <strong>income for MLS purposes</strong>, combined with your spouse's if you have one: taxable income plus reportable fringe benefits, net investment losses and reportable super contributions. The surcharge itself is charged only on your taxable income and reportable fringe benefits.</p>
 <p>To avoid it you need hospital cover from an Australian insurer with an excess of $750 or less for singles, or $1,500 or less for couples and families. Extras-only cover and travel insurance don't count.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Is it cheaper to pay the Medicare levy surcharge or get private health insurance?</summary><p>Hospital cover is cheaper whenever its yearly premium after the rebate is less than the surcharge. On $130,000 as a single, the surcharge is $1,625 a year, so a basic hospital policy costing less than that, with an excess of $750 or less, saves money. Enter a quote in the calculator to compare.</p></details><details><summary>Do I pay the surcharge if my partner earns most of the income?</summary><p>Couples are tested on combined income, but each person pays on their own taxable income and fringe benefits. If you had a spouse all year and your own income for MLS purposes is $28,011 or less (the 2025-26 figure; the 2026-27 one isn't published yet), you don't pay it.</p></details><details><summary>Does salary sacrifice or negative gearing affect the surcharge?</summary><p>Yes. Salary sacrificed super, deductible personal contributions and net investment losses are added back when working out your tier, even though they reduce your taxable income.</p></details><details><summary>What if I only had cover for part of the year?</summary><p>The surcharge is charged only for the days you didn't have appropriate hospital cover, so enter the number of days without it.</p></details><details><summary>What is Lifetime Health Cover loading?</summary><p>It's separate from the surcharge. If you don't hold hospital cover by 1 July after your 31st birthday, your premium goes up 2% for every year you're over 30 when you join, up to 70%. The loading is removed after 10 years of continuous cover.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="super.html">Super & Salary Sacrifice</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="take-home-pay.html">Take-Home Pay</a><a href="super.html">Super & Salary Sacrifice</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
     </section>
     <!-- content:end -->
   </main>

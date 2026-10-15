@@ -1,4 +1,4 @@
-import { readNumber, setError, announce } from '../layout.js';
+import { readNumber, setError } from '../layout.js';
 import { formatDuration } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
@@ -23,6 +23,13 @@ const show = (ms) => { $d.textContent = formatDuration(Math.ceil(ms / 1000) * 10
 const $msg = document.createElement('p');
 $msg.className = 'field-error'; $msg.id = 'timer-error'; $msg.hidden = true; $msg.setAttribute('role', 'alert');
 $('inputs').after($msg);
+// "Time's up" stays on screen until the timer is used again, and is read out straight away (an alert),
+// since the flash and the beep alone can be missed.
+const $done = document.createElement('p');
+$done.className = 'timer-done';
+$done.setAttribute('role', 'alert');
+$d.after($done);
+const clearDone = () => { $done.textContent = ''; };
 
 function beep() {
   try {
@@ -44,7 +51,7 @@ function tick() {
     remaining = 0; stop(); show(0);
     $d.classList.remove('flash'); void $d.offsetWidth; $d.classList.add('flash');
     beep();
-    announce("Time's up");
+    $done.textContent = "Time's up";
     return;
   }
   show(remaining);
@@ -58,6 +65,7 @@ function fromInputs() {
   return ms;
 }
 $start.addEventListener('click', () => {
+  clearDone();
   if (running) { stop(); remaining = endAt - Date.now(); return show(remaining); }
   if (inputMs() === null) return; // the field error says what to fix
   if (remaining <= 0) fromInputs();
@@ -71,14 +79,14 @@ $start.addEventListener('click', () => {
   endAt = Date.now() + remaining; running = true; $start.textContent = 'Pause';
   interval = setInterval(tick, 200); tick();
 });
-$('reset').addEventListener('click', () => { stop(); fromInputs(); });
+$('reset').addEventListener('click', () => { stop(); clearDone(); fromInputs(); });
 ['h', 'm', 's'].forEach((id) => {
-  $(id).addEventListener('input', () => { if (!running) fromInputs(); });
+  $(id).addEventListener('input', () => { clearDone(); if (!running) fromInputs(); });
   $(id).addEventListener('focusout', () => { if ($(id).value.trim() === '') $(id).value = '0'; if (!running) fromInputs(); });
 });
 document.querySelectorAll('[data-preset]').forEach((b) => b.addEventListener('click', () => {
   const s = +b.dataset.preset;
   $('h').value = Math.floor(s / 3600); $('m').value = Math.floor((s % 3600) / 60); $('s').value = s % 60;
-  stop(); fromInputs();
+  stop(); clearDone(); fromInputs();
 }));
 show(remaining);

@@ -61,8 +61,8 @@
         <label class="check"><input type="checkbox" id="foreign"> Foreign or temporary resident for tax</label>
         <label class="check"><input type="checkbox" id="support"> Received income support that year (like the Age Pension or JobSeeker)</label>
       </form>
-      <div class="card readout">
-        <div id="total-label">Estimated capital gains tax</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Estimated capital gains tax</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span id="gross-label">Capital gain</span><span id="gross">–</span></div>
         <div class="kv" id="split-row"><span>Gain to 30 June 2027 (50% discount)</span><span id="deferred">–</span></div>
@@ -75,7 +75,7 @@
         <div class="kv" id="old-row"><span>Under the old 50% discount</span><span id="old">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">Estimate for one asset sold by an individual. Uses the Treasury Laws Amendment (Tax Reform No. 1) Act 2026, ATO tax rates and ABS CPI, checked on 15 Oct 2026. <span id="projected-note"></span>Not tax advice: confirm with a registered tax agent or the <a href="https://www.ato.gov.au/individuals-and-families/investments-and-assets/capital-gains-tax" target="_blank" rel="noopener noreferrer">ATO</a>.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -88,10 +88,11 @@
 <li><strong>A 30% minimum tax:</strong> if your marginal rate on the gain is below 30%, you pay a top-up so the gain from 1 July 2027 is taxed at 30% at least (Medicare levy not counted). People receiving income support, such as the Age Pension or JobSeeker, are exempt.</li></ul>
 <p><strong>Held across 1 July 2027?</strong> The asset is treated as sold and bought back at its value on that date. The gain to then keeps the 50% discount; growth after it is indexed and minimum-taxed. If you don't have a valuation, Treasury's draft method estimates one by assuming steady, compounding growth over the whole time you owned it.</p>
 <p><strong>Newly built residential property</strong> can choose the 50% discount or indexation; this calculator picks whichever costs less. Foreign and temporary residents get neither the discount nor indexation.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Does the new CGT apply to shares I already own?</summary><p>Only to growth from 1 July 2027. Gains up to 30 June 2027 keep the 50% discount when you eventually sell, if you've held the asset for more than 12 months in total. For listed shares, the value at 30 June 2027 is their market price that day.</p></details><details><summary>Is the new CGT law passed?</summary><p>Yes. The Treasury Laws Amendment (Tax Reform No. 1) Act 2026 received Royal Assent on 26 June 2026. Some details are still being finalised, including the definition of a new build and the apportioning method, so the calculator says when it relies on them.</p></details><details><summary>Will I pay more tax under the new rules?</summary><p>It depends on inflation, how long you hold the asset and your income. Growth well above inflation is taxed more than under the 50% discount; slow growth in high inflation can be taxed less. The 30% minimum tax mainly affects people with lower incomes, such as retirees not on the Age Pension. The calculator shows both results side by side.</p></details><details><summary>How much CGT will I pay on $100,000 profit?</summary><p>About $16,350 if you sell before 1 July 2027, or about $33,861 under the new rules, for shares held more than 12 months by someone with $90,000 of other income. Selling before 1 July 2027 (bought 1 March 2025, sold 1 March 2027), the 50% discount means only $50,000 is taxed. Bought on 1 July 2027 and sold on 1 July 2029, indexation at an assumed 2.5% inflation (factor 1.051) reduces the taxable gain to $94,900, with no discount. Both include the Medicare levy; the 30% minimum tax adds nothing at this income.</p></details><details><summary>Why do I need to enter my other income?</summary><p>Capital gains are added to your taxable income, so the tax depends on your marginal rate. A $50,000 gain costs much less for someone with no other income than for someone earning $200,000.</p></details><details><summary>What isn't covered?</summary><p>Partial main residence exemptions, small business concessions, assets bought before 21 September 1999 using frozen indexation, trusts and companies, and the Working Australians Tax Offset. Ask a registered tax agent if these apply to you.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="inflation.html">Inflation</a><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a><a href="take-home-pay.html">Take-Home Pay</a><a href="medicare-levy-surcharge.html">Medicare Levy Surcharge</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="inflation.html">Inflation</a><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a><a href="take-home-pay.html">Take-Home Pay</a><a href="medicare-levy-surcharge.html">Medicare Levy Surcharge</a></nav>
     </section>
     <!-- content:end -->
   </main>

@@ -92,7 +92,7 @@ export const SHAPES = {
   beach: '<path d="M12 3.5c4.7 0 8.5 3.2 8.5 7.2H3.5c0-4 3.8-7.2 8.5-7.2z"/><rect x="11.2" y="10.4" width="1.6" height="9"/><path d="M3 20.5c2.2-1.3 4.4-1.3 6 0s3.8 1.3 6 0 3.8-1.3 6 0V22H3z"/>',
 };
 const line = (name) => `<svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LINE[name]}</svg>`;
-const est = '<span class="aus-est" title="Estimated: industry source">est.</span>';
+const est = '<abbr class="aus-est" title="estimate">est.</abbr>';
 const tag = (key) => (BENCH[key].status === 'estimated' ? est : '');
 
 // A row of up to 40 silhouettes. Each one stands for a tenth of the benchmark, so ten filled icons = the whole
@@ -147,7 +147,7 @@ export function mountAussieTerms() {
       <div class="aus-count"></div>
       <div><h3 class="aus-sub">How it stacks up</h3><ul class="aus-bars"></ul></div>
     </div>
-    <p class="aus-key"><span class="aus-est">est.</span> marks an industry figure rather than an official statistic.</p>
+    <p class="aus-key">${est} marks an industry figure rather than an official statistic.</p>
     <details class="aus-sources"><summary>Where these numbers come from</summary><ul>${SOURCES()}</ul><p>“est.” marks industry figures rather than official statistics.</p></details>`;
   // Below the chart if there is one, so drawing this card doesn't push the chart down.
   (document.querySelector('.chart-card') || cols).after(card);

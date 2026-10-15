@@ -55,7 +55,7 @@ function render() {
   const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
   $pinned.replaceChildren(...pinnedTools.map(tile));
   document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
-  document.getElementById('pinned-count').textContent = pinnedTools.length;
+  document.getElementById('pinned-count').innerHTML = `${pinnedTools.length}<span class="visually-hidden"> tool${pinnedTools.length === 1 ? '' : 's'}</span>`;
 
   let shown = pinnedTools.length;
   $sections.replaceChildren(...CATEGORIES.map((c) => {
@@ -65,7 +65,7 @@ function render() {
     sec.className = 'cat-section';
     sec.id = c.key;
     sec.hidden = tools.length === 0;
-    sec.innerHTML = `<div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${tools.length}</span><p class="cat-blurb">${c.blurb}</p></div>`;
+    sec.innerHTML = `<div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${tools.length}<span class="visually-hidden"> tool${tools.length === 1 ? '' : 's'}</span></span><p class="cat-blurb">${c.blurb}</p></div>`;
     const grid = document.createElement('div');
     grid.className = 'grid';
     grid.append(...tools.map(tile));

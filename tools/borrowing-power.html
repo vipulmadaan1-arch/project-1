@@ -57,8 +57,8 @@
         <div class="field"><label for="rate">Home loan interest rate (% a year)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="years">Loan term (years)</label><input type="text" id="years" class="num" value="30" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
       </form>
-      <div class="card readout">
-        <div id="total-label">Estimated borrowing power</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">Estimated borrowing power</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span id="repay-label">Monthly repayment at your rate</span><span id="repay">–</span></div>
         <div class="kv"><span id="assess-label">Repayment the bank tests</span><span id="assess">–</span></div>
@@ -69,7 +69,7 @@
         <div class="kv"><span>Debt-to-income ratio</span><span id="dti">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer"><strong>Estimate only: each lender works this out differently, and most will lend less than this.</strong> Banks use their own minimum living expenses (the Household Expenditure Measure, which isn't published), their own rates for rental income and credit cards, and may count other costs. Uses 2026-27 tax rates and APRA's 3 percentage point buffer and debt-to-income limits, checked against <a href="https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain" target="_blank" rel="noopener noreferrer">APRA</a> on 15 Oct 2026. The 80% rental and 3.8% credit card rates are typical lender practice, not official figures. Not financial advice: talk to a lender or licensed mortgage broker.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -78,10 +78,11 @@
 <p>Banks work out how much you can borrow by checking what's left of your take-home income after living expenses and existing debts, then finding the largest loan that amount could repay. APRA requires banks to test repayments at <strong>3 percentage points above the loan rate</strong> (the serviceability buffer), so a 6% loan is tested at 9%.</p>
 <p>This estimate takes your income after 2026-27 tax, the Medicare levy and any HECS/HELP repayments. It counts <strong>80% of rental or other income</strong> and treats credit cards as fully drawn at <strong>3.8% of the limit a month</strong>, the repayment that clears the limit in three years. Both are typical lender practice, not official rules. It then subtracts your living expenses and other loan repayments.</p>
 <p>From 1 February 2026, APRA limits each bank to 20% of new home loans at a <strong>debt-to-income ratio</strong> of 6 or more, so very high borrowing compared with income can be harder to get. Lenders also apply their own minimum living expenses, the Household Expenditure Measure, which isn't published. Most will lend less than this estimate.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>How much can I borrow on $100,000?</summary><p>On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6% loan over 30 years tested at 9% gives about $491,000. Repayments at 6% would be about $2,948 a month, and the loan would be 4.9 times income.</p></details><details><summary>How much does a credit card limit reduce borrowing power?</summary><p>In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $444,000, around $47,000 less.</p></details><details><summary>What is the APRA serviceability buffer?</summary><p>Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000.</p></details><details><summary>How much can a couple borrow?</summary><p>Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4.</p></details><details><summary>Does rental income count?</summary><p>Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="stamp-duty-nsw.html">NSW Stamp Duty</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
     </section>
     <!-- content:end -->
   </main>

@@ -42,20 +42,20 @@
       <form class="card" id="form">
         <div class="field"><label for="principal">Loan amount ($)</label><input type="text" id="principal" class="num" value="600000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="offset">Offset balance ($)</label><input type="text" id="offset" class="num" aria-describedby="offset-hint" value="50000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="offset-hint">Assumes the balance stays constant.</small></div>
-        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% a year)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="years">Loan term (years)</label><input type="text" id="years" class="num" value="30" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="freq">Repayment frequency</label>
           <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
       </form>
-      <div class="card readout">
-        <div>Interest saved</div>
+      <section class="card readout" aria-labelledby="result-label">
+        <h2 class="readout-label" id="result-label">Interest saved</h2>
         <div class="result-big" id="saved">–</div>
         <div class="kv"><span>Time saved</span><span id="time">–</span></div>
         <div class="kv"><span>Repayment</span><span id="repayment">–</span></div>
         <div class="kv"><span>Interest without offset</span><span id="base">–</span></div>
         <div class="kv"><span>Interest with offset</span><span id="with">–</span></div>
         <p class="disclaimer">Estimate only. Assumes constant rate and offset balance, and no fees. Not financial advice.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -64,10 +64,11 @@
 <p>On a $600,000 loan at 6% over 30 years, keeping $50,000 in offset saves <strong>$202,175</strong> in interest and finishes the loan <strong>4 years 8 months</strong> sooner. $100,000 in offset saves <strong>$338,658</strong> and <strong>7 years 10 months</strong>. Both assume the balance stays the same and you keep paying $3,597 a month.</p>
 <p>An offset account is a transaction account linked to your home loan. Its balance is subtracted from your loan balance before interest is calculated, so $50,000 in offset on a $600,000 loan means you're charged interest on $550,000.</p>
 <p>Because your repayment stays the same, more of each payment goes to principal and the loan finishes early. This calculator compares the loan with and without the offset to show interest and time saved.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Is an offset better than extra repayments?</summary><p>Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender).</p></details><details><summary>Does the calculator assume my offset balance changes?</summary><p>No, it assumes a constant balance. In practice your balance moves with your pay and spending.</p></details><details><summary>Is offset interest saving taxable?</summary><p>Interest saved through an offset isn't income, so it isn't taxed, unlike interest earned in a savings account. Check your own situation with a tax professional.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="mortgage.html">Mortgage Repayments</a><a href="borrowing-power.html">Borrowing Power</a><a href="savings-goal.html">Savings Goal</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="mortgage.html">Mortgage Repayments</a><a href="borrowing-power.html">Borrowing Power</a><a href="savings-goal.html">Savings Goal</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a></nav>
     </section>
     <!-- content:end -->
   </main>

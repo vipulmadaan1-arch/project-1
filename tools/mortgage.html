@@ -42,18 +42,18 @@
     <div class="cols">
       <form class="card" id="form">
         <div class="field"><label for="principal">Loan amount ($)</label><input type="text" id="principal" class="num" value="600000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
-        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% a year)</label><input type="text" id="rate" class="num" value="6" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="years">Loan term (years)</label><input type="text" id="years" class="num" value="30" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="freq">Repayment frequency</label>
           <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
       </form>
-      <div class="card readout">
-        <div id="freq-label">Monthly repayment</div>
+      <section class="card readout" aria-labelledby="freq-label">
+        <h2 class="readout-label" id="freq-label">Monthly repayment</h2>
         <div class="result-big" id="repayment">–</div>
         <div class="kv"><span>Total interest</span><span id="interest">–</span></div>
         <div class="kv"><span>Total repaid</span><span id="total">–</span></div>
         <p class="disclaimer">Estimate only. Assumes a constant rate and no fees. Not a loan offer or financial advice.</p>
-      </div>
+      </section>
     </div>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Repayments by year</h2><div id="chart"></div>
       <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Repayments by year table"><table><thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance left</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
@@ -63,19 +63,20 @@
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/home-loans/mortgage-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's mortgage calculator</a>, so you can cross-check a result there.</p>
 <p>Repayments on a principal and interest loan are calculated with the standard amortisation formula: each repayment covers that period's interest and pays down some principal. Early on, most of each repayment is interest.</p>
 <h3>Monthly repayments over 30 years</h3>
-<table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Monthly repayments over 30 years"><table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
 <tr><td>$400,000</td><td>$2,271</td><td>$2,398</td><td>$2,528</td></tr>
 <tr><td>$500,000</td><td>$2,839</td><td>$2,998</td><td>$3,160</td></tr>
 <tr><td>$600,000</td><td>$3,407</td><td>$3,597</td><td>$3,792</td></tr>
 <tr><td>$750,000</td><td>$4,258</td><td>$4,497</td><td>$4,741</td></tr>
 <tr><td>$1,000,000</td><td>$5,678</td><td>$5,996</td><td>$6,321</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>Principal and interest, monthly repayments, constant rate, no fees.</p>
 <p><strong>Tip:</strong> paying fortnightly, half your monthly repayment every two weeks, means 26 half-payments a year: the equivalent of 13 monthly payments. That extra payment can cut years off a 30-year loan. This calculator shows the true fortnightly amount for the same term, so compare carefully.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>What are the repayments on a $600,000 mortgage?</summary><p>$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792.</p></details><details><summary>How much interest will I pay over 30 years?</summary><p>$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest.</p></details><details><summary>Does this include fees or LMI?</summary><p>No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included.</p></details><details><summary>What about interest-only loans?</summary><p>Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans.</p></details><details><summary>How much will I save with an offset account?</summary><p>About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href="offset.html">offset account calculator</a> for your own balance.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="borrowing-power.html">Borrowing Power</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="offset.html">Offset Account</a><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="borrowing-power.html">Borrowing Power</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="offset.html">Offset Account</a><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a></nav>
     </section>
     <!-- content:end -->
   </main>

@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled, partsFormat } from '../layout.js';
 import { upfrontCosts } from '../upfront.js';
 import { SCHEME_URL } from '../lmi.js';
 
@@ -9,11 +9,11 @@ const money = (id, name) => readNumber($(id), { name, unit: 'money', min: 0, max
 function update() {
   const home = $('home').checked;
   // Options that need the one before them are unticked when they're switched off, so what's shown is what's calculated.
-  for (const [id, on] of [['fhb', home], ['newhome', home]]) { $(id).disabled = !on; if (!on) $(id).checked = false; }
+  for (const id of ['fhb', 'newhome']) { setEnabled($(id), home, "Only for a home you'll live in. Tick “I'll live in it” to use this."); if (!home) $(id).checked = false; }
   const fhb = $('fhb').checked;
-  $('scheme').disabled = !fhb;
+  setEnabled($('scheme'), fhb, 'Only for first home buyers. Tick “First home buyer” to use this.');
   if (!fhb) $('scheme').checked = false;
-  $('area').disabled = $('state').value === 'ACT';
+  setEnabled($('area'), $('state').value !== 'ACT', 'The ACT has one price cap for the whole territory, so this doesn\'t apply.');
 
   const price = readNumber($('price'), { name: 'Purchase price', unit: 'money', above: 0, max: 1e9 });
   let deposit = readNumber($('deposit'), { name: 'Deposit', unit: 'money', min: 0, max: 1e9 });
@@ -30,10 +30,13 @@ function update() {
     $('note').textContent = ''; $('estimate-note').textContent = ''; $('rows').innerHTML = '';
     return blank($('cash'), $('dep'), $('costs'), $('duty'), $('loan'), $('lvr'));
   }
-  $('cash').textContent = fmtMoney(r.cash);
-  $('dep').textContent = fmtMoney(deposit);
-  $('costs').textContent = fmtMoney(r.costs);
-  $('duty').textContent = fmtMoney(r.duty.total);
+  // Whole dollars from $1,000 up, registration fees to the cent, unless rounding would stop the figures adding up.
+  const amounts = r.items.map((i) => i.amount);
+  const dollars = partsFormat([[deposit, r.costs], r.cash], [amounts, r.costs], [[deposit, ...amounts], r.cash]);
+  $('cash').textContent = dollars(r.cash);
+  $('dep').textContent = dollars(deposit);
+  $('costs').textContent = dollars(r.costs);
+  $('duty').textContent = dollars(r.duty.total);
   $('loan-label').textContent = $('lmiloan').checked && r.lmiCost ? 'Loan amount, including LMI' : 'Loan amount';
   $('loan').textContent = fmtMoney(r.loanWithLmi);
   $('lvr').textContent = pct(r.lvr);
@@ -67,7 +70,7 @@ function update() {
     return 'Estimate';
   };
   const rows = [{ label: 'Deposit', amount: deposit, s: 'Your figure' }, ...r.items.map((i) => ({ label: i.label, amount: i.amount, s: src(i) }))];
-  $('rows').innerHTML = `${rows.map((x) => `<tr><td>${x.label}</td><td>${fmtMoney(x.amount, x.amount % 1 ? 2 : 0)}</td><td>${x.s}</td></tr>`).join('')}<tr><th scope="row">Total cash needed</th><td><strong>${fmtMoney(r.cash, r.cash % 1 ? 2 : 0)}</strong></td><td></td></tr>`;
+  $('rows').innerHTML = `${rows.map((x) => `<tr><td>${x.label}</td><td>${dollars(x.amount)}</td><td>${x.s}</td></tr>`).join('')}<tr class="total-row"><th scope="row">Total cash needed</th><td>${dollars(r.cash)}</td><td></td></tr>`;
 }
 wireForm($('form'), update);
 syncFormWithUrl($('form'), update);

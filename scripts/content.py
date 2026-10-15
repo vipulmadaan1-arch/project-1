@@ -427,9 +427,9 @@ C = {
  related=['gst','calculator','unit-converter','date-calculator']),
 'calculator': dict(
  how="""<p>Switch between <strong>Basic</strong> for everyday sums and <strong>Scientific</strong> for trigonometry, logarithms, powers, roots and factorials. It follows the normal order of operations: brackets, then powers, then × and ÷, then + and −. So <em>−2²</em> is −4 and <em>2³²</em> (2^3^2) is 512.</p>
-<p>Trig functions work in degrees or radians: tap the angle button to switch. A number next to a bracket, π or a function multiplies, so <em>2π</em> and <em>3 sin(30)</em> work as written. The % key divides by 100, so <em>50% × 200</em> = 100.</p>
+<p>Trig functions work in degrees or radians: choose Degrees or Radians above the keys to switch. A number next to a bracket, π or a function multiplies, so <em>2π</em> and <em>3 sin(30)</em> work as written. The % key divides by 100, so <em>50% × 200</em> = 100.</p>
 <p>On a keyboard, use * for ×, / for ÷, ^ for powers, ! for factorial, Enter for equals, Backspace to delete and Esc to clear.</p>""",
- faq=[("Does it use degrees or radians?","Degrees by default, which suits most school and trade maths. Tap the Degrees button to switch to radians; your choice is remembered on this device."),
+ faq=[("Does it use degrees or radians?","Degrees by default, which suits most school and trade maths. Choose Radians above the keys to switch; your choice is remembered on this device."),
       ("Why does it say Math error?","The input has no real answer, such as the square root of a negative number, the log of 0, tan 90° or the factorial of a fraction."),
       ("Is anything I type saved or sent anywhere?","No. Everything runs in your browser. The tape of recent sums is cleared when you leave the page."),
       ("Why does 0.1 + 0.2 show 0.3?","Results are rounded to 15 significant digits to hide the tiny floating-point errors common in computer arithmetic. Very large and very small results are shown in scientific notation.")],
@@ -567,11 +567,31 @@ BOOT = "try{var d=document.documentElement,t=localStorage.getItem('theme');if(t=
 
 def strip_tags(s): return re.sub(r'<[^>]+>', '', s)
 
+# Same wording as the footer in js/layout.js, shortened: shown once in each money tool's explainer
+# (everyday tools such as the timer have no figures it could apply to).
+DISCLAIMER = '<p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>'
+
+# Explainer tables scroll sideways inside their own box on a phone, instead of widening the page.
+# The box can take keyboard focus (so it can be scrolled without a mouse) and is named after the
+# heading just above the table, or its column headings.
+def scroll_tables(h):
+    def wrap(m):
+        heading = re.search(r'<h3>([^<]*)</h3>\s*$', h[:m.start()])
+        name = heading.group(1) if heading else 'Table: ' + ', '.join(strip_tags(x) for x in re.findall(r'<th>(.*?)</th>', m.group(0))[:3])
+        return f'<div class="table-scroll" tabindex="0" role="region" aria-label="{html.escape(name)}">{m.group(0)}</div>'
+    return re.sub(r'<table>.*?</table>', wrap, h, flags=re.S)
+
+# Year ranges in a tool's h1 ("2026-27") never break across lines. Only the visible heading gets the
+# span; the page title, description and JSON-LD keep the plain text.
+def nowrap_years(h1):
+    return re.sub(r'(?<!nowrap">)\b(\d{4}-\d{2})\b', r'<span class="nowrap">\1</span>', h1)
+
 for slug, c in C.items():
     p = f'tools/{slug}.html'; s = open(p).read()
     s = re.sub(r'\n    <!-- content:start -->.*?<!-- content:end -->', '', s, flags=re.S)
     s = re.sub(r'\n  <script type="application/ld\+json">.*?</script>', '', s, flags=re.S)
-    name = re.search(r'<h1>(.*?)</h1>', s).group(1)
+    s = re.sub(r'<h1>(.*?)</h1>', lambda m: f'<h1>{nowrap_years(m.group(1))}</h1>', s, count=1)
+    name = html.unescape(strip_tags(re.search(r'<h1>(.*?)</h1>', s).group(1)))
     desc = re.search(r'<meta name="description" content="(.*?)">', s).group(1)
     faq_html = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in c['faq'])
     rel = ''.join(f'<a href="{r}.html">{names[r]}</a>' for r in c['related'])
@@ -579,11 +599,12 @@ for slug, c in C.items():
     <!-- content:start -->
     <section class="content">
       <h2>How it works</h2>
-      {trust_line(slug)}{c['how']}
+      {trust_line(slug)}{scroll_tables(c['how'])}
+      {DISCLAIMER if cats.get(slug) != 'general' else ''}
       <h2>Frequently asked questions</h2>
       {faq_html}
       <h2>Related tools</h2>
-      <nav class="related">{rel}</nav>
+      <nav class="related" aria-label="Related tools">{rel}</nav>
     </section>
     <!-- content:end -->'''
     s = s.replace('\n  </main>', block + '\n  </main>')

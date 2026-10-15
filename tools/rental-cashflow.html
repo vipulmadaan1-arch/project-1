@@ -77,8 +77,8 @@
         <div class="field"><label for="income">Your other taxable income ($ a year)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="120,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Salary and other income after deductions, without this property.</small></div>
         <div class="field" id="carried-field"><label for="carried">Rental losses carried forward ($, optional)</label><input type="text" id="carried" class="num" aria-describedby="carried-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="carried-hint">Losses from earlier years that the limit stopped you claiming.</small></div>
       </form>
-      <div class="card readout">
-        <div id="total-label">After-tax cashflow per week</div>
+      <section class="card readout" aria-labelledby="total-label">
+        <h2 class="readout-label" id="total-label">After-tax cashflow per week</h2>
         <div class="result-big" id="total">–</div>
         <div class="kv"><span>After tax, per year</span><span id="after-year">–</span></div>
         <div class="kv"><span>Before tax, per week</span><span id="pre-week">–</span></div>
@@ -89,14 +89,14 @@
         <div class="kv"><span>Rates, insurance, fees and upkeep</span><span id="holding">–</span></div>
         <div class="kv"><span id="net-label">Net rental loss for tax</span><span id="net">–</span></div>
         <div class="kv"><span id="tax-label">Tax saved on your other income</span><span id="tax-effect">–</span></div>
-        <h2 class="section-title">Negative gearing limit</h2>
+        <h3 class="section-title">Negative gearing limit</h3>
         <div class="kv"><span>Does the limit apply?</span><span id="status">–</span></div>
         <div class="kv" id="carried-row"><span>Loss carried forward to next year</span><span id="carried-out">–</span></div>
         <div class="kv"><span id="cmp-label">If you could negatively gear</span><span id="cmp">–</span></div>
         <div class="kv"><span>Gross rental yield</span><span id="yield">–</span></div>
         <p class="note" id="note"></p>
         <p class="disclaimer">Estimate for one property owned by one individual, for a full year. Uses section 26-155 of the Income Tax Assessment Act 1997 (inserted by the <a href="https://www.legislation.gov.au/C2026A00049/asmade/text" target="_blank" rel="noopener noreferrer">Treasury Laws Amendment (Tax Reform No. 1) Act 2026</a>) and ATO resident tax rates, checked on 15 Oct 2026. The definition of a new build is still to be set by the Minister, so that part is our best reading of the Budget papers. Not tax advice: confirm with a registered tax agent.</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -108,10 +108,11 @@
 <ul><li><strong>Bought before 7.30 pm (AEST) on 12 May 2026:</strong> not caught. The contract date counts, even if you settled later.</li>
 <li><strong>New builds:</strong> not caught. The exact definition is still to be set. The Budget papers say it covers homes built on vacant land, or replacing demolished housing with more homes, bought from new.</li>
 <li><strong>Shares and commercial property:</strong> not affected.</li></ul>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Can I still negatively gear an investment property?</summary><p>Yes, if you signed the contract before 7.30 pm (AEST) on 12 May 2026 or it's a new build. Otherwise, from 2027-28 a rental loss can't reduce tax on your salary. A $650 a week rental with a $600,000 interest-only loan at 6.2% and $120,000 of other income makes a $12,475 loss. If it was bought before Budget night, that saves $3,992 in tax and costs you about $163 a week. If it was bought after, it saves nothing and costs $240 a week.</p></details><details><summary>What happens to a loss I can't claim?</summary><p>It's carried forward with no time limit. It reduces rental profit from your caught properties in later years and capital gains on residential property. For example, a $12,475 loss carried into a year when the property makes a $3,800 profit wipes out tax on that profit and leaves $8,675 to carry on. It never reduces tax on your salary.</p></details><details><summary>I'm buying in 2026-27. Am I affected this year?</summary><p>No. The limit starts with the 2027-28 income year, so in 2026-27 the same $12,475 loss saves $3,992 even on a property bought after Budget night. It's caught from 1 July 2027.</p></details><details><summary>Does interest-only or principal and interest change the tax?</summary><p>Only the interest is deductible. On a $600,000 loan at 6.2% over 30 years, principal and interest repayments in the first year include $37,001 of interest and $7,097 of principal. Cashflow is $133 a week worse than interest-only, but the tax loss is slightly smaller ($12,276 against $12,475).</p></details><details><summary>How much does a new build save?</summary><p>With the same rent and loan plus $8,000 of depreciation, a new build's $20,475 tax loss saves $6,552 for someone earning $120,000 in 2027-28. That brings the cost down to about $114 a week after tax. Check the final definition of a new build before relying on it.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="rental-yield.html">Rental Yield</a><a href="capital-gains-tax.html">Capital Gains Tax</a><a href="mortgage.html">Mortgage Repayments</a><a href="borrowing-power.html">Borrowing Power</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="rental-yield.html">Rental Yield</a><a href="capital-gains-tax.html">Capital Gains Tax</a><a href="mortgage.html">Mortgage Repayments</a><a href="borrowing-power.html">Borrowing Power</a></nav>
     </section>
     <!-- content:end -->
   </main>

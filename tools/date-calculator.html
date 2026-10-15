@@ -48,15 +48,15 @@
         <h2 class="section-title">Add or subtract days</h2>
         <div class="field"><label for="n">Days to add from start date (use − to subtract)</label><input type="text" id="n" class="num" value="90" spellcheck="false" autocomplete="off"></div>
       </form>
-      <div class="card readout">
-        <div>Days between</div>
+      <section class="card readout" aria-labelledby="result-label">
+        <h2 class="readout-label" id="result-label">Days between</h2>
         <div class="result-big" id="days">–</div>
         <div class="kv"><span>Years, months, days</span><span id="ymd">–</span></div>
         <div class="kv"><span>Weeks</span><span id="weeks">–</span></div>
         <div class="kv"><span>Business days (Mon–Fri)</span><span id="biz">–</span></div>
         <div class="kv"><span id="added-label">Start date + 90 days</span><span id="added">–</span></div>
         <p class="disclaimer" id="hol-note">Business days exclude weekends and, if ticked, NSW statewide public holidays for 2026–2027 (not local holidays or the Bank Holiday).</p>
-      </div>
+      </section>
     </div>
     <!-- content:start -->
     <section class="content">
@@ -64,10 +64,11 @@
       <p>Count the days between two dates, including a breakdown into years, months and days, weeks, and business days (Monday to Friday). You can also add or subtract days from a date, handy for notice periods, settlement dates and deadlines.</p>
 <p>Business days skip weekends and NSW public holidays, useful for settlement periods and notice periods.</p>
 <p>By default the end date isn't counted (1 Jan to 2 Jan is 1 day). Tick “Include the end date” to count both.</p>
+      
       <h2>Frequently asked questions</h2>
       <details><summary>Are public holidays excluded from business days?</summary><p>Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ.</p></details><details><summary>Does daylight saving affect the count?</summary><p>No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="world-clock.html">World Clock</a><a href="timer.html">Countdown Timer</a><a href="calculator.html">Calculator</a><a href="stopwatch.html">Stopwatch</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="world-clock.html">World Clock</a><a href="timer.html">Countdown Timer</a><a href="calculator.html">Calculator</a><a href="stopwatch.html">Stopwatch</a></nav>
     </section>
     <!-- content:end -->
   </main>

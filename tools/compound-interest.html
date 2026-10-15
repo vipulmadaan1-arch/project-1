@@ -42,7 +42,7 @@
     <div class="cols">
       <form class="card" id="form">
         <div class="field"><label for="principal">Starting amount ($)</label><input type="text" id="principal" class="num" value="10000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
-        <div class="field"><label for="rate">Interest rate (% p.a.)</label><input type="text" id="rate" class="num" value="5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="rate">Interest rate (% a year)</label><input type="text" id="rate" class="num" value="5" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="years">Years</label><input type="text" id="years" class="num" value="10" inputmode="numeric" spellcheck="false" autocomplete="off"></div>
         <div class="field"><label for="comp">Compounding</label>
           <select id="comp"><option value="365">Daily</option><option value="12" selected>Monthly</option><option value="4">Quarterly</option><option value="1">Annually</option></select></div>
@@ -50,15 +50,15 @@
         <div class="field"><label for="cfreq">Deposit frequency</label>
           <select id="cfreq"><option value="52">Weekly</option><option value="26">Fortnightly</option><option value="12" selected>Monthly</option><option value="1">Yearly</option></select></div>
       </form>
-      <div class="card readout">
-        <div>Final balance</div>
+      <section class="card readout" aria-labelledby="result-label">
+        <h2 class="readout-label" id="result-label">Final balance</h2>
         <div class="result-big" id="balance">–</div>
         <div class="kv"><span>Total deposited</span><span id="contributed">–</span></div>
         <div class="kv"><span>Interest earned</span><span id="interest">–</span></div>
-        <h2 class="section-title">Year by year</h2>
-        <div class="table-scroll" tabindex="0" role="region" aria-label="Year by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <h3 class="section-title">Year by year</h3>
+        <div class="table-scroll is-long" tabindex="0" role="region" aria-label="Year by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div>
         <p class="disclaimer">Estimate only. Ignores tax, fees and rate changes.</p>
-      </div>
+      </section>
     </div>
     <section class="card chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Balance by year</h2><div id="chart"></div></section>
     <!-- content:start -->
@@ -67,10 +67,11 @@
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/budgeting/compound-interest-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's compound interest calculator</a>, so you can cross-check a result there.</p>
 <p>Compound interest means you earn interest on your interest. The balance grows by <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the annual rate, n the compounding periods per year and t the years. Regular deposits are added each period.</p>
 <p>The year-by-year table shows how much of your balance comes from deposits and how much from interest. Over long periods, interest usually overtakes deposits.</p>
+      <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Frequently asked questions</h2>
       <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.</p></details>
       <h2>Related tools</h2>
-      <nav class="related"><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a><a href="offset.html">Offset Account</a></nav>
+      <nav class="related" aria-label="Related tools"><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a><a href="offset.html">Offset Account</a></nav>
     </section>
     <!-- content:end -->
   </main>
