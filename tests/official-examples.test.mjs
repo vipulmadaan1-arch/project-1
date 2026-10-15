@@ -62,3 +62,10 @@ test('NT duty follows the Territory Revenue Office formula (treasury.nt.gov.au, 
   assert.equal(nt(600000), 29700);
   assert.equal(nt(2000000), 99000);
 });
+
+test('ACT owner-occupier duty matches ACT Revenue Office rates (revenue.act.gov.au)', () => {
+  // Up to $260,000: $0.28 per $100 or part. Over $1,455,000: a flat $4.54 per $100 of the whole value.
+  const act = (v) => stampDuty({ state: 'ACT', value: v, home: true }).total;
+  assert.equal(act(260000), 728);
+  assert.equal(act(1500000), 68100);
+});
