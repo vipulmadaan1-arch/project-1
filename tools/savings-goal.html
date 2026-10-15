@@ -28,7 +28,9 @@
   <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/affiliates.js">
   <link rel="modulepreload" href="../js/format.js">
+  <link rel="modulepreload" href="../js/present-value.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/rates.js">
   <link rel="modulepreload" href="../js/calc.js">
@@ -58,6 +60,7 @@
           <select id="freq"><option value="weekly">Weekly</option><option value="fortnightly">Fortnightly</option><option value="monthly" selected>Monthly</option></select></div>
         <div class="field" id="deposit-field"><label for="deposit">Amount you save each time ($)</label><input type="text" id="deposit" class="num" value="200" inputmode="decimal" data-money spellcheck="false" autocomplete="off"></div>
         <div class="field" id="date-field" hidden><label for="by">Reach my goal by</label><input type="date" id="by"></div>
+        <div class="field"><label for="cpi">Inflation, for today's dollars (% a year)</label><input type="text" id="cpi" class="num" aria-describedby="cpi-hint" value="2.5" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="cpi-hint">2.5% is the middle of the Reserve Bank's 2–3% inflation target and ASIC's default for today's dollars. Change it to try another rate.</small></div>
       </form>
       <section class="card readout" aria-labelledby="total-label">
         <h2 class="readout-label" id="total-label">Time to reach your goal</h2>
@@ -67,19 +70,33 @@
         <div class="kv"><span>Your money in, including what’s already saved</span><span id="deposited">–</span></div>
         <div class="kv"><span>Interest earned</span><span id="interest">–</span></div>
         <div class="kv"><span>Final balance</span><span id="balance" data-aussie>–</span></div>
+        <div class="kv kv-pv" id="pv-row" hidden><span id="pv-label">Final balance in today's dollars</span><span id="pv">–</span></div>
         <p class="note" id="note"></p>
-        <p class="disclaimer">Estimate only. Like Moneysmart’s savings goals calculator, assumes you save at the start of each period, reinvest interest and keep the same rate, with no tax, fees or inflation. Not financial advice.</p>
+        <p class="disclaimer">Estimate only. Like Moneysmart’s savings goals calculator, assumes you save at the start of each period, reinvest interest and keep the same rate, with no tax or fees. This calculator is not intended to be relied on for the purposes of making a decision about a financial product. You should consider obtaining advice from a financial services licensee (a licensed financial adviser) before making any financial decisions.</p>
       </section>
     </div>
     <section class="card chart-card" id="chart-card" aria-labelledby="chart-title"><h2 class="section-title" id="chart-title">Savings by year</h2><div id="chart"></div>
       <details class="chart-table"><summary>Show the numbers</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Savings by year table"><table><thead><tr><th>Year</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead><tbody id="rows"></tbody></table></div></details></section>
+    <section class="card assumptions" aria-labelledby="assume-title">
+      <h2 class="section-title" id="assume-title">Purpose, assumptions and limitations</h2>
+      <p><strong>What it's for:</strong> working out how long a savings goal could take, or how much to put away each time to reach it by a date, at an interest rate you choose. It doesn't recommend or compare any savings account.</p>
+      <p><strong>Today's dollars:</strong> Your goal and final balance are in future dollars. When the goal is 2 or more years away, the results also show the final balance in today's dollars: a reminder that a goal set in today's prices (say, a holiday or a car) may cost more by then. The <em>in today's dollars</em> figure divides it by 1 plus the inflation rate for each year until then (the present value), so you can see what it would buy at today's prices. It uses 2.5% a year unless you change it: the middle of the <a href="https://www.rba.gov.au/inflation/inflation-target.html" target="_blank" rel="noopener noreferrer">Reserve Bank's 2–3% inflation target</a>, and the default set by <a href="https://www.legislation.gov.au/F2026L00271/latest/text" target="_blank" rel="noopener noreferrer">ASIC Corporations (Generic Calculators) Instrument 2026/41</a> (section 6), which asks calculators like this one to show it for amounts 2 or more years away.</p>
+      <p><strong>Default assumptions and why they're reasonable:</strong></p>
+      <ul>
+        <li>A $10,000 goal, $1,000 already saved and $200 a month: an example, so the page shows a result straight away. Enter your own figures.</li>
+        <li>4.5% a year, added monthly: an example rate in the range Australian online savings accounts have paid in recent years. It isn't a quote; enter your account's rate.</li>
+        <li>Deposits at the start of each week, fortnight or month, interest reinvested and the rate never changing: the same method as <a href="https://moneysmart.gov.au/saving/savings-goals-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's savings goals calculator</a>, so you can cross-check a result there.</li>
+      </ul>
+      <p><strong>Limitations and their effect:</strong> <strong>tax</strong> on interest isn't taken off, so the interest you keep will be lower and the goal can take a little longer. <strong>Fees</strong>, <strong>rate changes</strong> and bonus-rate conditions aren't modelled, and the goal itself isn't raised for inflation: for a goal priced in today's dollars that's years away, aim a little higher.</p>
+      <p class="advice-line"><strong>Not for product decisions:</strong> This calculator is not intended to be relied on for the purposes of making a decision about a financial product. You should consider obtaining advice from a financial services licensee (a licensed financial adviser) before making any financial decisions.</p>
+    </section>
     <!-- content:start -->
     <div class="aus-slot"></div>
     <section class="content">
       <h2>Savings Goal: how it works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/saving/savings-goals-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's savings goals calculator</a>, so you can cross-check a result there.</p>
 <p>Enter your goal, what you've already saved and your interest rate. Then either enter how much you can save each week, fortnight or month to see how long it will take, or pick a date to see how much to put away each time.</p>
-<p>Like Moneysmart's savings goals calculator, it assumes you deposit at the start of each period, reinvest the interest and keep the same rate. Interest compounds daily, monthly, quarterly or yearly as you choose. It ignores tax on interest, account fees and inflation, so allow a little extra if your goal is a long way off.</p>
+<p>Like Moneysmart's savings goals calculator, it assumes you deposit at the start of each period, reinvest the interest and keep the same rate. Interest compounds daily, monthly, quarterly or yearly as you choose. It ignores tax on interest and account fees. When your goal is 2 or more years away, it also shows the final balance <strong>in today's dollars</strong> (at 2.5% inflation a year unless you change it), a reminder that prices rise while you save: allow a little extra if your goal is priced in today's dollars.</p>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
       <h2>Savings Goal FAQs</h2>
       <details><summary>How long will it take to save $10,000?</summary><p>Saving $200 a month, with $1,000 already saved, takes about 3 years 5 months at 4.5% p.a. compounded monthly, and 3 years 9 months with no interest.</p></details><details><summary>How much do I need to save each week to reach my goal?</summary><p>About $86.54 a week saves $9,000 in 2 years with no interest, or about $82.25 a week at 5% p.a. compounded monthly. To work out your own, choose to save by a date, pick weekly and enter your date.</p></details><details><summary>Is interest on savings taxed in Australia?</summary><p>Yes. Interest is income and is taxed at your marginal rate, which this calculator doesn't include. Money held in a mortgage offset account saves interest that isn't taxed.</p></details><details><summary>Does compounding frequency make much difference?</summary><p>Only a little. Daily compounding earns slightly more than monthly at the same rate. How much you save and the rate matter far more.</p></details><details><summary>What about saving for a home deposit?</summary><p>Use this to set a target, then check the stamp duty calculator for the extra upfront costs, and the mortgage calculator for repayments on the loan.</p></details>
@@ -117,7 +134,7 @@
       </div>
       <div class="footer-legal">
         <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
-        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></span>
       </div>
     </div>
   </footer>

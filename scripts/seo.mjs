@@ -11,7 +11,7 @@
 //   - The Content-Security-Policy meta tag on every page (built here, with the hash of the page's inline
 //     boot script), the <link rel="modulepreload"> list (each page's whole static import graph) and the
 //     <noscript> notice, so the copies on 45 pages can't drift.
-//   - The site footer (tool links by section, About, Privacy and the general-information notice) between
+//   - The site footer (tool links by section, About, Privacy, Terms and the general-information notice) between
 //     <!-- footer:start --> and <!-- footer:end --> after </main>, from js/site-footer.js, so crawlers and no-JS
 //     visitors see it; js/layout.js reuses it instead of adding another.
 //   - Content hashes in sw.js (scripts/sw-hashes.mjs), last, once every page is final.
@@ -59,6 +59,7 @@ const PAGES = [
   ...TOOLS.map((t) => ({ file: `tools/${t.slug}.html`, path: `tools/${t.slug}.html` })),
   { file: 'about.html', path: 'about.html' },
   { file: 'privacy.html', path: 'privacy.html' },
+  { file: 'terms.html', path: 'terms.html' },
 ];
 
 // Sitemap lastmod = date of each page's last commit, or today if it has uncommitted changes (or no

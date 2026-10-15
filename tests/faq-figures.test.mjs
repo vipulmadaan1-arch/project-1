@@ -16,6 +16,9 @@ import { rentalCashflow } from '../js/rental.js';
 import { borrowingPower } from '../js/borrowing.js';
 import { lmi } from '../js/lmi.js';
 import { upfrontCosts } from '../js/upfront.js';
+import { presentValue } from '../js/present-value.js';
+import { rentVsBuy } from '../js/rentbuy.js';
+import { termDeposit } from '../js/term-deposit.js';
 
 const money = (n) => n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', maximumFractionDigits: 0 });
 const cents = (n) => n.toLocaleString('en-AU', { style: 'currency', currency: 'AUD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -185,6 +188,17 @@ test('compound interest: worked example and frequencies', () => {
     has('compound-interest', money(l.balance), money(l.contributed));
   }
   has('compound-interest', money(compoundInterest({ principal: 0, ratePct: 5, years: 30, contribution: 200 }).interest));
+});
+
+// Today's dollars (ASIC Generic Calculators Instrument 2026/41: present value at 2.5% inflation).
+test("today's dollars: compound interest, term deposit and rent vs buy FAQs", () => {
+  const w = compoundInterest({ principal: 10000, ratePct: 5, years: 10, contribution: 200 });
+  const l = compoundInterest({ principal: 0, ratePct: 5, years: 30, contribution: 200 });
+  has('compound-interest', `${money(w.balance)} you'd have`, `about ${money(presentValue(w.balance, 10))} in today's dollars`, money(l.balance), `about ${money(presentValue(l.balance, 30))} in today's dollars`);
+  const t = termDeposit({ amount: 10000, ratePct: 4.5, months: 24, paid: 'annually', reinvest: true });
+  has('term-deposit', cents(t.interest), cents(t.balance), `about ${cents(presentValue(t.balance, 2))} in today's dollars`);
+  const r = rentVsBuy({ price: 800000, deposit: 160000, state: 'NSW', home: true, otherUpfront: 3000, ratePct: 6, termYears: 30, councilRates: 2000, strata: 0, insurance: 1800, maintenancePct: 1, costInflationPct: 3, growthPct: 5, weeklyRent: 650, rentGrowthPct: 4, returnPct: 7, taxDragPct: 15, sellingCostPct: 2.5, years: 10 });
+  has('rent-vs-buy', `${money(r.diff)} lead`, `about ${money(presentValue(r.diff, 10))} in today's dollars`, money(r.buy), money(r.rent), `about ${money(presentValue(r.buy, 10))} and ${money(presentValue(r.rent, 10))}`);
 });
 
 test('GST: FAQ and table figures', () => {

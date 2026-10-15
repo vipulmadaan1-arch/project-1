@@ -1,8 +1,9 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, setError, setEnabled, todaysDollars, readInflation } from '../layout.js';
+import { presentValue } from '../present-value.js';
 import { rentVsBuy } from '../rentbuy.js';
 
 const $ = (id) => document.getElementById(id);
-const OUT = ['diff', 'buy', 'rentw', 'breakeven', 'duty', 'upfrontamt', 'loan', 'repay', 'owncosts', 'rentmonth'];
+const OUT = ['diff', 'buy', 'rentw', 'pvboth', 'breakeven', 'duty', 'upfrontamt', 'loan', 'repay', 'owncosts', 'rentmonth'];
 const money = (id, name, o = {}) => readNumber($(id), { name, unit: 'money', min: 0, max: 1e10, ...o });
 const pct = (id, name, o = {}) => readNumber($(id), { name, unit: 'percent', min: 0, max: 30, example: '5', ...o });
 const table = $('rows').closest('section');
@@ -40,6 +41,7 @@ function update() {
     $('estimate-note').textContent = '';
     $('result-label').textContent = 'Difference in net wealth';
     table.hidden = true;
+    todaysDollars(null, 0, { always: true });
     return blank(...OUT.map($));
   }
   const r = rentVsBuy({ ...v, state: $('state').value, home, firstHome: $('fhb').checked });
@@ -49,6 +51,10 @@ function update() {
   $('diff').textContent = fmtMoney(Math.abs(r.diff));
   $('buy').textContent = fmtMoney(r.buy);
   $('rentw').textContent = fmtMoney(r.rent);
+  // Present values (ASIC Instrument 2026/41 s 8(1)(e)(iv)); shown for every period so the rows don't come and go.
+  todaysDollars(Math.abs(r.diff), v.years, { always: true });
+  const cpi = readInflation();
+  $('pvboth').textContent = cpi === null ? '–' : `${fmtMoney(presentValue(r.buy, v.years, cpi))} and ${fmtMoney(presentValue(r.rent, v.years, cpi))}`;
   $('breakeven').textContent = r.breakEven === null ? `Not within ${yrs}` : r.breakEven === 1 ? 'Year 1 (buying ahead from the start)' : `Year ${r.breakEven}`;
   $('duty').textContent = fmtMoney(r.duty);
   $('upfrontamt').textContent = fmtMoney(r.upfront);

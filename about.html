@@ -28,7 +28,9 @@
   <link rel="modulepreload" href="js/site-footer.js">
   <link rel="modulepreload" href="js/icons.js">
   <link rel="modulepreload" href="js/ads.js">
+  <link rel="modulepreload" href="js/affiliates.js">
   <link rel="modulepreload" href="js/format.js">
+  <link rel="modulepreload" href="js/present-value.js">
   <link rel="modulepreload" href="js/layout.js">
   <link rel="modulepreload" href="js/pages/privacy.js">
 </head>
@@ -40,7 +42,7 @@
       <h1>About Sorted, Mate</h1>
       <p class="updated">Last updated 15 October 2026</p>
 
-      <h2>Who runs it</h2>
+      <h2 id="who-runs-it">Who runs it</h2>
       <!-- TODO (site owner): if you want to, add your name, business name or ABN here, e.g.
            "Sorted, Mate is run by <name>, ABN <number>, from <town>, <state>." -->
       <p>Sorted, Mate is an independent Australian website. It isn't owned by a bank, lender, broker, real estate agency or government body, and nobody pays to appear in its results. The calculators are free, and the site may show ads to cover its costs.</p>
@@ -75,13 +77,23 @@
       <h2>How often figures are re-checked</h2>
       <p>Rates are re-checked each 1 July, when most tax rates, thresholds and duty brackets change, and whenever a government announces a change, such as in a Budget or a revenue office update. The date of the last check is shown on each tool and in the footer.</p>
 
-      <h2>Report an error</h2>
+      <h2 id="report-an-error">Report an error</h2>
       <p>If a result looks wrong or a rate is out of date, please let us know which tool and the figures you entered (a results link from the <em>Copy link</em> button is ideal). Corrections are made as quickly as possible.</p>
       <p id="contact-line" hidden>Email: <a id="contact-email" href="#"></a></p>
       <!-- TODO (site owner): set CONTACT_EMAIL in js/config.js so the email line above appears. -->
 
+      <h2 id="support">Support the site</h2>
+      <p>Sorted, Mate is run independently (see <a href="#who-runs-it">who runs it</a>, above), and nobody pays to appear in its results. Keeping it going mostly means re-checking rates: every 1 July, after each Budget and whenever a revenue office changes a rule, every affected figure is checked against the official source and the tests are rerun before the change goes live.</p>
+      <p>The calculators stay free. If one saved you time, you can help cover hosting and the hours spent checking rates:</p>
+      <ul>
+        <li id="bmc-line" hidden><a id="bmc-link" href="#" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>: a one-off tip, handled by Buy Me a Coffee.</li>
+        <li>Share a tool with someone it would help, or link to it from your own site (see the <a href="terms.html">terms of use</a> for embedding).</li>
+        <li>Report anything that looks wrong (below).</li>
+      </ul>
+      <p>The site may also show ads, but never on the calculators that project savings, investments or super, and never between a calculator and its result.</p>
+
       <h2>General information only</h2>
-      <p>The calculators give general estimates based on the information you enter and the rules described on each page. They don't take your personal circumstances into account and aren't financial, tax, credit or legal advice. Before making a decision, confirm figures with the ATO, your state revenue office, your lender or a licensed adviser. See the <a href="privacy.html">privacy policy</a> for how your information is handled.</p>
+      <p>The calculators give general estimates based on the information you enter and the rules described on each page. They don't take your personal circumstances into account and aren't financial, tax, credit or legal advice. Before making a decision, confirm figures with the ATO, your state revenue office, your lender or a licensed adviser. See the <a href="terms.html">terms of use</a>, and the <a href="privacy.html">privacy policy</a> for how your information is handled.</p>
     </article>
   </main>
   <!-- footer:start -->
@@ -113,7 +125,7 @@
       </div>
       <div class="footer-legal">
         <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
-        <span class="footer-links"><a href="./about.html">About</a><a href="./privacy.html">Privacy</a></span>
+        <span class="footer-links"><a href="./about.html">About</a><a href="./privacy.html">Privacy</a><a href="./terms.html">Terms</a></span>
       </div>
     </div>
   </footer>

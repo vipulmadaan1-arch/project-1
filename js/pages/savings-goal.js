@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, setError, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, setError, wireForm, blank, syncFormWithUrl, addResultActions, todaysDollars } from '../layout.js';
 import { FREQ, savingsTime, savingsDeposit, periodsUntil, describeMonths, periodRate, savingsBalance } from '../loans.js';
 import { stackedColumns, perFrame } from '../chart.js';
 
@@ -75,7 +75,7 @@ function update() {
     }
   }
   const outs = [$('total'), $('other'), $('count'), $('deposited'), $('interest'), $('balance')];
-  if ([target, start, ratePct, deposit, periods].includes(null)) { later(null); $('note').textContent = ''; $('chart-card').hidden = true; return blank(...outs); }
+  if ([target, start, ratePct, deposit, periods].includes(null)) { todaysDollars(null, 0); later(null); $('note').textContent = ''; $('chart-card').hidden = true; return blank(...outs); }
   const compoundsPerYear = +$('comp').value;
 
   let r, note = '';
@@ -89,6 +89,7 @@ function update() {
     if (!r.reached) {
       $('total').textContent = deposit > 0 || ratePct > 0 ? 'More than 100 years' : 'Never, without deposits';
       blank($('other'), $('count'), $('deposited'), $('interest'), $('balance'));
+      todaysDollars(null, 0);
       later(null);
       $('chart-card').hidden = true;
       $('note').textContent = deposit > 0 || ratePct > 0 ? 'At this rate it would take more than 100 years. Try saving more each time.' : 'Enter an amount to save each time, or an interest rate, to see how long it will take.';
@@ -102,6 +103,8 @@ function update() {
   $('deposited').textContent = fmtMoney(r.deposited);
   $('interest').textContent = fmtMoney(r.interest);
   $('balance').textContent = fmtMoney(r.balance);
+  // Present value when the goal is 2 or more years away (ASIC Instrument 2026/41 s 8(1)(e)(iv)).
+  todaysDollars(r.balance, r.periods / perYear, { label: "Final balance in today's dollars" });
   $('note').textContent = note;
   drawChart({ start, deposit: byDate ? r.deposit : deposit, ratePct, compoundsPerYear, perYear, periods: r.periods });
 }

@@ -481,7 +481,10 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .add-row select { flex: 1; min-width: 0; }
 
 /* Ads: one labelled slot, space reserved so the page doesn't jump when the ad loads */
-.ad-slot { margin-top: 40px; padding: 12px; min-height: 280px; border: 1px dashed var(--line); border-radius: var(--r); background: var(--sunken); }
+/* A clear gap and a rule above the slot, so an ad never reads as part of the results, the Copy link and Print
+   buttons or the coffee note above it. */
+.ad-slot { position: relative; margin-top: 64px; padding: 12px; min-height: 280px; border: 1px dashed var(--line); border-radius: var(--r); background: var(--sunken); }
+.ad-slot::before { content: ""; position: absolute; left: 0; right: 0; top: -32px; border-top: 1px solid var(--line-strong); }
 .ad-label { display: block; margin-bottom: 8px; font: 500 var(--t-xs)/1 var(--font-body); color: var(--faint); }
 
 /* Privacy page */
@@ -632,3 +635,53 @@ html.is-leaving body::before {
 }
 @keyframes nav-progress { from { transform: scaleX(.05); } to { transform: scaleX(.92); } }
 @media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }
+
+/* "In today's dollars" (present value) line under a result: as prominent as the line it explains. */
+.readout .kv-pv span:first-child { color: var(--readout-ink); }
+.kv-pv span:last-child { font-size: var(--t-md); }
+.kv[hidden] { display: none; }
+
+/* "Tools I use" affiliate card (off by default). The disclosure is at body-text size, directly above the links. */
+.affiliates { margin-top: 40px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); }
+.content .affiliates h2 { margin: 0 0 8px; font-size: var(--t-md); }
+.affiliates-disclosure { font-size: var(--t-base); color: var(--ink); }
+.affiliates ul { margin-top: 12px; }
+.affiliates li span { color: var(--muted); }
+
+/* Printing (the "Print or save as PDF" button, or the browser's own Print). Light colours whatever the theme,
+   no header, ads, coffee links, buttons, form controls or explainer: just the tool name, the inputs as a list,
+   the results, the chart and assumptions, and a footer with the date checked, the not-advice statement and
+   the link that reopens the result. */
+.print-only { display: none; }
+@media print {
+  :root:not(#_) {
+    --bg: #fff; --surface: #fff; --sunken: #fff; --ink: #000; --muted: #333; --faint: #444; --line: #bbb; --line-strong: #888;
+    --accent: #0b5a4d; --accent-soft: #ccc; --readout: #fff; --readout-ink: #000; --readout-muted: #333; --readout-line: #bbb;
+    --readout-accent: #0b5a4d; --readout-border: #888; --series-1: #0b8a72; --series-2: #b8741a; color-scheme: light;
+  }
+  @page { margin: 14mm; }
+  html, body { background: #fff !important; color: #000; font-size: 11pt; }
+  .site-header, .skip-link, .site-footer, .ad-slot, .bmc, .mini-result, #theme-toggle, .result-actions, .crumbs,
+  .aus-slot, main .content, .affiliates, .readout-hint, .next-step, .noscript, main form.card, .tool-head .ico, .tool-head .tag,
+  details.chart-table:not([open]), html.is-leaving body::before { display: none !important; }
+  .print-only { display: block; }
+  .wrap { max-width: none; padding: 0; }
+  .tool-head { display: block; margin: 0 0 10px; }
+  .tool-head h1 { font-size: 18pt; }
+  .cols { display: block; }
+  .card { border-color: #999; padding: 12px 14px; margin-top: 10px; break-inside: avoid; box-shadow: none; }
+  .readout { position: static; }
+  .readout .note { background: none; padding: 0; }
+  .table-scroll, .table-scroll.is-long { max-height: none !important; overflow: visible !important; }
+  .chart-card, .assumptions { break-inside: avoid; }
+  .assumptions { break-inside: auto; }
+  a { color: inherit; text-decoration: underline; }
+  .print-inputs h2 { font-size: 12pt; margin: 0 0 6px; }
+  .print-inputs dl { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin: 0; }
+  .print-inputs dl > div { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border-bottom: 1px solid #ddd; break-inside: avoid; }
+  .print-inputs dt { color: #333; }
+  .print-inputs dd { margin: 0; font-weight: 600; text-align: right; }
+  .print-foot { margin-top: 14px; padding-top: 8px; border-top: 1px solid #888; font-size: 9pt; color: #333; break-inside: avoid; }
+  .print-foot p + p { margin-top: 4px; }
+  .print-foot p:nth-last-child(2) { word-break: break-all; }
+}

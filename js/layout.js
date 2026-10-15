@@ -1,10 +1,12 @@
 // Injects the shared header, reuses (or adds) the shared footer, and handles the theme toggle.
-import { BMC_URL } from './config.js';
-import { TOOLS, CATEGORIES } from './tools.js';
+import { BMC_URL, SITE_NAME, ADS_EXCLUDE } from './config.js';
+import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
 import { HAS_BMC, brandHtml, footerHtml } from './site-footer.js';
 import { icon } from './icons.js';
 import { mountAds } from './ads.js';
+import { affiliatesFor, affiliateCardHtml } from './affiliates.js';
 import { fmtMoney, parseNumber, checkNumber, moneyFieldText } from './format.js';
+import { presentValue, PV_MIN_YEARS } from './present-value.js';
 
 const root = document.documentElement;
 const base = root.dataset.base || './';
@@ -319,6 +321,25 @@ export function setEnabled(el, on, why) {
   if (ids.length) el.setAttribute('aria-describedby', ids.join(' ')); else el.removeAttribute('aria-describedby');
 }
 
+// "In today's dollars" row for calculators about a financial product (ASIC Corporations (Generic Calculators)
+// Instrument 2026/41 s 8(1)(e)(iv): the present value of an estimate payable 2 or more years ahead; the formula and
+// the 2.5% default are in s 6, see presentValue in calc.js). Reads the page's #cpi field (editable inflation rate)
+// and fills #pv, with its label in #pv-label. Shown only for amounts 2 or more years away (the row is hidden
+// otherwise), unless always is set. amount: the future-dollar figure, or null to blank it.
+export function todaysDollars(amount, years, { label = "In today's dollars", always = false, format = (n) => fmtMoney(n) } = {}) {
+  const row = document.getElementById('pv-row');
+  const cpi = readInflation();
+  const show = amount !== null && Number.isFinite(years) && (always || years >= PV_MIN_YEARS);
+  if (row) row.hidden = !show && !always;
+  const pv = show && cpi !== null ? presentValue(amount, years, cpi) : null;
+  document.getElementById('pv-label').textContent = cpi === null ? label : `${label} (${cpi.toLocaleString('en-AU', { maximumFractionDigits: 2 })}% inflation)`;
+  document.getElementById('pv').textContent = pv === null ? '–' : format(pv);
+  return pv;
+}
+
+// The inflation rate typed into the page's #cpi field (null, with an error shown, when it can't be used).
+export const readInflation = () => readNumber(document.getElementById('cpi'), { name: 'Inflation', unit: 'percent', min: -5, max: 20, example: '2.5' });
+
 // Sets several outputs to the same placeholder.
 export const blank = (...els) => els.forEach((el) => { el.textContent = '–'; });
 
@@ -392,22 +413,107 @@ export function syncFormWithUrl(form, onChange) {
   addEventListener('hashchange', () => { if (location.hash.includes('=')) restoreFromUrl(); });
 }
 
-// Adds "Copy link" and a gentle coffee prompt under a result card.
+// The address that reopens this result: the page plus the form's inputs after the # (see syncFormWithUrl).
+const shareUrl = () => `${location.origin}${location.pathname}${sharedForm ? `#${formParams(sharedForm)}` : ''}`;
+
+// Print or save as PDF. The printout (css/style.css, @media print) leaves out the header, ads, coffee links and
+// form controls, and shows instead: the tool name, the inputs as "label: value" lines, the results, the assumptions,
+// the rates-checked date, the general-information statement, and the results link, so the printout can reproduce
+// the result. That keeps the estimate easy to print or store, as ASIC's calculator relief requires
+// (ASIC Corporations (Generic Calculators) Instrument 2026/41 s 8(1)(f)).
+const textOf = (el) => (el?.textContent || '').replace(/\s+/g, ' ').trim();
+function inputRows(form) {
+  const rows = [];
+  for (const el of form.querySelectorAll('input, select, textarea')) {
+    if (el.type === 'hidden' || el.type === 'button' || el.type === 'submit' || el.closest('[hidden]')) continue;
+    if (el.type === 'radio' && !el.checked) continue;
+    const check = el.closest('label.check');
+    let label = el.type === 'radio' ? textOf(el.closest('fieldset')?.querySelector('legend')) || textOf(el.labels?.[0])
+      : check ? textOf(check) : textOf(el.labels?.[0]) || el.getAttribute('aria-label') || '';
+    let value;
+    if (el.type === 'checkbox') value = el.checked ? 'Yes' : 'No';
+    else if (el.type === 'radio') value = textOf(el.labels?.[0]) || el.value;
+    else if (el.tagName === 'SELECT') value = textOf(el.selectedOptions[0]);
+    else if (el.type === 'date' && el.value) value = new Date(`${el.value}T00:00:00`).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+    else value = el.value.trim() || 'Not entered';
+    if (el.disabled && el.type === 'checkbox' && !el.checked) continue;
+    label = label.replace(/\s*\(optional\)$/i, '');
+    if (label) rows.push([label, value]);
+  }
+  return rows;
+}
+function fillPrintSummary() {
+  const m = document.querySelector('main');
+  const form = sharedForm || m?.querySelector('form');
+  if (!m || !form) return;
+  let box = document.getElementById('print-inputs');
+  if (!box) {
+    box = document.createElement('section');
+    box.id = 'print-inputs';
+    box.className = 'print-only print-inputs';
+    (m.querySelector('.tool-head') || m.firstElementChild).after(box);
+    m.insertAdjacentHTML('beforeend', '<footer class="print-only print-foot" id="print-foot"></footer>');
+  }
+  const h = document.createElement('h2');
+  h.textContent = 'Your inputs';
+  const dl = document.createElement('dl');
+  for (const [k, v] of inputRows(form)) {
+    const div = document.createElement('div');
+    const dt = document.createElement('dt'); dt.textContent = k;
+    const dd = document.createElement('dd'); dd.textContent = v;
+    div.append(dt, dd);
+    dl.append(div);
+  }
+  box.replaceChildren(h, dl);
+  const foot = document.getElementById('print-foot');
+  const lines = [];
+  const money = tool && tool.cat !== 'general';
+  if (money) lines.push(`Rates checked ${RATES_CHECKED}. Printed ${new Date().toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })}.`);
+  if (money) lines.push('General information only, not financial, tax or credit advice. It doesn\'t take your personal circumstances into account. Check your situation with the ATO, your state revenue office or a licensed adviser.');
+  lines.push(`Open these results again: ${shareUrl()}`);
+  lines.push(`Made with ${SITE_NAME} (free)`);
+  foot.replaceChildren(...lines.map((t) => { const p = document.createElement('p'); p.textContent = t; return p; }));
+}
+addEventListener('beforeprint', fillPrintSummary);
+matchMedia('print').addEventListener?.('change', (e) => { if (e.matches) fillPrintSummary(); });
+
+// Adds "Copy link", "Print or save as PDF" and (once you've changed an input) a gentle coffee prompt under a
+// result card. The prompt is never there on page load and never pops up over anything.
 export function addResultActions(card) {
   const wrap = document.createElement('div');
   wrap.className = 'result-actions';
   wrap.innerHTML = `
-    <button class="btn" type="button">${icon('link')}<span>Copy link to these results</span></button>
-    ${HAS_BMC ? `<p class="nudge">${icon('coffee')}<span>Saved you some time? <a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Buy me a coffee</a></span></p>` : ''}`;
-  const btn = wrap.querySelector('button');
+    <div class="btn-row">
+      <button class="btn" type="button" data-act="copy">${icon('link')}<span>Copy link to these results</span></button>
+      <button class="btn" type="button" data-act="print">${icon('print')}<span>Print or save as PDF</span></button>
+    </div>`;
+  const btn = wrap.querySelector('[data-act="copy"]');
   const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
-    const url = `${location.origin}${location.pathname}${sharedForm ? `#${formParams(sharedForm)}` : ''}`;
+    const url = shareUrl();
     try { await navigator.clipboard.writeText(url); btn.innerHTML = `${icon('check')}<span>Link copied</span>`; announce('Link copied'); }
     catch { prompt('Copy this link:', url); }
     setTimeout(() => { btn.innerHTML = idle; }, 2000);
   });
+  wrap.querySelector('[data-act="print"]').addEventListener('click', () => { fillPrintSummary(); print(); });
   card.append(wrap);
+  // Keep the print summary current, so printing from the browser menu (or a PDF made without beforeprint) has it.
+  const form = card.closest('main')?.querySelector('form');
+  let t = 0;
+  const refresh = () => { clearTimeout(t); t = setTimeout(fillPrintSummary, 250); };
+  form?.addEventListener('input', refresh);
+  form?.addEventListener('change', refresh);
+  refresh();
+  if (HAS_BMC && form) {
+    const show = (e) => {
+      if (!e.isTrusted) return;
+      form.removeEventListener('input', show);
+      form.removeEventListener('change', show);
+      wrap.insertAdjacentHTML('beforeend', `<p class="nudge">${icon('coffee')}<span>Saved you a spreadsheet? <a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>. It keeps the rates checked.</span></p>`);
+    };
+    form.addEventListener('input', show);
+    form.addEventListener('change', show);
+  }
 }
 
 // Smooth page changes. Start fetching a page as soon as a finger or pointer reaches its link, so it is
@@ -448,10 +554,16 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   else addEventListener('load', register, { once: true });
 }
 
-// Ad placeholder after each tool, before the explainer. Stays hidden unless ads are enabled.
+// Ad placeholder after each tool, before the explainer: below the results, the chart and the assumptions, never
+// between the form and its result or inside the results panel (js/ads.js also refuses a slot placed there).
+// Pages in ADS_EXCLUDE (js/config.js) get none. Stays hidden unless ads are enabled.
 const content = document.querySelector('main .content');
-if (tool && content) content.insertAdjacentHTML('beforebegin', '<div class="ad-slot" hidden></div>');
+if (tool && content && !ADS_EXCLUDE.includes(tool.slug)) content.insertAdjacentHTML('beforebegin', '<div class="ad-slot" hidden></div>');
 mountAds();
+
+// "Tools I use" affiliate card, below the FAQs, on the pages each link is set for (off by default: see js/config.js).
+const affiliateCard = tool && content ? affiliateCardHtml(affiliatesFor(tool.slug)) : '';
+if (affiliateCard) (content.querySelector('nav.related')?.previousElementSibling || content.lastElementChild).insertAdjacentHTML('beforebegin', affiliateCard);
 
 // Related-tool links get their tool's icon.
 document.querySelectorAll('.related a').forEach((a) => {

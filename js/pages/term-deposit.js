@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, todaysDollars } from '../layout.js';
 import { termDeposit, taxOnInterest, TAX_YEAR } from '../term-deposit.js';
 
 const $ = (id) => document.getElementById(id);
@@ -18,6 +18,7 @@ function update() {
   const income = readNumber($('income'), { name: 'Other taxable income', unit: 'money', min: 0, max: 1e9, optional: true, example: '80,000' });
   if ([amount, ratePct, months, income].includes(null)) {
     $('note').textContent = '';
+    todaysDollars(null, 0);
     return blank($('interest'), $('balance'), $('per'), $('effective'), $('tax'), $('after'));
   }
   const r = termDeposit({ amount, ratePct, months, paid, reinvest });
@@ -25,6 +26,8 @@ function update() {
   const paidOut = !atMaturity && !reinvest;
   $('balance-label').textContent = paidOut ? 'Balance at maturity (interest paid out)' : 'Balance at maturity';
   $('balance').textContent = fmtMoney(r.balance, 2);
+  // Present value for terms of 2 years or more (ASIC Instrument 2026/41 s 8(1)(e)(iv)).
+  todaysDollars(r.balance, months / 12, { label: "Balance at maturity in today's dollars", format: (n) => fmtMoney(n, 2) });
   $('per-label').textContent = atMaturity ? 'Interest paid at maturity' : reinvest ? `Interest added in the first ${EVERY[paid]}` : `Interest paid each ${EVERY[paid]}`;
   $('per').textContent = fmtMoney(atMaturity ? r.interest : r.perPayment, 2);
   $('effective').textContent = `${r.effectiveRatePct.toLocaleString('en-AU', { maximumFractionDigits: 2 })}% a year`;

@@ -1,4 +1,4 @@
-import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
+import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions, todaysDollars } from '../layout.js';
 import { compoundInterest } from '../calc.js';
 import { stackedColumns, perFrame } from '../chart.js';
 
@@ -14,12 +14,15 @@ function update() {
     later(null);
     $('rows').replaceChildren();
     $('chart').closest('.chart-card').hidden = true;
+    todaysDollars(null, 0, { always: true });
     return blank($('balance'), $('contributed'), $('interest'));
   }
   const r = compoundInterest({
     principal, ratePct, years, compoundsPerYear: +$('comp').value, contribution, contributionsPerYear: +$('cfreq').value,
   });
   $('balance').textContent = fmtMoney(r.balance);
+  // Present value of the final balance (ASIC Instrument 2026/41 s 8(1)(e)(iv)); shown for every term so the row doesn't come and go.
+  todaysDollars(r.balance, years, { always: true });
   $('contributed').textContent = fmtMoney(r.contributed);
   $('interest').textContent = fmtMoney(r.interest);
   later(() => {
