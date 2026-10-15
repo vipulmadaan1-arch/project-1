@@ -304,17 +304,23 @@ export function medicareLevy(income) {
   return income * MEDICARE.rate;
 }
 
-export function takeHome(gross, { includesSuper = false, help = false } = {}) {
+// From 2026-27 resident employees get a standard deduction for work-related expenses: the lower of $1,000 and
+// their labour income, applied automatically at tax time (ATO "Standard deduction for work-related expenses",
+// updated 14 Sep 2026). Payslips don't include it; it comes back when you lodge your return.
+export const STANDARD_DEDUCTION = 1000;
+export function takeHome(gross, { includesSuper = false, help = false, standardDeduction = true } = {}) {
   // Super is only payable on earnings up to the maximum contribution base.
   const salary = includesSuper
     ? (gross <= SUPER_MAX_BASE * (1 + SUPER_GUARANTEE) ? gross / (1 + SUPER_GUARANTEE) : gross - SUPER_MAX_BASE * SUPER_GUARANTEE)
     : gross;
   const superAmt = Math.min(salary, SUPER_MAX_BASE) * SUPER_GUARANTEE;
-  const tax = Math.max(0, incomeTax(salary) - lito(salary));
-  const medicare = medicareLevy(salary);
-  const helpAmt = help ? helpRepayment(salary) : 0;
+  const deduction = standardDeduction ? Math.min(STANDARD_DEDUCTION, salary) : 0;
+  const taxable = salary - deduction;
+  const tax = Math.max(0, incomeTax(taxable) - lito(taxable));
+  const medicare = medicareLevy(taxable);
+  const helpAmt = help ? helpRepayment(taxable) : 0;
   const net = salary - tax - medicare - helpAmt;
-  return { salary, super: superAmt, tax, medicare, help: helpAmt, net, effectiveRate: salary ? (tax + medicare) / salary : 0 };
+  return { salary, super: superAmt, deduction, taxable, tax, medicare, help: helpAmt, net, effectiveRate: salary ? (tax + medicare) / salary : 0 };
 }
 
 // ---------- Unit conversion ----------

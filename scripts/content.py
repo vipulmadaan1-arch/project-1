@@ -44,13 +44,13 @@ C = {
       ("Can I claim driving to work?","Usually not. Trips between home and your normal workplace are private. You can claim trips between workplaces, to clients or to an alternative workplace, and trips carrying bulky tools you need for work.")],
  related=['take-home-pay','gross-up','capital-gains-tax','gst']),
 'gross-up': dict(
- how="""<p>Tell us the take-home pay you want and we work backwards to the salary you'd need to earn. It uses exactly the same 2026-27 rates as our Take-Home Pay calculator: resident income tax, the low income tax offset, the Medicare levy and, if you tick it, compulsory HECS/HELP repayments. The calculator tries salaries until the take-home pay matches yours to the cent.</p>
+ how="""<p>Tell us the take-home pay you want and we work backwards to the salary you'd need to earn. It uses exactly the same 2026-27 rates as our Take-Home Pay calculator: resident income tax, the $1,000 standard deduction, the low income tax offset, the Medicare levy and, if you tick it, compulsory HECS/HELP repayments. The calculator tries salaries until the take-home pay matches yours to the cent.</p>
 <p>Employer super of 12% is paid on top of salary, so we also show your <strong>package</strong> (salary plus super). Tick <em>Show the answer as a package</em> if the job ads or offers you're comparing quote total pay including super.</p>""",
- faq=[("How much do I need to earn to take home $1,000 a week?","About $62,436 a year before tax in 2026-27. A HECS/HELP debt doesn't change that, because compulsory repayments only start above $69,528."),
-      ("How much do I need to earn to take home $100,000 a year?","About $133,118 a year in 2026-27 with no HECS/HELP debt, or about $154,650 with one. Employer super of 12% is paid on top."),
+ faq=[("How much do I need to earn to take home $1,000 a week?","About $61,932 a year before tax in 2026-27, including the $1,000 standard deduction. A HECS/HELP debt doesn't change that, because compulsory repayments only start above $69,528."),
+      ("How much do I need to earn to take home $100,000 a year?","About $132,647 a year in 2026-27 with no HECS/HELP debt, or about $153,378 with one, including the $1,000 standard deduction. Employer super of 12% is paid on top."),
       ("Why does each extra dollar of take-home pay cost more than a dollar of salary?","Every extra dollar you earn is taxed at your marginal rate (30% from $45,001), plus the 2% Medicare levy and, with a study loan, 15% to 17% for HECS/HELP. At $90,000 with no HELP debt, an extra $1,000 in your pocket needs about $1,471 more salary."),
       ("Does this include HECS/HELP?","Yes, if you tick “I have a HECS/HELP debt”. It uses the 2026-27 marginal repayment rates on salary only. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super."),
-      ("What isn't included?","The Medicare levy surcharge, salary sacrifice, deductions and offsets other than the low income tax offset. Your payslip may differ slightly because employers use ATO withholding tables.")],
+      ("What isn't included?","The Medicare levy surcharge, salary sacrifice, and deductions and offsets other than the standard deduction and low income tax offset. Your payslip may differ slightly because employers use ATO withholding tables, and the standard deduction only comes back at tax time.")],
  related=['take-home-pay','hecs-help','capital-gains-tax','gst']),
 'hecs-help': dict(
  how="""<p>Each year the ATO works out a compulsory repayment from your repayment income. From 2025-26 it's a marginal system: you only repay on income above the threshold.</p>
@@ -83,13 +83,14 @@ C = {
       ("Is this the exact amount I'll pay?","It's an estimate. Your conveyancer or solicitor confirms the final amount, which can depend on exemptions, concessions and how dutiable value is assessed.")],
  related=['stamp-duty','mortgage','offset','rental-yield']),
 'take-home-pay': dict(
- how="""<p>Your take-home pay is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026.</p>
+ how="""<p>Your take-home pay is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026, and the new <strong>$1,000 standard deduction</strong> for work-related expenses that the ATO applies automatically from 2026-27.</p>
 <table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
 <tr><td>$0 – $18,200</td><td>Nil</td></tr><tr><td>$18,201 – $45,000</td><td>15%</td></tr><tr><td>$45,001 – $135,000</td><td>30%</td></tr>
 <tr><td>$135,001 – $190,000</td><td>37%</td></tr><tr><td>$190,001 and over</td><td>45%</td></tr></tbody></table>
 <p>It then subtracts the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667) and adds the <strong>Medicare levy</strong> of 2%, which is reduced for low incomes. Employer super of 12% is shown separately because it's paid on top of your salary, not out of it (unless you enter a package that includes super).</p>""",
  faq=[("Does this include HECS/HELP repayments?","Yes — tick “I have a HECS/HELP debt”. From 2025-26 repayments are marginal: nothing up to $69,528 in 2026-27, then 15c per dollar above that, rising to 17c above $129,717, and 10% of all income above $186,050. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super, so yours may be higher."),
-      ("What isn't included?","The Medicare levy surcharge, salary sacrifice, deductions and offsets other than the low income tax offset."),
+      ("What is the $1,000 standard deduction?","From 2026-27 the ATO automatically takes up to $1,000 off the taxable income of resident employees, with no receipts needed. It's worth $320 a year at the 30% rate (with Medicare). It isn't taken out of your pay each week, so it comes back as part of your tax return. If you claim more than $1,000 of work expenses instead, untick it."),
+      ("What isn't included?","The Medicare levy surcharge, salary sacrifice, and deductions and offsets other than the standard deduction and low income tax offset."),
       ("What's the difference between salary and package?","A salary excludes super; your employer pays 12% super on top. A package (total remuneration) includes super, so your actual salary is lower. Tick “Salary includes super” if your figure is a package."),
       ("Why is my payslip slightly different?","Employers withhold tax using ATO tax tables per pay period, which round differently. Your final tax is settled when you lodge your return."),
       ("Is there a cap on super?","Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies.")],

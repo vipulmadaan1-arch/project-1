@@ -9,7 +9,7 @@ function update() {
   $('help-row').hidden = !$('help').checked;
   const gross = readNumber($('gross'), { name: 'Annual salary', unit: 'money', min: 0, max: 1e12, example: '90,000' });
   if (gross === null) return blank($('net'), $('salary'), $('tax'), $('medicare'), $('helpamt'), $('super'), $('eff'));
-  const r = takeHome(gross, { includesSuper: $('incl').checked, help: $('help').checked });
+  const r = takeHome(gross, { includesSuper: $('incl').checked, help: $('help').checked, standardDeduction: $('std').checked });
   $('net').textContent = fmtMoney(r.net / per);
   $('salary').textContent = fmtMoney(r.salary / per);
   $('tax').textContent = fmtMoney(r.tax / per);

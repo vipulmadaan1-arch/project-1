@@ -15,7 +15,7 @@ function update() {
     $('note').textContent = '';
     return blank($('total'), $('per'), $('net'), $('tax'), $('medicare'), $('helpamt'), $('super'), $('package'));
   }
-  const opts = { includesSuper: incl, help };
+  const opts = { includesSuper: incl, help, standardDeduction: $('std').checked };
   const r = grossUp(want * per, opts);
   $('total').textContent = fmtMoney(r.gross);
   $('per').textContent = fmtMoney(r.gross / per);

@@ -60,6 +60,9 @@ test('take-home pay is consistent', () => {
   const r = takeHome(100000);
   assert.equal(Math.round(r.net), Math.round(100000 - r.tax - r.medicare));
   assert.equal(Math.round(r.super), 12000);
+  // The standard deduction saves tax at the marginal rate plus Medicare: $1,000 × (30% + 2%).
+  assert.equal(Math.round(r.net - takeHome(100000, { standardDeduction: false }).net), 320);
+  assert.equal(takeHome(600).deduction, 600);
   const inc = takeHome(112000, { includesSuper: true });
   assert.equal(Math.round(inc.salary), 100000);
 });
@@ -139,8 +142,9 @@ test('HELP repayments match ATO 2026-27 worked examples', () => {
   assert.equal(helpRepayment(254780), 25478);                             // Priya
   // bands join up (no cliff) at the top threshold
   assert.ok(Math.abs(helpRepayment(186050) - helpRepayment(186051)) < 1);
-  const r = takeHome(100000, { help: true });
+  const r = takeHome(100000, { help: true, standardDeduction: false });
   assert.equal(Math.round(r.help), Math.round((100000 - 69528) * 0.15));
+  assert.equal(Math.round(takeHome(100000, { help: true }).help), Math.round((99000 - 69528) * 0.15)); // HELP on income after the $1,000 standard deduction
   assert.equal(Math.round(r.net), Math.round(100000 - r.tax - r.medicare - r.help));
 });
 
