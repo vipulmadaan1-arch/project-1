@@ -4,6 +4,27 @@ import json, re, html, sys, os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 C = {
+'gross-up': dict(
+ how="""<p>Tell us the take-home pay you want and we work backwards to the salary you'd need to earn. It uses exactly the same 2026-27 rates as our Take-Home Pay calculator: resident income tax, the low income tax offset, the Medicare levy and, if you tick it, compulsory HECS/HELP repayments. The calculator tries salaries until the take-home pay matches yours to the cent.</p>
+<p>Employer super of 12% is paid on top of salary, so we also show your <strong>package</strong> (salary plus super). Tick <em>Show the answer as a package</em> if the job ads or offers you're comparing quote total pay including super.</p>""",
+ faq=[("How much do I need to earn to take home $1,000 a week?","About $62,436 a year before tax in 2026-27. A HECS/HELP debt doesn't change that, because compulsory repayments only start above $69,528."),
+      ("How much do I need to earn to take home $100,000 a year?","About $133,118 a year in 2026-27 with no HECS/HELP debt, or about $154,650 with one. Employer super of 12% is paid on top."),
+      ("Why does each extra dollar of take-home pay cost more than a dollar of salary?","Every extra dollar you earn is taxed at your marginal rate (30% from $45,001), plus the 2% Medicare levy and, with a study loan, 15% to 17% for HECS/HELP. At $90,000 with no HELP debt, an extra $1,000 in your pocket needs about $1,471 more salary."),
+      ("Does this include HECS/HELP?","Yes, if you tick “I have a HECS/HELP debt”. It uses the 2026-27 marginal repayment rates on salary only. The ATO uses repayment income, which can include fringe benefits and salary-sacrificed super."),
+      ("What isn't included?","The Medicare levy surcharge, salary sacrifice, deductions and offsets other than the low income tax offset. Your payslip may differ slightly because employers use ATO withholding tables.")],
+ related=['take-home-pay','hecs-help','capital-gains-tax','gst']),
+'hecs-help': dict(
+ how="""<p>Each year the ATO works out a compulsory repayment from your repayment income. From 2025-26 it's a marginal system: you only repay on income above the threshold.</p>
+<table><thead><tr><th>Repayment income (2026-27)</th><th>Compulsory repayment</th></tr></thead><tbody>
+<tr><td>$0 – $69,528</td><td>Nil</td></tr><tr><td>$69,529 – $129,717</td><td>15c for each $1 over $69,528</td></tr>
+<tr><td>$129,718 – $186,050</td><td>$9,028 plus 17c for each $1 over $129,717</td></tr><tr><td>$186,051 and over</td><td>10% of total repayment income</td></tr></tbody></table>
+<p>On 1 June each year the ATO adds <strong>indexation</strong> to debt that's more than 11 months old, at the lower of CPI and wage growth (2.8% on 1 June 2026). The calculator repeats this year by year using your pay rise. It treats voluntary repayments as made before 1 June and compulsory repayments as coming off after each tax return. Future indexation isn't known, so it uses the rate you enter. Repayment thresholds are held at 2026-27 values; they normally rise each year, so the real payoff may take a little longer.</p>""",
+ faq=[("How is HECS/HELP indexation worked out?","On 1 June each year the ATO indexes the part of your debt that's more than 11 months old, at the lower of the Consumer Price Index and the Wage Price Index. It was 2.8% on 1 June 2026, 3.2% in 2025 and 4% in 2024."),
+      ("What happened with the 20% HECS cut?","The Government cut study loan debts by 20%, based on your balance at 1 June 2025, before that year's indexation. The ATO applied it from November 2025. Your balance in myGov already includes it, so enter that figure."),
+      ("Is it worth making voluntary HECS repayments?","It saves indexation and can shorten the time you're repaying, which the calculator shows. There's no interest beyond indexation, so paying off higher-interest debt or building an offset balance often comes first. To beat a 1 June indexation, the ATO needs your payment in time; in 2026 that meant paying by 26 May."),
+      ("When do I have to start repaying HECS?","When your repayment income is above $69,528 in 2026-27. Below that there's no compulsory repayment, but indexation still applies each year."),
+      ("Does my HECS debt get written off?","Not because of time or low income. HELP debts stay until repaid, apart from limited cases such as death or a special-circumstances cancellation.")],
+ related=['take-home-pay','gross-up','compound-interest','offset']),
 'stamp-duty-nsw': dict(
  how="""<p>NSW transfer duty (stamp duty) is charged on a sliding scale on the property's <strong>dutiable value</strong> — the higher of the price you pay and the market value. Thresholds are indexed to CPI each year; the rate year is set by your contract date. This calculator uses the Revenue NSW 2026/27 rates.</p>
 <table><thead><tr><th>Dutiable value</th><th>Duty</th></tr></thead><tbody>

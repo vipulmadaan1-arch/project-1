@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/hecs-help.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HECS/HELP Debt Payoff Calculator 2026-27 | Sorted, Mate</title>
+  <meta name="description" content="See how long your HECS/HELP debt will take to repay, year by year, with 2026-27 compulsory repayment rates, indexation and voluntary repayments.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HECS/HELP Debt Payoff Calculator 2026-27">
+  <meta property="og:description" content="See how long your HECS/HELP debt will take to repay, year by year, with 2026-27 compulsory repayment rates, indexation and voluntary repayments.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/hecs.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/hecs-help.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "HECS/HELP Debt Payoff Calculator", "description": "See how long your HECS/HELP debt will take to repay, year by year, with 2026-27 compulsory repayment rates, indexation and voluntary repayments.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is HECS/HELP indexation worked out?", "acceptedAnswer": {"@type": "Answer", "text": "On 1 June each year the ATO indexes the part of your debt that's more than 11 months old, at the lower of the Consumer Price Index and the Wage Price Index. It was 2.8% on 1 June 2026, 3.2% in 2025 and 4% in 2024."}}, {"@type": "Question", "name": "What happened with the 20% HECS cut?", "acceptedAnswer": {"@type": "Answer", "text": "The Government cut study loan debts by 20%, based on your balance at 1 June 2025, before that year's indexation. The ATO applied it from November 2025. Your balance in myGov already includes it, so enter that figure."}}, {"@type": "Question", "name": "Is it worth making voluntary HECS repayments?", "acceptedAnswer": {"@type": "Answer", "text": "It saves indexation and can shorten the time you're repaying, which the calculator shows. There's no interest beyond indexation, so paying off higher-interest debt or building an offset balance often comes first. To beat a 1 June indexation, the ATO needs your payment in time; in 2026 that meant paying by 26 May."}}, {"@type": "Question", "name": "When do I have to start repaying HECS?", "acceptedAnswer": {"@type": "Answer", "text": "When your repayment income is above $69,528 in 2026-27. Below that there's no compulsory repayment, but indexation still applies each year."}}, {"@type": "Question", "name": "Does my HECS debt get written off?", "acceptedAnswer": {"@type": "Answer", "text": "Not because of time or low income. HELP debts stay until repaid, apart from limited cases such as death or a special-circumstances cancellation."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#au">Australian</a><span aria-hidden="true">/</span><span aria-current="page">HECS/HELP Debt Payoff</span></nav>
+    <div class="tool-head">
+      <h1>HECS/HELP Debt Payoff Calculator</h1>
+      <p>How long your study loan will take to repay, year by year, using 2026-27 compulsory repayment rates and yearly indexation.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="debt">HECS/HELP debt now ($)</label><input type="text" id="debt" class="num" aria-describedby="debt-hint" value="30000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="debt-hint">Your balance in ATO online services through myGov.</small></div>
+        <div class="field"><label for="income">Income this year, 2026-27 ($)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="85000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Your yearly salary before tax. The ATO uses repayment income, which can be higher.</small></div>
+        <div class="field"><label for="rise">Expected pay rise each year (%)</label><input type="text" id="rise" class="num" value="3" inputmode="decimal" spellcheck="false" autocomplete="off"></div>
+        <div class="field"><label for="index">Indexation each 1 June (% a year, assumed)</label><input type="text" id="index" class="num" aria-describedby="index-hint" value="2.8" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="index-hint">Future rates aren't known yet. 2.8% was applied on 1 June 2026.</small></div>
+        <div class="field"><label for="extra">Voluntary repayments per year ($)</label><input type="text" id="extra" class="num" aria-describedby="extra-hint" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="extra-hint">Optional. Extra payments made before each 1 June.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Time to repay</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Paid off with the tax return for</span><span id="final">–</span></div>
+        <div class="kv"><span>Total repaid</span><span id="repaid">–</span></div>
+        <div class="kv"><span>Indexation added</span><span id="indexation">–</span></div>
+        <div class="kv"><span>Compulsory repayments</span><span id="compulsory">–</span></div>
+        <div class="kv" id="vol-row" hidden><span>Voluntary repayments</span><span id="voluntary">–</span></div>
+        <div class="kv" id="saved-row" hidden><span>Time saved by voluntary repayments</span><span id="saved">–</span></div>
+        <div class="kv" id="isaved-row" hidden><span>Indexation saved</span><span id="isaved">–</span></div>
+        <p class="note" id="note"></p>
+        <h2 class="section-title">Year by year</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Year by year table"><table><thead id="head"></thead><tbody id="rows"></tbody></table></div>
+        <p class="disclaimer">Compulsory repayments use the ATO's <a href="https://www.ato.gov.au/tax-rates-and-codes/study-and-training-loan-minimum-repayment-income-and-rates" target="_blank" rel="noopener noreferrer">2026-27 repayment rates</a>. Assumptions, not official figures: repayment thresholds are held at 2026-27 values (they normally rise each year, so later repayments may be a little lower and take longer); indexation stays at the rate you enter; your income is salary only and rises by the same percentage each year. Voluntary repayments are made before 1 June and compulsory repayments come off after each tax return. Estimate only.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Each year the ATO works out a compulsory repayment from your repayment income. From 2025-26 it's a marginal system: you only repay on income above the threshold.</p>
+<table><thead><tr><th>Repayment income (2026-27)</th><th>Compulsory repayment</th></tr></thead><tbody>
+<tr><td>$0 – $69,528</td><td>Nil</td></tr><tr><td>$69,529 – $129,717</td><td>15c for each $1 over $69,528</td></tr>
+<tr><td>$129,718 – $186,050</td><td>$9,028 plus 17c for each $1 over $129,717</td></tr><tr><td>$186,051 and over</td><td>10% of total repayment income</td></tr></tbody></table>
+<p>On 1 June each year the ATO adds <strong>indexation</strong> to debt that's more than 11 months old, at the lower of CPI and wage growth (2.8% on 1 June 2026). The calculator repeats this year by year using your pay rise. It treats voluntary repayments as made before 1 June and compulsory repayments as coming off after each tax return. Future indexation isn't known, so it uses the rate you enter. Repayment thresholds are held at 2026-27 values; they normally rise each year, so the real payoff may take a little longer.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>How is HECS/HELP indexation worked out?</summary><p>On 1 June each year the ATO indexes the part of your debt that's more than 11 months old, at the lower of the Consumer Price Index and the Wage Price Index. It was 2.8% on 1 June 2026, 3.2% in 2025 and 4% in 2024.</p></details><details><summary>What happened with the 20% HECS cut?</summary><p>The Government cut study loan debts by 20%, based on your balance at 1 June 2025, before that year's indexation. The ATO applied it from November 2025. Your balance in myGov already includes it, so enter that figure.</p></details><details><summary>Is it worth making voluntary HECS repayments?</summary><p>It saves indexation and can shorten the time you're repaying, which the calculator shows. There's no interest beyond indexation, so paying off higher-interest debt or building an offset balance often comes first. To beat a 1 June indexation, the ATO needs your payment in time; in 2026 that meant paying by 26 May.</p></details><details><summary>When do I have to start repaying HECS?</summary><p>When your repayment income is above $69,528 in 2026-27. Below that there's no compulsory repayment, but indexation still applies each year.</p></details><details><summary>Does my HECS debt get written off?</summary><p>Not because of time or low income. HELP debts stay until repaid, apart from limited cases such as death or a special-circumstances cancellation.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="compound-interest.html">Compound Interest</a><a href="offset.html">Offset Account</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

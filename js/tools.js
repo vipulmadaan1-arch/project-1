@@ -23,6 +23,8 @@ export const TOOLS = [
   { slug: 'world-clock', name: 'World Clock', desc: 'Live times worldwide and a meeting-time converter.', meta: '50 cities', cat: 'general' },
   { slug: 'stopwatch', name: 'Stopwatch', desc: 'Split and total lap times to the hundredth.', meta: 'Space to start', cat: 'general' },
   { slug: 'timer', name: 'Countdown Timer', desc: 'Hours, minutes and seconds with an audible alarm.', meta: 'Presets included', cat: 'general' },
+  { slug: 'gross-up', name: 'Salary Needed for Take-Home Pay', desc: 'The salary you need to earn a set take-home pay, after tax and HECS.', meta: 'ATO 2026-27', cat: 'au' },
+  { slug: 'hecs-help', name: 'HECS/HELP Debt Payoff', desc: 'Years to repay your study loan, with indexation and extra repayments.', meta: 'ATO 2026-27 rates', cat: 'au' },
 ];
 
 export const RATES_CHECKED = '14 Oct 2026';
