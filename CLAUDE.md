@@ -1,7 +1,13 @@
 # Working notes for Claude
 
 ## Web research
-Use research tools in this order, moving to the next only when the current one is exhausted or failing:
+Use research tools in this order, moving to the next only when the current one is exhausted or failing. The order
+comes from a side-by-side test on 15 Oct 2026 (same ATO page and same search on each tool):
+- TinyFish: live page with every table intact in ~2s; search put Revenue NSW (official) first of 10 results.
+- Tavily: complete page but a stale cached copy (ATO "last updated 30 June" vs live "13 Oct"); official page only
+  6th in search; frequent 429 rate limits. Always check the page's last-updated date against a live fetch.
+- Apify (rag-web-browser): ATO fetch failed; search took 14s, returned Google redirect URLs, 1 of 3 pages failed.
+- Firecrawl: couldn't be tested (out of credits).
 1. TinyFish MCP: `search` and `fetch_content` are free and return full pages with tables intact, including sites
    this environment's network blocks. Its browser automation (`run_web_automation*`) is paid per step from a small
    wallet: use it only when fetch_content can't get the content (e.g. a calculator that only renders after input).
