@@ -110,7 +110,7 @@ export function upfrontCosts({
     { key: 'lmi', label: schemeUsed ? 'LMI (none with the 5% Deposit Scheme)' : lmiToLoan && lmiCost ? 'LMI (added to the loan, not paid in cash)' : 'Lenders mortgage insurance (estimate)', amount: lmiCash, estimate: true },
     { key: 'legal', label: 'Conveyancing and legal', amount: legal, estimate: true },
     { key: 'inspection', label: 'Building and pest inspection', amount: inspection, estimate: true },
-    { key: 'loanFee', label: 'Loan application fee', amount: loanFee, estimate: true },
+    { key: 'loanFee', label: 'Loan application fee', amount: loan > 0 ? loanFee : 0, estimate: true },
     { key: 'other', label: 'Other costs', amount: other },
   ];
   const costs = cents(items.reduce((s, i) => s + (i.amount || 0), 0));

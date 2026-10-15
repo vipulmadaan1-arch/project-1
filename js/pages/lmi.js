@@ -22,6 +22,7 @@ function update() {
   if (value !== null && amount !== null) {
     loan = isLoan ? amount : value - amount;
     if (loan < 0) { setError($('amount'), 'Deposit must be no more than the property value'); loan = null; }
+    else if (loan > value) { setError($('amount'), 'Loan must be no more than the property value'); loan = null; }
   }
   const r = loan === null ? null : lmi({ state, value, loan, firstHome: $('fhb').checked, home, area: $('area').value });
   if (!r) {

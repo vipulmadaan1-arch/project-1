@@ -46,7 +46,7 @@ function update() {
 
   const notes = [];
   if (r.breakEven === null) notes.push('Switching doesn’t pay for itself over the life of the loan with these figures.');
-  else if (r.breakEven > 0) notes.push(`You get your switching costs back after ${describeMonths(r.breakEven)}, counting both the lower repayments and the faster drop in what you owe.`);
+  else if (r.breakEven > 0) notes.push(`You get your switching costs back after ${describeMonths(r.breakEven)}, ${r.monthlySaving > 0 ? 'counting both the lower repayments and the faster drop in what you owe' : 'counting the faster drop in what you owe'}.`);
   if (newYears > yearsLeft && r.monthlySaving > 0) notes.push(`The new term is ${describeMonths((newYears - yearsLeft) * 12)} longer than what you have left, so part of the monthly saving comes from stretching the loan out.`);
   if (r.keep && r.keep.monthsSaved > 0) notes.push(`If you keep paying ${fmtMoney(r.currentRepayment, 2)} a month on the new loan, it’s paid off in ${describeMonths(r.keep.months)} instead of ${describeMonths(Math.round(yearsLeft * 12))}.`);
   $('note').textContent = notes.join(' ');

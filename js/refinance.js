@@ -73,8 +73,9 @@ export function refinance({ balance, currentRatePct, yearsLeft, newRatePct, newY
   }
 
   // Keep paying your current repayment on the new loan: how much sooner it's paid off.
+  // Only meaningful when the current repayment is above the new loan's minimum (not with a shorter term).
   const keep = cardPayoff({ balance: newPrincipal, ratePct: newRatePct, payment: cur.repayment });
-  const keepResult = keep.paysOff ? {
+  const keepResult = keep.paysOff && cur.repayment > nu.repayment + 0.005 ? {
     months: keep.months,
     monthsSaved: n1 - keep.months,
     interest: keep.interest,

@@ -44,7 +44,7 @@ function update() {
   if (r.duty.note) notes.push(`Stamp duty: ${r.duty.note}`);
   if (r.lmi.overMax && !r.schemeUsed) notes.push('Your deposit is under 5%, which most lenders won\'t accept even with LMI, so LMI isn\'t included.');
   if (r.lmi.needed && r.schemeUsed) notes.push('With the 5% Deposit Scheme you pay no LMI. Check the price cap for your suburb with a participating lender.');
-  else if ($('scheme').checked && r.lmi.needed) notes.push(`The 5% Deposit Scheme doesn't apply because ${r.lmi.scheme.reasons.join(', and ')}, so LMI is included.`);
+  else if ($('scheme').checked && r.lmi.needed && !r.lmi.overMax) notes.push(`The 5% Deposit Scheme doesn't apply because ${r.lmi.scheme.reasons.join(', and ')}, so LMI is included.`);
   else if (r.lmi.needed && r.lmi.scheme.eligible) notes.push('LMI is included because you\'re borrowing more than 80%. You could skip it with the 5% Deposit Scheme: tick it above to compare.');
   else if (r.lmi.needed && !r.lmi.overMax) notes.push('LMI is included because you\'re borrowing more than 80% of the price. A 20% deposit avoids it.');
   if (r.rego.missing) notes.push('Northern Territory registration fees for 2026-27 aren\'t included: we couldn\'t confirm them. Add them under other costs from your conveyancer\'s quote.');

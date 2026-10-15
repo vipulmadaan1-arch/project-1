@@ -23,7 +23,7 @@ function update() {
   $('refund-label').textContent = owe ? `Estimated amount you owe, ${year}` : `Estimated refund, ${year}`;
   $('refund').textContent = fmtMoney(Math.abs(r.refund));
   $('income').textContent = fmtMoney(r.income);
-  $('deductions-label').textContent = r.useStandard ? 'Deductions (incl. $1,000 standard deduction)' : 'Deductions';
+  $('deductions-label').textContent = r.useStandard ? `Deductions (incl. ${fmtMoney(r.standard)} standard deduction)` : 'Deductions';
   $('deductions').textContent = r.deductions ? `−${fmtMoney(r.deductions)}` : fmtMoney(0);
   $('taxable').textContent = fmtMoney(r.taxable);
   $('gross').textContent = fmtMoney(r.gross, 2);

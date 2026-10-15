@@ -21,7 +21,7 @@ export function termDeposit({ amount, ratePct, months, paid = 'maturity', reinve
     // At maturity, or paid out as it's earned: simple interest on the deposit.
     const interest = amount * r * months / 12;
     const payments = k ? Math.ceil(months / (12 / k) - 1e-9) : 1;
-    return { interest, balance: amount + (k ? 0 : interest), paidOut: k ? interest : 0, perPayment: k ? amount * r / k : interest, payments, effectiveRatePct: (interest / amount) / (months / 12) * 100 };
+    return { interest, balance: amount + (k ? 0 : interest), paidOut: k ? interest : 0, perPayment: k ? amount * r * Math.min(months, 12 / k) / 12 : interest, payments, effectiveRatePct: (interest / amount) / (months / 12) * 100 };
   }
   const periodMonths = 12 / k;
   const whole = Math.floor(months / periodMonths + 1e-9);
