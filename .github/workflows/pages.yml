@@ -49,6 +49,13 @@ jobs:
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
           [ -f CNAME ] && cp CNAME _site/ || true
           [ -f ads.txt ] && cp ads.txt _site/ || true
+      # Stamp the service worker with this commit, so every deploy installs a fresh cache even if
+      # VERSION wasn't bumped by hand (the worker serves cache-first, so a missed bump would leave
+      # returning visitors on old files and rates).
+      - name: Stamp service worker version
+        run: |
+          sed -i "s/^const VERSION = '[^']*';/const VERSION = '${GITHUB_SHA::12}';/" _site/sw.js
+          grep -q "^const VERSION = '${GITHUB_SHA::12}';" _site/sw.js
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
