@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { project, drawdown, ASFA, PENSION_AGE, PRESERVATION_AGE, CONCESSIONAL_CAP, SUPER_GUARANTEE, RETIREMENT_CHECKED } from '../js/retirement.js';
+import { project, drawdown, incomeToAge, retirementAgeUsed, retirementPlan, ASFA, ASIC_DEFLATORS, DRAWDOWN_END_AGE, PENSION_AGE, PRESERVATION_AGE, CONCESSIONAL_CAP, SUPER_GUARANTEE, RETIREMENT_CHECKED } from '../js/retirement.js';
 
 const near = (a, b, tol = 0.01, msg = '') => assert.ok(Math.abs(a - b) < tol, `${msg} expected ${b}, got ${a}`);
 
@@ -48,13 +48,51 @@ test('super guarantee stops at the maximum contribution base', () => {
   near(r.rows[0].sg, 32499.6);
 });
 
-test("today's dollars: deflated by inflation, and contributions + earnings add up to the balance", () => {
+test('ASIC defaults: 3.7% wage inflation while working, 2.5% CPI in retirement, 67 to 92', () => {
+  // ASIC (Superannuation Calculators and Retirement Estimates) Instrument 2022/603, RG 276.141-143 and 276.188.
+  assert.deepEqual(ASIC_DEFLATORS, { accumulation: 3.7, retirement: 2.5 });
+  assert.equal(DRAWDOWN_END_AGE, 92);
+});
+
+test("today's dollars: deflated by 3.7% wage inflation by default, and contributions + earnings add up to the balance", () => {
   const r = project({ age: 30, retireAge: 67, balance: 50000, salary: 90000, feePct: 0.11, feeDollar: 59 });
   assert.equal(r.rows.length, 37);
   assert.equal(r.rows.at(-1).age, 67);
-  near(r.balanceReal, r.balance / 1.025 ** 37, 0.01);
+  near(r.balanceReal, r.balance / 1.037 ** 37, 0.01);
   for (const row of r.rows) near(row.paidInReal + row.earningsReal, row.balanceReal, 1e-6);
-  assert.ok(r.balanceReal > 900000 && r.balanceReal < 1000000, `got ${r.balanceReal}`);
+  assert.ok(r.balanceReal > 600000 && r.balanceReal < 700000, `got ${r.balanceReal}`);
+  // The user can change the rate: at 2.5% the same balance is worth more.
+  const cpi = project({ age: 30, retireAge: 67, balance: 50000, salary: 90000, feePct: 0.11, feeDollar: 59, deflatorPct: 2.5 });
+  near(cpi.balance, r.balance, 1e-6);
+  near(cpi.balanceReal, r.balance / 1.025 ** 37, 0.01);
+});
+
+test('income to 92: a constant real income that uses up the balance exactly', () => {
+  // Zero real return: $500,000 over 25 years is $20,000 a year.
+  near(incomeToAge({ balance: 500000, startAge: 67, returnPct: 2.5, inflationPct: 2.5 }).income, 20000, 1e-4);
+  // With a real return, drawing that income for 25 years leaves nothing.
+  const s = incomeToAge({ balance: 600000, startAge: 67, returnPct: 6.5, feePct: 0.11, inflationPct: 2.5 });
+  assert.equal(s.years, 25);
+  const d = drawdown({ balance: 600000, income: s.income, startAge: 67, returnPct: 6.5, feePct: 0.11, inflationPct: 2.5 });
+  near(d.years, 25, 1e-6);
+  // At least five years, even for someone retiring at 90.
+  assert.equal(incomeToAge({ balance: 100000, startAge: 90 }).years, 5);
+  assert.equal(incomeToAge({ balance: 0 }).income, 0);
+});
+
+test('retirement age used: preservation age floor and next birthday at 67 or older (RG 276.141, 276.148)', () => {
+  assert.deepEqual(retirementAgeUsed(35, 67), { age: 67, reason: '' });
+  assert.deepEqual(retirementAgeUsed(35, 55), { age: 60, reason: 'preservation' });
+  assert.deepEqual(retirementAgeUsed(70, 67), { age: 71, reason: 'next-birthday' });
+  assert.equal(retirementAgeUsed(50, 45), null);
+});
+
+test('retirement plan: the dollar fee follows the money from wage- to price-deflated dollars', () => {
+  const v = { age: 35, retireAge: 67, balance: 80000, salary: 90000, feeDollar: 59, income: 50000 };
+  const p = retirementPlan(v);
+  const fee = 59 * (1.025 / 1.037) ** 32;
+  near(p.draw.years, drawdown({ balance: p.balanceReal, income: 50000, feeDollar: fee }).years, 1e-9);
+  near(p.stream.income, incomeToAge({ balance: p.balanceReal, feeDollar: fee }).income, 1e-6);
 });
 
 test('no years when already at retirement age', () => {

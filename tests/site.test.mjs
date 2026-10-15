@@ -119,8 +119,8 @@ test('preloaded fonts, icons and manifest icons exist', () => {
 test('every page has privacy and about links via the shared footer, and both pages exist', () => {
   assert.ok(existsSync('privacy.html'));
   assert.ok(existsSync('about.html'));
-  assert.match(readFileSync('js/layout.js', 'utf8'), /privacy\.html/);
-  assert.match(readFileSync('js/layout.js', 'utf8'), /about\.html/);
+  assert.match(readFileSync('js/site-footer.js', 'utf8'), /privacy\.html/);
+  assert.match(readFileSync('js/site-footer.js', 'utf8'), /about\.html/);
 });
 
 // ---------- SEO ----------
@@ -182,4 +182,22 @@ test('sw.js has a current content hash for every file it caches', async () => {
   const hashes = Object.fromEntries([...sw.matchAll(/^ {2}'([^']+)': '([0-9a-f]+)',$/gm)].map((m) => [m[1], m[2]]));
   assert.deepEqual(Object.keys(hashes).sort(), [...listed].sort(), 'HASHES in sw.js should list exactly the FILES (run node scripts/sw-hashes.mjs)');
   for (const f of listed) assert.equal(hashes[f], fileHash(f), `${f} changed since its hash was written: run node scripts/sw-hashes.mjs (or node scripts/seo.mjs)`);
+});
+
+test('every page has the static footer (tool links, About, Privacy, disclaimer) and layout.js reuses it', async () => {
+  const { footerHtml } = await import('../js/site-footer.js');
+  for (const f of ['index.html', 'privacy.html', 'about.html', '404.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)]) {
+    const html = readFileSync(f, 'utf8');
+    const m = html.match(/<!-- footer:start -->\s*([\s\S]*?)\s*<!-- footer:end -->/);
+    assert.ok(m, `${f} has no static footer (run node scripts/seo.mjs)`);
+    assert.equal((html.match(/<footer class="site-footer">/g) || []).length, 1, `${f} should have one footer`);
+    const base = f.startsWith('tools/') ? '../' : './';
+    assert.equal(m[1].replace(/\n {2}/g, '\n'), footerHtml(base), `${f} footer is stale (run node scripts/seo.mjs)`);
+    for (const t of TOOLS) assert.ok(m[1].includes(`href="${base}tools/${t.slug}.html"`), `${f} footer is missing ${t.slug}`);
+    assert.match(m[1], /about\.html/);
+    assert.match(m[1], /privacy\.html/);
+    assert.match(m[1], /not financial, tax or legal advice/);
+  }
+  const layout = readFileSync('js/layout.js', 'utf8');
+  assert.match(layout, /querySelector\('body > footer\.site-footer'\)/);
 });

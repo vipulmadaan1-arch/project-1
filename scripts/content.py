@@ -27,13 +27,17 @@ C = {
       ("Are the conveyancing and inspection costs accurate?","They're typical amounts, not quotes: $1,800 for conveyancing and legal, $600 for a building and pest inspection and $400 for a loan application fee. Change them to match your quotes; many lenders charge no application fee.")],
  related=['stamp-duty','lmi','borrowing-power','mortgage']),
 'retirement': dict(
- how="""<p>The calculator projects your super year by year to your retirement age. Each year your employer pays <strong>12%</strong> of your salary (up to the maximum contribution base), plus any salary sacrifice. Your fund takes <strong>15% contributions tax</strong>. Salary sacrifice is cut back if your employer super plus sacrifice would go over the <strong>$32,500 concessional cap</strong>. Earnings are taxed at an assumed effective <strong>7%</strong>, then fees come off. Salary grows 3.7% a year by default (Moneysmart's 2.5% inflation plus 1.2% for rising living standards).</p>
-<p>Results are in <strong>today's dollars</strong>: future balances are divided by inflation (2.5% by default) so you can compare them with prices now. With the defaults (age 35, $80,000 in super, $90,000 salary), you'd retire at 67 with about $827,116 in today's dollars, or $1,822,763 in 2058 dollars. Moneysmart also takes off the 1.2% for rising living standards, which would show $569,915.</p>
+ h=('How your super projection works', 'Super and retirement FAQs', 'More super and tax tools'),
+ how="""<p>The calculator projects your super year by year to your retirement age. Each year your employer pays <strong>12%</strong> of your salary (up to the maximum contribution base), plus any salary sacrifice. Your fund takes <strong>15% contributions tax</strong>. Salary sacrifice is cut back if your employer super plus sacrifice would go over the <strong>$32,500 concessional cap</strong>. Earnings are taxed at an assumed effective <strong>7%</strong>, then fees come off. Your salary grows 3.7% a year by default.</p>
+<p>Results are in <strong>today's dollars</strong>, worked out the way ASIC requires of every super calculator: future dollars are divided by <strong>3.7% a year while you're working</strong> (wage inflation) and <strong>2.5% a year in retirement</strong> (price inflation). With the defaults (age 35, $80,000 in super, $90,000 salary), you'd retire at 67 with about $569,915 in today's dollars, or $1,822,763 in 2058 dollars. Spread from 67 to 92, ASIC's default planning age, that balance could pay about $34,352 a year in today's dollars before any Age Pension.</p>
+<h3>Why wage inflation, not just prices?</h3>
+<p>Dividing by wage growth while you work compares your future balance with today's wages and living standards, which is what matters if you want to keep living the way you do now. Dividing by prices alone would show a bigger number: $827,116 with the same defaults. You can change both rates in the form.</p>
 <p>In retirement we draw your chosen income at the start of each year. The balance keeps earning the same return after fees, with no tax on earnings (an assumption for a retirement-phase pension). The <strong>ASFA Retirement Standard</strong> (June quarter 2026) puts a comfortable retirement at $56,166 a year for a single homeowner and $78,998 for a couple, and a modest one at $36,548 and $52,690. The Age Pension (from age 67) isn't included, so super alone runs out sooner than your full retirement income would.</p>""",
  faq=[("How much super do I need to retire comfortably?","ASFA says $630,000 for a single homeowner and $730,000 for a couple at 67, in today's dollars. That assumes you also get a part Age Pension and spend the whole balance. On its own, without the pension, $630,000 drawing $56,166 a year lasts about 14 years here."),
-      ("How long will my super last?","It depends on the income you draw and your returns. With the default inputs, $827,116 at 67 drawing ASFA's comfortable $56,166 a year lasts about 20 years, to age 87, before any Age Pension."),
-      ("How much difference does salary sacrifice make?","With the defaults, an extra $5,000 a year (rising with wages) adds about $278,063 in today's dollars by 67, after the 15% contributions tax. Your employer super plus sacrifice must stay within the $32,500 concessional cap."),
-      ("Do fees really matter?","Yes. With the defaults, an extra 0.5% a year in fees leaves you about $80,047 less at 67 in today's dollars. Compare your fund's fees and costs summary with Moneysmart's defaults of $59 a year plus 0.11%."),
+      ("How long will my super last?","It depends on the income you draw and your returns. With the default inputs, $569,915 at 67 drawing ASFA's comfortable $56,166 a year lasts about 12 years, to age 79, before any Age Pension. Drawn evenly to 92, it pays about $34,352 a year."),
+      ("Why is the result lower than other calculators?","Because it's in today's dollars, using ASIC's default rates: 3.7% wage inflation while you work and 2.5% price inflation in retirement. With the defaults, that's $569,915 at 67. The same balance is $1,822,763 in 2058 dollars, or $827,116 divided by price inflation alone."),
+      ("How much difference does salary sacrifice make?","With the defaults, an extra $5,000 a year (rising with wages) adds about $191,596 in today's dollars by 67, after the 15% contributions tax. Your employer super plus sacrifice must stay within the $32,500 concessional cap."),
+      ("Do fees really matter?","Yes. With the defaults, an extra 0.5% a year in fees leaves you about $55,156 less at 67 in today's dollars. Compare your fund's fees and costs summary with Moneysmart's defaults of $59 a year plus 0.11%."),
       ("When can I get my super and the Age Pension?","You can usually take your super from 60 (your preservation age, if you were born after 30 June 1964) once you retire, or at 65 even if you keep working. The Age Pension starts at 67 and is means-tested. Check your rate with Services Australia.")],
  related=['super','take-home-pay','compound-interest','inflation']),
 'budget': dict(
@@ -47,6 +51,7 @@ C = {
       ("What if I have a shortfall?","Start with the biggest lines in the table. If bills are hard to pay, free financial counselling is available; Moneysmart lists how to get it.")],
  related=['take-home-pay','savings-goal','credit-card','compound-interest']),
 'tax-refund': dict(
+ h=('How your tax refund is worked out', 'Tax refund FAQs', 'More tax calculators'),
  how="""<p>Your refund is the tax your employer withheld minus the tax you actually owe for the year. We add your salary, interest, dividends and franking credits, take off your deductions to get your <strong>taxable income</strong>, then work out income tax at Australian resident rates, take off the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667), and add the <strong>Medicare levy</strong> (2%, reduced below $35,013), the <strong>Medicare levy surcharge</strong> if you had no private hospital cover, and any compulsory <strong>HECS/HELP</strong> repayment. Franking credits come off what you owe and can be refunded.</p>
 <table><thead><tr><th>Taxable income</th><th>2025-26</th><th>2026-27</th></tr></thead><tbody>
 <tr><td>$0 to $18,200</td><td>Nil</td><td>Nil</td></tr><tr><td>$18,201 to $45,000</td><td>16%</td><td>15%</td></tr><tr><td>$45,001 to $135,000</td><td>30%</td><td>30%</td></tr>
@@ -154,10 +159,12 @@ C = {
       ("What is Victoria's luxury car stamp duty?","For 2026-27, passenger cars over $80,809 pay $10.40 per $200, over $100,000 pay $14 and over $150,000 pay $18, on the whole value. Green cars pay $8.40 per $200 at any price.")],
  related=['personal-loan','stamp-duty','gst','work-deductions']),
 'super': dict(
+ h=('How super and salary sacrifice work (2026-27)', 'Salary sacrifice and super FAQs', 'More super and tax tools'),
  how="""<p>Your employer must pay <strong>12%</strong> of your salary into super (the super guarantee), up to the <strong>maximum contribution base of $270,830</strong> for 2026-27. With Payday Super this is now a yearly limit, so the most an employer must pay is $32,499.60. Salary you sacrifice still counts, so sacrificing doesn't reduce your employer's 12%.</p>
 <p><strong>Salary sacrifice</strong> means asking your employer to pay part of your pre-tax salary into super. It isn't taxed at your marginal rate. Instead your fund takes <strong>15% contributions tax</strong>. If your marginal rate plus the 2% Medicare levy is more than 15%, you save the difference. On $100,000, sacrificing $10,000 saves $3,200 in income tax and Medicare, costs $1,500 in contributions tax, and cuts take-home pay by $6,800. That puts $8,500 more in super.</p>
 <p>Employer, salary sacrifice and deductible personal contributions all count towards the <strong>concessional contributions cap of $32,500</strong> from 1 July 2026. Amounts over the cap are added to your taxable income and taxed at your marginal rate, less a 15% offset, so they save little. If your total super balance was under $500,000 on 30 June last year, you can use <strong>unused cap amounts</strong> from the past 5 years. myGov shows how much you have.</p>
-<p>If your income plus concessional contributions is over <strong>$250,000</strong>, <strong>Division 293</strong> adds another 15% on the smaller of your contributions or the amount over $250,000.</p>""",
+<p>If your income plus concessional contributions is over <strong>$250,000</strong>, <strong>Division 293</strong> adds another 15% on the smaller of your contributions or the amount over $250,000.</p>
+<p>This calculator works out this year's contributions and tax only, from current ATO rates: it doesn't project your super into the future. That makes it factual information, not general or personal advice. To see what your super could grow to by retirement, in today's dollars using ASIC's required assumptions, use the <a href="retirement.html">super and retirement calculator</a>.</p>""",
  faq=[("Is salary sacrifice worth it?","Usually, if your taxable income is over $45,000. There your tax rate is 30% or more plus the 2% Medicare levy, against 15% in super. Below about $45,000 the saving is small or nothing, and the money is locked away until you can access your super."),
       ("What is the concessional contributions cap for 2026-27?","$32,500, up from $30,000. It covers your employer's super guarantee, salary sacrifice and personal contributions you claim as a tax deduction, across all your funds."),
       ("How do I find my unused carry-forward cap?","Log in to myGov, open the ATO, then Super, Information, and Carry forward concessional contributions. You can only use it if your total super balance was under $500,000 on 30 June of the previous year. Unused amounts expire after 5 years."),
@@ -241,6 +248,7 @@ C = {
       ("Does my HECS debt get written off?","Not because of time or low income. HELP debts stay until repaid, apart from limited cases such as death or a special-circumstances cancellation.")],
  related=['take-home-pay','gross-up','savings-goal','offset']),
 'stamp-duty-nsw': dict(
+ h=('How NSW stamp duty is calculated (2026-27)', 'NSW stamp duty FAQs', 'More stamp duty and home buying tools'),
  how="""<p>NSW transfer duty (stamp duty) is charged on a sliding scale on the property's <strong>dutiable value</strong>: the higher of the price you pay and the market value. Thresholds are indexed to CPI each year; the rate year is set by your contract date. This calculator uses the Revenue NSW 2026-27 rates.</p>
 <table><thead><tr><th>Dutiable value</th><th>Duty</th></tr></thead><tbody>
 <tr><td>$0 – $18,000</td><td>$1.25 per $100 (min $20)</td></tr>
@@ -261,6 +269,7 @@ C = {
 # State stamp duty pages. Every figure comes from stampDuty() in js/duty.js (rates checked 15 Oct 2026
 # against each revenue office, linked in each entry); tests/duty.test.mjs checks the worked examples.
 'stamp-duty-vic': dict(
+ h=('How Victorian stamp duty is calculated (2026-27)', 'Victoria stamp duty FAQs', 'More stamp duty and home buying tools'),
  how="""<p>Victorian land transfer duty (stamp duty) is charged on the property's <strong>dutiable value</strong>: the higher of the price you pay and the market value. This calculator uses the State Revenue Office Victoria rates for 2026-27.</p>
 <table><thead><tr><th>Dutiable value</th><th>Duty (general rate)</th></tr></thead><tbody>
 <tr><td>$0 – $25,000</td><td>1.4% of the value</td></tr>
@@ -281,6 +290,7 @@ C = {
       ("How much is stamp duty on a $1 million home in Victoria?","$55,000. From $960,001 to $2,000,000 Victoria charges 5.5% of the whole value, not just the part over a threshold, and no home or first home concession applies at this price.")],
  related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'stamp-duty-qld': dict(
+ h=('How Queensland transfer duty is calculated (2026-27)', 'Queensland stamp duty FAQs', 'More stamp duty and home buying tools'),
  how="""<p>Queensland transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the Queensland Revenue Office rates for 2026-27. There are two scales: the general rate, and a lower home concession rate for a home you'll live in.</p>
 <table><thead><tr><th>Dutiable value</th><th>General rate</th></tr></thead><tbody>
 <tr><td>$0 – $5,000</td><td>Nil</td></tr>
@@ -307,6 +317,7 @@ C = {
       ("How much is the foreign buyer surcharge in Queensland?","8% of the dutiable value: $56,000 on a $700,000 home. From 1 August 2026 foreign buyers also can't get the home concession unless they are a specified foreign retiree (visa 405 or 410), so a foreign buyer's total on a $700,000 home is $80,525.")],
  related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'stamp-duty-wa': dict(
+ h=('How WA stamp duty is calculated (2026-27)', 'WA stamp duty FAQs', 'More stamp duty and home buying tools'),
  how="""<p>Western Australian transfer duty is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100. This calculator uses the RevenueWA rates for 2026-27.</p>
 <table><thead><tr><th>Dutiable value</th><th>Duty (general rate)</th></tr></thead><tbody>
 <tr><td>$0 – $120,000</td><td>$1.90 per $100</td></tr>
@@ -326,7 +337,102 @@ C = {
       ("How much is the foreign buyer surcharge in WA?","7% of the dutiable value, on top of normal duty: $49,000 on a $700,000 home, for a total of $76,265. A foreign buyer on their own can't use the first home owner rate."),
       ("How much is stamp duty on a $1 million home in WA?","$42,616: $28,453 plus $5.15 per $100 over $725,000. No home or first home concession applies at this price.")],
  related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
+'stamp-duty-sa': dict(
+ h=('How SA stamp duty is calculated (2026-27)', 'SA stamp duty FAQs', 'More stamp duty and home buying tools'),
+ how="""<p>South Australian stamp duty on a property transfer is charged on the <strong>dutiable value</strong> (the higher of the price and the market value) for every $100 or part of $100, and RevenueSA quotes it to the cent. The same scale applies whether you'll live in the home or rent it out: South Australia has no owner-occupier discount.</p>
+<table><thead><tr><th>Dutiable value</th><th>Stamp duty</th></tr></thead><tbody>
+<tr><td>$0 – $12,000</td><td>$1.00 per $100</td></tr>
+<tr><td>$12,001 – $30,000</td><td>$120 + $2.00 per $100 over $12,000</td></tr>
+<tr><td>$30,001 – $50,000</td><td>$480 + $3.00 per $100 over $30,000</td></tr>
+<tr><td>$50,001 – $100,000</td><td>$1,080 + $3.50 per $100 over $50,000</td></tr>
+<tr><td>$100,001 – $200,000</td><td>$2,830 + $4.00 per $100 over $100,000</td></tr>
+<tr><td>$200,001 – $250,000</td><td>$6,830 + $4.25 per $100 over $200,000</td></tr>
+<tr><td>$250,001 – $300,000</td><td>$8,955 + $4.75 per $100 over $250,000</td></tr>
+<tr><td>$300,001 – $500,000</td><td>$11,330 + $5.00 per $100 over $300,000</td></tr>
+<tr><td>Over $500,000</td><td>$21,330 + $5.50 per $100 over $500,000</td></tr>
+</tbody></table>
+<p><strong>Worked example:</strong> a $600,000 home: $21,330 + $5.50 × 1,000 (the $100s over $500,000) = <strong>$26,830</strong>. A foreign buyer adds the 7% surcharge, $42,000, for $68,830.</p>
+<p><strong>First home buyers</strong> pay <strong>no stamp duty</strong> on a new home, an off-the-plan apartment or vacant land to build a home on, with <strong>no price cap</strong> for contracts signed on or after 6 June 2024. There's no relief on an established home. At least one buyer must be an Australian citizen or permanent resident, and you must live in the home for at least 6 continuous months, starting within 12 months of settlement (or of the home being ready, for land).</p>
+<p>Confirm rates and eligibility with <a href="https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty" target="_blank" rel="noopener noreferrer">RevenueSA</a> and its <a href="https://www.revenuesa.sa.gov.au/stamp-duty-land/first-home-buyer-relief/eligible-properties" target="_blank" rel="noopener noreferrer">first home buyer relief rules</a>. Buying in another state? Compare them in the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $600,000 home in South Australia?","$26,830: $21,330 plus $5.50 per $100 over $500,000. It's the same whether you live in it or rent it out. A first home buyer pays $0 if it's a new home, and a foreign buyer pays $68,830 including the 7% surcharge."),
+      ("Do first home buyers pay stamp duty in SA?","$0 on a new home, an off-the-plan apartment or vacant land to build on, at any price, for contracts from 6 June 2024. On an established home, first home buyers pay full duty: $26,830 on $600,000."),
+      ("Is there a price cap on SA first home buyer relief?","No, not for contracts signed on or after 6 June 2024. Between 15 June 2023 and 5 June 2024 new homes had to be worth under $700,000 and vacant land under $450,000."),
+      ("How much is stamp duty on $500,000 and $750,000 in SA?","$21,330 on $500,000 and $35,080 on $750,000. Above $500,000 each extra $100 costs $5.50."),
+      ("How much is the foreign buyer surcharge in SA?","7% of the dutiable value on top of normal duty: $42,000 on a $600,000 home. A foreign buyer on their own can't get first home buyer relief.")],
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
+'stamp-duty-tas': dict(
+ h=('How Tasmanian stamp duty is calculated (2026-27)', 'Tasmania stamp duty FAQs', 'More stamp duty and home buying tools'),
+ how="""<p>Tasmanian property transfer duty is charged on the <strong>dutiable value</strong>, the greater of the price and the unencumbered (market) value, for every $100 or part of $100. The same scale applies to homes and investments: Tasmania has no owner-occupier rate. These rates have applied to transfers since 21 October 2013.</p>
+<table><thead><tr><th>Dutiable value</th><th>Duty</th></tr></thead><tbody>
+<tr><td>$0 – $3,000</td><td>$50</td></tr>
+<tr><td>$3,001 – $25,000</td><td>$50 + $1.75 per $100 over $3,000</td></tr>
+<tr><td>$25,001 – $75,000</td><td>$435 + $2.25 per $100 over $25,000</td></tr>
+<tr><td>$75,001 – $200,000</td><td>$1,560 + $3.50 per $100 over $75,000</td></tr>
+<tr><td>$200,001 – $375,000</td><td>$5,935 + $4.00 per $100 over $200,000</td></tr>
+<tr><td>$375,001 – $725,000</td><td>$12,935 + $4.25 per $100 over $375,000</td></tr>
+<tr><td>Over $725,000</td><td>$27,810 + $4.50 per $100 over $725,000</td></tr>
+</tbody></table>
+<p><strong>Worked example:</strong> an $800,000 home: $27,810 + $4.50 × 750 (the $100s over $725,000) = <strong>$31,185</strong>. A foreign buyer adds the 8% surcharge, $64,000, for $95,185.</p>
+<p><strong>First home buyers:</strong> the exemption for established homes up to $750,000 is <strong>not available for transfers settling after 30 June 2026</strong>, so a first home buyer now pays the same duty as anyone else, for example $22,498 on a $600,000 home. The <a href="https://www.sro.tas.gov.au/first-home-owner/eligibility" target="_blank" rel="noopener noreferrer">First Home Owner Grant</a> is still paid for new homes. Pensioners downsizing to a new home can get a 50% concession.</p>
+<p>Confirm rates and eligibility with <a href="https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Tasmania</a> and its <a href="https://www.sro.tas.gov.au/property-transfer-duties/concessions-exemptions" target="_blank" rel="noopener noreferrer">concessions and exemptions</a>. Buying in another state? Compare them in the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $600,000 home in Tasmania?","$22,498: $12,935 plus $4.25 per $100 over $375,000. It's the same for a home, an investment or a first home buyer settling after 30 June 2026. A foreign buyer pays $70,498 including the 8% surcharge."),
+      ("Do first home buyers still get a stamp duty exemption in Tasmania?","Not on transfers settling after 30 June 2026. The exemption for established homes up to $750,000 ran from 18 February 2024 to 30 June 2026, so a $600,000 first home now costs $22,498 in duty. Check grants for new homes with State Revenue Office Tasmania."),
+      ("How much is stamp duty on $500,000 and $800,000 in Tasmania?","$18,248 on $500,000 and $31,185 on $800,000. Above $725,000 each extra $100 costs $4.50."),
+      ("How much is the foreign investor duty surcharge in Tasmania?","8% of the dutiable value on top of normal duty: $48,000 on a $600,000 home."),
+      ("Is duty charged on the price or the valuation?","On whichever is greater: the price you pay or the unencumbered value, which is the Valuer-General's valuation multiplied by your council area's adjustment factor.")],
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
+'stamp-duty-act': dict(
+ h=('How ACT stamp duty is calculated (2026-27)', 'ACT stamp duty FAQs', 'More stamp duty and home buying tools'),
+ how="""<p>ACT conveyance duty (stamp duty) is charged on the <strong>dutiable value</strong>, the higher of the price and the market value, for every $100 or part of $100. There are two scales: a lower one for <strong>owner-occupiers</strong> (a home you'll live in) and one for everyone else. Above $1,455,000 both are a flat 4.54% of the whole value. These are the ACT Revenue Office rates for 2026-27.</p>
+<h3>Owner-occupier rates</h3>
+<table><thead><tr><th>Dutiable value</th><th>Duty</th></tr></thead><tbody>
+<tr><td>$0 – $260,000</td><td>$0.28 per $100</td></tr>
+<tr><td>$260,001 – $300,000</td><td>$728 + $2.20 per $100 over $260,000</td></tr>
+<tr><td>$300,001 – $500,000</td><td>$1,608 + $3.40 per $100 over $300,000</td></tr>
+<tr><td>$500,001 – $750,000</td><td>$8,408 + $4.32 per $100 over $500,000</td></tr>
+<tr><td>$750,001 – $1,000,000</td><td>$19,208 + $5.90 per $100 over $750,000</td></tr>
+<tr><td>$1,000,001 – $1,455,000</td><td>$33,958 + $6.40 per $100 over $1,000,000</td></tr>
+<tr><td>Over $1,455,000</td><td>4.54% of the total value</td></tr>
+</tbody></table>
+<h3>Investor and other rates</h3>
+<table><thead><tr><th>Dutiable value</th><th>Duty</th></tr></thead><tbody>
+<tr><td>$0 – $200,000</td><td>$1.20 per $100</td></tr>
+<tr><td>$200,001 – $300,000</td><td>$2,400 + $2.20 per $100 over $200,000</td></tr>
+<tr><td>$300,001 – $500,000</td><td>$4,600 + $3.40 per $100 over $300,000</td></tr>
+<tr><td>$500,001 – $750,000</td><td>$11,400 + $4.32 per $100 over $500,000</td></tr>
+<tr><td>$750,001 – $1,000,000</td><td>$22,200 + $5.90 per $100 over $750,000</td></tr>
+<tr><td>$1,000,001 – $1,455,000</td><td>$36,950 + $6.40 per $100 over $1,000,000</td></tr>
+<tr><td>Over $1,455,000</td><td>4.54% of the total value</td></tr>
+</tbody></table>
+<p><strong>Worked example:</strong> a $750,000 home you'll live in: $8,408 + $4.32 × 2,500 (the $100s over $500,000) = <strong>$19,208</strong>. As an investment it's $11,400 + $4.32 × 2,500 = $22,200.</p>
+<p><strong>Home Buyer Concession Scheme:</strong> from 1 July 2026 the property price cap and the income threshold are gone, so eligible buyers pay <strong>no duty at any price</strong>. No buyer (or their domestic partner) can have owned property anywhere in the last five years, and at least one buyer must live in the home for at least 12 months, starting within a year of settlement. You don't have to be a first home buyer. The ACT charges no foreign buyer duty surcharge.</p>
+<p>Confirm rates and eligibility with the <a href="https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property" target="_blank" rel="noopener noreferrer">ACT Revenue Office</a> and its <a href="https://www.revenue.act.gov.au/about-the-act-revenue-office/news/act-budget-2026-27-updates" target="_blank" rel="noopener noreferrer">2026-27 Budget changes</a>. Buying in another state? Compare them in the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $750,000 home in Canberra?","$19,208 if you'll live in it: $8,408 plus $4.32 per $100 over $500,000. As an investment it's $22,200. Under the Home Buyer Concession Scheme it's $0."),
+      ("Who pays no stamp duty under the ACT Home Buyer Concession Scheme?","Buyers where no one, including domestic partners, has owned property anywhere in the last five years, and one of them lives in the home for at least 12 months. From 1 July 2026 there's no price cap and no income test, so a $750,000 home saves $19,208."),
+      ("How much is stamp duty on a $600,000 home in the ACT?","$12,728 for an owner-occupier and $15,720 for an investor. Both scales charge $4.32 per $100 between $500,000 and $750,000; the owner-occupier scale is $2,992 cheaper at this price."),
+      ("Is there a foreign buyer surcharge on ACT stamp duty?","No. The ACT charges no extra conveyance duty for foreign buyers, so a foreign buyer of a $750,000 investment pays the same $22,200."),
+      ("What is the ACT stamp duty on a $1 million home?","$33,958 for an owner-occupier and $36,950 for an investor. Above $1,455,000 both pay a flat 4.54% of the whole value.")],
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
+'stamp-duty-nt': dict(
+ h=('How NT stamp duty is calculated (2026-27)', 'NT stamp duty FAQs', 'More stamp duty and home buying tools'),
+ how="""<p>Northern Territory stamp duty on a property transfer is charged on the <strong>dutiable value</strong>, the higher of the price and the unencumbered value. Up to $525,000 it's worked out with a formula from the Territory Revenue Office; above that it's a flat percentage of the whole value. The same rates apply to homes and investments.</p>
+<table><thead><tr><th>Dutiable value</th><th>Stamp duty</th></tr></thead><tbody>
+<tr><td>Up to $525,000</td><td>(0.06571441 × V²) + 15V, where V is the value ÷ 1,000</td></tr>
+<tr><td>$525,001 – under $3 million</td><td>4.95% of the value</td></tr>
+<tr><td>$3 million – under $5 million</td><td>5.75% of the value</td></tr>
+<tr><td>$5 million and over</td><td>5.95% of the value</td></tr>
+</tbody></table>
+<p><strong>Worked example:</strong> a $500,000 home: V = 500, so (0.06571441 × 250,000) + (15 × 500) = 16,428.60 + 7,500 = <strong>$23,929</strong>. A $750,000 home is 4.95% × $750,000 = $37,125.</p>
+<p><strong>House and land package exemption:</strong> buy a new detached home and its land from a building contractor in one contract, signed between 1 July 2022 and 30 June 2027, and you pay <strong>no stamp duty</strong>. It isn't means tested, there's no price cap and you don't need to be a first home buyer, but at least one buyer must live in it for 6 continuous months, starting within 12 months of completion. The NT has no other first home buyer duty concession and no foreign buyer surcharge.</p>
+<p>Confirm with the <a href="https://nt.gov.au/property/home-owner-assistance/stamp-duty-exemption" target="_blank" rel="noopener noreferrer">Territory Revenue Office's exemption page</a> and its <a href="https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator" target="_blank" rel="noopener noreferrer">stamp duty calculator</a>. The rates above $3 million come from NT Treasury's 2024-25 Budget Paper 2. Buying in another state? Compare them in the <a href="stamp-duty.html">all-states stamp duty calculator</a>.</p>""",
+ faq=[("How much is stamp duty on a $500,000 home in the NT?","$23,929, from the Territory Revenue Office formula (0.06571441 × V²) + 15V with V = 500. It's the same for a first home buyer, unless it's a house and land package, which pays $0."),
+      ("Do first home buyers pay stamp duty in the NT?","Yes, on an established home: $23,929 on $500,000 and $37,125 on $750,000. The only home buyer exemption is for a house and land package bought from a builder in one contract, signed by 30 June 2027, which any buyer who lives in it can use."),
+      ("What is the NT house and land package exemption?","No stamp duty on a new detached home and its land bought from a building contractor in a single contract, signed between 1 July 2022 and 30 June 2027. No price cap or means test; one buyer must live in it for 6 months, starting within 12 months of completion."),
+      ("How much is stamp duty on a $750,000 home in Darwin?","$37,125: above $525,000 the NT charges 4.95% of the whole value, rising to 5.75% from $3 million and 5.95% from $5 million."),
+      ("Is there a foreign buyer surcharge in the NT?","No. The Northern Territory doesn't charge foreign buyers extra stamp duty, so a $750,000 purchase costs $37,125 either way.")],
+ related=['stamp-duty','upfront-costs','lmi','borrowing-power','mortgage']),
 'take-home-pay': dict(
+ h=('How income tax and take-home pay are worked out (2026-27)', 'Income tax and take-home pay FAQs', 'More tax and pay calculators'),
  how="""<p>Your take-home pay, or salary after tax, is your salary minus income tax and the Medicare levy. This calculator uses the 2026-27 resident tax rates, which cut the second bracket from 16% to 15% from 1 July 2026, and the new <strong>$1,000 standard deduction</strong> for work-related expenses that the ATO applies automatically from 2026-27.</p>
 <table><thead><tr><th>Taxable income</th><th>Tax rate (2026-27)</th></tr></thead><tbody>
 <tr><td>$0 – $18,200</td><td>Nil</td></tr><tr><td>$18,201 – $45,000</td><td>15%</td></tr><tr><td>$45,001 – $135,000</td><td>30%</td></tr>
@@ -352,6 +458,7 @@ C = {
       ("Is there a cap on super?","Yes. Super guarantee is only payable on earnings up to the maximum contribution base ($270,830 for 2026-27), which this calculator applies.")],
  related=['tax-refund','budget','gross-up','super','hecs-help']),
 'mortgage': dict(
+ h=('How mortgage repayments are calculated', 'Mortgage repayment FAQs', 'More home loan calculators'),
  how="""<p>Repayments on a principal and interest loan are calculated with the standard amortisation formula: each repayment covers that period's interest and pays down some principal. Early on, most of each repayment is interest.</p>
 <h3>Monthly repayments over 30 years</h3>
 <table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
@@ -362,37 +469,73 @@ C = {
 <tr><td>$1,000,000</td><td>$5,678</td><td>$5,996</td><td>$6,321</td></tr>
 </tbody></table>
 <p>Principal and interest, monthly repayments, constant rate, no fees.</p>
+<h3>Total interest over 30 years</h3>
+<table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
+<tr><td>$500,000</td><td>$522,020</td><td>$579,191</td><td>$637,722</td></tr>
+<tr><td>$600,000</td><td>$626,424</td><td>$695,029</td><td>$765,267</td></tr>
+<tr><td>$750,000</td><td>$783,030</td><td>$868,786</td><td>$956,584</td></tr>
+</tbody></table>
+<p>Half a percentage point on a $600,000 loan is about $191 a month more at 6% than at 5.5% and $68,605 in interest over the life of the loan.</p>
+<h3>Extra repayments</h3>
+<p>Anything you pay above the minimum comes straight off the principal, so every later repayment has less interest in it. On a $600,000 loan at 6% over 30 years, an extra $200 a month saves $106,693 in interest and finishes the loan 3 years 11 months early. An extra $500 a month saves $212,713 and 7 years 11 months. Check your loan allows extra repayments: fixed-rate loans often cap them.</p>
+<h3>Interest-only loans</h3>
+<p>Interest-only repayments are the loan × the rate ÷ 12: $3,000 a month on $600,000 at 6%, against $3,597 for principal and interest. But you repay nothing off the loan. After 5 years interest-only, the full $600,000 has to be repaid over the remaining 25 years, at $3,866 a month, and total interest comes to $739,743 instead of $695,029.</p>
 <p><strong>Tip:</strong> paying fortnightly, half your monthly repayment every two weeks, means 26 half-payments a year: the equivalent of 13 monthly payments. That extra payment can cut years off a 30-year loan. This calculator shows the true fortnightly amount for the same term, so compare carefully.</p>""",
  faq=[("What are the repayments on a $600,000 mortgage?","$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792."),
+      ("What are the repayments on a $500,000 or $750,000 mortgage?","$2,998 a month on $500,000 and $4,497 on $750,000, at 6% over 30 years. At 5.5% they're $2,839 and $4,258; at 6.5%, $3,160 and $4,741."),
       ("How much interest will I pay over 30 years?","$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest."),
+      ("How much do extra repayments save?","$106,693 in interest and 3 years 11 months off a $600,000 loan at 6% over 30 years, if you pay an extra $200 a month from the start. An extra $100 a month saves $58,423 and 2 years 1 month."),
+      ("How much are interest-only repayments?","$3,000 a month on $600,000 at 6% (loan × rate ÷ 12), against $3,597 for principal and interest. After 5 interest-only years the repayment jumps to $3,866 a month for the remaining 25 years, and you pay $44,713 more interest overall."),
       ("Does this include fees or LMI?","No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."),
-      ("What about interest-only loans?","Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans."),
       ("How much will I save with an offset account?","About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href=\"offset.html\">offset account calculator</a> for your own balance.")],
  related=['refinance','upfront-costs','lmi','offset','borrowing-power']),
 'offset': dict(
+ h=('How an offset account saves interest', 'Offset account FAQs', 'More home loan calculators'),
  how="""<p>On a $600,000 loan at 6% over 30 years, keeping $50,000 in offset saves <strong>$202,175</strong> in interest and finishes the loan <strong>4 years 8 months</strong> sooner. $100,000 in offset saves <strong>$338,658</strong> and <strong>7 years 10 months</strong>. Both assume the balance stays the same and you keep paying $3,597 a month.</p>
 <p>An offset account is a transaction account linked to your home loan. Its balance is subtracted from your loan balance before interest is calculated, so $50,000 in offset on a $600,000 loan means you're charged interest on $550,000.</p>
-<p>Because your repayment stays the same, more of each payment goes to principal and the loan finishes early. This calculator compares the loan with and without the offset to show interest and time saved.</p>""",
- faq=[("Is an offset better than extra repayments?","Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender)."),
-      ("Does the calculator assume my offset balance changes?","No, it assumes a constant balance. In practice your balance moves with your pay and spending."),
+<p>Because your repayment stays the same, more of each payment goes to principal and the loan finishes early. This calculator compares the loan with and without the offset to show interest and time saved.</p>
+<h3>Offset or savings account?</h3>
+<p>Every dollar in offset "earns" your home loan rate, with no tax on it, because interest you don't pay isn't income. Savings account interest is taxed at your marginal rate, so a savings account has to pay well above your loan rate to beat an offset. The catch: offset accounts usually come with a package fee, often a few hundred dollars a year, and only on variable or part-fixed loans.</p>""",
+ faq=[("How much does $20,000 in an offset account save?","$91,647 in interest and 2 years 1 month off a $600,000 loan at 6% over 30 years, if the $20,000 stays there and you keep paying $3,597 a month."),
+      ("How much does $50,000 in offset save on a $500,000 loan?","$194,606 in interest and 5 years 4 months, at 6% over 30 years with the normal $2,998 monthly repayment. Offset money saves more when it's there early in the loan."),
+      ("Is an offset better than extra repayments?","Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender)."),
+      ("Does the calculator assume my offset balance changes?","No, it assumes a constant balance. In practice your balance moves with your pay and spending, and even money that sits there for a few weeks between pay days helps."),
       ("Is offset interest saving taxable?","Interest saved through an offset isn't income, so it isn't taxed, unlike interest earned in a savings account. Check your own situation with a tax professional.")],
  related=['mortgage','borrowing-power','savings-goal','hecs-help']),
 'rental-yield': dict(
+ h=('How rental yield is calculated', 'Rental yield FAQs', 'More property investment tools'),
  how="""<p><strong>Gross yield</strong> = annual rent ÷ purchase price × 100. It's the quick comparison figure used in listings.</p>
 <p><strong>Net yield</strong> = (annual rent after vacancy − annual costs) ÷ purchase price × 100. It's a better guide to what the property actually earns before mortgage interest and tax.</p>
-<p><strong>Example:</strong> $520/week on a $550,000 property is $27,040 a year: a 4.92% gross yield. With 2 weeks' vacancy and $7,500 of yearly costs, net income is $18,500, a 3.36% net yield.</p>""",
- faq=[("What costs should I include?","Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."),
-      ("Does this include mortgage repayments?","No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately."),
+<p><strong>Example:</strong> $520/week on a $550,000 property is $27,040 a year: a 4.92% gross yield. With 2 weeks' vacancy ($26,000 of rent received) and $7,500 of yearly costs, net income is $18,500, a 3.36% net yield.</p>
+<h3>Costs that turn gross into net</h3>
+<ul><li>Council and water rates, and strata levies for a unit</li>
+<li>Landlord insurance</li>
+<li>Property management, usually a percentage of the rent plus letting fees</li>
+<li>Repairs and maintenance</li>
+<li>Land tax, if your landholdings are over your state's threshold</li></ul>
+<p>Mortgage interest, depreciation and tax aren't in the yield, because they depend on how you finance and own the property, not on the property itself. For those, use the <a href="rental-cashflow.html">rental cashflow and negative gearing calculator</a>.</p>""",
+ faq=[("What is the rental yield on a $550,000 property renting for $520 a week?","4.92% gross: $27,040 a year ÷ $550,000. With 2 weeks' vacancy and $7,500 of costs, net income is $18,500, a 3.36% net yield."),
+      ("What is the yield on a $750,000 property at $650 a week?","4.51% gross. With 2 weeks' vacancy and $9,000 of yearly costs, it nets $23,500, a 3.13% net yield."),
+      ("What costs should I include?","Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."),
+      ("Does this include mortgage repayments?","No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and the rental cashflow calculator for your cash flow after tax."),
       ("What's a good rental yield?","About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.")],
  related=['rental-cashflow','mortgage','stamp-duty','capital-gains-tax']),
 'compound-interest': dict(
- how="""<p>Compound interest means you earn interest on your interest. The balance grows by <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the annual rate, n the compounding periods per year and t the years. Regular deposits are added each period.</p>
-<p>The year-by-year table shows how much of your balance comes from deposits and how much from interest. Over long periods, interest usually overtakes deposits.</p>""",
- faq=[("Does compounding frequency matter much?","A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."),
-      ("Does this include tax?","No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."),
+ h=('How compound interest works', 'Compound interest FAQs', 'More savings calculators'),
+ how="""<p>Compound interest means you earn interest on your interest. A lump sum grows by the formula <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the yearly rate as a decimal, n the number of times interest is added each year and t the years. Regular deposits are added each period and earn interest from then on.</p>
+<p><strong>Worked example:</strong> $10,000 at 5% a year, compounded monthly, for 10 years: $10,000 × (1 + 0.05/12)<sup>120</sup> = <strong>$16,470</strong>. Add $200 a month and you finish with $47,527: $34,000 you put in and $13,527 of interest.</p>
+<h3>How often interest is added</h3>
+<p>On that $10,000 over 10 years at 5%, yearly compounding gives $16,289, monthly $16,470 and daily $16,487. Time and rate matter far more than frequency: $200 a month at 5% grows to $82,207 in 20 years but $166,452 in 30, when interest ($94,452) has overtaken your deposits ($72,000).</p>
+<h3>Saving in Australia</h3>
+<p>Interest from a bank account or term deposit is taxable income, taxed at your marginal rate, and this calculator shows it before tax. Deposits with Australian banks, building societies and credit unions are protected by the government's Financial Claims Scheme up to $250,000 per person per institution, as <a href="https://moneysmart.gov.au/investments-paying-interest/term-deposits" target="_blank" rel="noopener noreferrer">Moneysmart</a> explains. Many high-interest savings accounts pay their bonus rate only if you deposit or don't withdraw each month, so check the conditions. Inflation also eats into growth: the <a href="inflation.html">inflation calculator</a> shows what money is worth over time.</p>""",
+ faq=[("How much will $10,000 grow to in 10 years at 5%?","$16,470 with interest compounded monthly, or $16,289 compounded yearly. That's $6,470 of interest, before tax, with nothing added."),
+      ("How much will I have if I save $200 a month?","$82,207 after 20 years at 5% compounded monthly, of which $48,000 is your deposits. After 30 years it's $166,452, and interest ($94,452) is more than you put in."),
+      ("Does compounding frequency matter much?","A little. $10,000 at 5% for 10 years grows to $16,289 compounded yearly, $16,470 monthly and $16,487 daily. Time and rate matter far more."),
+      ("Does this include tax?","No. Interest earned in a savings account is taxable income in Australia, taxed at your marginal rate. Results also ignore fees and rate changes."),
       ("Can I use this for investments?","Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.")],
  related=['term-deposit','savings-goal','inflation','super']),
 'gst': dict(
+ h=('How GST is calculated', 'GST FAQs', 'More tax calculators'),
  how="""<p>Australia's GST rate is 10%.</p>
 <ul><li><strong>Add GST:</strong> price × 1.1. $100 + GST = $110.</li>
 <li><strong>Remove GST:</strong> price ÷ 1.1. $110 includes $10 GST.</li>
@@ -413,6 +556,8 @@ C = {
 <tr><td>$5,500</td><td>$500.00</td><td>$5,000.00</td></tr>
 </tbody></table>""",
  faq=[("How do I calculate GST from a total?","Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09."),
+      ("How much GST is in $100?","$9.09. A $100 GST-inclusive price is $90.91 before GST. Taking 10% off would give $90, which is wrong."),
+      ("What is $1,000 plus GST?","$1,100: $1,000 × 1.1, of which $100 is GST."),
       ("Is GST charged on fresh food, rent or medical?","Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as <a href=\"https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/gst-free-sales\" target=\"_blank\" rel=\"noopener noreferrer\">GST-free</a>. Renting out a home is <a href=\"https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/input-taxed-sales\" target=\"_blank\" rel=\"noopener noreferrer\">input taxed</a>, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list."),
       ("Why divide by 11?","Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."),
       ("Do I need to charge GST?","Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the <a href=\"https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst\" target=\"_blank\" rel=\"noopener noreferrer\">ATO's GST guide</a> for your situation.")],
@@ -450,6 +595,7 @@ C = {
       ("What isn't covered?","Partial main residence exemptions, small business concessions, assets bought before 21 September 1999 using frozen indexation, trusts and companies, and the Working Australians Tax Offset. Ask a registered tax agent if these apply to you.")],
  related=['inflation','rental-cashflow','take-home-pay','medicare-levy-surcharge']),
 'stamp-duty': dict(
+ h=('Stamp duty in every state and territory (2026-27)', 'Stamp duty FAQs', 'More home buying tools'),
  how="""<p>Each state and territory sets its own transfer (stamp) duty on property purchases, charged on the <strong>dutiable value</strong>: usually the higher of the price and the market value. Rates step up in brackets, and most states charge less if you'll live in the home or are buying your first home.</p>
 <table><thead><tr><th>State</th><th>First home buyers</th><th>Foreign buyer surcharge</th></tr></thead><tbody>
 <tr><td>NSW</td><td>No duty up to $800,000; reduced to $1 million</td><td>9%</td></tr>
@@ -461,7 +607,18 @@ C = {
 <tr><td>ACT</td><td>No duty at any price under the Home Buyer Concession Scheme, if no buyer has owned property in 5 years</td><td>None</td></tr>
 <tr><td>NT</td><td>No first home concession. Any buyer of a new house and land package from a builder pays no duty (to 30 June 2027)</td><td>None</td></tr>
 </tbody></table>
-<p><strong>Buying in NSW, Victoria, Queensland or WA?</strong> The <a href="stamp-duty-nsw.html">NSW</a>, <a href="stamp-duty-vic.html">Victoria</a>, <a href="stamp-duty-qld.html">Queensland</a> and <a href="stamp-duty-wa.html">WA</a> stamp duty calculators show that state's rate table, home and first home buyer rules and a worked example step by step.</p>
+<h3>Stamp duty on a $750,000 home in each state</h3>
+<table><thead><tr><th>State</th><th>Investment</th><th>Your home</th><th>First home, established</th><th>First home, new</th></tr></thead><tbody>
+<tr><td><a href="stamp-duty-nsw.html">NSW</a></td><td>$27,937</td><td>$27,937</td><td>$0</td><td>$0</td></tr>
+<tr><td><a href="stamp-duty-vic.html">Victoria</a></td><td>$40,070</td><td>$40,070</td><td>$40,070</td><td>$40,070</td></tr>
+<tr><td><a href="stamp-duty-qld.html">Queensland</a></td><td>$26,775</td><td>$19,600</td><td>$10,925</td><td>$0</td></tr>
+<tr><td><a href="stamp-duty-sa.html">South Australia</a></td><td>$35,080</td><td>$35,080</td><td>$35,080</td><td>$0</td></tr>
+<tr><td><a href="stamp-duty-wa.html">Western Australia</a></td><td>$29,741</td><td>$29,741</td><td>$24,225</td><td>$24,225</td></tr>
+<tr><td><a href="stamp-duty-tas.html">Tasmania</a></td><td>$28,935</td><td>$28,935</td><td>$28,935</td><td>$28,935</td></tr>
+<tr><td><a href="stamp-duty-act.html">ACT</a></td><td>$22,200</td><td>$19,208</td><td>$0</td><td>$0</td></tr>
+<tr><td><a href="stamp-duty-nt.html">Northern Territory</a></td><td>$37,125</td><td>$37,125</td><td>$37,125</td><td>$0</td></tr>
+</tbody></table>
+<p>Worked out by this calculator for an Australian citizen buying in 2026-27. "First home" assumes the buyer qualifies for their state's first home relief (in the ACT, the Home Buyer Concession Scheme). The NT's $0 for a new home is its house and land package exemption, open to any buyer who lives in it. Victoria's first home relief ends at $750,000, and its owner-occupier rate at $550,000. Each state's page shows its rate table and a worked example step by step.</p>
 <p>Rates and thresholds were checked against each state's revenue office on 15 October 2026: <a href="https://www.revenue.nsw.gov.au/taxes-duties-levies-royalties/transfer-duty/understanding-transfer-duty/calculate-transfer-duty" target="_blank" rel="noopener noreferrer">Revenue NSW</a>, <a href="https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Victoria</a>, <a href="https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/" target="_blank" rel="noopener noreferrer">Queensland Revenue Office</a>, <a href="https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty" target="_blank" rel="noopener noreferrer">RevenueSA</a>, <a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>, <a href="https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty" target="_blank" rel="noopener noreferrer">State Revenue Office Tasmania</a>, <a href="https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property" target="_blank" rel="noopener noreferrer">ACT Revenue Office</a> and <a href="https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator" target="_blank" rel="noopener noreferrer">Territory Revenue Office</a>. Tick <em>I'll live in it</em> for owner-occupier rates (Victoria up to $550,000, Queensland's home concession, the ACT owner-occupier scale and WA's concessional rate up to $200,000).</p>
 <p><strong>Foreign buyers</strong> pay the surcharge on the full dutiable value, on top of duty and before any concession. First home relief needs at least one buyer who is an Australian citizen or permanent resident in every state except the ACT and NT, and from 1 August 2026 Queensland's home concession does too. With a joint purchase the surcharge applies only to the foreign buyer's share.</p>""",
  faq=[("Which state has the cheapest stamp duty?","On a $750,000 investment property the ACT is cheapest ($22,200) and Victoria the dearest ($40,070). In between are Queensland ($26,775), NSW ($27,937), Tasmania ($28,935), WA ($29,741), South Australia ($35,080) and the NT ($37,125). The order changes with price and buyer: first home buyers can pay nothing in several states, depending on price and whether the home is new."),
@@ -550,6 +707,11 @@ TRUST = {
   'stamp-duty-vic': ('rates', ext('https://www.sro.vic.gov.au/buying-property/land-transfer-stamp-duty/understanding-land-transfer-stamp-duty', 'State Revenue Office Victoria')),
   'stamp-duty-qld': ('rates', ext('https://qro.qld.gov.au/duties/transfer-duty/calculate/rates/', 'Queensland Revenue Office')),
   'stamp-duty-wa': ('rates', ext('https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment', 'RevenueWA')),
+  'stamp-duty-sa': ('rates', ext('https://revenuesa.sa.gov.au/stamp-duty/rate-of-stamp-duty', 'RevenueSA')),
+  'stamp-duty-tas': ('rates', ext('https://www.sro.tas.gov.au/property-transfer-duties/rates-of-duty', 'State Revenue Office Tasmania')),
+  'stamp-duty-act': ('rates', ext('https://www.revenue.act.gov.au/rates-and-property-charges/conveyance-duty-stamp-duty/conveyance-duty-for-non-commercial-property', 'the ACT Revenue Office')),
+  'stamp-duty-nt': ('rates', ext('https://nt.gov.au/property/buying-and-selling-a-home/settle-the-sale/stamp-duty-buying-or-selling-a-home/conveyance-calculator', 'the Territory Revenue Office') + ' and NT Treasury Budget Paper 2'),
+  'term-deposit': ('note', 'Tax on interest uses ' + ext('https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents', "the ATO's 2026-27 resident tax rates") + '; deposit protection as described by ' + ext('https://moneysmart.gov.au/investments-paying-interest/term-deposits', 'Moneysmart') + '.'),
   'car-stamp-duty': ('rates', "each state's revenue office or transport department"),
   'rental-cashflow': ('rates', ext('https://www.legislation.gov.au/C2026A00049/asmade/text', 'the Treasury Laws Amendment (Tax Reform No. 1) Act 2026') + ' and the ATO tax rates'),
   'borrowing-power': ('rates', ext('https://www.apra.gov.au/news-and-publications/apra-maintains-current-macroprudential-policy-settings-highly-uncertain', "APRA's serviceability buffer")),
@@ -565,7 +727,7 @@ TRUST = {
   'balance-transfer': ('method', ext('https://moneysmart.gov.au/credit-cards/credit-card-calculator', "Moneysmart's credit card calculator")),
   'tax-refund': ('rates', ext('https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents', "the ATO's resident tax rates") + ' and the ATO Medicare levy, surcharge and study loan pages'),
   'rent-vs-buy': ('note', 'Stamp duty uses each state revenue office\'s rates; every other figure is an assumption you can change.'),
-  'retirement': ('note', 'Defaults follow ' + ext('https://moneysmart.gov.au/how-super-works/superannuation-calculator', "Moneysmart's superannuation calculator") + '; ASFA standard as published by ' + ext('https://moneysmart.gov.au/glossary/asfa-retirement-standard', 'Moneysmart') + '.'),
+  'retirement': ('note', "Today's dollars and the retirement age and planning age follow " + ext('https://download.asic.gov.au/media/tlbldlxj/rg276-published-13-september-2024-20260402.pdf', "ASIC's required defaults (RG 276)") + '; returns and fees follow ' + ext('https://moneysmart.gov.au/how-super-works/superannuation-calculator', "Moneysmart's superannuation calculator") + '; ASFA standard as published by ' + ext('https://moneysmart.gov.au/glossary/asfa-retirement-standard', 'Moneysmart') + '.'),
   'budget': ('method', ext('https://moneysmart.gov.au/budgeting/budget-planner', "Moneysmart's budget planner")),
   'lmi': ('note', 'LMI premiums are an estimate from one lender\'s published table; duty on LMI checked against each state revenue office; scheme price caps from ' + ext('https://firsthomebuyers.gov.au/australian-government-5-percent-deposit-scheme/property-price-caps', 'Housing Australia') + '.'),
   'upfront-costs': ('rates', "each state's revenue office and land titles office 2026-27 fee schedules"),
@@ -607,6 +769,30 @@ def scroll_tables(h):
 def nowrap_years(h1):
     return re.sub(r'(?<!nowrap">)\b(\d{4}-\d{2})\b', r'<span class="nowrap">\1</span>', h1)
 
+# Section headings. Each page names its own topic ("NSW stamp duty FAQs") instead of a generic "How it works";
+# an entry can set h=(how, faq, related) to override the default "<short name>: how it works" style.
+def headings(slug, c):
+    if 'h' in c:
+        if len(c['h']) != 3: raise MissingMarker(f'scripts/content.py: {slug} h= needs three headings')
+        return c['h']
+    short = names[slug]
+    return (f'{short}: how it works', f'{short} FAQs', f'Related to {short}')
+
+# JSON-LD dateModified: the rates-check date for tools whose figures depend on rates; for everyday tools with no
+# rates (timers, converters, plain maths) the git date of the tool's own script, js/pages/<slug>.js: its last commit,
+# or today if it has uncommitted changes. (Not the HTML file: this script writes the date into it, so its git date
+# would change with every commit and the output would never settle.)
+NO_RATES = {'stopwatch', 'timer', 'world-clock', 'unit-converter', 'date-calculator', 'percentage', 'calculator'}
+TODAY_ISO = datetime.now().date().isoformat()
+def git_date(path):
+    import subprocess
+    try:
+        if subprocess.run(['git', 'status', '--porcelain', '--', path], capture_output=True, text=True, check=True).stdout.strip(): return TODAY_ISO
+        return subprocess.run(['git', 'log', '-1', '--format=%cs', '--', path], capture_output=True, text=True, check=True).stdout.strip() or TODAY_ISO
+    except Exception: return TODAY_ISO
+def date_modified(slug):
+    return GIT_DATES[slug] if slug in NO_RATES else CHECKED_ISO
+
 def build(slug, c):
     p = f'tools/{slug}.html'; s = open(p).read()
     if slug not in names: raise MissingMarker(f'js/tools.js: no tool with slug {slug}')
@@ -620,21 +806,22 @@ def build(slug, c):
     desc = find(r'<meta name="description" content="(.*?)">', s, p, 'the meta description').group(1)
     faq_html = ''.join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in c['faq'])
     rel = ''.join(f'<a href="{r}.html">{names[r]}</a>' for r in c['related'])
+    h_how, h_faq, h_rel = headings(slug, c)
     block = f'''
     <!-- content:start -->
     {AUS_SLOT if cats.get(slug) != 'general' and slug not in NO_AUSSIE else ''}<section class="content">
-      <h2>How it works</h2>
+      <h2>{h_how}</h2>
       {trust_line(slug)}{scroll_tables(c['how'])}
       {DISCLAIMER if cats.get(slug) != 'general' else ''}
-      <h2>Frequently asked questions</h2>
+      <h2>{h_faq}</h2>
       {faq_html}
-      <h2>Related tools</h2>
+      <h2>{h_rel}</h2>
       <nav class="related" aria-label="Related tools">{rel}</nav>
     </section>
     <!-- content:end -->'''
     s = replace_once(s, '\n  </main>', block + '\n  </main>', p, '"  </main>" line')
     ld = [
-      {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"FinanceApplication" if cats.get(slug) in ('tax','property','money') else "UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"dateModified":CHECKED_ISO,"publisher":PUBLISHER},
+      {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"FinanceApplication" if cats.get(slug) in ('tax','property','money') else "UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"dateModified":date_modified(slug),"publisher":PUBLISHER},
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":strip_tags(a)}} for q,a in c['faq']]},
     ]
     # Escape "</" so text in the FAQ can never close the script tag early.
@@ -645,6 +832,8 @@ def build(slug, c):
     # Open Graph, canonical and breadcrumb tags are written by scripts/seo.mjs (between seo:start/end).
     return p, s
 
+# Worked out before any page is written, so rerunning this script doesn't make the pages look changed today.
+GIT_DATES = {slug: git_date(f'js/pages/{slug}.js') for slug in NO_RATES}
 try:
     built = [build(slug, c) for slug, c in C.items()]
     if BOOT not in open('index.html').read():

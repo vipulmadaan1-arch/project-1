@@ -172,3 +172,17 @@ test('describeMonths', () => {
   assert.equal(describeMonths(1), '1 month');
   assert.equal(describeMonths(0), '0 months');
 });
+
+test('extra repayments: none saves nothing, more saves more, and the loan still clears', async () => {
+  const { extraRepayments, interestOnlyRepayment, mortgage } = await import('../js/calc.js');
+  const base = { principal: 600000, ratePct: 6, years: 30 };
+  const zero = extraRepayments({ ...base, extra: 0 });
+  assert.ok(Math.abs(zero.interestSaved) < 0.01 && zero.periodsSaved === 0);
+  assert.ok(Math.abs(zero.interest - mortgage(base).interest) < 0.5);
+  const a = extraRepayments({ ...base, extra: 200 }), b = extraRepayments({ ...base, extra: 500 });
+  assert.ok(b.interestSaved > a.interestSaved && a.interestSaved > 0);
+  assert.ok(b.periodsSaved > a.periodsSaved);
+  assert.equal(extraRepayments({ ...base, extra: -1 }), null);
+  assert.equal(interestOnlyRepayment(600000, 6), 3000);
+  assert.equal(interestOnlyRepayment(520000, 6, 'fortnightly'), 1200);
+});

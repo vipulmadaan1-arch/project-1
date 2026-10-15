@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
@@ -33,7 +34,7 @@
   <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/pages/compound-interest.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Compound Interest Calculator", "description": "Free Australian compound interest calculator with regular deposits. See how your savings grow year by year, and how much comes from interest.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much will $10,000 grow to in 10 years at 5%?", "acceptedAnswer": {"@type": "Answer", "text": "$16,470 with interest compounded monthly, or $16,289 compounded yearly. That's $6,470 of interest, before tax, with nothing added."}}, {"@type": "Question", "name": "How much will I have if I save $200 a month?", "acceptedAnswer": {"@type": "Answer", "text": "$82,207 after 20 years at 5% compounded monthly, of which $48,000 is your deposits. After 30 years it's $166,452, and interest ($94,452) is more than you put in."}}, {"@type": "Question", "name": "Does compounding frequency matter much?", "acceptedAnswer": {"@type": "Answer", "text": "A little. $10,000 at 5% for 10 years grows to $16,289 compounded yearly, $16,470 monthly and $16,487 daily. Time and rate matter far more."}}, {"@type": "Question", "name": "Does this include tax?", "acceptedAnswer": {"@type": "Answer", "text": "No. Interest earned in a savings account is taxable income in Australia, taxed at your marginal rate. Results also ignore fees and rate changes."}}, {"@type": "Question", "name": "Can I use this for investments?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -68,17 +69,55 @@
     <!-- content:start -->
     <div class="aus-slot"></div>
     <section class="content">
-      <h2>How it works</h2>
+      <h2>How compound interest works</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/budgeting/compound-interest-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's compound interest calculator</a>, so you can cross-check a result there.</p>
-<p>Compound interest means you earn interest on your interest. The balance grows by <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the annual rate, n the compounding periods per year and t the years. Regular deposits are added each period.</p>
-<p>The year-by-year table shows how much of your balance comes from deposits and how much from interest. Over long periods, interest usually overtakes deposits.</p>
+<p>Compound interest means you earn interest on your interest. A lump sum grows by the formula <em>A = P(1 + r/n)<sup>nt</sup></em>, where P is the starting amount, r the yearly rate as a decimal, n the number of times interest is added each year and t the years. Regular deposits are added each period and earn interest from then on.</p>
+<p><strong>Worked example:</strong> $10,000 at 5% a year, compounded monthly, for 10 years: $10,000 × (1 + 0.05/12)<sup>120</sup> = <strong>$16,470</strong>. Add $200 a month and you finish with $47,527: $34,000 you put in and $13,527 of interest.</p>
+<h3>How often interest is added</h3>
+<p>On that $10,000 over 10 years at 5%, yearly compounding gives $16,289, monthly $16,470 and daily $16,487. Time and rate matter far more than frequency: $200 a month at 5% grows to $82,207 in 20 years but $166,452 in 30, when interest ($94,452) has overtaken your deposits ($72,000).</p>
+<h3>Saving in Australia</h3>
+<p>Interest from a bank account or term deposit is taxable income, taxed at your marginal rate, and this calculator shows it before tax. Deposits with Australian banks, building societies and credit unions are protected by the government's Financial Claims Scheme up to $250,000 per person per institution, as <a href="https://moneysmart.gov.au/investments-paying-interest/term-deposits" target="_blank" rel="noopener noreferrer">Moneysmart</a> explains. Many high-interest savings accounts pay their bonus rate only if you deposit or don't withdraw each month, so check the conditions. Inflation also eats into growth: the <a href="inflation.html">inflation calculator</a> shows what money is worth over time.</p>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
-      <h2>Frequently asked questions</h2>
-      <details><summary>Does compounding frequency matter much?</summary><p>A little. Daily compounding earns slightly more than monthly, and monthly slightly more than annually, at the same rate. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.</p></details>
-      <h2>Related tools</h2>
+      <h2>Compound interest FAQs</h2>
+      <details><summary>How much will $10,000 grow to in 10 years at 5%?</summary><p>$16,470 with interest compounded monthly, or $16,289 compounded yearly. That's $6,470 of interest, before tax, with nothing added.</p></details><details><summary>How much will I have if I save $200 a month?</summary><p>$82,207 after 20 years at 5% compounded monthly, of which $48,000 is your deposits. After 30 years it's $166,452, and interest ($94,452) is more than you put in.</p></details><details><summary>Does compounding frequency matter much?</summary><p>A little. $10,000 at 5% for 10 years grows to $16,289 compounded yearly, $16,470 monthly and $16,487 daily. Time and rate matter far more.</p></details><details><summary>Does this include tax?</summary><p>No. Interest earned in a savings account is taxable income in Australia, taxed at your marginal rate. Results also ignore fees and rate changes.</p></details><details><summary>Can I use this for investments?</summary><p>Yes, as a rough guide with an expected average return, but investment returns vary year to year and aren't guaranteed.</p></details>
+      <h2>More savings calculators</h2>
       <nav class="related" aria-label="Related tools"><a href="term-deposit.html">Term Deposit</a><a href="savings-goal.html">Savings Goal</a><a href="inflation.html">Inflation</a><a href="super.html">Super & Salary Sacrifice</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

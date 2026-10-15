@@ -11,6 +11,9 @@
 //   - The Content-Security-Policy meta tag on every page (built here, with the hash of the page's inline
 //     boot script), the <link rel="modulepreload"> list (each page's whole static import graph) and the
 //     <noscript> notice, so the copies on 45 pages can't drift.
+//   - The site footer (tool links by section, About, Privacy and the general-information notice) between
+//     <!-- footer:start --> and <!-- footer:end --> after </main>, from js/site-footer.js, so crawlers and no-JS
+//     visitors see it; js/layout.js reuses it instead of adding another.
 //   - Content hashes in sw.js (scripts/sw-hashes.mjs), last, once every page is final.
 // Every marker or tag this script edits must be present: a missing one stops the run with the file's name,
 // and nothing is written until every page has been built.
@@ -26,6 +29,7 @@ import { SITE_NAME, SITE_URL } from '../js/config.js';
 import { icon } from '../js/icons.js';
 import { ADS_ENABLED } from '../js/ads.js';
 import { updateSwHashes } from './sw-hashes.mjs';
+import { footerHtml } from '../js/site-footer.js';
 
 const base = (process.argv[2] || SITE_URL || '').replace(/\/+$/, '');
 if (base && !/^https:\/\/[^/]+/.test(base)) {
@@ -188,8 +192,16 @@ function withNoscript(html, file) {
   return must(html, /(\n {2}<main class="wrap">)/, `$1\n    ${NOSCRIPT}`, file, '<main class="wrap">');
 }
 
+// The footer, with links relative to the page (tool pages are one folder down; the 404 page's <base> points at the root).
+function withFooter(html, file) {
+  html = html.replace(/\n {2}<!-- footer:start -->[\s\S]*?<!-- footer:end -->/, '');
+  const base = matchOrThrow(html, /<html lang="en-AU" data-base="([^"]*)">/, file, 'the data-base attribute on <html>')[1];
+  const block = `\n  <!-- footer:start -->\n  ${footerHtml(base).replace(/\n/g, '\n  ')}\n  <!-- footer:end -->`;
+  return must(html, /(\n {2}<\/main>)/, `$1${block}`, file, 'the "  </main>" line');
+}
+
 // Everything every page gets.
-const common = (html, file) => withNoscript(withPreloads(withCsp(html, file), file), file);
+const common = (html, file) => withFooter(withNoscript(withPreloads(withCsp(html, file), file), file), file);
 
 // Static tool tiles. js/pages/home.js re-renders them (adding pins and search), but the plain
 // links are in the HTML so crawlers and no-JS visitors can reach every tool.

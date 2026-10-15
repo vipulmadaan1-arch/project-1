@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="js/config.js">
   <link rel="modulepreload" href="js/tools.js">
+  <link rel="modulepreload" href="js/site-footer.js">
   <link rel="modulepreload" href="js/icons.js">
   <link rel="modulepreload" href="js/ads.js">
   <link rel="modulepreload" href="js/format.js">
@@ -55,7 +56,21 @@
         <li><a href="https://moneysmart.gov.au/" target="_blank" rel="noopener noreferrer">Moneysmart</a> (ASIC): the methods and assumptions used by the loan, savings and credit card calculators.</li>
         <li>Legislation sites such as the <a href="https://www.legislation.gov.au/" target="_blank" rel="noopener noreferrer">Federal Register of Legislation</a>, for new laws such as the 2027 capital gains tax and negative gearing changes.</li>
       </ul>
+      <p>Every worked example and FAQ answer on a tool page is calculated by the same code as the calculator, and automated tests recalculate each one and compare it with the published rate tables and the revenue offices' own worked examples. If a rate changes and a figure on a page no longer matches, the tests fail until the page is fixed.</p>
       <p>A few figures, such as typical rental yields from Cotality, come from industry sources rather than government. These are always marked as estimates on the page that uses them, along with any formula a revenue office doesn't publish.</p>
+
+      <h2>What changed for 2026-27</h2>
+      <p>Changes the calculators already use, with the date each took effect and where it's published:</p>
+      <ul>
+        <li><strong>7 May 2026:</strong> WA first home buyers pay no transfer duty on a home up to $600,000, with a reduced rate to $800,000 (<a href="https://www.wa.gov.au/organisation/department-of-treasury-and-finance/transfer-duty-assessment" target="_blank" rel="noopener noreferrer">RevenueWA</a>).</li>
+        <li><strong>30 June 2026:</strong> Tasmania's first home buyer exemption for established homes ended for transfers settling after this date (<a href="https://www.sro.tas.gov.au/property-transfer-duties/concessions-exemptions/first-home-buyers-of-established-homes-duty-relief" target="_blank" rel="noopener noreferrer">State Revenue Office Tasmania</a>).</li>
+        <li><strong>1 July 2026:</strong> the tax rate on income from $18,201 to $45,000 fell from 16% to 15% (<a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">ATO</a>).</li>
+        <li><strong>1 July 2026:</strong> employees can claim a $1,000 standard deduction for work-related expenses instead of itemising smaller claims (<a href="https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/deductions-you-can-claim/work-related-deductions/standard-deduction-for-work-related-expenses" target="_blank" rel="noopener noreferrer">ATO</a>).</li>
+        <li><strong>1 July 2026:</strong> the HECS/HELP repayment threshold rose from $67,000 to $69,528 (<a href="https://www.ato.gov.au/tax-rates-and-codes/study-and-training-loan-minimum-repayment-income-and-rates" target="_blank" rel="noopener noreferrer">ATO</a>).</li>
+        <li><strong>1 July 2026:</strong> the Medicare levy surcharge starts at $105,000 for singles (up from $101,000) and $210,000 for families (<a href="https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates" target="_blank" rel="noopener noreferrer">ATO</a>).</li>
+        <li><strong>1 July 2026:</strong> the concessional super contributions cap rose from $30,000 to $32,500, and the maximum contribution base is $270,830 (<a href="https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/contributions-caps" target="_blank" rel="noopener noreferrer">ATO</a>).</li>
+        <li><strong>1 July 2026:</strong> the ACT Home Buyer Concession Scheme dropped its price cap and income test, so eligible buyers pay no conveyance duty at any price (<a href="https://www.revenue.act.gov.au/about-the-act-revenue-office/news/act-budget-2026-27-updates" target="_blank" rel="noopener noreferrer">ACT Revenue Office</a>).</li>
+      </ul>
 
       <h2>How often figures are re-checked</h2>
       <p>Rates are re-checked each 1 July, when most tax rates, thresholds and duty brackets change, and whenever a government announces a change, such as in a Budget or a revenue office update. The date of the last check is shown on each tool and in the footer.</p>
@@ -69,5 +84,39 @@
       <p>The calculators give general estimates based on the information you enter and the rules described on each page. They don't take your personal circumstances into account and aren't financial, tax, credit or legal advice. Before making a decision, confirm figures with the ATO, your state revenue office, your lender or a licensed adviser. See the <a href="privacy.html">privacy policy</a> for how your information is handled.</p>
     </article>
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="./" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="./tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="./tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="./tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="./tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="./tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="./tools/gst.html">GST</a></li><li><a href="./tools/super.html">Super & Salary Sacrifice</a></li><li><a href="./tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="./tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="./tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="./tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="./tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="./tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="./tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="./tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="./tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="./tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="./tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="./tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="./tools/mortgage.html">Mortgage Repayments</a></li><li><a href="./tools/offset.html">Offset Account</a></li><li><a href="./tools/rental-yield.html">Rental Yield</a></li><li><a href="./tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="./tools/borrowing-power.html">Borrowing Power</a></li><li><a href="./tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="./tools/refinance.html">Refinance</a></li><li><a href="./tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="./tools/lmi.html">LMI Calculator</a></li><li><a href="./tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="./tools/compound-interest.html">Compound Interest</a></li><li><a href="./tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="./tools/credit-card.html">Credit Card Payoff</a></li><li><a href="./tools/savings-goal.html">Savings Goal</a></li><li><a href="./tools/inflation.html">Inflation</a></li><li><a href="./tools/term-deposit.html">Term Deposit</a></li><li><a href="./tools/balance-transfer.html">Balance Transfer</a></li><li><a href="./tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="./tools/calculator.html">Calculator</a></li><li><a href="./tools/percentage.html">Percentage</a></li><li><a href="./tools/unit-converter.html">Unit Converter</a></li><li><a href="./tools/date-calculator.html">Date Calculator</a></li><li><a href="./tools/world-clock.html">World Clock</a></li><li><a href="./tools/stopwatch.html">Stopwatch</a></li><li><a href="./tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="./about.html">About</a><a href="./privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

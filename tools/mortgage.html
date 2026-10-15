@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
@@ -33,7 +34,7 @@
   <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/chart.js">
   <link rel="modulepreload" href="../js/pages/mortgage.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Mortgage Repayment Calculator Australia", "description": "Work out weekly, fortnightly or monthly repayments and total interest on an Australian home loan, with a repayment table for $400,000 to $1 million loans.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What are the repayments on a $600,000 mortgage?", "acceptedAnswer": {"@type": "Answer", "text": "$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792."}}, {"@type": "Question", "name": "How much interest will I pay over 30 years?", "acceptedAnswer": {"@type": "Answer", "text": "$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest."}}, {"@type": "Question", "name": "Does this include fees or LMI?", "acceptedAnswer": {"@type": "Answer", "text": "No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."}}, {"@type": "Question", "name": "What about interest-only loans?", "acceptedAnswer": {"@type": "Answer", "text": "Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans."}}, {"@type": "Question", "name": "How much will I save with an offset account?", "acceptedAnswer": {"@type": "Answer", "text": "About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the offset account calculator for your own balance."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Mortgage Repayment Calculator Australia", "description": "Work out weekly, fortnightly or monthly repayments and total interest on an Australian home loan, with a repayment table for $400,000 to $1 million loans.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What are the repayments on a $600,000 mortgage?", "acceptedAnswer": {"@type": "Answer", "text": "$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792."}}, {"@type": "Question", "name": "What are the repayments on a $500,000 or $750,000 mortgage?", "acceptedAnswer": {"@type": "Answer", "text": "$2,998 a month on $500,000 and $4,497 on $750,000, at 6% over 30 years. At 5.5% they're $2,839 and $4,258; at 6.5%, $3,160 and $4,741."}}, {"@type": "Question", "name": "How much interest will I pay over 30 years?", "acceptedAnswer": {"@type": "Answer", "text": "$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest."}}, {"@type": "Question", "name": "How much do extra repayments save?", "acceptedAnswer": {"@type": "Answer", "text": "$106,693 in interest and 3 years 11 months off a $600,000 loan at 6% over 30 years, if you pay an extra $200 a month from the start. An extra $100 a month saves $58,423 and 2 years 1 month."}}, {"@type": "Question", "name": "How much are interest-only repayments?", "acceptedAnswer": {"@type": "Answer", "text": "$3,000 a month on $600,000 at 6% (loan × rate ÷ 12), against $3,597 for principal and interest. After 5 interest-only years the repayment jumps to $3,866 a month for the remaining 25 years, and you pay $44,713 more interest overall."}}, {"@type": "Question", "name": "Does this include fees or LMI?", "acceptedAnswer": {"@type": "Answer", "text": "No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."}}, {"@type": "Question", "name": "How much will I save with an offset account?", "acceptedAnswer": {"@type": "Answer", "text": "About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the offset account calculator for your own balance."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -65,7 +66,7 @@
     <!-- content:start -->
     <div class="aus-slot"></div>
     <section class="content">
-      <h2>How it works</h2>
+      <h2>How mortgage repayments are calculated</h2>
       <p class="checked-line">Checked 15 Oct 2026. Uses the same approach as <a href="https://moneysmart.gov.au/home-loans/mortgage-calculator" target="_blank" rel="noopener noreferrer">Moneysmart's mortgage calculator</a>, so you can cross-check a result there.</p>
 <p>Repayments on a principal and interest loan are calculated with the standard amortisation formula: each repayment covers that period's interest and pays down some principal. Early on, most of each repayment is interest.</p>
 <h3>Monthly repayments over 30 years</h3>
@@ -77,14 +78,59 @@
 <tr><td>$1,000,000</td><td>$5,678</td><td>$5,996</td><td>$6,321</td></tr>
 </tbody></table></div>
 <p>Principal and interest, monthly repayments, constant rate, no fees.</p>
+<h3>Total interest over 30 years</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Total interest over 30 years"><table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
+<tr><td>$500,000</td><td>$522,020</td><td>$579,191</td><td>$637,722</td></tr>
+<tr><td>$600,000</td><td>$626,424</td><td>$695,029</td><td>$765,267</td></tr>
+<tr><td>$750,000</td><td>$783,030</td><td>$868,786</td><td>$956,584</td></tr>
+</tbody></table></div>
+<p>Half a percentage point on a $600,000 loan is about $191 a month more at 6% than at 5.5% and $68,605 in interest over the life of the loan.</p>
+<h3>Extra repayments</h3>
+<p>Anything you pay above the minimum comes straight off the principal, so every later repayment has less interest in it. On a $600,000 loan at 6% over 30 years, an extra $200 a month saves $106,693 in interest and finishes the loan 3 years 11 months early. An extra $500 a month saves $212,713 and 7 years 11 months. Check your loan allows extra repayments: fixed-rate loans often cap them.</p>
+<h3>Interest-only loans</h3>
+<p>Interest-only repayments are the loan × the rate ÷ 12: $3,000 a month on $600,000 at 6%, against $3,597 for principal and interest. But you repay nothing off the loan. After 5 years interest-only, the full $600,000 has to be repaid over the remaining 25 years, at $3,866 a month, and total interest comes to $739,743 instead of $695,029.</p>
 <p><strong>Tip:</strong> paying fortnightly, half your monthly repayment every two weeks, means 26 half-payments a year: the equivalent of 13 monthly payments. That extra payment can cut years off a 30-year loan. This calculator shows the true fortnightly amount for the same term, so compare carefully.</p>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
-      <h2>Frequently asked questions</h2>
-      <details><summary>What are the repayments on a $600,000 mortgage?</summary><p>$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792.</p></details><details><summary>How much interest will I pay over 30 years?</summary><p>$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest.</p></details><details><summary>Does this include fees or LMI?</summary><p>No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included.</p></details><details><summary>What about interest-only loans?</summary><p>Interest-only repayments are simply loan amount × rate ÷ repayments per year. This calculator covers principal and interest loans.</p></details><details><summary>How much will I save with an offset account?</summary><p>About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href="offset.html">offset account calculator</a> for your own balance.</p></details>
-      <h2>Related tools</h2>
+      <h2>Mortgage repayment FAQs</h2>
+      <details><summary>What are the repayments on a $600,000 mortgage?</summary><p>$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792.</p></details><details><summary>What are the repayments on a $500,000 or $750,000 mortgage?</summary><p>$2,998 a month on $500,000 and $4,497 on $750,000, at 6% over 30 years. At 5.5% they're $2,839 and $4,258; at 6.5%, $3,160 and $4,741.</p></details><details><summary>How much interest will I pay over 30 years?</summary><p>$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest.</p></details><details><summary>How much do extra repayments save?</summary><p>$106,693 in interest and 3 years 11 months off a $600,000 loan at 6% over 30 years, if you pay an extra $200 a month from the start. An extra $100 a month saves $58,423 and 2 years 1 month.</p></details><details><summary>How much are interest-only repayments?</summary><p>$3,000 a month on $600,000 at 6% (loan × rate ÷ 12), against $3,597 for principal and interest. After 5 interest-only years the repayment jumps to $3,866 a month for the remaining 25 years, and you pay $44,713 more interest overall.</p></details><details><summary>Does this include fees or LMI?</summary><p>No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included.</p></details><details><summary>How much will I save with an offset account?</summary><p>About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href="offset.html">offset account calculator</a> for your own balance.</p></details>
+      <h2>More home loan calculators</h2>
       <nav class="related" aria-label="Related tools"><a href="refinance.html">Refinance</a><a href="upfront-costs.html">Upfront Costs of Buying a Home</a><a href="lmi.html">LMI Calculator</a><a href="offset.html">Offset Account</a><a href="borrowing-power.html">Borrowing Power</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

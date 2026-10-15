@@ -50,6 +50,10 @@ P['stamp-duty'] = P['stamp-duty-nsw'];
 P['stamp-duty-vic'] = P['stamp-duty-nsw'];
 P['stamp-duty-qld'] = P['stamp-duty-nsw'];
 P['stamp-duty-wa'] = P['stamp-duty-nsw'];
+P['stamp-duty-sa'] = P['stamp-duty-nsw'];
+P['stamp-duty-tas'] = P['stamp-duty-nsw'];
+P['stamp-duty-act'] = P['stamp-duty-nsw'];
+P['stamp-duty-nt'] = P['stamp-duty-nsw'];
 
 export function icon(name, { size = 24, className = 'icon' } = {}) {
   const body = P[name];

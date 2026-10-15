@@ -25,12 +25,13 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
   <link rel="modulepreload" href="../js/layout.js">
   <link rel="modulepreload" href="../js/pages/world-clock.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "World Clock", "description": "Live world clock: compare the current time in Sydney, London, New York, Delhi, Tokyo and more, add your own cities and convert a meeting time.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the time difference change during the year?", "acceptedAnswer": {"@type": "Answer", "text": "Daylight saving starts and ends on different dates in different countries, and Queensland, the NT and WA don't use it at all, so the gap between two cities can shift by an hour."}}, {"@type": "Question", "name": "Which time zone is Newcastle NSW in?", "acceptedAnswer": {"@type": "Answer", "text": "Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "World Clock", "description": "Live world clock: compare the current time in Sydney, London, New York, Delhi, Tokyo and more, add your own cities and convert a meeting time.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-14", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Why does the time difference change during the year?", "acceptedAnswer": {"@type": "Answer", "text": "Daylight saving starts and ends on different dates in different countries, and Queensland, the NT and WA don't use it at all, so the gap between two cities can shift by an hour."}}, {"@type": "Question", "name": "Which time zone is Newcastle NSW in?", "acceptedAnswer": {"@type": "Answer", "text": "Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -56,16 +57,50 @@
     <div class="clock-grid" id="clocks"></div>
     <!-- content:start -->
     <section class="content">
-      <h2>How it works</h2>
+      <h2>World Clock: how it works</h2>
       <p>See the current time in cities around the world, with the difference from your own time. Add cities you call or work with often; your list is saved on this device.</p>
 <p>To plan a call, use <strong>Convert a time</strong>: pick a date and time in any city, and every clock shows what time that will be there. Daylight saving is handled automatically, including the different change-over dates in Australia, Europe and North America.</p>
       
-      <h2>Frequently asked questions</h2>
+      <h2>World Clock FAQs</h2>
       <details><summary>Why does the time difference change during the year?</summary><p>Daylight saving starts and ends on different dates in different countries, and Queensland, the NT and WA don't use it at all, so the gap between two cities can shift by an hour.</p></details><details><summary>Which time zone is Newcastle NSW in?</summary><p>Newcastle uses Sydney time: AEST (UTC+10), or AEDT (UTC+11) during daylight saving.</p></details>
-      <h2>Related tools</h2>
+      <h2>Related to World Clock</h2>
       <nav class="related" aria-label="Related tools"><a href="date-calculator.html">Date Calculator</a><a href="timer.html">Countdown Timer</a><a href="stopwatch.html">Stopwatch</a><a href="calculator.html">Calculator</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

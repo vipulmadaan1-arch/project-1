@@ -230,6 +230,31 @@ export function offsetSavings({ principal, ratePct, years, offset, frequency = '
   };
 }
 
+// Extra repayments on a P&I loan: the normal repayment plus `extra` each period, until it's paid off.
+// Same simulation as offsetSavings (interest charged each period, at the repayment frequency).
+export function extraRepayments({ principal, ratePct, years, extra = 0, frequency = 'monthly' }) {
+  if (badLoan({ principal, ratePct, years, frequency }) || !(extra >= 0)) return null;
+  const perYear = FREQ[frequency];
+  const i = ratePct / 100 / perYear;
+  const pay = repayment(principal, ratePct, years, perYear);
+  const run = (amount) => {
+    let bal = principal, interest = 0, periods = 0;
+    const max = Math.round(years * perYear) + 1;
+    while (bal > 0.005 && periods < max) {
+      const charge = bal * i;
+      interest += charge;
+      bal = bal + charge - Math.min(amount, bal + charge);
+      periods++;
+    }
+    return { interest, periods };
+  };
+  const base = run(pay), faster = run(pay + extra);
+  return { repayment: pay, interestSaved: base.interest - faster.interest, periodsSaved: base.periods - faster.periods, interest: faster.interest, periods: faster.periods };
+}
+
+// Interest-only repayment: the interest on the whole loan each period (no principal is repaid).
+export const interestOnlyRepayment = (principal, ratePct, frequency = 'monthly') => (principal * ratePct) / 100 / FREQ[frequency];
+
 // ---------- NSW transfer (stamp) duty, 2026/27 ----------
 // Source: Revenue NSW "How to calculate transfer duty", rates for 2026/2027 (checked 14 Oct 2026).
 export const NSW_DUTY_YEAR = '2026/27';

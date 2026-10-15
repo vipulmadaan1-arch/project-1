@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
@@ -32,7 +33,7 @@
   <link rel="modulepreload" href="../js/rates.js">
   <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/gst.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate GST from a total?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09."}}, {"@type": "Question", "name": "Is GST charged on fresh food, rent or medical?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as GST-free. Renting out a home is input taxed, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list."}}, {"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO's GST guide for your situation."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "GST Calculator", "description": "Free Australian GST calculator. Add 10% GST to a price or work out the GST included in a total, and see the amount excluding GST, the GST and the total.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I calculate GST from a total?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09."}}, {"@type": "Question", "name": "How much GST is in $100?", "acceptedAnswer": {"@type": "Answer", "text": "$9.09. A $100 GST-inclusive price is $90.91 before GST. Taking 10% off would give $90, which is wrong."}}, {"@type": "Question", "name": "What is $1,000 plus GST?", "acceptedAnswer": {"@type": "Answer", "text": "$1,100: $1,000 × 1.1, of which $100 is GST."}}, {"@type": "Question", "name": "Is GST charged on fresh food, rent or medical?", "acceptedAnswer": {"@type": "Answer", "text": "Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as GST-free. Renting out a home is input taxed, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list."}}, {"@type": "Question", "name": "Why divide by 11?", "acceptedAnswer": {"@type": "Answer", "text": "Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total."}}, {"@type": "Question", "name": "Do I need to charge GST?", "acceptedAnswer": {"@type": "Answer", "text": "Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the ATO's GST guide for your situation."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -58,7 +59,7 @@
     </div>
     <!-- content:start -->
     <section class="content">
-      <h2>How it works</h2>
+      <h2>How GST is calculated</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">the ATO's GST guide</a>.</p>
 <p>Australia's GST rate is 10%.</p>
 <ul><li><strong>Add GST:</strong> price × 1.1. $100 + GST = $110.</li>
@@ -80,12 +81,46 @@
 <tr><td>$5,500</td><td>$500.00</td><td>$5,000.00</td></tr>
 </tbody></table></div>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
-      <h2>Frequently asked questions</h2>
-      <details><summary>How do I calculate GST from a total?</summary><p>Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09.</p></details><details><summary>Is GST charged on fresh food, rent or medical?</summary><p>Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/gst-free-sales" target="_blank" rel="noopener noreferrer">GST-free</a>. Renting out a home is <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/input-taxed-sales" target="_blank" rel="noopener noreferrer">input taxed</a>, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list.</p></details><details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">ATO's GST guide</a> for your situation.</p></details>
-      <h2>Related tools</h2>
+      <h2>GST FAQs</h2>
+      <details><summary>How do I calculate GST from a total?</summary><p>Divide the total by 11. For a $1,000 GST-inclusive price, the GST is $1,000 ÷ 11 = $90.91, and the price before GST is $1,000 ÷ 1.1 = $909.09.</p></details><details><summary>How much GST is in $100?</summary><p>$9.09. A $100 GST-inclusive price is $90.91 before GST. Taking 10% off would give $90, which is wrong.</p></details><details><summary>What is $1,000 plus GST?</summary><p>$1,100: $1,000 × 1.1, of which $100 is GST.</p></details><details><summary>Is GST charged on fresh food, rent or medical?</summary><p>Mostly no. The ATO lists most basic food, some medical, health and care services, some medicines and some medical aids as <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/gst-free-sales" target="_blank" rel="noopener noreferrer">GST-free</a>. Renting out a home is <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst/when-to-charge-gst-and-when-not-to/input-taxed-sales" target="_blank" rel="noopener noreferrer">input taxed</a>, so residential rent has no GST. Not every food is GST-free, so check the ATO's detailed food list.</p></details><details><summary>Why divide by 11?</summary><p>Because a GST-inclusive price is 110% of the base price, GST is 10/110 = 1/11 of the total.</p></details><details><summary>Do I need to charge GST?</summary><p>Generally, businesses must register for GST when their GST turnover is $75,000 or more. Check the <a href="https://www.ato.gov.au/businesses-and-organisations/gst-excise-and-indirect-taxes/gst" target="_blank" rel="noopener noreferrer">ATO's GST guide</a> for your situation.</p></details>
+      <h2>More tax calculators</h2>
       <nav class="related" aria-label="Related tools"><a href="percentage.html">Percentage</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="car-stamp-duty.html">Car Stamp Duty, All States</a><a href="take-home-pay.html">Take-Home Pay</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

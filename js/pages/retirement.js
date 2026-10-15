@@ -1,9 +1,9 @@
 import { fmtMoney, readNumber, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
-import { project, drawdown, ASFA, PRESERVATION_AGE, CONCESSIONAL_CAP } from '../retirement.js';
+import { retirementPlan, retirementAgeUsed, ASFA, PRESERVATION_AGE, PENSION_AGE, CONCESSIONAL_CAP } from '../retirement.js';
 import { stackedColumns, perFrame } from '../chart.js';
 
 const $ = (id) => document.getElementById(id);
-const OUT = ['total', 'future', 'paidin', 'earned', 'fees', 'lasts', 'asfa-c', 'asfa-m', 'asfa-l'];
+const OUT = ['total', 'future', 'stream', 'paidin', 'earned', 'fees', 'lasts', 'asfa-c', 'asfa-m', 'asfa-l'];
 const pct = (n) => `${Math.round(n * 100)}%`;
 const card = $('chart').closest('.chart-card');
 // The headline figures update as you type; the chart and year table follow a frame later.
@@ -22,27 +22,33 @@ function update() {
     feePct: readNumber($('feepct'), { name: 'Admin fee', unit: 'percent', min: 0, max: 5, optional: true, example: '0.11' }),
     feeDollar: readNumber($('feedollar'), { name: 'Admin fee in dollars', unit: 'money', min: 0, max: 1e5, optional: true }),
     wageGrowthPct: readNumber($('wage'), { name: 'Wage growth', unit: 'percent', min: -5, max: 15, example: '3.7' }),
-    inflationPct: readNumber($('inflation'), { name: 'Inflation', unit: 'percent', min: -5, max: 15, example: '2.5' }),
+    deflatorPct: readNumber($('deflator'), { name: 'Wage inflation while working', unit: 'percent', min: -5, max: 15, example: '3.7' }),
+    inflationPct: readNumber($('inflation'), { name: 'Price inflation in retirement', unit: 'percent', min: -5, max: 15, example: '2.5' }),
+    endAge: readNumber($('endage'), { name: 'Plan income to age', unit: 'years', min: 61, max: 110, whole: true, example: '92' }),
     income: readNumber($('income'), { name: 'Retirement income', unit: 'money', min: 0, max: 1e8, optional: true }),
   };
   const fail = (msg = '') => { later(null); card.hidden = true; $('note').textContent = msg; return blank(...OUT.map($)); };
   if (age === null || retireAge === null || Object.values(v).includes(null)) return fail();
-  if (retireAge <= age) return fail('Your retirement age needs to be later than your age now. Already retired? Enter next year as your retirement age.');
+  const used = retirementAgeUsed(age, retireAge);
+  if (!used) return fail('Your retirement age needs to be later than your age now. Already retired? Enter next year as your retirement age.');
 
   const hh = ASFA[$('household').value] || ASFA.single;
   const who = $('household').value === 'couple' ? 'couple' : 'single';
-  const r = project({ age, retireAge, ...v, sgRate: v.sg / 100 });
-  const d = drawdown({ balance: r.balanceReal, income: v.income, startAge: retireAge, returnPct: v.returnPct, feePct: v.feePct, feeDollar: v.feeDollar, inflationPct: v.inflationPct });
+  const r = retirementPlan({ age, ...v, retireAge: used.age, sgRate: v.sg / 100 });
+  const d = r.draw;
 
-  $('total-label').textContent = `Super at ${retireAge}, in today's dollars`;
+  const at = used.age;
+  $('total-label').textContent = `Super at ${at}, in today's dollars`;
   $('total').textContent = fmtMoney(r.balanceReal);
-  $('future-label').textContent = `In ${new Date().getFullYear() + retireAge - age} dollars`;
+  $('future-label').textContent = `In ${new Date().getFullYear() + at - age} dollars (not adjusted for inflation)`;
   $('future').textContent = fmtMoney(r.balance);
+  $('stream-label').textContent = `Income it could pay each year from ${at} to ${r.stream.endAge}, today's dollars`;
+  $('stream').textContent = fmtMoney(r.stream.income);
   $('paidin').textContent = fmtMoney(r.paidInReal);
   $('earned').textContent = fmtMoney(r.earningsReal);
   $('fees').textContent = fmtMoney(r.fees);
   $('lasts-label').textContent = v.income > 0 ? `Drawing ${fmtMoney(v.income)} a year, it lasts` : 'Drawing no income, it lasts';
-  $('lasts').textContent = d.lastsForever ? `Past age 110` : `${d.years < 1 ? 'Under a year' : `${Math.floor(d.years)} years`}, to ${Math.floor(d.runsOutAge)}`;
+  $('lasts').textContent = d.lastsForever ? `Past age 110` : `${d.years < 1 ? 'Under a year' : `${Math.floor(d.years)} year${Math.floor(d.years) === 1 ? '' : 's'}`}, to ${Math.floor(d.runsOutAge)}`;
   $('asfa-c-label').textContent = `ASFA comfortable, ${who}, per year`;
   $('asfa-c').textContent = fmtMoney(hh.comfortable);
   $('asfa-m-label').textContent = `ASFA modest, ${who}, per year`;
@@ -52,7 +58,9 @@ function update() {
 
   const notes = [];
   if (r.cappedYears) notes.push(`Your employer super plus salary sacrifice would go over the ${fmtMoney(CONCESSIONAL_CAP)} concessional cap, so we cut the sacrifice back to fit in ${r.cappedYears === r.rows.length ? 'every year' : `${r.cappedYears} of ${r.rows.length} years`}.`);
-  if (retireAge < PRESERVATION_AGE) notes.push(`You usually can't take your super until ${PRESERVATION_AGE} (your preservation age) and retired, or 65.`);
+  if (used.reason === 'preservation') notes.push(`You usually can't take your super until ${PRESERVATION_AGE} (your preservation age) and retired, or 65, so we've worked this out to age ${at}.`);
+  if (used.reason === 'next-birthday') notes.push(`You're ${PENSION_AGE} or older, so we've assumed you retire on your next birthday, at ${at}. Enter a later age to change it.`);
+  if (r.stream.endAge !== v.endAge) notes.push(`The income is spread over at least five years, to ${r.stream.endAge}.`);
   if (v.income > 0) {
     const level = v.income >= hh.comfortable ? 'at or above ASFA’s comfortable' : v.income >= hh.modest ? 'between ASFA’s modest and comfortable' : 'below ASFA’s modest';
     notes.push(`Your income of ${fmtMoney(v.income)} a year is ${level} standard for a ${who} homeowner. The Age Pension (from 67) could pay part of it once your super is lower; it isn't included here.`);

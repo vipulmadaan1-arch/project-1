@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
@@ -79,7 +80,7 @@
     <!-- content:start -->
     <div class="aus-slot"></div>
     <section class="content">
-      <h2>How it works</h2>
+      <h2>How your tax refund is worked out</h2>
       <p class="checked-line">Rates checked 15 Oct 2026 against <a href="https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents" target="_blank" rel="noopener noreferrer">the ATO's resident tax rates</a> and the ATO Medicare levy, surcharge and study loan pages.</p>
 <p>Your refund is the tax your employer withheld minus the tax you actually owe for the year. We add your salary, interest, dividends and franking credits, take off your deductions to get your <strong>taxable income</strong>, then work out income tax at Australian resident rates, take off the <strong>low income tax offset</strong> (up to $700, phasing out by $66,667), and add the <strong>Medicare levy</strong> (2%, reduced below $35,013), the <strong>Medicare levy surcharge</strong> if you had no private hospital cover, and any compulsory <strong>HECS/HELP</strong> repayment. Franking credits come off what you owe and can be refunded.</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="Table: Taxable income, 2025-26, 2026-27"><table><thead><tr><th>Taxable income</th><th>2025-26</th><th>2026-27</th></tr></thead><tbody>
@@ -87,12 +88,46 @@
 <tr><td>$135,001 to $190,000</td><td>37%</td><td>37%</td></tr><tr><td>$190,001 and over</td><td>45%</td><td>45%</td></tr></tbody></table></div>
 <p><strong>2026-27</strong> adds a $1,000 standard deduction for employees, applied automatically. Work-related expenses you claim reduce it dollar for dollar, so you get the larger of $1,000 and your claims. Union fees and professional association fees are claimed on top. The Medicare levy surcharge thresholds rise from $101,000 (2025-26) to $105,000 (2026-27) for singles, and the HECS/HELP repayment threshold from $67,000 to $69,528. The ATO hasn't published 2026-27 Medicare levy low-income thresholds yet, so 2025-26 figures ($28,011 and $35,013) are used.</p>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
-      <h2>Frequently asked questions</h2>
+      <h2>Tax refund FAQs</h2>
       <details><summary>How much tax do I pay on $85,000 in 2025-26?</summary><p>$17,988: $16,288 income tax plus a $1,700 Medicare levy, with no deductions. In 2026-27 the same salary pays $17,400 ($15,720 tax plus $1,680 Medicare levy), $588 less, thanks to the 15% bracket and the $1,000 standard deduction.</p></details><details><summary>How much does the $1,000 standard deduction save?</summary><p>$320 at a $85,000 salary in 2026-27 (30% tax plus 2% Medicare levy on $1,000). It isn't in your pay; it comes back when you lodge, so it adds to your refund. It doesn't exist for 2025-26.</p></details><details><summary>Will I pay the Medicare levy surcharge without private health insurance?</summary><p>Only above the surcharge threshold. A single person with $110,000 taxable income and no hospital cover pays $1,100 (1%) in 2025-26. In 2026-27 the same salary pays $1,090, because the $1,000 standard deduction takes taxable income to $109,000, still above the $105,000 threshold.</p></details><details><summary>How much HECS/HELP comes out of my refund?</summary><p>$2,700 on $85,000 in 2025-26: 15c for each $1 over $67,000. In 2026-27 it's $2,170.80, because the threshold rises to $69,528 and the standard deduction lowers taxable income to $84,000. Employers withhold extra for HELP during the year, so include that in tax withheld.</p></details><details><summary>Why do I get a refund if I earn under $45,000?</summary><p>Mostly the low income tax offset, which the ATO applies at tax time, not in your pay. On $30,000 in 2025-26 the $700 offset cuts income tax from $1,888 to $1,188. With a $198.90 Medicare levy and $1,500 withheld, the refund is $113.10.</p></details>
-      <h2>Related tools</h2>
+      <h2>More tax calculators</h2>
       <nav class="related" aria-label="Related tools"><a href="take-home-pay.html">Take-Home Pay</a><a href="work-deductions.html">Work From Home & Car Expenses</a><a href="hecs-help.html">HECS/HELP Debt Payoff</a><a href="medicare-levy-surcharge.html">Medicare Levy Surcharge</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>

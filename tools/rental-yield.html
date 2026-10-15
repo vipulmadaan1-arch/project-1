@@ -25,6 +25,7 @@
   <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
   <link rel="modulepreload" href="../js/config.js">
   <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/site-footer.js">
   <link rel="modulepreload" href="../js/icons.js">
   <link rel="modulepreload" href="../js/ads.js">
   <link rel="modulepreload" href="../js/format.js">
@@ -32,7 +33,7 @@
   <link rel="modulepreload" href="../js/rates.js">
   <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/rental-yield.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Yield Calculator", "description": "Calculate gross and net rental yield for an Australian investment property from price, weekly rent, vacancy and annual costs.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What costs should I include?", "acceptedAnswer": {"@type": "Answer", "text": "Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."}}, {"@type": "Question", "name": "Does this include mortgage repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately."}}, {"@type": "Question", "name": "What's a good rental yield?", "acceptedAnswer": {"@type": "Answer", "text": "About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Rental Yield Calculator", "description": "Calculate gross and net rental yield for an Australian investment property from price, weekly rent, vacancy and annual costs.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}, "dateModified": "2026-10-15", "publisher": {"@type": "Organization", "name": "Sorted, Mate"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the rental yield on a $550,000 property renting for $520 a week?", "acceptedAnswer": {"@type": "Answer", "text": "4.92% gross: $27,040 a year ÷ $550,000. With 2 weeks' vacancy and $7,500 of costs, net income is $18,500, a 3.36% net yield."}}, {"@type": "Question", "name": "What is the yield on a $750,000 property at $650 a week?", "acceptedAnswer": {"@type": "Answer", "text": "4.51% gross. With 2 weeks' vacancy and $9,000 of yearly costs, it nets $23,500, a 3.13% net yield."}}, {"@type": "Question", "name": "What costs should I include?", "acceptedAnswer": {"@type": "Answer", "text": "Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."}}, {"@type": "Question", "name": "Does this include mortgage repayments?", "acceptedAnswer": {"@type": "Answer", "text": "No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and the rental cashflow calculator for your cash flow after tax."}}, {"@type": "Question", "name": "What's a good rental yield?", "acceptedAnswer": {"@type": "Answer", "text": "About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -61,18 +62,59 @@
     <!-- content:start -->
     <div class="aus-slot"></div>
     <section class="content">
-      <h2>How it works</h2>
+      <h2>How rental yield is calculated</h2>
       <p class="checked-line">Checked 15 Oct 2026. The costs to include follow <a href="https://moneysmart.gov.au/property-investment/buying-an-investment-property" target="_blank" rel="noopener noreferrer">Moneysmart's guide to buying an investment property</a>.</p>
 <p><strong>Gross yield</strong> = annual rent ÷ purchase price × 100. It's the quick comparison figure used in listings.</p>
 <p><strong>Net yield</strong> = (annual rent after vacancy − annual costs) ÷ purchase price × 100. It's a better guide to what the property actually earns before mortgage interest and tax.</p>
-<p><strong>Example:</strong> $520/week on a $550,000 property is $27,040 a year: a 4.92% gross yield. With 2 weeks' vacancy and $7,500 of yearly costs, net income is $18,500, a 3.36% net yield.</p>
+<p><strong>Example:</strong> $520/week on a $550,000 property is $27,040 a year: a 4.92% gross yield. With 2 weeks' vacancy ($26,000 of rent received) and $7,500 of yearly costs, net income is $18,500, a 3.36% net yield.</p>
+<h3>Costs that turn gross into net</h3>
+<ul><li>Council and water rates, and strata levies for a unit</li>
+<li>Landlord insurance</li>
+<li>Property management, usually a percentage of the rent plus letting fees</li>
+<li>Repairs and maintenance</li>
+<li>Land tax, if your landholdings are over your state's threshold</li></ul>
+<p>Mortgage interest, depreciation and tax aren't in the yield, because they depend on how you finance and own the property, not on the property itself. For those, use the <a href="rental-cashflow.html">rental cashflow and negative gearing calculator</a>.</p>
       <p class="checked-line advice-line">General information only, not financial, tax or credit advice. Check your situation with the ATO, your state revenue office or a licensed adviser.</p>
-      <h2>Frequently asked questions</h2>
-      <details><summary>What costs should I include?</summary><p>Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies.</p></details><details><summary>Does this include mortgage repayments?</summary><p>No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and consider your cash flow separately.</p></details><details><summary>What's a good rental yield?</summary><p>About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.</p></details>
-      <h2>Related tools</h2>
+      <h2>Rental yield FAQs</h2>
+      <details><summary>What is the rental yield on a $550,000 property renting for $520 a week?</summary><p>4.92% gross: $27,040 a year ÷ $550,000. With 2 weeks' vacancy and $7,500 of costs, net income is $18,500, a 3.36% net yield.</p></details><details><summary>What is the yield on a $750,000 property at $650 a week?</summary><p>4.51% gross. With 2 weeks' vacancy and $9,000 of yearly costs, it nets $23,500, a 3.13% net yield.</p></details><details><summary>What costs should I include?</summary><p>Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies.</p></details><details><summary>Does this include mortgage repayments?</summary><p>No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and the rental cashflow calculator for your cash flow after tax.</p></details><details><summary>What's a good rental yield?</summary><p>About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.</p></details>
+      <h2>More property investment tools</h2>
       <nav class="related" aria-label="Related tools"><a href="rental-cashflow.html">Rental Cashflow & Negative Gearing</a><a href="mortgage.html">Mortgage Repayments</a><a href="stamp-duty.html">Stamp Duty, All States</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
     </section>
     <!-- content:end -->
   </main>
+  <!-- footer:start -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-about">
+        <a class="brand" href="../" aria-label="Sorted, Mate home"><svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
+    <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
+    <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg><span>Sorted<span class="brand-comma">,</span> Mate</span></a>
+        <p>Free calculators for Australian money questions, plus everyday tools. Calculations run in your browser: the calculators never send your figures anywhere.</p>
+        <span class="stamp">Rates checked 15 Oct 2026</span>
+      </div>
+      <div>
+        <p class="foot-head">Tax & pay</p>
+        <ul><li><a href="../tools/take-home-pay.html">Take-Home Pay</a></li><li><a href="../tools/gross-up.html">Salary Needed for Take-Home Pay</a></li><li><a href="../tools/capital-gains-tax.html">Capital Gains Tax</a></li><li><a href="../tools/work-deductions.html">Work From Home & Car Expenses</a></li><li><a href="../tools/hecs-help.html">HECS/HELP Debt Payoff</a></li><li><a href="../tools/gst.html">GST</a></li><li><a href="../tools/super.html">Super & Salary Sacrifice</a></li><li><a href="../tools/medicare-levy-surcharge.html">Medicare Levy Surcharge</a></li><li><a href="../tools/tax-refund.html">Tax Refund Estimator</a></li><li><a href="../tools/retirement.html">Super & Retirement</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Property</p>
+        <ul><li><a href="../tools/stamp-duty.html">Stamp Duty, All States</a></li><li><a href="../tools/stamp-duty-nsw.html">NSW Stamp Duty</a></li><li><a href="../tools/stamp-duty-vic.html">VIC Stamp Duty</a></li><li><a href="../tools/stamp-duty-qld.html">QLD Stamp Duty</a></li><li><a href="../tools/stamp-duty-wa.html">WA Stamp Duty</a></li><li><a href="../tools/stamp-duty-sa.html">SA Stamp Duty</a></li><li><a href="../tools/stamp-duty-tas.html">TAS Stamp Duty</a></li><li><a href="../tools/stamp-duty-act.html">ACT Stamp Duty</a></li><li><a href="../tools/stamp-duty-nt.html">NT Stamp Duty</a></li><li><a href="../tools/mortgage.html">Mortgage Repayments</a></li><li><a href="../tools/offset.html">Offset Account</a></li><li><a href="../tools/rental-yield.html">Rental Yield</a></li><li><a href="../tools/car-stamp-duty.html">Car Stamp Duty, All States</a></li><li><a href="../tools/borrowing-power.html">Borrowing Power</a></li><li><a href="../tools/rental-cashflow.html">Rental Cashflow & Negative Gearing</a></li><li><a href="../tools/refinance.html">Refinance</a></li><li><a href="../tools/rent-vs-buy.html">Rent vs Buy</a></li><li><a href="../tools/lmi.html">LMI Calculator</a></li><li><a href="../tools/upfront-costs.html">Upfront Costs of Buying a Home</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Loans & savings</p>
+        <ul><li><a href="../tools/compound-interest.html">Compound Interest</a></li><li><a href="../tools/personal-loan.html">Car & Personal Loan Repayments</a></li><li><a href="../tools/credit-card.html">Credit Card Payoff</a></li><li><a href="../tools/savings-goal.html">Savings Goal</a></li><li><a href="../tools/inflation.html">Inflation</a></li><li><a href="../tools/term-deposit.html">Term Deposit</a></li><li><a href="../tools/balance-transfer.html">Balance Transfer</a></li><li><a href="../tools/budget.html">Budget Planner</a></li></ul>
+      </div>
+      <div>
+        <p class="foot-head">Everyday</p>
+        <ul><li><a href="../tools/calculator.html">Calculator</a></li><li><a href="../tools/percentage.html">Percentage</a></li><li><a href="../tools/unit-converter.html">Unit Converter</a></li><li><a href="../tools/date-calculator.html">Date Calculator</a></li><li><a href="../tools/world-clock.html">World Clock</a></li><li><a href="../tools/stopwatch.html">Stopwatch</a></li><li><a href="../tools/timer.html">Countdown Timer</a></li></ul>
+      </div>
+      <div class="footer-legal">
+        <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
+        <span class="footer-links"><a href="../about.html">About</a><a href="../privacy.html">Privacy</a></span>
+      </div>
+    </div>
+  </footer>
+  <!-- footer:end -->
 </body>
 </html>
