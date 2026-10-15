@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/work-deductions.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work From Home and Car Expenses Calculator 2026-27 | Sorted, Mate</title>
+  <meta name="description" content="Work out your working from home (70c an hour fixed rate) and car (cents per km or logbook) tax deductions for 2024-25 to 2026-27, and what they save you in tax.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Work From Home and Car Expenses Calculator 2026-27">
+  <meta property="og:description" content="Work out your working from home (70c an hour fixed rate) and car (cents per km or logbook) tax deductions for 2024-25 to 2026-27, and what they save you in tax.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/deductions.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/work-deductions.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Work From Home and Car Expenses Calculator", "description": "Work out your working from home (70c an hour fixed rate) and car (cents per km or logbook) tax deductions for 2024-25 to 2026-27, and what they save you in tax.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the working from home rate for 2025-26?", "acceptedAnswer": {"@type": "Answer", "text": "70 cents for each hour you work from home, the same as 2024-25. It covers internet, phone, energy and stationery. The ATO's examples round the result down to whole dollars."}}, {"@type": "Question", "name": "What is the ATO cents per km rate for 2026-27?", "acceptedAnswer": {"@type": "Answer", "text": "91 cents per kilometre, up from 88c in 2024-25 and 2025-26. You can claim up to 5,000 work-related kilometres per car."}}, {"@type": "Question", "name": "Should I claim working from home or take the $1,000 standard deduction?", "acceptedAnswer": {"@type": "Answer", "text": "From 2026-27, if your working from home, car and other work-related expenses add up to less than $1,000, it's better to take the $1,000 standard deduction. Claims above $1,000 replace it and need written evidence."}}, {"@type": "Question", "name": "Can I claim my phone and internet as well as the 70c rate?", "acceptedAnswer": {"@type": "Answer", "text": "No. The fixed rate already includes home and mobile phone and internet. You can claim depreciation on equipment and furniture, such as a desk, chair or laptop."}}, {"@type": "Question", "name": "Can I claim driving to work?", "acceptedAnswer": {"@type": "Answer", "text": "Usually not. Trips between home and your normal workplace are private. You can claim trips between workplaces, to clients or to an alternative workplace, and trips carrying bulky tools you need for work."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#au">Australian</a><span aria-hidden="true">/</span><span aria-current="page">Work From Home &amp; Car Expenses</span></nav>
+    <div class="tool-head">
+      <h1>Work From Home and Car Expenses Calculator</h1>
+      <p>Your working from home and work car deductions using the ATO's fixed rates, and roughly how much tax they save.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="year">Income year</label>
+          <select id="year" aria-describedby="year-hint"><option value="2024-25">2024-25</option><option value="2025-26">2025-26</option><option value="2026-27" selected>2026-27 (this year)</option></select>
+          <small id="year-hint">The year the work was done, not the year you lodge. 2026-27 runs from 1 July 2026 to 30 June 2027.</small></div>
+        <h2 class="section-title">Working from home</h2>
+        <div class="field"><label for="hours">Hours worked from home</label><input type="text" id="hours" class="num" aria-describedby="hours-hint" value="600" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="hours-hint">Actual hours from a timesheet, roster or diary kept at the time. Estimates aren't accepted. Put 0 if none.</small></div>
+        <h2 class="section-title">Car</h2>
+        <div class="field"><label for="method">How you'll claim your car</label>
+          <select id="method"><option value="cents" selected>Cents per kilometre (up to 5,000 km)</option><option value="logbook">Logbook method</option></select></div>
+        <div class="field" id="km-field"><label for="km">Work-related kilometres</label><input type="text" id="km" class="num" aria-describedby="km-hint" value="2000" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="km-hint">Trips between workplaces or to clients, not home to work. Capped at 5,000 km per car. Put 0 if none.</small></div>
+        <div class="field" id="costs-field" hidden><label for="costs">Total car costs for the year ($)</label><input type="text" id="costs" class="num" aria-describedby="costs-hint" value="10000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="costs-hint">Fuel, rego, insurance, servicing, repairs, loan interest and decline in value.</small></div>
+        <div class="field" id="pct-field" hidden><label for="pct">Business-use percentage (%)</label><input type="text" id="pct" class="num" aria-describedby="pct-hint" value="30" inputmode="decimal" spellcheck="false" autocomplete="off"><small id="pct-hint">From a logbook kept for at least 12 continuous weeks.</small></div>
+        <h2 class="section-title">Your tax</h2>
+        <div class="field"><label for="income">Taxable income before these deductions ($)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="90000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Used to estimate your tax saving at your marginal rate, including the 2% Medicare levy.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Total deduction</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="wfh-label">Working from home</span><span id="wfh">–</span></div>
+        <div class="kv"><span id="car-label">Car expenses</span><span id="car">–</span></div>
+        <div class="kv"><span>Estimated tax saving</span><span id="saving">–</span></div>
+        <div class="kv" id="standard-row"><span>Standard deduction you'd give up</span><span id="standard">–</span></div>
+        <div class="kv" id="extra-row"><span>Extra tax saving over the standard deduction</span><span id="extra">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Employees only; Australian residents. <span id="estimate-note"></span>The fixed rate covers home and mobile internet and phone, electricity and gas, and stationery and computer consumables, so you can't claim those separately; you can add depreciation of equipment and furniture on top. The actual cost method isn't covered here. Rates checked against the <a href="https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/deductions-you-can-claim/work-related-deductions/working-from-home-expenses/fixed-rate-method" target="_blank" rel="noopener noreferrer">ATO fixed rate method</a> and <a href="https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/deductions-you-can-claim/work-related-deductions/cars-transport-and-travel/motor-vehicle-and-car-expenses/expenses-for-a-car-you-own-or-lease/cents-per-kilometre-method" target="_blank" rel="noopener noreferrer">cents per kilometre</a> pages on 15 Oct 2026. Estimate only; check with a registered tax agent.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p><strong>Working from home:</strong> the ATO's fixed rate method lets you claim a set amount for every hour you work from home: 70c an hour for 2024-25 and 2025-26. The rate covers home and mobile internet and data, phone use, electricity and gas for heating, cooling and lighting, and stationery and computer consumables, so you can't claim those separately. You can still claim depreciation on work equipment and furniture such as a desk, chair or computer. You need a record of the actual hours you worked from home (a timesheet, roster or diary kept at the time) and at least one bill for each expense the rate covers. The actual cost method isn't covered here.</p>
+<p><strong>Car:</strong> the cents per kilometre method pays a set rate for every work-related kilometre, up to 5,000 km per car: 88c for 2024-25 and 2025-26, and 91c for 2026-27. The rate covers all running costs, including fuel, rego, insurance, servicing and depreciation. If you drive more than 5,000 km for work, the logbook method (total car costs × business-use percentage from a 12-week logbook) may give a bigger claim. Driving between home and your usual workplace usually doesn't count.</p>
+<p><strong>From 2026-27</strong> eligible employees get a $1,000 standard deduction automatically, with no receipts needed. Any work-related expenses you claim, including working from home and car, replace it, so claiming only makes sense if your expenses add up to more than $1,000.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>What is the working from home rate for 2025-26?</summary><p>70 cents for each hour you work from home, the same as 2024-25. It covers internet, phone, energy and stationery. The ATO's examples round the result down to whole dollars.</p></details><details><summary>What is the ATO cents per km rate for 2026-27?</summary><p>91 cents per kilometre, up from 88c in 2024-25 and 2025-26. You can claim up to 5,000 work-related kilometres per car.</p></details><details><summary>Should I claim working from home or take the $1,000 standard deduction?</summary><p>From 2026-27, if your working from home, car and other work-related expenses add up to less than $1,000, it's better to take the $1,000 standard deduction. Claims above $1,000 replace it and need written evidence.</p></details><details><summary>Can I claim my phone and internet as well as the 70c rate?</summary><p>No. The fixed rate already includes home and mobile phone and internet. You can claim depreciation on equipment and furniture, such as a desk, chair or laptop.</p></details><details><summary>Can I claim driving to work?</summary><p>Usually not. Trips between home and your normal workplace are private. You can claim trips between workplaces, to clients or to an alternative workplace, and trips carrying bulky tools you need for work.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="capital-gains-tax.html">Capital Gains Tax</a><a href="gst.html">GST</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>
