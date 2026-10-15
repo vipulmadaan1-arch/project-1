@@ -42,7 +42,7 @@ header.innerHTML = `
   <div class="wrap">
     ${brand}
     <nav class="nav" aria-label="Sections">
-      ${CATEGORIES.map((c) => `<a href="${base}#${c.key}">${c.key === 'au' ? 'Australian' : 'General'}</a>`).join('')}
+      ${CATEGORIES.map((c) => `<a href="${base}#${c.key}">${c.short}</a>`).join('')}
     </nav>
     <button class="icon-btn" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" title="Switch theme">
       <span class="theme-light-only">${icon('moon')}</span><span class="theme-dark-only">${icon('sun')}</span>
@@ -70,7 +70,7 @@ footer.innerHTML = `
     </div>
     ${CATEGORIES.map((c) => `
     <div>
-      <h2>${c.key === 'au' ? 'Australian' : 'General'}</h2>
+      <h2>${c.short}</h2>
       <ul>${TOOLS.filter((t) => t.cat === c.key).map((t) => `<li><a href="${base}tools/${t.slug}.html">${t.name}</a></li>`).join('')}</ul>
     </div>`).join('')}
     <div class="footer-legal">

@@ -99,8 +99,13 @@ function tiles() {
 }
 const withTiles = (html) => html.replace(/(<!-- tiles:start -->)[\s\S]*?(\s*<!-- tiles:end -->)/, `$1\n${tiles()}$2`);
 
+// Each tool page's breadcrumb names its home page section, so moving a tool between sections
+// in js/tools.js is a one-line change.
+const crumbFor = (t) => { const c = CATEGORIES.find((x) => x.key === t.cat); return `<a href="../#${c.key}">${c.title}</a>`; };
 for (const page of PAGES) {
   let html = readFileSync(page.file, 'utf8');
+  const tool = TOOLS.find((t) => page.file === `tools/${t.slug}.html`);
+  if (tool) html = html.replace(/(<nav class="crumbs"[^>]*><a href="\.\.\/">Tools<\/a><span aria-hidden="true">\/<\/span>)<a href="\.\.\/#[a-z]+">[^<]*<\/a>/, `$1${crumbFor(tool)}`);
   html = stamp(html, headBlock(html, page));
   if (page.file === 'index.html') html = withTiles(html);
   writeFileSync(page.file, html);

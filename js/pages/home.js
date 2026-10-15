@@ -39,7 +39,8 @@ function tile(t) {
 
 function render() {
   const q = $search.value.trim().toLowerCase();
-  const match = (t) => !q || `${t.name} ${t.desc} ${t.cat === 'au' ? 'australia australian au' : 'general'}`.toLowerCase().includes(q);
+  const catText = Object.fromEntries(CATEGORIES.map((c) => [c.key, `${c.title} ${c.short}`]));
+  const match = (t) => !q || `${t.name} ${t.desc} ${t.meta} ${catText[t.cat]}`.toLowerCase().includes(q);
   const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
   $pinned.replaceChildren(...pinnedTools.map(tile));
   document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
