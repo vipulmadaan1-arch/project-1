@@ -21,6 +21,8 @@ const P = {
   'personal-loan': '<path d="M3 15.5V12l2-4.5h10.5l3 4.5h1.5v3.5z"/><circle cx="7.5" cy="16" r="1.8"/><circle cx="16" cy="16" r="1.8"/><path d="M5.5 12h13"/>',
   'credit-card': '<rect x="3" y="5.5" width="18" height="13" rx="1.5"/><path d="M3 9.5h18"/><path d="M6.5 14.5h4"/>',
   'savings-goal': '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+  'super': '<path d="M5 20h14"/><path d="M7 20v-6h10v6"/><path d="M9 14V9a3 3 0 0 1 6 0v5"/><path d="M12 3v3"/><path d="M10.5 11.5h3"/>',
+  'medicare-levy-surcharge': '<path d="M12 3.5 19 6v5.5c0 4.3-3 7.6-7 9-4-1.4-7-4.7-7-9V6z"/><path d="M12 9v6M9 12h6"/>',
   search: '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/>',
   arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   pin: '<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/>',

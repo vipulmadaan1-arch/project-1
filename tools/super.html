@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/super.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Salary Sacrifice Calculator 2026-27 | Sorted, Mate</title>
+  <meta name="description" content="Work out your employer super, how much salary sacrifice saves you in tax, the effect on take-home pay and whether you will go over the $32,500 concessional contributions cap in 2026-27.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Super Salary Sacrifice Calculator 2026-27">
+  <meta property="og:description" content="Work out your employer super, how much salary sacrifice saves you in tax, the effect on take-home pay and whether you will go over the $32,500 concessional contributions cap in 2026-27.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/calc.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/super.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/super.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Super Contributions and Salary Sacrifice Calculator", "description": "Work out your employer super, how much salary sacrifice saves you in tax, the effect on take-home pay and whether you will go over the $32,500 concessional contributions cap in 2026-27.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is salary sacrifice worth it?", "acceptedAnswer": {"@type": "Answer", "text": "Usually, if your taxable income is over $45,000. There your tax rate is 30% or more plus the 2% Medicare levy, against 15% in super. Below about $45,000 the saving is small or nothing, and the money is locked away until you can access your super."}}, {"@type": "Question", "name": "What is the concessional contributions cap for 2026-27?", "acceptedAnswer": {"@type": "Answer", "text": "$32,500, up from $30,000. It covers your employer's super guarantee, salary sacrifice and personal contributions you claim as a tax deduction, across all your funds."}}, {"@type": "Question", "name": "How do I find my unused carry-forward cap?", "acceptedAnswer": {"@type": "Answer", "text": "Log in to myGov, open the ATO, then Super, Manage, and Carry-forward concessional contributions. You can only use it if your total super balance was under $500,000 on 30 June of the previous year. Unused amounts expire after 5 years."}}, {"@type": "Question", "name": "What happens if I go over the cap?", "acceptedAnswer": {"@type": "Answer", "text": "The excess is added to your taxable income and taxed at your marginal rate, with a 15% offset for the tax your fund already paid. The ATO writes to you with options for paying it."}}, {"@type": "Question", "name": "What is Division 293 tax?", "acceptedAnswer": {"@type": "Answer", "text": "An extra 15% on concessional contributions for people whose income plus contributions is over $250,000. It applies to the smaller of your contributions or the amount over $250,000. The ATO bills you separately, and you can pay it from your super."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Super and Salary Sacrifice</span></nav>
+    <div class="tool-head">
+      <h1>Super Contributions and Salary Sacrifice Calculator</h1>
+      <p>Employer super, the tax you save by salary sacrificing and how close you are to the concessional cap, for 2026-27.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field" id="salary-field"><label for="salary">Yearly salary before salary sacrifice ($)</label><input type="text" id="salary" class="num" aria-describedby="salary-hint" value="120,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="salary-hint">Your pay before tax, not counting the super your employer adds.</small></div>
+        <div class="field"><label for="sacrifice">Salary sacrifice amount ($)</label><input type="text" id="sacrifice" class="num" aria-describedby="sacrifice-hint" value="10,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="sacrifice-hint">Extra pre-tax pay you ask your employer to put into super.</small></div>
+        <div class="field"><label for="per">Salary sacrifice is per</label>
+          <select id="per"><option value="1">Year</option><option value="12">Month</option><option value="26">Fortnight</option><option value="52">Week</option></select></div>
+        <div class="field" id="personal-field"><label for="personal">Personal contributions you'll claim as a deduction ($ a year, optional)</label><input type="text" id="personal" class="num" aria-describedby="personal-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="personal-hint">After-tax money you put in yourself and claim back at tax time. These count towards the cap too.</small></div>
+        <div class="field" id="unused-field"><label for="unused">Unused cap carried forward ($, optional)</label><input type="text" id="unused" class="num" aria-describedby="unused-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="unused-hint">Only if your total super balance was under $500,000 on 30 June 2026. Find it in myGov: ATO, Super, Manage, Carry-forward concessional contributions.</small></div>
+        <div class="field" id="other-field"><label for="other">Other income for Division 293 ($ a year, optional)</label><input type="text" id="other" class="num" aria-describedby="other-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="other-hint">Reportable fringe benefits, net investment losses and any other taxable income. Only matters if you earn over about $200,000.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Tax saved by salary sacrificing, per year</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span>Employer super guarantee (12%)</span><span id="sg">–</span></div>
+        <div class="kv"><span>Salary sacrifice, per year</span><span id="sacrificed">–</span></div>
+        <div class="kv"><span>Total concessional contributions</span><span id="concessional">–</span></div>
+        <div class="kv"><span id="cap-label">Concessional cap</span><span id="cap">–</span></div>
+        <div class="kv"><span>Income tax and Medicare levy saved</span><span id="taxcut">–</span></div>
+        <div class="kv"><span>15% contributions tax on the sacrifice</span><span id="contrib">–</span></div>
+        <div class="kv"><span>Extra Division 293 tax</span><span id="div293">–</span></div>
+        <div class="kv"><span>Change in take-home pay, per year</span><span id="takehome">–</span></div>
+        <div class="kv"><span>Added to your super after tax</span><span id="added">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">Resident tax rates for 2026-27, with the low income tax offset and Medicare levy; HELP, the Medicare levy surcharge and other offsets aren't included. <span id="estimate-note"></span>Caps and rates checked against the <a href="https://www.ato.gov.au/tax-rates-and-codes/key-superannuation-rates-and-thresholds/contributions-caps" target="_blank" rel="noopener noreferrer">ATO</a> on 15 Oct 2026. General information only, not financial advice.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>Your employer must pay <strong>12%</strong> of your salary into super (the super guarantee), up to the <strong>maximum contribution base of $270,830</strong> for 2026-27. With Payday Super this is now a yearly limit, so the most an employer must pay is $32,499.60. Salary you sacrifice still counts, so sacrificing doesn't reduce your employer's 12%.</p>
+<p><strong>Salary sacrifice</strong> means asking your employer to pay part of your pre-tax salary into super. It isn't taxed at your marginal rate. Instead your fund takes <strong>15% contributions tax</strong>. If your marginal rate plus the 2% Medicare levy is more than 15%, you save the difference. On $100,000, sacrificing $10,000 saves $3,200 in income tax and Medicare, costs $1,500 in contributions tax, and cuts take-home pay by $6,800. That puts $8,500 more in super.</p>
+<p>Employer, salary sacrifice and deductible personal contributions all count towards the <strong>concessional contributions cap of $32,500</strong> from 1 July 2026. Amounts over the cap are added to your taxable income and taxed at your marginal rate, less a 15% offset, so they save little. If your total super balance was under $500,000 on 30 June last year, you can use <strong>unused cap amounts</strong> from the past 5 years. myGov shows how much you have.</p>
+<p>If your income plus concessional contributions is over <strong>$250,000</strong>, <strong>Division 293</strong> adds another 15% on the smaller of your contributions or the amount over $250,000.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is salary sacrifice worth it?</summary><p>Usually, if your taxable income is over $45,000. There your tax rate is 30% or more plus the 2% Medicare levy, against 15% in super. Below about $45,000 the saving is small or nothing, and the money is locked away until you can access your super.</p></details><details><summary>What is the concessional contributions cap for 2026-27?</summary><p>$32,500, up from $30,000. It covers your employer's super guarantee, salary sacrifice and personal contributions you claim as a tax deduction, across all your funds.</p></details><details><summary>How do I find my unused carry-forward cap?</summary><p>Log in to myGov, open the ATO, then Super, Manage, and Carry-forward concessional contributions. You can only use it if your total super balance was under $500,000 on 30 June of the previous year. Unused amounts expire after 5 years.</p></details><details><summary>What happens if I go over the cap?</summary><p>The excess is added to your taxable income and taxed at your marginal rate, with a 15% offset for the tax your fund already paid. The ATO writes to you with options for paying it.</p></details><details><summary>What is Division 293 tax?</summary><p>An extra 15% on concessional contributions for people whose income plus contributions is over $250,000. It applies to the smaller of your contributions or the amount over $250,000. The ATO bills you separately, and you can pay it from your super.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="compound-interest.html">Compound Interest</a><a href="medicare-levy-surcharge.html">Medicare Levy Surcharge</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

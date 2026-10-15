@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-AU" data-base="../">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'sha256-qseZPjL8m1eOgvuz1oilYGUZuM7gTDDkwteAgHMAPNk=' 'strict-dynamic' 'unsafe-inline' 'unsafe-eval' https: http:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script data-module="../js/pages/medicare-levy-surcharge.js">try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medicare Levy Surcharge Calculator 2026-27 | Sorted, Mate</title>
+  <meta name="description" content="Work out the Medicare levy surcharge you would pay without private hospital cover in 2026-27, for singles, couples and families, and compare it with the cost of a hospital policy.">
+  <!-- seo:start -->
+  <meta property="og:site_name" content="Sorted, Mate">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Medicare Levy Surcharge Calculator 2026-27">
+  <meta property="og:description" content="Work out the Medicare levy surcharge you would pay without private hospital cover in 2026-27, for singles, couples and families, and compare it with the cost of a hospital policy.">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- seo:end -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0f2d29" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c1312" media="(prefers-color-scheme: dark)">
+  <link rel="modulepreload" href="../js/ads.js">
+  <link rel="modulepreload" href="../js/config.js">
+  <link rel="modulepreload" href="../js/icons.js">
+  <link rel="modulepreload" href="../js/mls.js">
+  <link rel="modulepreload" href="../js/tools.js">
+  <link rel="modulepreload" href="../js/layout.js">
+  <link rel="modulepreload" href="../js/pages/medicare-levy-surcharge.js">
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebApplication", "name": "Medicare Levy Surcharge Calculator", "description": "Work out the Medicare levy surcharge you would pay without private hospital cover in 2026-27, for singles, couples and families, and compare it with the cost of a hospital policy.", "inLanguage": "en-AU", "isAccessibleForFree": true, "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "AUD"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is it cheaper to pay the Medicare levy surcharge or get private health insurance?", "acceptedAnswer": {"@type": "Answer", "text": "Compare the surcharge with the yearly premium of a basic hospital policy after the rebate. On $130,000 as a single, the surcharge is $1,625. Many basic hospital policies cost less, but check the excess is $750 or less."}}, {"@type": "Question", "name": "Do I pay the surcharge if my partner earns most of the income?", "acceptedAnswer": {"@type": "Answer", "text": "Couples are tested on combined income, but each person pays on their own taxable income and fringe benefits. If you had a spouse all year and your own income for MLS purposes is $27,222 or less (the 2025-26 figure), you don't pay it."}}, {"@type": "Question", "name": "Does salary sacrifice or negative gearing affect the surcharge?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Salary sacrificed super, deductible personal contributions and net investment losses are added back when working out your tier, even though they reduce your taxable income."}}, {"@type": "Question", "name": "What if I only had cover for part of the year?", "acceptedAnswer": {"@type": "Answer", "text": "The surcharge is charged only for the days you didn't have appropriate hospital cover, so enter the number of days without it."}}, {"@type": "Question", "name": "What is Lifetime Health Cover loading?", "acceptedAnswer": {"@type": "Answer", "text": "It's separate from the surcharge. If you don't hold hospital cover by 1 July after your 31st birthday, your premium goes up 2% for every year you're over 30 when you join, up to 70%. The loading is removed after 10 years of continuous cover."}}]}]</script>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../">Tools</a><span aria-hidden="true">/</span><a href="../#tax">Tax, pay and super</a><span aria-hidden="true">/</span><span aria-current="page">Medicare Levy Surcharge</span></nav>
+    <div class="tool-head">
+      <h1>Medicare Levy Surcharge Calculator</h1>
+      <p>What you would pay without private hospital cover in 2026-27, and whether a hospital policy costs less.</p>
+    </div>
+    <div class="cols">
+      <form class="card" id="form">
+        <div class="field"><label for="status">Your situation</label>
+          <select id="status"><option value="single">Single, no dependent children</option><option value="couple">Couple (married or de facto)</option><option value="parent">Single parent with dependent children</option></select></div>
+        <div class="field" id="children-field"><label for="children">MLS dependent children</label><input type="text" id="children" class="num" aria-describedby="children-hint" value="0" inputmode="numeric" spellcheck="false" autocomplete="off"><small id="children-hint">Under 21, or 21 to 24 and studying full-time. The family threshold rises $1,500 for each child after the first.</small></div>
+        <div class="field" id="taxable-field"><label for="taxable">Your taxable income ($ a year)</label><input type="text" id="taxable" class="num" aria-describedby="taxable-hint" value="110,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="taxable-hint">Income after deductions, as on your tax return.</small></div>
+        <div class="field" id="fringe-field"><label for="fringe">Your reportable fringe benefits ($, optional)</label><input type="text" id="fringe" class="num" aria-describedby="fringe-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="fringe-hint">Shown on your income statement in myGov, if any.</small></div>
+        <div class="field" id="losses-field"><label for="losses">Your net investment losses ($, optional)</label><input type="text" id="losses" class="num" aria-describedby="losses-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="losses-hint">Net rental property loss plus net financial investment loss (negative gearing).</small></div>
+        <div class="field" id="rsc-field"><label for="rsc">Your reportable super contributions ($, optional)</label><input type="text" id="rsc" class="num" aria-describedby="rsc-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="rsc-hint">Salary sacrifice into super plus personal contributions you claim as a deduction. Not your employer's 12%.</small></div>
+        <div class="field" id="spouse-field"><label for="spouse">Your spouse's income for MLS purposes ($)</label><input type="text" id="spouse" class="num" aria-describedby="spouse-hint" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="spouse-hint">Their taxable income plus the same extras. The rate uses your combined income.</small></div>
+        <div class="field"><label for="days">Days without hospital cover this year</label><input type="text" id="days" class="num" aria-describedby="days-hint" value="365" inputmode="numeric" spellcheck="false" autocomplete="off"><small id="days-hint">The surcharge is charged only for days you (or anyone in your family) had no appropriate hospital cover.</small></div>
+        <div class="field" id="premium-field"><label for="premium">Yearly hospital cover premium ($, optional)</label><input type="text" id="premium" class="num" aria-describedby="premium-hint" value="1,400" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="premium-hint">After the private health insurance rebate. Needs an excess of $750 or less for singles, $1,500 or less for couples and families.</small></div>
+      </form>
+      <div class="card readout">
+        <div id="total-label">Medicare levy surcharge</div>
+        <div class="result-big" id="total">–</div>
+        <div class="kv"><span id="income-label">Income for MLS purposes</span><span id="income">–</span></div>
+        <div class="kv"><span>Surcharge rate</span><span id="rate">–</span></div>
+        <div class="kv"><span>Surcharge-free up to</span><span id="threshold">–</span></div>
+        <div class="kv"><span>Charged on (taxable income and fringe benefits)</span><span id="base">–</span></div>
+        <div class="kv"><span>Hospital cover premium</span><span id="premium-out">–</span></div>
+        <div class="kv"><span id="diff-label">Cover compared with the surcharge</span><span id="diff">–</span></div>
+        <p class="note" id="note"></p>
+        <p class="disclaimer">2026-27 thresholds and rates. <span id="estimate-note"></span>Thresholds checked against the <a href="https://www.ato.gov.au/individuals-and-families/medicare-and-private-health-insurance/medicare-levy-surcharge/medicare-levy-surcharge-income-thresholds-and-rates" target="_blank" rel="noopener noreferrer">ATO</a> on 15 Oct 2026. The surcharge is on top of the 2% Medicare levy. General information only.</p>
+      </div>
+    </div>
+    <!-- content:start -->
+    <section class="content">
+      <h2>How it works</h2>
+      <p>The <strong>Medicare levy surcharge</strong> (MLS) is an extra 1% to 1.5% of income. You pay it on top of the 2% Medicare levy if you, your spouse and your dependent children don't have appropriate private hospital cover and your income is over the threshold.</p>
+<table><thead><tr><th>2026-27</th><th>Singles</th><th>Families</th><th>Rate</th></tr></thead><tbody>
+<tr><td>Base tier</td><td>$105,000 or less</td><td>$210,000 or less</td><td>0%</td></tr>
+<tr><td>Tier 1</td><td>$105,001 to $123,000</td><td>$210,001 to $246,000</td><td>1%</td></tr>
+<tr><td>Tier 2</td><td>$123,001 to $164,000</td><td>$246,001 to $328,000</td><td>1.25%</td></tr>
+<tr><td>Tier 3</td><td>$164,001 or more</td><td>$328,001 or more</td><td>1.5%</td></tr></tbody></table>
+<p>Family thresholds go up by $1,500 for each dependent child after the first. Couples and single parents use the family thresholds.</p>
+<p>Your tier depends on your <strong>income for MLS purposes</strong>, combined with your spouse's if you have one: taxable income plus reportable fringe benefits, net investment losses and reportable super contributions. The surcharge itself is charged only on your taxable income and reportable fringe benefits.</p>
+<p>To avoid it you need hospital cover from an Australian insurer with an excess of $750 or less for singles, or $1,500 or less for couples and families. Extras-only cover and travel insurance don't count.</p>
+      <h2>Frequently asked questions</h2>
+      <details><summary>Is it cheaper to pay the Medicare levy surcharge or get private health insurance?</summary><p>Compare the surcharge with the yearly premium of a basic hospital policy after the rebate. On $130,000 as a single, the surcharge is $1,625. Many basic hospital policies cost less, but check the excess is $750 or less.</p></details><details><summary>Do I pay the surcharge if my partner earns most of the income?</summary><p>Couples are tested on combined income, but each person pays on their own taxable income and fringe benefits. If you had a spouse all year and your own income for MLS purposes is $27,222 or less (the 2025-26 figure), you don't pay it.</p></details><details><summary>Does salary sacrifice or negative gearing affect the surcharge?</summary><p>Yes. Salary sacrificed super, deductible personal contributions and net investment losses are added back when working out your tier, even though they reduce your taxable income.</p></details><details><summary>What if I only had cover for part of the year?</summary><p>The surcharge is charged only for the days you didn't have appropriate hospital cover, so enter the number of days without it.</p></details><details><summary>What is Lifetime Health Cover loading?</summary><p>It's separate from the surcharge. If you don't hold hospital cover by 1 July after your 31st birthday, your premium goes up 2% for every year you're over 30 when you join, up to 70%. The loading is removed after 10 years of continuous cover.</p></details>
+      <h2>Related tools</h2>
+      <nav class="related"><a href="take-home-pay.html">Take-Home Pay</a><a href="super.html">Super & Salary Sacrifice</a><a href="gross-up.html">Salary Needed for Take-Home Pay</a><a href="capital-gains-tax.html">Capital Gains Tax</a></nav>
+    </section>
+    <!-- content:end -->
+  </main>
+</body>
+</html>

@@ -4,6 +4,33 @@ import json, re, html, sys, os
 os.chdir(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 C = {
+'super': dict(
+ how="""<p>Your employer must pay <strong>12%</strong> of your salary into super (the super guarantee), up to the <strong>maximum contribution base of $270,830</strong> for 2026-27. With Payday Super this is now a yearly limit, so the most an employer must pay is $32,499.60. Salary you sacrifice still counts, so sacrificing doesn't reduce your employer's 12%.</p>
+<p><strong>Salary sacrifice</strong> means asking your employer to pay part of your pre-tax salary into super. It isn't taxed at your marginal rate. Instead your fund takes <strong>15% contributions tax</strong>. If your marginal rate plus the 2% Medicare levy is more than 15%, you save the difference. On $100,000, sacrificing $10,000 saves $3,200 in income tax and Medicare, costs $1,500 in contributions tax, and cuts take-home pay by $6,800. That puts $8,500 more in super.</p>
+<p>Employer, salary sacrifice and deductible personal contributions all count towards the <strong>concessional contributions cap of $32,500</strong> from 1 July 2026. Amounts over the cap are added to your taxable income and taxed at your marginal rate, less a 15% offset, so they save little. If your total super balance was under $500,000 on 30 June last year, you can use <strong>unused cap amounts</strong> from the past 5 years. myGov shows how much you have.</p>
+<p>If your income plus concessional contributions is over <strong>$250,000</strong>, <strong>Division 293</strong> adds another 15% on the smaller of your contributions or the amount over $250,000.</p>""",
+ faq=[("Is salary sacrifice worth it?","Usually, if your taxable income is over $45,000. There your tax rate is 30% or more plus the 2% Medicare levy, against 15% in super. Below about $45,000 the saving is small or nothing, and the money is locked away until you can access your super."),
+      ("What is the concessional contributions cap for 2026-27?","$32,500, up from $30,000. It covers your employer's super guarantee, salary sacrifice and personal contributions you claim as a tax deduction, across all your funds."),
+      ("How do I find my unused carry-forward cap?","Log in to myGov, open the ATO, then Super, Manage, and Carry-forward concessional contributions. You can only use it if your total super balance was under $500,000 on 30 June of the previous year. Unused amounts expire after 5 years."),
+      ("What happens if I go over the cap?","The excess is added to your taxable income and taxed at your marginal rate, with a 15% offset for the tax your fund already paid. The ATO writes to you with options for paying it."),
+      ("What is Division 293 tax?","An extra 15% on concessional contributions for people whose income plus contributions is over $250,000. It applies to the smaller of your contributions or the amount over $250,000. The ATO bills you separately, and you can pay it from your super.")],
+ related=['take-home-pay','gross-up','compound-interest','medicare-levy-surcharge']),
+'medicare-levy-surcharge': dict(
+ how="""<p>The <strong>Medicare levy surcharge</strong> (MLS) is an extra 1% to 1.5% of income. You pay it on top of the 2% Medicare levy if you, your spouse and your dependent children don't have appropriate private hospital cover and your income is over the threshold.</p>
+<table><thead><tr><th>2026-27</th><th>Singles</th><th>Families</th><th>Rate</th></tr></thead><tbody>
+<tr><td>Base tier</td><td>$105,000 or less</td><td>$210,000 or less</td><td>0%</td></tr>
+<tr><td>Tier 1</td><td>$105,001 to $123,000</td><td>$210,001 to $246,000</td><td>1%</td></tr>
+<tr><td>Tier 2</td><td>$123,001 to $164,000</td><td>$246,001 to $328,000</td><td>1.25%</td></tr>
+<tr><td>Tier 3</td><td>$164,001 or more</td><td>$328,001 or more</td><td>1.5%</td></tr></tbody></table>
+<p>Family thresholds go up by $1,500 for each dependent child after the first. Couples and single parents use the family thresholds.</p>
+<p>Your tier depends on your <strong>income for MLS purposes</strong>, combined with your spouse's if you have one: taxable income plus reportable fringe benefits, net investment losses and reportable super contributions. The surcharge itself is charged only on your taxable income and reportable fringe benefits.</p>
+<p>To avoid it you need hospital cover from an Australian insurer with an excess of $750 or less for singles, or $1,500 or less for couples and families. Extras-only cover and travel insurance don't count.</p>""",
+ faq=[("Is it cheaper to pay the Medicare levy surcharge or get private health insurance?","Compare the surcharge with the yearly premium of a basic hospital policy after the rebate. On $130,000 as a single, the surcharge is $1,625. Many basic hospital policies cost less, but check the excess is $750 or less."),
+      ("Do I pay the surcharge if my partner earns most of the income?","Couples are tested on combined income, but each person pays on their own taxable income and fringe benefits. If you had a spouse all year and your own income for MLS purposes is $27,222 or less (the 2025-26 figure), you don't pay it."),
+      ("Does salary sacrifice or negative gearing affect the surcharge?","Yes. Salary sacrificed super, deductible personal contributions and net investment losses are added back when working out your tier, even though they reduce your taxable income."),
+      ("What if I only had cover for part of the year?","The surcharge is charged only for the days you didn't have appropriate hospital cover, so enter the number of days without it."),
+      ("What is Lifetime Health Cover loading?","It's separate from the surcharge. If you don't hold hospital cover by 1 July after your 31st birthday, your premium goes up 2% for every year you're over 30 when you join, up to 70%. The loading is removed after 10 years of continuous cover.")],
+ related=['take-home-pay','super','gross-up','capital-gains-tax']),
 'personal-loan': dict(
  how="""<p>Repayments use the standard amortisation formula, with interest charged at your repayment frequency (the same assumption as Moneysmart's personal loan calculator). Each repayment covers that period's interest and pays off some of the loan.</p>
 <p><strong>Fees:</strong> an upfront (establishment) fee can be added to the loan, so you pay interest on it, or paid at the start. A monthly account-keeping fee is added to every repayment. The <strong>true cost rate</strong> is the interest rate that would cost the same with no fees. It's worked out like a comparison rate, but on your own loan amount and term.</p>

@@ -31,6 +31,8 @@ export const TOOLS = [
   { slug: 'world-clock', name: 'World Clock', desc: 'Live times worldwide and a meeting-time converter.', meta: '50 cities', cat: 'general' },
   { slug: 'stopwatch', name: 'Stopwatch', desc: 'Split and total lap times to the hundredth.', meta: 'Space to start', cat: 'general' },
   { slug: 'timer', name: 'Countdown Timer', desc: 'Hours, minutes and seconds with an audible alarm.', meta: 'Presets included', cat: 'general' },
+  { slug: 'super', name: 'Super & Salary Sacrifice', desc: 'Employer super, tax saved by salary sacrificing and the concessional cap.', meta: 'ATO 2026-27, $32,500 cap', cat: 'tax' },
+  { slug: 'medicare-levy-surcharge', name: 'Medicare Levy Surcharge', desc: 'The surcharge without hospital cover, and whether a policy costs less.', meta: 'ATO 2026-27 thresholds', cat: 'tax' },
 ];
 
 export const RATES_CHECKED = '15 Oct 2026';
