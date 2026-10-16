@@ -333,3 +333,15 @@ test('header has a visible Home button on every page except the home page', () =
   assert.match(readFileSync('js/icons.js', 'utf8'), /^\s+home: '/m);
   assert.match(readFileSync('css/style.css', 'utf8'), /\.home-btn \{/);
 });
+
+test('IndexNow: key file matches the script, is deployed, and only changed sitemap pages are submitted', async () => {
+  const { KEY, changedUrls } = await import('../scripts/indexnow.mjs');
+  assert.match(KEY, /^[0-9a-f]{32}$/);
+  assert.equal(readFileSync(`${KEY}.txt`, 'utf8'), KEY);
+  const wf = readFileSync('.github/workflows/pages.yml', 'utf8');
+  assert.ok(wf.includes(`cp ${KEY}.txt _site/`), 'deploy copies the key file');
+  assert.match(wf, /node scripts\/indexnow\.mjs/);
+  const sitemap = '<loc>https://x.au/</loc><loc>https://x.au/tools/gst.html</loc>';
+  assert.deepEqual(changedUrls(['index.html', 'tools/gst.html', 'css/style.css', 'google1.html', 'tools/gst.html'], sitemap, 'https://x.au'),
+    ['https://x.au/', 'https://x.au/tools/gst.html']);
+});

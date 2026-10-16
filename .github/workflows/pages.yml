@@ -60,6 +60,7 @@ jobs:
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
           [ -f CNAME ] && cp CNAME _site/ || true
           [ -f ads.txt ] && cp ads.txt _site/ || true
+          cp cbc8338f6c0727d789325048cd4e2fd4.txt _site/ # IndexNow key file (scripts/indexnow.mjs)
       # Stamp the service worker with this commit, so every deploy installs a fresh cache even if
       # VERSION wasn't bumped by hand (the worker serves cache-first, so a missed bump would leave
       # returning visitors on old files and rates).
@@ -73,3 +74,20 @@ jobs:
           path: _site
       - id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
+
+  # After the new pages are live, tell Bing and the other IndexNow search engines which ones changed.
+  # A failed ping is logged and never fails the run.
+  indexnow:
+    needs: deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - run: node scripts/indexnow.mjs "${{ github.event.before }}" "${{ github.sha }}"
