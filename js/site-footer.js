@@ -35,7 +35,7 @@ export const footerHtml = (base) => `<footer class="site-footer">
     </div>`).join('')}
     <div class="footer-legal">
       <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
-      <span class="footer-links"><a href="${base}about.html">About</a><a href="${base}privacy.html">Privacy</a><a href="${base}terms.html">Terms</a>${HAS_CONTACT ? `<a href="${base}contact.html">Get in touch</a>` : ''}${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
+      <span class="footer-links"><a href="${base}about.html">About</a><a href="${base}privacy.html">Privacy</a><a href="${base}terms.html">Terms</a>${HAS_CONTACT ? `<a href="${base}contact.html">Get in touch</a>` : ''}${HAS_BMC ? `<a href="${BMC_URL}" rel="noopener">Support the site</a>` : ''}</span>
     </div>
   </div>
 </footer>`;

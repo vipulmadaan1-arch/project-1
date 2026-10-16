@@ -72,7 +72,7 @@ test('coffee note: only when BMC_URL is set, shown only after an input changes, 
   assert.match(fn, /if \(HAS_BMC && form\)/);
   assert.match(fn, /if \(!e\.isTrusted\) return;/);
   assert.match(fn, /form\.addEventListener\('input', show\)/);
-  assert.ok(fn.includes('Saved you a spreadsheet? <a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>. It keeps the rates checked.'));
+  assert.ok(fn.includes('Saved you a spreadsheet? <a href="${BMC_URL}" rel="noopener">Buy me a coffee</a>. It keeps the rates checked.'));
   assert.doesNotMatch(fn, /\bads?\b|advert/i);
   assert.match(fn, /Print or save as PDF/);
 });
@@ -146,4 +146,13 @@ test('print: every result panel gets a Print or save as PDF button, and the prin
   assert.match(layout, /Made with \$\{SITE_NAME\} \(free\)/);
   assert.match(layout, /Rates checked \$\{RATES_CHECKED\}/);
   assert.match(layout, /Open these results again: \$\{shareUrl\(\)\}/);
+});
+
+test('coffee links open in the same tab, and leaving a calculator saves its inputs so Back restores them', () => {
+  for (const f of ['js/layout.js', 'js/site-footer.js', 'about.html']) {
+    for (const m of read(f).matchAll(/<a[^>]*(?:BMC_URL|bmc-link)[^>]*>/g)) assert.doesNotMatch(m[0], /_blank/, `${f}: ${m[0]}`);
+  }
+  const layout = read('js/layout.js');
+  assert.match(layout, /addEventListener\('pagehide', remember\)/);
+  assert.match(layout, /history\.replaceState\(null, '', `\$\{location\.pathname\}#\$\{formParams\(form\)\}`\)/);
 });

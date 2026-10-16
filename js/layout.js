@@ -43,7 +43,7 @@ header.innerHTML = `
     <button class="icon-btn" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" title="Switch theme">
       <span class="theme-light-only">${icon('moon')}</span><span class="theme-dark-only">${icon('sun')}</span>
     </button>
-    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" target="_blank" rel="noopener noreferrer">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
+    ${HAS_BMC ? `<a class="bmc" href="${BMC_URL}" rel="noopener">${icon('coffee')}<span>Buy me a coffee</span></a>` : ''}
   </div>`;
 document.body.prepend(header);
 
@@ -413,6 +413,11 @@ export function syncFormWithUrl(form, onChange) {
   restoreFromUrl();
   // Opening a results link for the page you're already on only changes the part after #.
   addEventListener('hashchange', () => { if (location.hash.includes('=')) restoreFromUrl(); });
+  // Leaving the page (Buy Me a Coffee, an ad, any link): save the inputs in this history entry's address, so the
+  // Back button reopens the calculator with the same figures even when the browser reloads the page.
+  const remember = () => history.replaceState(null, '', `${location.pathname}#${formParams(form)}`);
+  document.addEventListener('click', (e) => { if (e.target.closest?.('a[href]:not([href^="#"])')) remember(); }, true);
+  addEventListener('pagehide', remember);
 }
 
 // The address that reopens this result: the page plus the form's inputs after the # (see syncFormWithUrl).
@@ -522,7 +527,7 @@ export function addResultActions(card) {
       if (!e.isTrusted) return;
       form.removeEventListener('input', show);
       form.removeEventListener('change', show);
-      wrap.insertAdjacentHTML('beforeend', `<p class="nudge">${icon('coffee')}<span>Saved you a spreadsheet? <a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>. It keeps the rates checked.</span></p>`);
+      wrap.insertAdjacentHTML('beforeend', `<p class="nudge">${icon('coffee')}<span>Saved you a spreadsheet? <a href="${BMC_URL}" rel="noopener">Buy me a coffee</a>. It keeps the rates checked.</span></p>`);
     };
     form.addEventListener('input', show);
     form.addEventListener('change', show);
