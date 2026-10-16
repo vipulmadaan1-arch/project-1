@@ -29,7 +29,7 @@ test('service worker caches every site file', () => {
     ...readdirSync('js').filter((f) => f.endsWith('.js')).map((f) => `js/${f}`),
     ...readdirSync('js/pages').map((f) => `js/pages/${f}`),
     ...readdirSync('fonts').filter((f) => f.endsWith('.woff2')).map((f) => `fonts/${f}`),
-    'index.html', 'privacy.html', 'about.html', 'terms.html', '404.html', 'css/style.css',
+    'index.html', 'privacy.html', 'about.html', 'terms.html', 'contact.html', '404.html', 'css/style.css',
   ];
   for (const f of files) assert.ok(listed.includes(f), `${f} missing from sw.js FILES`);
   for (const f of listed) if (f !== './') assert.ok(existsSync(f), `sw.js lists missing file ${f}`);
@@ -57,7 +57,7 @@ test('ads stay off until AdSense IDs are set', async () => {
 });
 
 test('every page has a Content-Security-Policy that allows its inline scripts', () => {
-  const pages = ['index.html', 'privacy.html', 'about.html', 'terms.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
+  const pages = ['index.html', 'privacy.html', 'about.html', 'terms.html', 'contact.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
   for (const p of pages) {
     const html = readFileSync(p, 'utf8');
     const csp = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/)?.[1];
@@ -81,7 +81,7 @@ test('every page has a Content-Security-Policy that allows its inline scripts', 
   }
 });
 
-const HTML_PAGES = ['index.html', 'privacy.html', 'about.html', 'terms.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
+const HTML_PAGES = ['index.html', 'privacy.html', 'about.html', 'terms.html', 'contact.html', '404.html', ...readdirSync('tools').map((f) => `tools/${f}`)];
 
 // Each page lists every module its scripts import as <link rel="modulepreload">, so the browser fetches
 // the whole module graph at once instead of discovering imports one level at a time.
@@ -126,7 +126,7 @@ test('every page has privacy, about and terms links via the shared footer, and t
 });
 
 // ---------- SEO ----------
-const PAGES = ['index.html', 'privacy.html', 'about.html', 'terms.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)];
+const PAGES = ['index.html', 'privacy.html', 'about.html', 'terms.html', 'contact.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)];
 const read = (f) => readFileSync(f, 'utf8');
 
 test('every page has valid JSON-LD', () => {
@@ -188,7 +188,7 @@ test('sw.js has a current content hash for every file it caches', async () => {
 
 test('every page has the static footer (tool links, About, Privacy, disclaimer) and layout.js reuses it', async () => {
   const { footerHtml } = await import('../js/site-footer.js');
-  for (const f of ['index.html', 'privacy.html', 'about.html', 'terms.html', '404.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)]) {
+  for (const f of ['index.html', 'privacy.html', 'about.html', 'terms.html', 'contact.html', '404.html', ...TOOLS.map((t) => `tools/${t.slug}.html`)]) {
     const html = readFileSync(f, 'utf8');
     const m = html.match(/<!-- footer:start -->\s*([\s\S]*?)\s*<!-- footer:end -->/);
     assert.ok(m, `${f} has no static footer (run node scripts/seo.mjs)`);
@@ -203,4 +203,65 @@ test('every page has the static footer (tool links, About, Privacy, disclaimer) 
   }
   const layout = readFileSync('js/layout.js', 'utf8');
   assert.match(layout, /querySelector\('body > footer\.site-footer'\)/);
+});
+
+// ---------- Get in touch ----------
+test('Get in touch: footer link, contact page and wrong-figure links follow CONTACT_EMAIL', async () => {
+  const { CONTACT_EMAIL } = await import('../js/config.js');
+  const { HAS_CONTACT, contactEmail } = await import('../js/contact.js');
+  const { footerHtml } = await import('../js/site-footer.js');
+  assert.equal(HAS_CONTACT, contactEmail(CONTACT_EMAIL) !== '');
+  // The footer is static HTML written by scripts/seo.mjs: the link is there exactly when the address is valid.
+  for (const f of HTML_PAGES) {
+    const foot = read(f).match(/<!-- footer:start -->([\s\S]*?)<!-- footer:end -->/)[1];
+    assert.equal(/href="(?:\.\.\/|\.\/)contact\.html">Get in touch<\/a>/.test(foot), HAS_CONTACT, `${f}: footer Get in touch link should ${HAS_CONTACT ? '' : 'not '}be there (run node scripts/seo.mjs)`);
+  }
+  assert.equal(footerHtml('./').includes('contact.html'), HAS_CONTACT);
+  const page = read('contact.html');
+  assert.match(page, /<title>Get in Touch \| Sorted, Mate<\/title>/);
+  assert.match(page, /<p id="contact-soon">Contact details are coming soon\.<\/p>/);
+  // Buttons start hidden; js/pages/contact.js shows them only with a valid address.
+  const buttons = [...page.matchAll(/<a class="btn" data-reason="([a-z-]+)" href="#" hidden>([^<]+)<\/a>/g)];
+  assert.deepEqual(buttons.map((m) => m[1]), ['wrong-figure', 'rate-change', 'tool-idea', 'other']);
+  for (const [, , name] of buttons) assert.ok(name.length > 'Email us'.length, 'each button says what the email is about');
+  assert.match(page, /no form/i);
+  assert.match(page, /Nothing is sent from this site/);
+  assert.match(page, /can't give personal financial advice/);
+  assert.doesNotMatch(page, /within \d|business days|24 hours/i, 'no response time is promised');
+  for (const f of ['about.html', 'privacy.html', 'terms.html']) assert.match(read(f), /<p id="contact-line" hidden>[^\n]*<a id="contact-email" href="#"><\/a>[^\n]*<a href="contact\.html">/, `${f} contact line should point to contact.html too`);
+  // The results-panel link is only built with a valid address, and print hides it.
+  const layout = read('js/layout.js');
+  assert.match(layout, /const email = tool \? contactEmail\(\) : '';/);
+  assert.match(layout, /\$\{email \? `[\s\S]*?Spot a wrong figure\? Tell us/);
+  const css = read('css/style.css');
+  assert.ok(css.slice(css.indexOf('@media print')).includes('.report-figure'), 'print hides the wrong-figure link');
+  // One address check, shared by every page.
+  for (const f of ['js/pages/privacy.js', 'js/pages/contact.js', 'js/layout.js', 'js/site-footer.js']) assert.doesNotMatch(read(f), /\[\^\\s@/, `${f} should use js/contact.js, not its own address regex`);
+});
+
+test('mailto builder: encodes subject and body, refuses addresses that could add headers', async () => {
+  const { mailtoUrl, validEmail, contactEmail, wrongFigureMail, CONTACT_REASONS } = await import('../js/contact.js');
+  assert.equal(mailtoUrl('hello@example.com'), 'mailto:hello@example.com');
+  const url = mailtoUrl('hello@example.com', { subject: 'Wrong figure: Tax & GST?', body: 'Page: https://x.au/a.html#a=1&b=2\nWhat you expected: 50%' });
+  assert.equal(url, 'mailto:hello@example.com?subject=Wrong%20figure%3A%20Tax%20%26%20GST%3F&body=Page%3A%20https%3A%2F%2Fx.au%2Fa.html%23a%3D1%26b%3D2%0D%0AWhat%20you%20expected%3A%2050%25');
+  // Only subject and body, so nothing in them can become another field.
+  const q = url.split('?')[1];
+  assert.deepEqual(q.split('&').map((kv) => kv.split('=')[0]), ['subject', 'body']);
+  assert.equal(decodeURIComponent(q.split('&')[0].slice(8)), 'Wrong figure: Tax & GST?');
+  for (const bad of ['', 'hello', 'hello@example', 'a@b@example.com', 'hello @example.com', 'hello@exa mple.com', 'hello@example.com?bcc=x@y.com',
+    'hello@example.com&cc=x@y.com', 'hello@example.com#x', 'he<llo>@example.com', 'hello@example.com\nbcc: x@y.com', 'mailto:hello@example.com', 'hello@example.com/x', null, 42]) {
+    assert.equal(validEmail(bad), false, `${JSON.stringify(bad)} should be refused`);
+    assert.equal(mailtoUrl(bad, { subject: 'x' }), '', `${JSON.stringify(bad)} should build no link`);
+    assert.equal(contactEmail(bad), '');
+  }
+  assert.equal(contactEmail('hello@example.com'), 'hello@example.com');
+  assert.equal(validEmail('first.last+tag@sub.example.com.au'), true);
+  const w = wrongFigureMail('hello@example.com', 'GST', 'https://x.au/tools/gst.html#amount=110&mode=add');
+  const [, subj, body] = w.match(/^mailto:hello@example\.com\?subject=([^&]+)&body=([^&]+)$/);
+  assert.equal(decodeURIComponent(subj), 'Wrong figure: GST');
+  const lines = decodeURIComponent(body).split('\r\n');
+  assert.equal(lines[0], 'Page: https://x.au/tools/gst.html#amount=110&mode=add');
+  for (const l of ['What you entered: ', 'What you expected: ', 'Source (if you have one): ']) assert.ok(lines.includes(l), `body has "${l}"`);
+  assert.deepEqual(CONTACT_REASONS.map((r) => r.subject), ['Report a wrong figure', 'A rate or rule has changed', 'Idea for a new tool', 'Something else']);
+  assert.match(CONTACT_REASONS[0].body, /^Page: \nWhat you entered: \nWhat you expected: \nSource \(if you have one\): $/);
 });

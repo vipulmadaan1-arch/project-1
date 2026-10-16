@@ -7,6 +7,7 @@ import {
   AFFILIATES_ENABLED, AFFILIATES, ADS_EXCLUDE,
 } from '../js/config.js';
 import { HAS_BMC } from '../js/site-footer.js';
+import { HAS_CONTACT } from '../js/contact.js';
 import { TOOLS } from '../js/tools.js';
 import { affiliateProblems, AFFILIATE_CATEGORIES } from '../js/affiliates.js';
 
@@ -27,7 +28,9 @@ else if (!existsSync('sitemap.xml') || !readFileSync('index.html', 'utf8').inclu
 if (SITE_URL && !readFileSync('robots.txt', 'utf8').includes('Sitemap:')) todo.push('robots.txt has no Sitemap line: run npm run seo.');
 
 // Contact, support, owner details and terms
-if (!CONTACT_EMAIL) todo.push(`CONTACT_EMAIL: set a contact address at ${cfg('CONTACT_EMAIL')} (shown on the privacy, about and terms pages; ads stay off without it).`);
+if (!CONTACT_EMAIL) todo.push(`CONTACT_EMAIL: set a contact address at ${cfg('CONTACT_EMAIL')} (shown on the privacy, about and terms pages; it also switches on the Get in touch page's email buttons, the footer's Get in touch link and the "Spot a wrong figure? Tell us" link under each calculator's results; ads stay off without it). Then run: npm run seo (writes the footer link into every page).`);
+else if (!HAS_CONTACT) todo.push(`CONTACT_EMAIL "${CONTACT_EMAIL}" at ${cfg('CONTACT_EMAIL')} isn't a plain email address (like hello@example.com), so the contact page, footer link and "Spot a wrong figure" links stay off.`);
+else if (!readFileSync('index.html', 'utf8').includes('contact.html">Get in touch</a>')) todo.push('Run: npm run seo (the footer\'s Get in touch link is missing for CONTACT_EMAIL).');
 if (!HAS_BMC) todo.push(`BMC_URL: set your Buy Me a Coffee page (https://buymeacoffee.com/<you>) at ${cfg('BMC_URL')}. Every coffee link stays hidden until you do.`);
 if (/TODO \(site owner\): if you want to, add your name/.test(readFileSync('about.html', 'utf8'))) {
   todo.push(`Owner name and ABN: add who runs the site (your name or business name, and ABN if you have one) at ${at('about.html', /TODO \(site owner\): if you want to, add your name/)}, then delete the TODO comment.`);

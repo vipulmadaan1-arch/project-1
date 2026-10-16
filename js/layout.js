@@ -7,6 +7,7 @@ import { mountAds } from './ads.js';
 import { affiliatesFor, affiliateCardHtml } from './affiliates.js';
 import { fmtMoney, parseNumber, checkNumber, moneyFieldText } from './format.js';
 import { presentValue, PV_MIN_YEARS } from './present-value.js';
+import { contactEmail, wrongFigureMail } from './contact.js';
 
 const root = document.documentElement;
 const base = root.dataset.base || './';
@@ -477,16 +478,27 @@ function fillPrintSummary() {
 addEventListener('beforeprint', fillPrintSummary);
 matchMedia('print').addEventListener?.('change', (e) => { if (e.matches) fillPrintSummary(); });
 
-// Adds "Copy link", "Print or save as PDF" and (once you've changed an input) a gentle coffee prompt under a
-// result card. The prompt is never there on page load and never pops up over anything.
+// Adds "Copy link", "Print or save as PDF", a "Spot a wrong figure? Tell us" email link (only once CONTACT_EMAIL is
+// a valid address) and (once you've changed an input) a gentle coffee prompt under a result card. The prompt is
+// never there on page load and never pops up over anything.
 export function addResultActions(card) {
   const wrap = document.createElement('div');
   wrap.className = 'result-actions';
+  const email = tool ? contactEmail() : '';
   wrap.innerHTML = `
     <div class="btn-row">
       <button class="btn" type="button" data-act="copy">${icon('link')}<span>Copy link to these results</span></button>
       <button class="btn" type="button" data-act="print">${icon('print')}<span>Print or save as PDF</span></button>
-    </div>`;
+    </div>${email ? `
+    <p class="report-figure"><a href="" data-act="report">Spot a wrong figure? Tell us<span class="visually-hidden"> (opens your email app)</span></a></p>` : ''}`;
+  // The email carries the results link (the page plus the inputs after the #), kept current as the inputs change,
+  // so the owner can reopen exactly what you saw. Nothing is sent unless you send the email yourself.
+  const report = wrap.querySelector('[data-act="report"]');
+  const syncReport = () => { if (report) report.href = wrongFigureMail(email, tool.name, shareUrl()); };
+  syncReport();
+  report?.addEventListener('pointerdown', syncReport);
+  report?.addEventListener('focus', syncReport);
+  addEventListener('hashchange', () => setTimeout(syncReport));
   const btn = wrap.querySelector('[data-act="copy"]');
   const idle = btn.innerHTML;
   btn.addEventListener('click', async () => {
@@ -500,7 +512,7 @@ export function addResultActions(card) {
   // Keep the print summary current, so printing from the browser menu (or a PDF made without beforeprint) has it.
   const form = card.closest('main')?.querySelector('form');
   let t = 0;
-  const refresh = () => { clearTimeout(t); t = setTimeout(fillPrintSummary, 250); };
+  const refresh = () => { syncReport(); clearTimeout(t); t = setTimeout(() => { syncReport(); fillPrintSummary(); }, 250); };
   form?.addEventListener('input', refresh);
   form?.addEventListener('change', refresh);
   refresh();

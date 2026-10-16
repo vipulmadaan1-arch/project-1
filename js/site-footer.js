@@ -4,6 +4,7 @@
 // from this module when a page doesn't have it. Imports nothing that touches the DOM, so Node can run it too.
 import { SITE_NAME, BMC_URL } from './config.js';
 import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
+import { HAS_CONTACT } from './contact.js';
 
 // Hide all coffee links until BMC_URL is set in config.js (empty, or the old YOUR_HANDLE placeholder, hides them).
 // It must be a plain https:// link, so a typo can't put a javascript: link in the page.
@@ -31,7 +32,7 @@ export const footerHtml = (base) => `<footer class="site-footer">
     </div>`).join('')}
     <div class="footer-legal">
       <span>Financial results are general estimates, not financial, tax or legal advice. Confirm figures with the ATO, your state revenue office or a licensed adviser.</span>
-      <span class="footer-links"><a href="${base}about.html">About</a><a href="${base}privacy.html">Privacy</a><a href="${base}terms.html">Terms</a>${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
+      <span class="footer-links"><a href="${base}about.html">About</a><a href="${base}privacy.html">Privacy</a><a href="${base}terms.html">Terms</a>${HAS_CONTACT ? `<a href="${base}contact.html">Get in touch</a>` : ''}${HAS_BMC ? `<a href="${BMC_URL}" target="_blank" rel="noopener noreferrer">Support the site</a>` : ''}</span>
     </div>
   </div>
 </footer>`;

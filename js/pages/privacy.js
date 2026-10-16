@@ -1,14 +1,17 @@
 // Shared by the privacy, about and terms pages: fills in the lines that depend on js/config.js.
 import '../layout.js';
-import { CONTACT_EMAIL, BMC_URL, AFFILIATES_ENABLED, AFFILIATES } from '../config.js';
+import { BMC_URL, AFFILIATES_ENABLED, AFFILIATES } from '../config.js';
+import { contactEmail, mailtoUrl } from '../contact.js';
 import { HAS_BMC } from '../site-footer.js';
 import { affiliateProblems } from '../affiliates.js';
 
-// Only a plain address, so the mailto: link can't carry extra fields such as ?bcc=.
+// Only a plain address (js/contact.js), so the mailto: link can't carry extra fields such as ?bcc=. The line also
+// points to the contact page.
 const contact = document.getElementById('contact-email');
-if (contact && /^[^\s@<>"'?&#/:]+@[^\s@<>"'?&#/:]+\.[a-z]{2,}$/i.test(CONTACT_EMAIL)) {
-  contact.textContent = CONTACT_EMAIL;
-  contact.href = `mailto:${CONTACT_EMAIL}`;
+const email = contactEmail();
+if (contact && email) {
+  contact.textContent = email;
+  contact.href = mailtoUrl(email);
   document.getElementById('contact-line').hidden = false;
 }
 

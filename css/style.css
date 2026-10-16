@@ -406,6 +406,9 @@ select {
 .result-actions { display: grid; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--readout-line); }
 .result-actions .btn { justify-self: start; background: transparent; color: var(--readout-ink); border-color: var(--readout-line); }
 .result-actions .btn:hover { border-color: var(--readout-ink); }
+.report-figure { font-size: var(--t-sm); color: var(--readout-muted); }
+.report-figure a { color: var(--readout-ink); text-underline-offset: 3px; }
+.report-figure a:hover { text-decoration-thickness: 2px; }
 .nudge { display: flex; align-items: center; gap: 8px; font-size: var(--t-sm); color: var(--readout-muted); }
 .nudge .icon { width: 16px; height: 16px; }
 
@@ -494,6 +497,13 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .legal h2 { font-size: var(--t-lg); font-weight: 650; margin: 36px 0 10px; }
 .legal p + p, .legal p + ul, .legal ul + p { margin-top: 12px; }
 .legal ul { padding-left: 20px; margin: 10px 0 0; display: grid; gap: 6px; }
+/* Get in touch: one card per reason to write, each with its own email button. */
+.legal .contact-reasons { list-style: none; padding: 0; gap: 12px; margin-top: 16px; }
+.contact-reasons li { padding: 16px; border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); }
+.contact-reasons h3 { font-size: var(--t-md); font-weight: 650; margin: 0 0 4px; }
+.contact-reasons p { margin: 0 0 12px; color: var(--muted); }
+.contact-reasons .btn { height: auto; min-height: 40px; padding-block: 9px; line-height: 1.3; text-align: left; text-decoration: none; }
+.contact-reasons .btn[hidden] { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -663,7 +673,7 @@ html.is-leaving body::before {
   }
   @page { margin: 14mm; }
   html, body { background: #fff !important; color: #000; font-size: 11pt; }
-  .site-header, .skip-link, .site-footer, .ad-slot, .bmc, .mini-result, #theme-toggle, .result-actions, .crumbs,
+  .site-header, .skip-link, .site-footer, .ad-slot, .bmc, .mini-result, #theme-toggle, .result-actions, .report-figure, .crumbs,
   .aus-slot, main .content, .affiliates, .readout-hint, .next-step, .noscript, main form.card, .tool-head .ico, .tool-head .tag,
   details.chart-table:not([open]), html.is-leaving body::before { display: none !important; }
   .print-only { display: block; }

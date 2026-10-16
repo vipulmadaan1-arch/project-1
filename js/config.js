@@ -39,6 +39,9 @@ export const ADS_EXCLUDE = ['retirement', 'super', 'term-deposit', 'savings-goal
 export const CONSENT_CONFIRMED = false;
 
 // Shown on the privacy, about and terms pages so visitors can reach you. Leave empty to hide the line.
+// A valid address also switches on the Get in touch page's email buttons (contact.html), the footer's Get in touch
+// link and the "Spot a wrong figure? Tell us" link under each calculator's results. Only a plain address is used
+// (js/contact.js). After changing it, run: npm run seo (writes the footer link into every page).
 export const CONTACT_EMAIL = '';
 
 // Affiliate links: a "Tools I use" card below the FAQs, off by default. Turn it on only with a real list.
