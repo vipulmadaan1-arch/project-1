@@ -15,6 +15,8 @@
 //     address, and the general-information notice) between
 //     <!-- footer:start --> and <!-- footer:end --> after </main>, from js/site-footer.js, so crawlers and no-JS
 //     visitors see it; js/layout.js reuses it instead of adding another.
+//   - The privacy page's analytics paragraph between <!-- analytics:start --> and <!-- analytics:end -->, from
+//     CF_ANALYTICS_TOKEN (js/analytics.js).
 //   - Content hashes in sw.js (scripts/sw-hashes.mjs), last, once every page is final.
 // Every marker or tag this script edits must be present: a missing one stops the run with the file's name,
 // and nothing is written until every page has been built.
@@ -29,6 +31,8 @@ import { TOOLS, CATEGORIES } from '../js/tools.js';
 import { SITE_NAME, SITE_URL } from '../js/config.js';
 import { icon } from '../js/icons.js';
 import { ADS_ENABLED } from '../js/ads.js';
+import { ANALYTICS_ENABLED, privacyAnalyticsHtml } from '../js/analytics.js';
+import { cspPolicy } from './csp.mjs';
 import { updateSwHashes } from './sw-hashes.mjs';
 import { footerHtml } from '../js/site-footer.js';
 
@@ -140,31 +144,12 @@ function stamp(html, tags, file) {
 }
 
 // Content-Security-Policy, the same on every page apart from the boot script's hash and base-uri.
-// - script-src: only the inline boot script (by hash) runs; 'strict-dynamic' lets the modules it loads run and
-//   import others. 'unsafe-inline' and https: http: are ignored by browsers that support 'strict-dynamic' and
-//   only matter to very old ones.
-// - style-src needs 'unsafe-inline': some pages use style="" attributes.
-// - form-action 'none': forms never submit (each calculator works out results in the page).
-// - base-uri: 'none', except the 404 page, whose <base> makes its links work at any missing address.
-// AdSense (js/ads.js, off until ADSENSE_CLIENT and ADSENSE_SLOT are set) needs more: Google's scripts use eval
-// and load images, frames and connections from many Google domains. Once ads are enabled and this script is
-// rerun, the policy adds 'unsafe-eval' and https: for img-src, connect-src and frame-src.
+// The policy itself (and why each part is there) is in scripts/csp.mjs; it widens only for what's switched on in
+// js/config.js (AdSense, Cloudflare Web Analytics).
 function csp(html, file) {
   const boot = matchOrThrow(html, /<script data-module="[^"]+">([\s\S]*?)<\/script>/, file, 'the inline boot script')[1];
   const hash = createHash('sha256').update(boot).digest('base64');
-  const ads = ADS_ENABLED;
-  return [
-    "default-src 'self'",
-    `script-src 'sha256-${hash}' 'strict-dynamic' 'unsafe-inline'${ads ? " 'unsafe-eval'" : ''} https: http:`,
-    "style-src 'self' 'unsafe-inline'",
-    `img-src 'self' data:${ads ? ' https:' : ''}`,
-    "font-src 'self'",
-    `connect-src 'self'${ads ? ' https:' : ''}`,
-    `frame-src ${ads ? 'https:' : "'none'"}`,
-    "object-src 'none'",
-    `base-uri ${file === '404.html' ? "'self'" : "'none'"}`,
-    "form-action 'none'",
-  ].join('; ');
+  return cspPolicy({ hash, file, ads: ADS_ENABLED, analytics: ANALYTICS_ENABLED });
 }
 const withCsp = (html, file) => must(html, /<meta http-equiv="Content-Security-Policy" content="[^"]*">/, `<meta http-equiv="Content-Security-Policy" content="${csp(html, file)}">`, file, 'the Content-Security-Policy meta tag');
 
@@ -228,6 +213,10 @@ const popular = () => `<nav class="popular" aria-label="Popular tools"><p class=
 }).join('')}</ul></nav>`;
 const withPopular = (html, file) => must(html, /(<!-- popular:start -->)[\s\S]*?(<!-- popular:end -->)/, `$1\n        ${popular()}\n        $2`, file, 'the <!-- popular:start --> … <!-- popular:end --> markers');
 
+// The privacy page's "What we don't collect" paragraph says whether Cloudflare Web Analytics is on, in the HTML
+// itself, so it's true for readers without JavaScript too (js/analytics.js has both versions).
+const withAnalyticsNotice = (html, file) => must(html, /(<!-- analytics:start -->)[\s\S]*?(<!-- analytics:end -->)/, `$1\n      ${privacyAnalyticsHtml()}\n      $2`, file, 'the <!-- analytics:start --> … <!-- analytics:end --> markers');
+
 // Each tool page's breadcrumb names its home page section, so moving a tool between sections
 // in js/tools.js is a one-line change.
 const crumbFor = (t) => { const c = CATEGORIES.find((x) => x.key === t.cat); return `<a href="../#${c.key}">${c.title}</a>`; };
@@ -241,6 +230,7 @@ for (const page of PAGES) {
   if (tool) html = must(html, /(<nav class="crumbs"[^>]*><a href="\.\.\/">Home<\/a><span aria-hidden="true">\/<\/span>)<a href="\.\.\/#[a-z]+">[^<]*<\/a>/, `$1${crumbFor(tool)}`, page.file, 'the breadcrumb\'s section link');
   html = stamp(html, headBlock(html, page), page.file);
   if (page.file === 'index.html') html = withPopular(withTiles(html, page.file), page.file);
+  if (page.file === 'privacy.html') html = withAnalyticsNotice(html, page.file);
   out.set(page.file, common(html, page.file));
 }
 

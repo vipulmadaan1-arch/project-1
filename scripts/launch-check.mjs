@@ -4,10 +4,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import {
   BMC_URL, SITE_NAME, SITE_URL, ADSENSE_CLIENT, ADSENSE_SLOT, CONTACT_EMAIL, CONSENT_CONFIRMED,
-  AFFILIATES_ENABLED, AFFILIATES, ADS_EXCLUDE,
+  AFFILIATES_ENABLED, AFFILIATES, ADS_EXCLUDE, CF_ANALYTICS_TOKEN,
 } from '../js/config.js';
 import { HAS_BMC } from '../js/site-footer.js';
 import { HAS_CONTACT } from '../js/contact.js';
+import { ANALYTICS_ENABLED, BEACON_ORIGIN } from '../js/analytics.js';
 import { TOOLS } from '../js/tools.js';
 import { affiliateProblems, AFFILIATE_CATEGORIES } from '../js/affiliates.js';
 
@@ -54,6 +55,12 @@ if (!ADSENSE_CLIENT) {
   console.log(`Ads: in the AdSense dashboard keep Auto ads off (or limited to explainer text), and add page exclusions for: ${ADS_EXCLUDE.map((s) => `tools/${s}.html`).join(', ')}.`);
 }
 for (const s of ADS_EXCLUDE) if (!TOOLS.some((t) => t.slug === s)) todo.push(`ADS_EXCLUDE at ${cfg('ADS_EXCLUDE')} lists unknown tool "${s}".`);
+
+// Analytics (optional, not needed for launch)
+if (!CF_ANALYTICS_TOKEN) todo.push(`Cloudflare Web Analytics (optional): to count visits without cookies, paste the "token" value from Cloudflare's Web Analytics snippet at ${cfg('CF_ANALYTICS_TOKEN')}, then run: npm run seo and update the date on privacy.html.`);
+else if (!ANALYTICS_ENABLED) todo.push(`CF_ANALYTICS_TOKEN at ${cfg('CF_ANALYTICS_TOKEN')} isn't a Cloudflare Web Analytics token (32 hex characters: only the "token" value, not the whole snippet), so analytics stay off.`);
+else if (!readFileSync('index.html', 'utf8').includes(`connect-src 'self' ${BEACON_ORIGIN}`) && !readFileSync('index.html', 'utf8').includes("connect-src 'self' https:")) todo.push('Run: npm run seo (the Content-Security-Policy and privacy page don\'t include Cloudflare Web Analytics yet).');
+else if (!readFileSync('privacy.html', 'utf8').includes('Cloudflare Web Analytics')) todo.push('Run: npm run seo (the privacy page doesn\'t mention Cloudflare Web Analytics yet).');
 
 // Affiliate links
 if (AFFILIATES_ENABLED || AFFILIATES.length) {

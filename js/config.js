@@ -61,3 +61,14 @@ export const CONTACT_EMAIL = 'sortedmate.site@gmail.com';
 //     blurb: 'GST and BAS for sole traders.', pages: ['gst', 'work-deductions'] },
 export const AFFILIATES_ENABLED = false;
 export const AFFILIATES = [];
+
+// Cloudflare Web Analytics (optional, off while empty). It's cookieless and collects no personal data: it counts
+// visits and which pages are opened, never the figures typed into a calculator.
+// To turn it on: in the Cloudflare dashboard (Analytics & Logs → Web Analytics → Add a site) copy the JS snippet,
+// and paste only the value of its "token" field here (32 letters and digits, e.g. '0123456789abcdef0123456789abcdef'),
+// not the whole <script> tag. Then run: npm run seo
+// (that adds https://cloudflareinsights.com to the Content-Security-Policy and switches the privacy page's
+// "What we don't collect" paragraph to describe the analytics), and change the "Last updated" date on privacy.html.
+// Anything that isn't a 32-character hex token is ignored and analytics stay off (js/analytics.js). The beacon never
+// loads on localhost or file: pages, or for visitors whose browser sends Do Not Track or Global Privacy Control.
+export const CF_ANALYTICS_TOKEN = '';

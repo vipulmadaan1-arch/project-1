@@ -4,6 +4,7 @@ import { TOOLS, CATEGORIES, RATES_CHECKED } from './tools.js';
 import { HAS_BMC, brandHtml, footerHtml } from './site-footer.js';
 import { icon } from './icons.js';
 import { mountAds } from './ads.js';
+import { mountAnalytics } from './analytics.js';
 import { affiliatesFor, affiliateCardHtml } from './affiliates.js';
 import { fmtMoney, parseNumber, checkNumber, moneyFieldText } from './format.js';
 import { presentValue, PV_MIN_YEARS } from './present-value.js';
@@ -572,6 +573,10 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
 const content = document.querySelector('main .content');
 if (tool && content && !ADS_EXCLUDE.includes(tool.slug)) content.insertAdjacentHTML('beforebegin', '<div class="ad-slot" hidden></div>');
 mountAds();
+
+// Cloudflare Web Analytics: off until CF_ANALYTICS_TOKEN is set (js/config.js); loads after 'load', never locally
+// or with Do Not Track / Global Privacy Control (js/analytics.js).
+mountAnalytics();
 
 // "Tools I use" affiliate card, below the FAQs, on the pages each link is set for (off by default: see js/config.js).
 const affiliateCard = tool && content ? affiliateCardHtml(affiliatesFor(tool.slug)) : '';
