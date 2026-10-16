@@ -326,3 +326,10 @@ test('breadcrumb structured data gives every crumb but the last a page URL (Goog
     });
   }
 });
+
+test('header has a visible Home button on every page except the home page', () => {
+  const layout = readFileSync('js/layout.js', 'utf8');
+  assert.match(layout, /\$\{onHome \? '' : `<a class="home-btn" href="\$\{base\}">\$\{icon\('home'\)\}<span>Home<\/span><\/a>`\}/);
+  assert.match(readFileSync('js/icons.js', 'utf8'), /^\s+home: '/m);
+  assert.match(readFileSync('css/style.css', 'utf8'), /\.home-btn \{/);
+});

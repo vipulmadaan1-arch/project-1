@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v73';
+const VERSION = 'v74';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -163,7 +163,7 @@ const HASHES = {
   './': '585733ddf7c7f6f5',
   'js/analytics.js': '4bef7ed4b3c9194c',
   '404.html': '606cc144ca78a06c',
-  'css/style.css': '5a5c0ca50c110281',
+  'css/style.css': 'a5e20588012af19c',
   'tools/upfront-costs.html': '1ba962fecebbd6cb',
   'tools/lmi.html': 'a0d2d8e6a8608196',
   'js/pages/upfront-costs.js': '605f91de49f15a12',
@@ -240,8 +240,8 @@ const HASHES = {
   'js/rates.js': '51eca1accbc9a681',
   'js/config.js': 'f45f3a2222e9e850',
   'js/duty.js': '511bfb98a0177d63',
-  'js/icons.js': '97b1ee33cf5a25be',
-  'js/layout.js': '6a8a2098efbd9bc7',
+  'js/icons.js': 'b77b2d5a3aad6693',
+  'js/layout.js': '120cfdf17c19a618',
   'js/site-footer.js': 'ad5302969c63e228',
   'js/pages/calculator.js': '4b0a93b681632315',
   'js/pages/compound-interest.js': '04639941f39dbd43',

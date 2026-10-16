@@ -129,6 +129,15 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
   :root:not([data-theme="light"]) .theme-light-only { display: none; }
   :root:not([data-theme="light"]) .theme-dark-only { display: block; }
 }
+/* Home button: sits after the brand on every page but the home page. */
+.home-btn {
+  display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px;
+  border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); color: var(--ink);
+  text-decoration: none; font-size: var(--t-sm); font-weight: 600; white-space: nowrap;
+}
+.home-btn:hover { color: var(--ink); border-color: var(--line-strong); }
+.home-btn .icon { width: 17px; height: 17px; }
+@media (max-width: 359px) { .home-btn span { display: none; } .home-btn { padding: 0 9px; } }
 .bmc {
   display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 12px;
   border-radius: var(--r-sm); background: var(--ink); color: var(--bg); text-decoration: none;

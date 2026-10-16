@@ -31,12 +31,15 @@ function syncThemeColor() {
 syncThemeColor();
 
 const brand = brandHtml(base);
+// A plain Home button on every page but the home page itself (the logo links home too, but not everyone knows).
+const onHome = new URL(base, location.href).pathname === location.pathname.replace(/index\.html$/, '');
 
 const header = document.createElement('header');
 header.className = 'site-header';
 header.innerHTML = `
   <div class="wrap">
     ${brand}
+    ${onHome ? '' : `<a class="home-btn" href="${base}">${icon('home')}<span>Home</span></a>`}
     <nav class="nav" aria-label="Sections">
       ${CATEGORIES.map((c) => `<a href="${base}#${c.key}">${c.short}</a>`).join('')}
     </nav>
