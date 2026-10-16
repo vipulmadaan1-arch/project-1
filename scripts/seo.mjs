@@ -2,7 +2,7 @@
 // so the domain lives in one place: SITE_URL in js/config.js.
 //   - <head> tags between <!-- seo:start --> and <!-- seo:end -->: canonical link, Open Graph,
 //     Twitter card, BreadcrumbList JSON-LD (built from each page's visible breadcrumb) and,
-//     on the home page, WebSite and Organization JSON-LD. Tool pages' WebApplication JSON-LD
+//     on the home page, WebSite and Organization JSON-LD. Tool pages' WebPage JSON-LD
 //     (written by scripts/content.py) points at the same Organization as its publisher.
 //   - The visible breadcrumb's first link is always "Home".
 //   - The static tool list between <!-- tiles:start --> and <!-- tiles:end --> on the home and
@@ -108,7 +108,7 @@ function headBlock(html, page) {
   // Structured data that needs absolute URLs.
   const ld = [];
   if (page.path === '') {
-    // Same @id as the publisher in each tool page's WebApplication JSON-LD (scripts/content.py).
+    // Same @id as the publisher in each tool page's WebPage JSON-LD (scripts/content.py).
     ld.push({ '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, ...(url ? { '@id': `${url}#organization`, url } : {}) });
     if (url) ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_NAME.replace(/\s+/g, ''), url, publisher: { '@id': `${url}#organization` } });
   }

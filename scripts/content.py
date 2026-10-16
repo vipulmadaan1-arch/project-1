@@ -845,7 +845,9 @@ def build(slug, c):
     <!-- content:end -->'''
     s = replace_once(s, '\n  </main>', block + '\n  </main>', p, '"  </main>" line')
     ld = [
-      {"@context":"https://schema.org","@type":"WebApplication","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"applicationCategory":"FinanceApplication" if cats.get(slug) in ('tax','property','money') else "UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"AUD"},"dateModified":date_modified(slug),"publisher":PUBLISHER},
+      # WebPage, not WebApplication: Google treats WebApplication as a Software App rich result, which requires
+      # star ratings or reviews; the site has none, so Search Console would flag every tool page as invalid.
+      {"@context":"https://schema.org","@type":"WebPage","name":name,"description":desc,"inLanguage":"en-AU","isAccessibleForFree":True,"dateModified":date_modified(slug),"publisher":PUBLISHER},
       {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":q,"acceptedAnswer":{"@type":"Answer","text":strip_tags(a)}} for q,a in c['faq']]},
     ]
     # Escape "</" so text in the FAQ can never close the script tag early.
