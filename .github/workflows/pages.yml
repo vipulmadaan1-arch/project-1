@@ -2,7 +2,8 @@ name: Test and deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    # The repository's default branch (it has no main). GitHub Pages only deploys from the default branch.
+    branches: [claude/website-brainstorm-build-vyvb36]
   workflow_dispatch:
   # Monthly test run, so CI goes red when the rates roll over (tests/rollover.test.mjs fails once the
   # current income year has ended). Scheduled runs only test; they never deploy.

@@ -119,11 +119,16 @@ test('about page: support section with the coffee link only once BMC_URL is set'
   assert.match(html, /TODO \(site owner\): if you want to, add your name/);
 });
 
-test('launch-check lists what the owner must set, with the file and line', () => {
+test('launch-check lists what the owner must set, with the file and line', async () => {
   const out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' });
-  for (const re of [/SITE_URL: .* js\/config\.js:\d+/, /CONTACT_EMAIL: .* js\/config\.js:\d+/, /BMC_URL: .* js\/config\.js:\d+/,
-    /Owner name and ABN: .* about\.html:\d+/, /Terms governing law: .* terms\.html:\d+/, /ADSENSE_CLIENT at js\/config\.js:\d+/,
-    /CONSENT_CONFIRMED at js\/config\.js:\d+/, /ads-txt/]) assert.match(out, re);
+  // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
+  const cfg = await import('../js/config.js');
+  const expected = [/Owner name and ABN: .* about\.html:\d+/, /Terms governing law: .* terms\.html:\d+/,
+    /ADSENSE_CLIENT at js\/config\.js:\d+/, /CONSENT_CONFIRMED at js\/config\.js:\d+/, /ads-txt/];
+  if (!cfg.SITE_URL) expected.push(/SITE_URL: .* js\/config\.js:\d+/);
+  if (!cfg.CONTACT_EMAIL) expected.push(/CONTACT_EMAIL: .* js\/config\.js:\d+/);
+  if (!cfg.BMC_URL) expected.push(/BMC_URL: .* js\/config\.js:\d+/);
+  for (const re of expected) assert.match(out, re);
 });
 
 test('print: every result panel gets a Print or save as PDF button, and the print stylesheet hides the extras', () => {
