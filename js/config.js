@@ -8,7 +8,7 @@ export const SITE_URL = 'https://dinkumcalc.com.au';
 
 // Your Buy Me a Coffee page (e.g. 'https://buymeacoffee.com/jane'). Leave empty to hide every coffee link:
 // the header button, the note under results (shown only after someone changes an input) and the About page line.
-export const BMC_URL = 'https://buymeacoffee.com/sortedmate';
+export const BMC_URL = 'https://buymeacoffee.com/dinkumcalc';
 
 // Google AdSense. Leave empty to show no ads at all.
 // Once approved, paste your publisher ID (e.g. 'ca-pub-1234567890123456') and the slot ID

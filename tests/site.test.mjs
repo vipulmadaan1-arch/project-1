@@ -269,8 +269,8 @@ test('mailto builder: encodes subject and body, refuses addresses that could add
 });
 
 test('the old name "Sorted, Mate" is gone from every site file (renamed to Dinkum Calc)', () => {
-  // Only the real Buy Me a Coffee handle and the contact inbox keep the old word; the owner may rename them later.
-  const ALLOWED = ['https://buymeacoffee.com/sortedmate'];
+  // No exceptions left: the Buy Me a Coffee page and contact inbox both moved to dinkumcalc.
+  const ALLOWED = [];
   // sw.js names the pre-rename cache prefix so activate still deletes old caches.
   const ALLOWED_IN = { 'sw.js': ["'sortedmate-'"] };
   const files = [];
