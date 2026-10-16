@@ -116,7 +116,7 @@ test('about page: support section with the coffee link only once BMC_URL is set'
   const html = read('about.html');
   assert.match(html, /<h2 id="support">Support the site<\/h2>/);
   assert.match(html, /<li id="bmc-line" hidden>/);
-  assert.match(html, /TODO \(site owner\): if you want to, add your name/);
+  assert.match(html, /Dinkum Calc is run by a sole trader in New South Wales/);
 });
 
 test('launch-check lists what the owner must set, with the file and line', async () => {
@@ -126,8 +126,7 @@ test('launch-check lists what the owner must set, with the file and line', async
   try { out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' }); }
   catch (e) { assert.ok(cfg.ADSENSE_CLIENT, 'launch-check only fails on ad blockers'); out = e.stdout + e.stderr; }
   // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
-  const expected = [/Owner name and ABN: .* about\.html:\d+/,
-    /CONSENT_CONFIRMED.* at js\/config\.js:\d+/];
+  const expected = [/CONSENT_CONFIRMED.* at js\/config\.js:\d+/];
   if (!cfg.ADSENSE_CLIENT) expected.push(/ADSENSE_CLIENT at js\/config\.js:\d+/, /ads-txt/);
   else expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
   if (!cfg.SITE_URL) expected.push(/SITE_URL: .* js\/config\.js:\d+/);
