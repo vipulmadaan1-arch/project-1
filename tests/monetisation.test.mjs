@@ -120,11 +120,16 @@ test('about page: support section with the coffee link only once BMC_URL is set'
 });
 
 test('launch-check lists what the owner must set, with the file and line', async () => {
-  const out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' });
-  // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
   const cfg = await import('../js/config.js');
+  // With a publisher ID set but ads not yet cleared to run, the check lists blockers and exits 1; read its output either way.
+  let out;
+  try { out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' }); }
+  catch (e) { assert.ok(cfg.ADSENSE_CLIENT, 'launch-check only fails on ad blockers'); out = e.stdout + e.stderr; }
+  // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
   const expected = [/Owner name and ABN: .* about\.html:\d+/, /Terms governing law: .* terms\.html:\d+/,
-    /ADSENSE_CLIENT at js\/config\.js:\d+/, /CONSENT_CONFIRMED at js\/config\.js:\d+/, /ads-txt/];
+    /CONSENT_CONFIRMED.* at js\/config\.js:\d+/];
+  if (!cfg.ADSENSE_CLIENT) expected.push(/ADSENSE_CLIENT at js\/config\.js:\d+/, /ads-txt/);
+  else expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
   if (!cfg.SITE_URL) expected.push(/SITE_URL: .* js\/config\.js:\d+/);
   if (!cfg.CONTACT_EMAIL) expected.push(/CONTACT_EMAIL: .* js\/config\.js:\d+/);
   if (!cfg.BMC_URL) expected.push(/BMC_URL: .* js\/config\.js:\d+/);

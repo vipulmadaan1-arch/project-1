@@ -19,7 +19,7 @@ export const BMC_URL = 'https://buymeacoffee.com/dinkumcalc';
 // Keep Auto ads OFF in the AdSense dashboard (Ads → By site → Auto ads), or limit them to the explainer text
 // with page exclusions for the pages in ADS_EXCLUDE: Auto ads can put an ad between a form and its result,
 // which this site's own ad slots never do (js/ads.js).
-export const ADSENSE_CLIENT = '';
+export const ADSENSE_CLIENT = 'ca-pub-4175558410545198';
 export const ADSENSE_SLOT = '';
 
 // Pages (tool slugs) that never get an ad slot, even when ads are on.
