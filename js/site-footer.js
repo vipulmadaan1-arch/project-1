@@ -10,12 +10,15 @@ import { HAS_CONTACT } from './contact.js';
 // It must be a plain https:// link, so a typo can't put a javascript: link in the page.
 export const HAS_BMC = !BMC_URL.includes('YOUR_HANDLE') && /^https:\/\/[^\s"'<>`]+$/.test(BMC_URL);
 
-// Brand mark: a tick in a rounded square, i.e. "sorted".
+// Brand mark: a tick in a rounded square, i.e. "checked and fair dinkum".
 const MARK = `<svg class="brand-mark" viewBox="0 0 26 26" aria-hidden="true" focusable="false">
   <rect x="1" y="1" width="24" height="24" rx="7" fill="var(--readout)"/>
   <path d="M7.5 13.5l3.6 3.6 7.4-8.2" fill="none" stroke="var(--readout-accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`;
-const wordmark = SITE_NAME.replace(',', '<span class="brand-comma">,</span>');
+// Wordmark: the last word of the name in the accent colour ("Dinkum" + "Calc"). The visible text is still the plain
+// name, so screen readers and copy-paste get "Dinkum Calc".
+const cut = SITE_NAME.lastIndexOf(' ');
+const wordmark = cut > 0 ? `${SITE_NAME.slice(0, cut + 1)}<span class="brand-accent">${SITE_NAME.slice(cut + 1)}</span>` : SITE_NAME;
 export const brandHtml = (base) => `<a class="brand" href="${base}" aria-label="${SITE_NAME} home">${MARK}<span>${wordmark}</span></a>`;
 
 // base: the path from the page to the site root ("../" on tool pages, "./" elsewhere).

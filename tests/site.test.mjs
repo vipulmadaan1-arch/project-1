@@ -4,6 +4,7 @@ import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join, dirname, normalize } from 'node:path';
 import { TOOLS } from '../js/tools.js';
+import { SITE_NAME } from '../js/config.js';
 
 const sw = readFileSync('sw.js', 'utf8');
 const listed = [...sw.match(/FILES = \[([\s\S]*?)\];/)[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
@@ -219,7 +220,7 @@ test('Get in touch: footer link, contact page and wrong-figure links follow CONT
   }
   assert.equal(footerHtml('./').includes('contact.html'), HAS_CONTACT);
   const page = read('contact.html');
-  assert.match(page, /<title>Get in Touch \| Sorted, Mate<\/title>/);
+  assert.match(page, /<title>Get in Touch \| Dinkum Calc<\/title>/);
   assert.match(page, /<p id="contact-soon">Contact details are coming soon\.<\/p>/);
   // Buttons start hidden; js/pages/contact.js shows them only with a valid address.
   const buttons = [...page.matchAll(/<a class="btn" data-reason="([a-z-]+)" href="#" hidden>([^<]+)<\/a>/g)];
@@ -265,4 +266,29 @@ test('mailto builder: encodes subject and body, refuses addresses that could add
   for (const l of ['What you entered: ', 'What you expected: ', 'Source (if you have one): ']) assert.ok(lines.includes(l), `body has "${l}"`);
   assert.deepEqual(CONTACT_REASONS.map((r) => r.subject), ['Report a wrong figure', 'A rate or rule has changed', 'Idea for a new tool', 'Something else']);
   assert.match(CONTACT_REASONS[0].body, /^Page: \nWhat you entered: \nWhat you expected: \nSource \(if you have one\): $/);
+});
+
+test('the old name "Sorted, Mate" is gone from every site file (renamed to Dinkum Calc)', () => {
+  // Only the real Buy Me a Coffee handle and the contact inbox keep the old word; the owner may rename them later.
+  const ALLOWED = ['https://buymeacoffee.com/sortedmate', 'sortedmate.site@gmail.com'];
+  // sw.js names the pre-rename cache prefix so activate still deletes old caches.
+  const ALLOWED_IN = { 'sw.js': ["'sortedmate-'"] };
+  const files = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (['.git', 'node_modules', 'tests', 'docs', '.claude'].includes(e.name)) continue;
+      const p = dir === '.' ? e.name : join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (/\.(html|js|mjs|css|webmanifest|json|xml|txt|svg)$/.test(e.name)) files.push(p);
+    }
+  };
+  walk('.');
+  assert.ok(files.length > 50, 'found the site files');
+  assert.equal(SITE_NAME, 'Dinkum Calc');
+  for (const f of files) {
+    let text = readFileSync(f, 'utf8');
+    for (const ok of [...ALLOWED, ...(ALLOWED_IN[f] || [])]) text = text.split(ok).join('');
+    assert.doesNotMatch(text, /sorted,?[\s-]*mate/i, `${f} still mentions the old name`);
+    assert.doesNotMatch(text, /brand-comma/, `${f} still uses the old wordmark markup`);
+  }
 });

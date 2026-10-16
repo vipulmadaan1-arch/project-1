@@ -24,7 +24,7 @@ const todo = [];
 const blockers = [];
 
 // Site address
-if (!SITE_URL) todo.push(`SITE_URL: set your domain (e.g. 'https://sortedmate.com.au') at ${cfg('SITE_URL')}, then run: npm run seo`);
+if (!SITE_URL) todo.push(`SITE_URL: set your domain (e.g. 'https://dinkumcalc.com.au') at ${cfg('SITE_URL')}, then run: npm run seo`);
 else if (!existsSync('sitemap.xml') || !readFileSync('index.html', 'utf8').includes(`<link rel="canonical" href="${SITE_URL}/">`)) todo.push('Run: npm run seo (canonical links and sitemap.xml are out of date for SITE_URL).');
 if (SITE_URL && !readFileSync('robots.txt', 'utf8').includes('Sitemap:')) todo.push('robots.txt has no Sitemap line: run npm run seo.');
 

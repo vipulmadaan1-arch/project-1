@@ -1,7 +1,7 @@
 // Site-wide settings. Change these in one place. npm run launch-check lists everything still to set before launch.
-export const SITE_NAME = 'Sorted, Mate';
+export const SITE_NAME = 'Dinkum Calc';
 
-// The site's address, with no trailing slash (e.g. 'https://sortedmate.com.au').
+// The site's address, with no trailing slash (e.g. 'https://dinkumcalc.com.au').
 // Leave empty until you have a domain. After changing it, run: npm run seo
 // That writes canonical links, social share tags, breadcrumb data, sitemap.xml and robots.txt.
 export const SITE_URL = 'https://vipulmadaan1-arch.github.io/project-1';

@@ -1,4 +1,4 @@
-# Sorted, Mate
+# Dinkum Calc
 
 Free everyday tools on one site, as tiles, with a focus on Australian money calculators. It's a static site: no backend and no build step. Everything runs in the browser.
 
@@ -22,7 +22,7 @@ Free everyday tools on one site, as tiles, with a focus on Australian money calc
 
 ## Setup
 1. **Buy Me a Coffee:** create an account at buymeacoffee.com, then set `BMC_URL` in `js/config.js`. Until then all coffee links stay hidden, so the site can go live without them.
-2. **Site name:** change `SITE_NAME` in `js/config.js`, the `| Sorted, Mate` suffix in the page `<title>` tags, and `name`/`short_name` in `manifest.webmanifest`.
+2. **Site name:** change `SITE_NAME` in `js/config.js`, the `| Dinkum Calc` suffix in the page `<title>` tags, and `name`/`short_name` in `manifest.webmanifest`.
 
 ## Revenue
 **Buy Me a Coffee:** set `BMC_URL` in `js/config.js`. The header button, footer link and the prompt under results appear automatically.
@@ -54,8 +54,8 @@ npm run seo            # canonical/share tags, static tool links, sitemap.xml, r
 1. Merge this branch into `main`.
 2. Go to repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 3. Every push to `main` now runs the tests and, if they pass, deploys the site (`.github/workflows/pages.yml`).
-4. For a custom domain, add a `CNAME` file containing the domain (e.g. `sortedmate.com.au`) and set the domain's DNS as GitHub Pages instructs.
-5. Set `SITE_URL` in `js/config.js` (e.g. `'https://sortedmate.com.au'`), run `npm run seo`, bump `VERSION` in `sw.js` and commit. See **Search and sharing** below.
+4. For a custom domain, add a `CNAME` file containing the domain (e.g. `dinkumcalc.com.au`) and set the domain's DNS as GitHub Pages instructs.
+5. Set `SITE_URL` in `js/config.js` (e.g. `'https://dinkumcalc.com.au'`), run `npm run seo`, bump `VERSION` in `sw.js` and commit. See **Search and sharing** below.
 6. Add the site to Google Search Console and submit `sitemap.xml`.
 
 **After you change any file**, bump `VERSION` in `sw.js` so returning visitors get the update, and run `node scripts/sw-hashes.mjs` (or `npm run seo`, which runs it) so the worker downloads only the files that changed. Add new files to its `FILES` list too; `npm test` fails if one is missing or a hash is stale. The comment at the top of `sw.js` explains how updates and offline fallback work.

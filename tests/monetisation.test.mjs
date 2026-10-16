@@ -107,7 +107,7 @@ test('privacy page mentions affiliate links only while they are on', () => {
 test('terms of use: not advice, no reliance, rates-checked date, embedding, Australian Consumer Law, governing law', () => {
   const html = read('terms.html');
   for (const s of ["isn't financial product advice, tax advice, credit assistance or legal advice", "aren't intended to be relied on",
-    'date its rates were last checked', 'Calculator by Sorted, Mate', 'specific financial or credit product', 'Australian Consumer Law',
+    'date its rates were last checked', 'Calculator by Dinkum Calc', 'specific financial or credit product', 'Australian Consumer Law',
     'TODO (site owner): governing law', 'id="contact-line" hidden']) assert.ok(html.includes(s), `terms.html should say ${s}`);
   assert.match(html, /data-module="js\/pages\/privacy\.js"/);
 });

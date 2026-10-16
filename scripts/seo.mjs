@@ -38,7 +38,7 @@ import { footerHtml } from '../js/site-footer.js';
 
 const base = (process.argv[2] || SITE_URL || '').replace(/\/+$/, '');
 if (base && !/^https:\/\/[^/]+/.test(base)) {
-  console.error(`SITE_URL "${base}" should look like https://sortedmate.com.au`);
+  console.error(`SITE_URL "${base}" should look like https://dinkumcalc.com.au`);
   process.exit(1);
 }
 
@@ -110,7 +110,7 @@ function headBlock(html, page) {
   if (page.path === '') {
     // Same @id as the publisher in each tool page's WebApplication JSON-LD (scripts/content.py).
     ld.push({ '@context': 'https://schema.org', '@type': 'Organization', name: SITE_NAME, ...(url ? { '@id': `${url}#organization`, url } : {}) });
-    if (url) ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_NAME.replace(',', ''), url, publisher: { '@id': `${url}#organization` } });
+    if (url) ld.push({ '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE_NAME.replace(/\s+/g, ''), url, publisher: { '@id': `${url}#organization` } });
   }
   const crumbs = html.match(/<nav class="crumbs"[^>]*>([\s\S]*?)<\/nav>/);
   if (url && crumbs) {

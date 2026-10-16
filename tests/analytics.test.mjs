@@ -25,7 +25,7 @@ test('validAnalyticsToken accepts only a 32-character hex token', () => {
 test('shouldLoadAnalytics: only a valid token, a real host, and no Do Not Track or Global Privacy Control', () => {
   const ok = { token: TOKEN, protocol: 'https:', hostname: 'vipulmadaan1-arch.github.io', doNotTrack: null, globalPrivacyControl: undefined };
   assert.equal(shouldLoadAnalytics(ok), true);
-  assert.equal(shouldLoadAnalytics({ ...ok, hostname: 'sortedmate.com.au', doNotTrack: '0', globalPrivacyControl: false }), true);
+  assert.equal(shouldLoadAnalytics({ ...ok, hostname: 'dinkumcalc.com.au', doNotTrack: '0', globalPrivacyControl: false }), true);
   assert.equal(shouldLoadAnalytics({ ...ok, token: '' }), false);
   assert.equal(shouldLoadAnalytics({ ...ok, token: 'not-a-token' }), false);
   for (const hostname of ['localhost', 'LOCALHOST', '127.0.0.1', '127.1.2.3', '0.0.0.0', '[::1]', '::1', 'app.localhost', '']) {
