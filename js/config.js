@@ -71,4 +71,4 @@ export const AFFILIATES = [];
 // "What we don't collect" paragraph to describe the analytics), and change the "Last updated" date on privacy.html.
 // Anything that isn't a 32-character hex token is ignored and analytics stay off (js/analytics.js). The beacon never
 // loads on localhost or file: pages, or for visitors whose browser sends Do Not Track or Global Privacy Control.
-export const CF_ANALYTICS_TOKEN = '';
+export const CF_ANALYTICS_TOKEN = '4f1fd48ea20f49a3ac278326dff69a5c';
