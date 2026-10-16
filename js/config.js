@@ -4,7 +4,7 @@ export const SITE_NAME = 'Sorted, Mate';
 // The site's address, with no trailing slash (e.g. 'https://sortedmate.com.au').
 // Leave empty until you have a domain. After changing it, run: npm run seo
 // That writes canonical links, social share tags, breadcrumb data, sitemap.xml and robots.txt.
-export const SITE_URL = '';
+export const SITE_URL = 'https://vipulmadaan1-arch.github.io/project-1';
 
 // Your Buy Me a Coffee page (e.g. 'https://buymeacoffee.com/jane'). Leave empty to hide every coffee link:
 // the header button, the note under results (shown only after someone changes an input) and the About page line.

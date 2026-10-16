@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://vipulmadaan1-arch.github.io/project-1/sitemap.xml
