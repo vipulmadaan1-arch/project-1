@@ -126,7 +126,8 @@ test('launch-check lists what the owner must set, with the file and line', async
   try { out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' }); }
   catch (e) { assert.ok(cfg.ADSENSE_CLIENT, 'launch-check only fails on ad blockers'); out = e.stdout + e.stderr; }
   // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
-  const expected = [/CONSENT_CONFIRMED.* at js\/config\.js:\d+/];
+  const expected = [];
+  if (cfg.CONSENT_CONFIRMED !== true) expected.push(/CONSENT_CONFIRMED.* at js\/config\.js:\d+/);
   if (!cfg.ADSENSE_CLIENT) expected.push(/ADSENSE_CLIENT at js\/config\.js:\d+/, /ads-txt/);
   else expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
   if (!cfg.SITE_URL) expected.push(/SITE_URL: .* js\/config\.js:\d+/);

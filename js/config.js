@@ -36,7 +36,7 @@ export const ADS_EXCLUDE = ['retirement', 'super', 'term-deposit', 'savings-goal
 // Switzerland before it serves them ads. Set this to true only once you've published the European regulations
 // message in AdSense (Privacy & messaging) or set up another certified CMP. Ads stay off until it's true and
 // CONTACT_EMAIL is set; npm run launch-check says what's missing.
-export const CONSENT_CONFIRMED = false;
+export const CONSENT_CONFIRMED = true;
 
 // Shown on the privacy, about and terms pages so visitors can reach you. Leave empty to hide the line.
 // A valid address also switches on the Get in touch page's email buttons (contact.html), the footer's Get in touch

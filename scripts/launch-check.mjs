@@ -51,7 +51,7 @@ if (!ADSENSE_CLIENT) {
   // Ads stay off (js/ads.js) until both are set; this says why.
   if (!CONTACT_EMAIL) blockers.push(`set CONTACT_EMAIL at ${cfg('CONTACT_EMAIL')} (the privacy page must list a contact before ads run)`);
   if (CONSENT_CONFIRMED !== true) blockers.push(`publish the European regulations message in AdSense → Privacy & messaging (Google requires a certified consent banner for EEA, UK and Swiss visitors), then set CONSENT_CONFIRMED = true at ${cfg('CONSENT_CONFIRMED')}`);
-  if (!blockers.length && !readFileSync('index.html', 'utf8').includes("'unsafe-eval'")) todo.push('Run: npm run seo (the Content-Security-Policy still blocks Google\'s ad scripts).');
+  if (!blockers.length && /^\d{6,12}$/.test(ADSENSE_SLOT) && !readFileSync('index.html', 'utf8').includes("'unsafe-eval'")) todo.push('Run: npm run seo (the Content-Security-Policy still blocks Google\'s ad scripts).');
   console.log(`Ads: in the AdSense dashboard keep Auto ads off (or limited to explainer text), and add page exclusions for: ${ADS_EXCLUDE.map((s) => `tools/${s}.html`).join(', ')}.`);
 }
 for (const s of ADS_EXCLUDE) if (!TOOLS.some((t) => t.slug === s)) todo.push(`ADS_EXCLUDE at ${cfg('ADS_EXCLUDE')} lists unknown tool "${s}".`);
