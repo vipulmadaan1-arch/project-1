@@ -64,9 +64,9 @@ test('ads: never on the excluded pages, never between inputs and result, and no 
   assert.match(read('css/style.css'), /\.ad-slot::before \{[^}]*border-top/, 'a rule separates the ad slot from the result actions above it');
 });
 
-test('coffee note: hidden without BMC_URL, shown only after an input changes, no mention of ads', () => {
-  assert.equal(BMC_URL, '');
-  assert.equal(HAS_BMC, false);
+test('coffee note: only when BMC_URL is set, shown only after an input changes, no mention of ads', () => {
+  // The note and every coffee link follow the setting: off while BMC_URL is blank, on once it's a valid page.
+  assert.equal(HAS_BMC, /^https:\/\/(www\.)?buymeacoffee\.com\/[\w-]+$/.test(BMC_URL));
   const layout = read('js/layout.js');
   const fn = layout.slice(layout.indexOf('export function addResultActions'), layout.indexOf('// Smooth page changes.'));
   assert.match(fn, /if \(HAS_BMC && form\)/);
