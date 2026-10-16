@@ -292,3 +292,8 @@ test('the old name "Sorted, Mate" is gone from every site file (renamed to Dinku
     assert.doesNotMatch(text, /brand-comma/, `${f} still uses the old wordmark markup`);
   }
 });
+
+test('home search placeholder counts every tool', () => {
+  const n = readFileSync('index.html', 'utf8').match(/placeholder="Search (\d+) tools"/)[1];
+  assert.equal(Number(n), TOOLS.length);
+});
