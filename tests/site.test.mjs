@@ -297,3 +297,12 @@ test('home search placeholder counts every tool', () => {
   const n = readFileSync('index.html', 'utf8').match(/placeholder="Search (\d+) tools"/)[1];
   assert.equal(Number(n), TOOLS.length);
 });
+
+test('every page title fits in a Google result (60 characters or fewer)', () => {
+  const pages = [...readdirSync('.').filter((f) => f.endsWith('.html')), ...readdirSync('tools').map((f) => join('tools', f))];
+  const unesc = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  const long = pages
+    .map((f) => [f, unesc(readFileSync(f, 'utf8').match(/<title>(.*?)<\/title>/)?.[1] ?? '')])
+    .filter(([, t]) => t.length > 60);
+  assert.deepEqual(long, []);
+});
