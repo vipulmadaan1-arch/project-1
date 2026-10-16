@@ -20,7 +20,7 @@ export const BMC_URL = 'https://buymeacoffee.com/dinkumcalc';
 // with page exclusions for the pages in ADS_EXCLUDE: Auto ads can put an ad between a form and its result,
 // which this site's own ad slots never do (js/ads.js).
 export const ADSENSE_CLIENT = 'ca-pub-4175558410545198';
-export const ADSENSE_SLOT = '';
+export const ADSENSE_SLOT = '5873107264';
 
 // Pages (tool slugs) that never get an ad slot, even when ads are on.
 // These calculators make projections about financial products (super, deposits, savings and investments).

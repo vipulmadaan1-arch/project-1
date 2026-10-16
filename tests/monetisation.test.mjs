@@ -129,7 +129,7 @@ test('launch-check lists what the owner must set, with the file and line', async
   const expected = [];
   if (cfg.CONSENT_CONFIRMED !== true) expected.push(/CONSENT_CONFIRMED.* at js\/config\.js:\d+/);
   if (!cfg.ADSENSE_CLIENT) expected.push(/ADSENSE_CLIENT at js\/config\.js:\d+/, /ads-txt/);
-  else expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
+  else if (!cfg.ADSENSE_SLOT) expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
   if (!cfg.SITE_URL) expected.push(/SITE_URL: .* js\/config\.js:\d+/);
   if (!cfg.CONTACT_EMAIL) expected.push(/CONTACT_EMAIL: .* js\/config\.js:\d+/);
   if (!cfg.BMC_URL) expected.push(/BMC_URL: .* js\/config\.js:\d+/);
