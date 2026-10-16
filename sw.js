@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v59';
+const VERSION = 'v60';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -238,7 +238,7 @@ const HASHES = {
   'js/ads.js': '3693ab2a0433a185',
   'js/calc.js': '128db9b2f8bc4130',
   'js/rates.js': '51eca1accbc9a681',
-  'js/config.js': '1d8a00313bf90a6a',
+  'js/config.js': '7de87b8d75c1fd8d',
   'js/duty.js': '511bfb98a0177d63',
   'js/icons.js': '97b1ee33cf5a25be',
   'js/layout.js': 'b3e58984cf84bbcb',
