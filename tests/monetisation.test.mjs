@@ -108,7 +108,7 @@ test('terms of use: not advice, no reliance, rates-checked date, embedding, Aust
   const html = read('terms.html');
   for (const s of ["isn't financial product advice, tax advice, credit assistance or legal advice", "aren't intended to be relied on",
     'date its rates were last checked', 'Calculator by Dinkum Calc', 'specific financial or credit product', 'Australian Consumer Law',
-    'TODO (site owner): governing law', 'id="contact-line" hidden']) assert.ok(html.includes(s), `terms.html should say ${s}`);
+    'governed by the laws of New South Wales', 'id="contact-line" hidden']) assert.ok(html.includes(s), `terms.html should say ${s}`);
   assert.match(html, /data-module="js\/pages\/privacy\.js"/);
 });
 
@@ -126,7 +126,7 @@ test('launch-check lists what the owner must set, with the file and line', async
   try { out = execFileSync('node', ['scripts/launch-check.mjs'], { encoding: 'utf8' }); }
   catch (e) { assert.ok(cfg.ADSENSE_CLIENT, 'launch-check only fails on ad blockers'); out = e.stdout + e.stderr; }
   // A setting drops off the to-do list once the owner fills it in, so only expect the ones still blank.
-  const expected = [/Owner name and ABN: .* about\.html:\d+/, /Terms governing law: .* terms\.html:\d+/,
+  const expected = [/Owner name and ABN: .* about\.html:\d+/,
     /CONSENT_CONFIRMED.* at js\/config\.js:\d+/];
   if (!cfg.ADSENSE_CLIENT) expected.push(/ADSENSE_CLIENT at js\/config\.js:\d+/, /ads-txt/);
   else expected.push(/ADSENSE_SLOT at js\/config\.js:\d+/);
