@@ -114,7 +114,10 @@ function headBlock(html, page) {
   }
   const crumbs = html.match(/<nav class="crumbs"[^>]*>([\s\S]*?)<\/nav>/);
   if (url && crumbs) {
-    const items = [...crumbs[1].matchAll(/<a href="([^"]*)">([^<]+)<\/a>|<span aria-current="page">([^<]+)<\/span>/g)];
+    // Google needs an item URL on every crumb but the last. Section crumbs link to a #fragment of the home page,
+    // which isn't a page of its own, so they're left out of the structured data (the visible trail keeps them).
+    const items = [...crumbs[1].matchAll(/<a href="([^"]*)">([^<]+)<\/a>|<span aria-current="page">([^<]+)<\/span>/g)]
+      .filter((m) => m[1] === undefined || !m[1].includes('#'));
     ld.push({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -122,9 +125,7 @@ function headBlock(html, page) {
         '@type': 'ListItem',
         position: i + 1,
         name: unesc(m[2] || m[3]),
-        // Section crumbs link to a #fragment of the home page, which isn't a page of its own,
-        // so they're listed by name only.
-        ...(m[1] !== undefined && !m[1].includes('#') ? { item: new URL(m[1], url).href } : {}),
+        ...(m[1] !== undefined ? { item: new URL(m[1], url).href } : {}),
       })),
     });
   }

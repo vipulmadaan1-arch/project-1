@@ -311,3 +311,18 @@ test('every page title fits in a Google result (60 characters or fewer)', () => 
     .filter(([, t]) => t.length > 60);
   assert.deepEqual(long, []);
 });
+
+test('breadcrumb structured data gives every crumb but the last a page URL (Google rejects the list otherwise)', () => {
+  for (const f of readdirSync('tools')) {
+    const html = readFileSync(join('tools', f), 'utf8');
+    const ld = JSON.parse(html.match(/<script type="application\/ld\+json" id="ld-seo">(.*?)<\/script>/)[1]);
+    const list = [ld].flat().find((x) => x['@type'] === 'BreadcrumbList');
+    assert.ok(list, `${f} has a BreadcrumbList`);
+    const items = list.itemListElement;
+    items.forEach((it, i) => {
+      assert.equal(it.position, i + 1, `${f} positions run 1, 2, 3`);
+      assert.ok(it.name, `${f} crumb ${i + 1} has a name`);
+      if (i < items.length - 1) assert.match(it.item ?? '', /^https:\/\/[^#]+$/, `${f} crumb ${i + 1} needs a page URL`);
+    });
+  }
+});
