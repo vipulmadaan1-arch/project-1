@@ -568,8 +568,16 @@ C = {
  how="""<ul><li><strong>X% of Y</strong> = X ÷ 100 × Y. 15% of 200 = 30.</li>
 <li><strong>X is what % of Y</strong> = X ÷ Y × 100. 30 is 25% of 120.</li>
 <li><strong>Percentage change</strong> = (new − old) ÷ old × 100. From 80 to 100 is +25%.</li></ul>
-<p>Note that a 25% increase followed by a 25% decrease doesn't get you back to where you started: 80 → 100 → 75.</p>""",
+<p>Note that a 25% increase followed by a 25% decrease doesn't get you back to where you started: 80 → 100 → 75.</p>
+<h3>Everyday Australian examples</h3>
+<ul><li><strong>Pay rise:</strong> a 3.5% rise on an $85,000 salary is $85,000 × 0.035 = $2,975, taking it to $87,975.</li>
+<li><strong>Home deposit:</strong> a 20% deposit on a $750,000 home is $150,000. A 5% deposit is $37,500.</li>
+<li><strong>GST inside a price:</strong> GST is 10% of the price before GST, which is one-eleventh (about 9.09%) of a GST-inclusive price. A $110 bill includes $10 of GST, not $11.</li>
+<li><strong>Interest rates:</strong> a home loan rate moving from 6.00% to 6.25% rises 0.25 percentage points (25 basis points), which is a 4.17% increase in the rate itself.</li>
+<li><strong>Stacked discounts:</strong> 30% off, then a further 20% off the sale price, is 44% off in total, not 50%: 0.7 × 0.8 = 0.56 of the original price.</li></ul>""",
  faq=[("How do I add a percentage to a number?","Multiply by (1 + percent ÷ 100). To add 15% to 200: 200 × 1.15 = 230."),
+      ("How do I take a percentage off a price?","Multiply by (1 − percent ÷ 100). 25% off $80 is $80 × 0.75 = $60."),
+      ("How do I work out the original price before a percentage increase?","Divide by (1 + percent ÷ 100). If a price is $115 after a 15% increase, it was $115 ÷ 1.15 = $100. Taking 15% off $115 gives $97.75, which is wrong."),
       ("What's the difference between percent and percentage points?","If a rate goes from 5% to 6%, it rose by 1 percentage point, which is a 20% increase.")],
  related=['gst','calculator','unit-converter','date-calculator']),
 'calculator': dict(
@@ -631,9 +639,23 @@ C = {
  related=['upfront-costs','lmi','borrowing-power','mortgage','car-stamp-duty']),
 'unit-converter': dict(
  how="""<p>Convert between metric and imperial units for length, mass, volume, area, speed and temperature. Australia uses metric, but you'll still meet feet, pounds and Fahrenheit in recipes, specs and overseas listings.</p>
-<p>Australian real estate sometimes quotes house size in <strong>squares</strong>: one square is 100 square feet, or about 9.29 m².</p>""",
+<p>Australian real estate sometimes quotes house size in <strong>squares</strong>: one square is 100 square feet, or about 9.29 m².</p>
+<h3>Common Australian conversions</h3>
+<table><thead><tr><th>You see</th><th>Metric</th></tr></thead><tbody>
+<tr><td>20 squares (house size)</td><td>185.8 m²</td></tr>
+<tr><td>Quarter-acre block</td><td>1,011.7 m²</td></tr>
+<tr><td>1 acre</td><td>0.4047 ha (4,046.9 m²)</td></tr>
+<tr><td>1 hectare</td><td>2.471 acres</td></tr>
+<tr><td>100 km/h</td><td>62.1 mph</td></tr>
+<tr><td>1 knot (boating)</td><td>1.852 km/h</td></tr>
+<tr><td>1 US gallon</td><td>3.785 L</td></tr>
+<tr><td>1 UK (imperial) gallon</td><td>4.546 L</td></tr>
+</tbody></table>
+<p>Land is usually sold in square metres in towns and hectares or acres on rural blocks. A typical 600 m² suburban block is about 0.15 acres.</p>""",
  faq=[("Is a cup the same everywhere?","No. This converter uses the Australian metric cup of 250 mL. A US cup is about 237 mL."),
-      ("How do I convert Celsius to Fahrenheit?","°F = °C × 9/5 + 32. So 25 °C is 77 °F.")],
+      ("How do I convert Celsius to Fahrenheit?","°F = °C × 9/5 + 32. So 25 °C is 77 °F."),
+      ("How many square metres is a square?","One square is 100 square feet, which is 9.29 m². Multiply squares by 9.29 to get square metres, or divide square metres by 9.29 to get squares."),
+      ("How big is a hectare?","10,000 m², or a square 100 metres on each side. It's about 2.47 acres.")],
  related=['calculator','percentage','date-calculator','world-clock']),
 'date-calculator': dict(
  how="""<p>Count the days between two dates, including a breakdown into years, months and days, weeks, and business days (Monday to Friday). You can also add or subtract days from a date, handy for notice periods, settlement dates and deadlines.</p>

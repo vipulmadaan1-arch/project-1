@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v63';
+const VERSION = 'v64';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -264,7 +264,7 @@ const HASHES = {
   'manifest.webmanifest': 'ade7e065154b24eb',
   'privacy.html': '51849a428c9bee5b',
   'about.html': '5092bca351934b34',
-  'terms.html': 'f34e568dd27e9bc8',
+  'terms.html': '2296197da694579b',
   'contact.html': 'a11a5688dbd1bdde',
   'js/contact.js': '05a261814f05c635',
   'js/pages/contact.js': '9ce2d5a03c2974be',
@@ -276,7 +276,7 @@ const HASHES = {
   'tools/gst.html': 'd44a6314fb254f44',
   'tools/mortgage.html': 'e32d4b6334e1946f',
   'tools/offset.html': '34b5f5472adae3cd',
-  'tools/percentage.html': 'd766cb604545d003',
+  'tools/percentage.html': '2f0c9e4df8024937',
   'tools/rental-yield.html': '91a4bbfeba7cb03d',
   'tools/stamp-duty-nsw.html': '8ad43c63454cfac3',
   'tools/stamp-duty-vic.html': 'd173ac0ea57f5444',
@@ -290,7 +290,7 @@ const HASHES = {
   'tools/stopwatch.html': '3a917eb23cabaa8f',
   'tools/take-home-pay.html': '5b20bffa6163474b',
   'tools/timer.html': '0c76e864b3ddde64',
-  'tools/unit-converter.html': '2b41f2dc566c6e3c',
+  'tools/unit-converter.html': '66bbd9a7339ad576',
   'tools/world-clock.html': '742f59831d8f5667',
 };
 // hashes:end
