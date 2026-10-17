@@ -13,12 +13,21 @@ function update() {
     franking: money('franking', 'Franking credits'), workDeductions: money('work', 'Work-related deductions'),
     otherDeductions: money('other', 'Other deductions'),
   };
+  // Family details only matter for the surcharge, so they show when there's no private hospital cover.
+  const noCover = !$('cover').checked;
+  const situation = $('status').value;
+  $('family-fields').hidden = !noCover;
+  $('spouse-field').hidden = situation !== 'couple';
+  $('children-field').hidden = situation === 'single';
+  if (situation === 'parent' && $('children').value.trim() === '0') $('children').value = '1';
+  if (noCover && situation === 'couple') v.spouseIncome = money('spouse', 'Partner’s taxable income');
+  if (noCover && situation !== 'single') v.children = readNumber($('children'), { name: 'Dependent children', min: situation === 'parent' ? 1 : 0, max: 30, whole: true, example: '2' });
   if (Object.values(v).includes(null)) {
     $('note').textContent = '';
     $('refund-label').textContent = 'Estimated refund';
     return blank(...OUT.map($));
   }
-  const r = taxRefund({ year, ...v, privateCover: $('cover').checked, help: $('help').checked });
+  const r = taxRefund({ year, ...v, situation, privateCover: !noCover, help: $('help').checked });
   const owe = r.refund < -0.005;
   $('refund-label').textContent = owe ? `Estimated amount you owe, ${year}` : `Estimated refund, ${year}`;
   // Tax and levies, then the refund: whole dollars from $1,000 up, cents below that, unless rounding would
@@ -51,11 +60,16 @@ function update() {
       ? `Your work-related deductions are less than the standard deduction, so the ATO's ${fmtMoney(r.standard)} standard deduction is used instead.`
       : `Your work-related deductions are more than ${fmtMoney(r.standard)}, so you get them in full instead of the standard deduction (claims reduce it dollar for dollar). Keep receipts and records.`);
   }
-  if (!$('cover').checked && !r.mls.rate) notes.push(`No Medicare levy surcharge at this income for a single person in ${year}.`);
+  if (noCover && r.mls.lowIncome) notes.push(`No Medicare levy surcharge for you: your combined income is over the family threshold, but your own income is ${fmtMoney(r.taxable)}, at or under the low-income cut-off. Your partner may pay it.`);
+  else if (noCover && !r.mls.rate) notes.push(situation === 'single'
+    ? `No Medicare levy surcharge at this income for a single person in ${year}.`
+    : `No Medicare levy surcharge: your ${situation === 'couple' ? 'combined ' : ''}income is at or under the ${fmtMoney(r.mls.freeLimit)} family threshold for ${year}.`);
+  else if (noCover && situation === 'couple') notes.push(`The surcharge rate uses your combined income (${fmtMoney(r.mls.combined)}), but you pay it on your own income only. Your partner pays theirs separately.`);
   if (owe) notes.push('You may owe tax: pay it by the due date on your notice of assessment.');
   $('note').textContent = notes.join(' ');
   $('estimate-note').textContent = r.medicareEstimate ? 'The ATO hasn\'t published 2026-27 Medicare levy low-income thresholds yet, so 2025-26 ones are used (only matters below about $35,000). ' : '';
 }
 wireForm($('form'), update);
+$('form').addEventListener('change', update); // the situation select and cover tick
 syncFormWithUrl($('form'), update);
 addResultActions(document.querySelectorAll('.cols > .card')[1]);

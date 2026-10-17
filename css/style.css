@@ -337,6 +337,7 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; min-width: 0; }
 form.card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-content: start; }
 form > .card { display: grid; gap: 12px; }
+#family-fields:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 form > .card + .card { margin-top: 12px; }
 .card > .section-title { margin-bottom: 0; }
 

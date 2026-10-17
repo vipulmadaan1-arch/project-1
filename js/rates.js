@@ -60,7 +60,7 @@ export const YEARS = {
     brackets: brackets(0.16),
     medicare: medicare(28011, 35013), // SOURCES.medicare
     standard: 0, // the standard deduction starts in 2026-27
-    mls: { single: [101000, 118000, 158000] }, // SOURCES.mls (family tiers aren't used for this year)
+    mls: { single: [101000, 118000, 158000], family: [202000, 236000, 316000] }, // SOURCES.mls (verified 17 Oct 2026)
     help: help(67000, 125000, 8700, 179285), // SOURCES.help, 2025-26 table
   },
   '2026-27': {

@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v74';
+const VERSION = 'v77';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -163,7 +163,7 @@ const HASHES = {
   './': '585733ddf7c7f6f5',
   'js/analytics.js': '4bef7ed4b3c9194c',
   '404.html': '606cc144ca78a06c',
-  'css/style.css': 'a5e20588012af19c',
+  'css/style.css': '0e840f2b7c7808d0',
   'tools/upfront-costs.html': '1ba962fecebbd6cb',
   'tools/lmi.html': 'a0d2d8e6a8608196',
   'js/pages/upfront-costs.js': '605f91de49f15a12',
@@ -177,11 +177,11 @@ const HASHES = {
   'tools/budget.html': '3c5aebeca74d23cc',
   'tools/retirement.html': '741c342db9b56e34',
   'js/pages/rent-vs-buy.js': '5be1991fb20ae7b4',
-  'js/pages/tax-refund.js': '8236aecff05422de',
+  'js/pages/tax-refund.js': '9fded5a6532d3a0f',
   'js/rentbuy.js': 'c389bfa04e175e66',
-  'js/refund.js': '707b0af2be637097',
+  'js/refund.js': '395d5f0140549a29',
   'tools/rent-vs-buy.html': 'b3fceea23d63b2f1',
-  'tools/tax-refund.html': 'ec87a144bf0de46b',
+  'tools/tax-refund.html': '64afc8f2056ec93a',
   'tools/balance-transfer.html': '5bfa83b7c0742439',
   'tools/term-deposit.html': '96a4f12110dd1aae',
   'tools/refinance.html': '4ce60d40ec86a2cf',
@@ -207,7 +207,7 @@ const HASHES = {
   'tools/car-stamp-duty.html': 'a0d46909ae1aaba8',
   'js/pages/car-stamp-duty.js': '20a270a88a631e97',
   'js/motor-duty.js': '9a30f7ba5cf3a291',
-  'tools/medicare-levy-surcharge.html': 'a4780fdd3593cd05',
+  'tools/medicare-levy-surcharge.html': 'e754eab5ed6d7c67',
   'tools/super.html': '5cfd09ba3c2e316c',
   'js/pages/medicare-levy-surcharge.js': '8142605060100729',
   'js/pages/super.js': '99afc0e9752b9bbb',
@@ -237,7 +237,7 @@ const HASHES = {
   'index.html': '585733ddf7c7f6f5',
   'js/ads.js': '3693ab2a0433a185',
   'js/calc.js': '128db9b2f8bc4130',
-  'js/rates.js': '51eca1accbc9a681',
+  'js/rates.js': '275348ef412fffb8',
   'js/config.js': 'f45f3a2222e9e850',
   'js/duty.js': '511bfb98a0177d63',
   'js/icons.js': 'b77b2d5a3aad6693',

@@ -1,7 +1,8 @@
 // Tax refund estimate for an Australian resident individual, 2025-26 and 2026-27. Pure functions, no DOM.
 // Refund = tax withheld − (income tax after LITO + Medicare levy + Medicare levy surcharge + HELP repayment
 // − franking credits). A negative result is an amount you owe.
-import { YEARS as RATES, SOURCES as RATE_SOURCES, MLS_RATES, taxFor, litoFor, medicareFor, mlsFor as mlsRate, helpFor as helpRate } from './rates.js';
+import { CHILD_INCREMENT } from './mls.js';
+import { YEARS as RATES, SOURCES as RATE_SOURCES, MLS_RATES, mlsTiersFor, taxFor, litoFor, medicareFor, mlsFor as mlsRate, helpFor as helpRate } from './rates.js';
 
 export const REFUND_CHECKED = '15 Oct 2026';
 
@@ -54,11 +55,23 @@ export function medicareLevyFor(taxable, year = DEFAULT_YEAR) {
   return medicareFor(year, taxable);
 }
 
-// Medicare levy surcharge for a single person with no private hospital cover for the full year.
-// The thresholds are "or less", so the limit itself is in the lower tier.
-export function mlsFor(incomeForMls, year = DEFAULT_YEAR) {
-  yearOf(year);
-  return mlsRate(year, incomeForMls);
+// Medicare levy surcharge for a full year without private hospital cover. The thresholds are "or less", so the
+// limit itself is in the lower tier. o.situation: 'single', 'couple' (married or de facto) or 'parent' (single
+// parent with dependent children). A couple's rate uses their combined income for MLS purposes, and the family
+// thresholds rise $1,500 for each MLS dependent child after the first (ATO, SOURCES.mls). The surcharge is
+// charged on your own income only, and not at all if you have a spouse and your own income for MLS purposes is
+// at or under the single Medicare levy lower threshold (ATO "M2 Medicare levy surcharge").
+export function mlsFor(incomeForMls, year = DEFAULT_YEAR, { situation = 'single', spouseIncome = 0, children = 0 } = {}) {
+  const y = yearOf(year);
+  if (situation === 'single') return mlsRate(year, incomeForMls);
+  const couple = situation === 'couple';
+  const kids = Math.max(situation === 'parent' ? 1 : 0, Math.floor(children) || 0);
+  const combined = incomeForMls + (couple ? Math.max(0, spouseIncome) : 0);
+  const extra = Math.max(0, kids - 1) * CHILD_INCREMENT;
+  const tier = mlsTiersFor(year, true).filter((limit) => combined > limit + extra).length;
+  const lowIncome = couple && tier > 0 && incomeForMls <= y.medicare.lower;
+  const rate = lowIncome ? 0 : MLS_RATES[tier];
+  return { tier, rate, amount: incomeForMls * rate, combined, freeLimit: mlsTiersFor(year, true)[0] + extra, lowIncome };
 }
 
 export function helpFor(repaymentIncome, year = DEFAULT_YEAR) {
@@ -70,11 +83,12 @@ export function helpFor(repaymentIncome, year = DEFAULT_YEAR) {
  * o.salary: gross salary and wages. o.withheld: PAYG tax withheld (income statement).
  * o.interest, o.dividends (cash received), o.franking (franking credits; grossed up into income and refundable).
  * o.workDeductions, o.otherDeductions. o.privateCover: appropriate private hospital cover all year.
- * o.help: has a HELP/study loan debt. Simplified: single, full-year resident, no fringe benefits,
+ * o.situation, o.spouseIncome, o.children: family details for the surcharge (see mlsFor).
+ * o.help: has a HELP/study loan debt. Simplified: full-year resident, no fringe benefits,
  * investment losses or reportable super, so income for MLS and HELP repayment income = taxable income.
  */
 export function taxRefund({ year = DEFAULT_YEAR, salary = 0, withheld = 0, interest = 0, dividends = 0, franking = 0,
-  workDeductions = 0, otherDeductions = 0, privateCover = true, help = false } = {}) {
+  workDeductions = 0, otherDeductions = 0, privateCover = true, help = false, situation = 'single', spouseIncome = 0, children = 0 } = {}) {
   const y = yearOf(year);
   if (![salary, withheld, interest, dividends, franking, workDeductions, otherDeductions].every(Number.isFinite)) return null;
   const income = salary + interest + dividends + franking;
@@ -90,7 +104,7 @@ export function taxRefund({ year = DEFAULT_YEAR, salary = 0, withheld = 0, inter
   const offset = Math.min(gross, litoFor(taxable)); // non-refundable
   const incomeTax = gross - offset;
   const medicare = medicareLevyFor(taxable, year);
-  const mls = privateCover ? { tier: 0, rate: 0, amount: 0 } : mlsFor(taxable, year);
+  const mls = privateCover ? { tier: 0, rate: 0, amount: 0 } : mlsFor(taxable, year, { situation, spouseIncome, children });
   const helpAmt = help ? helpFor(taxable, year) : 0;
   const liability = incomeTax + medicare + mls.amount + helpAmt - franking; // franking credits are refundable
   const refund = withheld - liability;

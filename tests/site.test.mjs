@@ -345,3 +345,19 @@ test('IndexNow: key file matches the script, is deployed, and only changed sitem
   assert.deepEqual(changedUrls(['index.html', 'tools/gst.html', 'css/style.css', 'google1.html', 'tools/gst.html'], sitemap, 'https://x.au'),
     ['https://x.au/', 'https://x.au/tools/gst.html']);
 });
+
+test('tax refund: the surcharge uses family thresholds and combined income for couples (ATO 2025-26)', async () => {
+  const { mlsFor, taxRefund } = await import('../js/refund.js');
+  const y = '2025-26';
+  assert.equal(mlsFor(110000, y).rate, 0.01); // single over $101,000
+  assert.equal(mlsFor(110000, y, { situation: 'couple', spouseIncome: 90000 }).rate, 0); // $200,000 ≤ $202,000
+  const c = mlsFor(110000, y, { situation: 'couple', spouseIncome: 130000 }); // $240,000: tier 2
+  assert.equal(c.rate, 0.0125); assert.equal(c.amount, 1375);
+  assert.equal(mlsFor(25000, y, { situation: 'couple', spouseIncome: 200000 }).amount, 0); // own income under the cut-off
+  assert.equal(mlsFor(203000, y, { situation: 'parent', children: 3 }).rate, 0); // $202,000 + 2 × $1,500
+  assert.equal(mlsFor(203000, y, { situation: 'parent', children: 1 }).rate, 0.01);
+  const r = taxRefund({ year: y, salary: 110000, privateCover: false, situation: 'couple', spouseIncome: 90000 });
+  assert.equal(r.mls.amount, 0);
+  const html = readFileSync('tools/tax-refund.html', 'utf8');
+  for (const id of ['status', 'spouse', 'children', 'family-fields']) assert.match(html, new RegExp(`id="${id}"`));
+});
