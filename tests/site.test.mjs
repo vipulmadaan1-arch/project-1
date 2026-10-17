@@ -370,3 +370,11 @@ test('capital gains tax and rental cashflow ask for an ownership share and scale
     assert.ok(js.includes(`for (const k of ${JSON.stringify(keys).replace(/"/g, "'").replace(/,/g, ', ')}) if (v[k]) v[k] *= share / 100;`), page);
   }
 });
+
+test('CGT 12-month rule: the day after the first anniversary qualifies, including for a 29 February purchase', async () => {
+  const { heldTwelveMonths } = await import('../js/cgt.js');
+  assert.equal(heldTwelveMonths('2025-03-01', '2026-03-01'), false);
+  assert.equal(heldTwelveMonths('2025-03-01', '2026-03-02'), true);
+  assert.equal(heldTwelveMonths('2024-02-29', '2025-02-28'), false);
+  assert.equal(heldTwelveMonths('2024-02-29', '2025-03-01'), true);
+});

@@ -30,9 +30,13 @@ const DAY = 86400000;
 const quarterOf = (s) => { const d = D(s); return [d.getUTCFullYear(), Math.floor(d.getUTCMonth() / 3) + 1]; };
 const qIndex = ([y, q]) => y * 4 + (q - 1);
 export const fyOf = (s) => { const d = D(s); return d.getUTCMonth() >= 6 ? d.getUTCFullYear() : d.getUTCFullYear() - 1; };
-// Held at least 12 months: the sale is after the first anniversary of the purchase.
+// Held at least 12 months: the sale is after the first anniversary of the purchase (the days of buying and selling
+// don't count). Bought on 29 February, the anniversary is 28 February the next year, not 1 March.
 export function heldTwelveMonths(bought, sold) {
-  const a = D(bought); a.setUTCFullYear(a.getUTCFullYear() + 1);
+  const b = D(bought);
+  const y = b.getUTCFullYear() + 1, m = b.getUTCMonth();
+  const lastDay = new Date(Date.UTC(y, m + 1, 0)).getUTCDate();
+  const a = new Date(Date.UTC(y, m, Math.min(b.getUTCDate(), lastDay)));
   return D(sold) > a;
 }
 
