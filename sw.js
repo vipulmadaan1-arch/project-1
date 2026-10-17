@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v80';
+const VERSION = 'v81';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -181,7 +181,7 @@ const HASHES = {
   'js/rentbuy.js': 'c389bfa04e175e66',
   'js/refund.js': '395d5f0140549a29',
   'tools/rent-vs-buy.html': 'b3fceea23d63b2f1',
-  'tools/tax-refund.html': '64afc8f2056ec93a',
+  'tools/tax-refund.html': 'b92ad58fd3596bef',
   'tools/balance-transfer.html': '5bfa83b7c0742439',
   'tools/term-deposit.html': '96a4f12110dd1aae',
   'tools/refinance.html': '4ce60d40ec86a2cf',
@@ -221,7 +221,7 @@ const HASHES = {
   'js/pages/personal-loan.js': 'f5e08baf28802d6f',
   'js/loans.js': '3718099c698b7ab5',
   'js/pages/work-deductions.js': 'f99689df032a4023',
-  'js/deductions.js': 'e29892f8403fa769',
+  'js/deductions.js': '397ffb5e0566d47a',
   'tools/work-deductions.html': '225e152e75f26295',
   'js/pages/hecs-help.js': '6360a3117bdec84d',
   'js/pages/gross-up.js': 'e6840ca47bcee366',
@@ -237,7 +237,7 @@ const HASHES = {
   'index.html': '585733ddf7c7f6f5',
   'js/ads.js': '3693ab2a0433a185',
   'js/calc.js': '128db9b2f8bc4130',
-  'js/rates.js': '275348ef412fffb8',
+  'js/rates.js': '91bd0ec9179e7c03',
   'js/config.js': 'f45f3a2222e9e850',
   'js/duty.js': '511bfb98a0177d63',
   'js/icons.js': 'b77b2d5a3aad6693',

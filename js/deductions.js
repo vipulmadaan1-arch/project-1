@@ -13,11 +13,11 @@ export const SOURCES = {
 // Income years, keyed by label. For each year:
 //   wfhRate  dollars per hour worked from home, fixed rate method.
 //            Source: ATO "Fixed rate method" (last updated 8 June 2026): 70c for 2024-25 and 2025-26.
-//            2026-27: the ATO hasn't published a rate as at 15 Oct 2026, so 70c is carried forward as an
+//            2026-27: the ATO hasn't published a rate (rechecked 17 Oct 2026), so 70c is carried forward as an
 //            ESTIMATE (wfhEstimate: true) and the page says so.
 //   carRate  dollars per work-related km, cents per kilometre method.
 //            Source: ATO "Cents per kilometre method" (last updated 12 Aug 2026): 88c for 2024-25 and
-//            2025-26, 91c for 2026-27 (Cents per Kilometre Deduction Rate for Car Expenses 2026 Determination).
+//            2025-26, 91c for 2026-27 (Cents per Kilometre Deduction Rate for Car Expenses 2026 Determination). Rechecked 17 Oct 2026.
 //   standard The standard deduction for work-related expenses: up to $1,000 from 2026-27, reduced dollar
 //            for dollar by work-related expenses you claim (including working from home and car).
 //            From js/rates.js (ATO "Standard deduction for work-related expenses", last updated 14 Sep 2026).

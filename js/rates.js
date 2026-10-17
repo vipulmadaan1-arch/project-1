@@ -65,7 +65,8 @@ export const YEARS = {
   },
   '2026-27': {
     brackets: brackets(0.15),
-    // ESTIMATE: the ATO hadn't published 2026-27 thresholds as at 15 Oct 2026, so 2025-26's are carried forward.
+    // ESTIMATE: the ATO hadn't published 2026-27 thresholds as at 17 Oct 2026, so 2025-26's are carried forward. The PAYG
+    // withholding schedules from 1 July 2026 (LI 2026/18, verified 17 Oct 2026) also still use $28,011 and $35,013.
     medicare: medicare(28011, 35013, true),
     standard: 1000, // lower of $1,000 and labour income, SOURCES.standard
     mls: { single: [105000, 123000, 164000], family: [210000, 246000, 328000] }, // SOURCES.mls
