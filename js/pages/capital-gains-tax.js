@@ -30,6 +30,10 @@ function update() {
     inflation: readNumber($('inflation'), { name: 'Assumed inflation', unit: 'percent', min: -5, max: 20 }),
     startValue: heldAcross ? readNumber($('start-value'), { name: 'Value at 30 June 2027', unit: 'money', min: 0, max: 1e12, optional: true }) : 0,
   };
+  // Joint owners: each is taxed on their share of the gain, at their own rates (ATO). Scale the asset's figures.
+  const share = readNumber($('share'), { name: 'Ownership share', unit: 'percent', above: 0, max: 100 });
+  if (share != null && share < 100) for (const k of ['price', 'buyCosts', 'proceeds', 'sellCosts', 'startValue']) if (v[k]) v[k] *= share / 100;
+  if (share == null) v.share = null;
   const r = dates && !Object.values(v).includes(null) ? capitalGainsTax({
     asset, ...dates, ...v, inflation: v.inflation / 100, foreign: $('foreign').checked, support: $('support').checked,
   }) : null;
@@ -58,6 +62,7 @@ function update() {
   if (r.gross < 0) notes.unshift(`A capital loss of ${fmtMoney(-r.gross)} can be carried forward to reduce future capital gains.`);
   else if (r.loss > 0) notes.unshift(`${fmtMoney(r.loss)} of capital loss is left to carry forward.`);
   if (r.lossesUsed > 0) notes.push(`${fmtMoney(r.lossesUsed)} of your carried-forward losses were used.`);
+  if (share < 100) notes.push(`These figures are your ${share.toLocaleString('en-AU')}% share: gain and tax. Your co-owner works out theirs the same way, with their own income.`);
   $('note').textContent = notes.join(' ');
   $('projected-note').textContent = r.projected ? `Indexation uses projected CPI at ${v.inflation}% a year, as future figures aren't published yet. ` : '';
 }

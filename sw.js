@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v77';
+const VERSION = 'v79';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -191,8 +191,8 @@ const HASHES = {
   'js/balance-transfer.js': 'e7b9836f0590b16c',
   'js/term-deposit.js': '3ef0d3cf5795b531',
   'js/refinance.js': '4e0d44b282ef46ed',
-  'tools/rental-cashflow.html': '4462032862e6e7bf',
-  'js/pages/rental-cashflow.js': '37c0a36b98c83fc0',
+  'tools/rental-cashflow.html': 'f71d49fe578b5bc4',
+  'js/pages/rental-cashflow.js': '02aa3bc605600687',
   'js/rental.js': '0e4ccec12c46ee15',
   'tools/borrowing-power.html': '9e07cba9b2f94a57',
   'tools/inflation.html': 'e49ba1fd7c357fc6',
@@ -229,8 +229,8 @@ const HASHES = {
   'js/grossup.js': '57af1d271d096f44',
   'tools/hecs-help.html': '8585eb9812372d07',
   'tools/gross-up.html': 'e966b7c9ca8303a1',
-  'tools/capital-gains-tax.html': 'cafa24940d8b5615',
-  'js/pages/capital-gains-tax.js': '569856b2d357227c',
+  'tools/capital-gains-tax.html': '55878ca3d2ecce19',
+  'js/pages/capital-gains-tax.js': '2b9cc7f13154002e',
   'js/cgt.js': 'd3677db85c32d4f0',
   'fonts/instrument-sans.woff2': '2ee17598a98d8a59',
   'img/icon.svg': '2411553927ad6b14',

@@ -90,6 +90,7 @@
         <div class="field"><label for="land-tax">Land tax ($ a year)</label><input type="text" id="land-tax" class="num" aria-describedby="land-tax-hint" value="0" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="land-tax-hint">From your state revenue office assessment. Thresholds and rates differ by state.</small></div>
         <div class="field"><label for="depreciation">Depreciation ($ a year, optional)</label><input type="text" id="depreciation" class="num" aria-describedby="depreciation-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="depreciation-hint">From a quantity surveyor's schedule. It's a tax deduction, not money you spend.</small></div>
         <h2 class="section-title">Your tax</h2>
+        <div class="field"><label for="share">Your ownership share (%)</label><input type="text" id="share" class="num" value="100" inputmode="decimal" spellcheck="false" autocomplete="off" aria-describedby="share-hint"><small id="share-hint">50 if you own it equally with a partner. Enter the whole property's figures above; cashflow and tax are worked out on your share, with your own income.</small></div>
         <div class="field"><label for="income">Your other taxable income ($ a year)</label><input type="text" id="income" class="num" aria-describedby="income-hint" value="120,000" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="income-hint">Salary and other income after deductions, without this property.</small></div>
         <div class="field" id="carried-field"><label for="carried">Rental losses carried forward ($, optional)</label><input type="text" id="carried" class="num" aria-describedby="carried-hint" inputmode="decimal" data-money spellcheck="false" autocomplete="off"><small id="carried-hint">Losses from earlier years that the limit stopped you claiming.</small></div>
       </form>
@@ -111,7 +112,7 @@
         <div class="kv"><span id="cmp-label">If you could negatively gear</span><span id="cmp">–</span></div>
         <div class="kv"><span>Gross rental yield</span><span id="yield">–</span></div>
         <p class="note" id="note"></p>
-        <p class="disclaimer">Estimate for one property owned by one individual, for a full year. Uses section 26-155 of the Income Tax Assessment Act 1997 (inserted by the <a href="https://www.legislation.gov.au/C2026A00049/asmade/text" target="_blank" rel="noopener noreferrer">Treasury Laws Amendment (Tax Reform No. 1) Act 2026</a>) and ATO resident tax rates, checked on 15 Oct 2026. The definition of a new build is still to be set by the Minister, so that part is our best reading of the Budget papers. Not tax advice: confirm with a registered tax agent.</p>
+        <p class="disclaimer">Estimate for one property, for your ownership share, for a full year. Uses section 26-155 of the Income Tax Assessment Act 1997 (inserted by the <a href="https://www.legislation.gov.au/C2026A00049/asmade/text" target="_blank" rel="noopener noreferrer">Treasury Laws Amendment (Tax Reform No. 1) Act 2026</a>) and ATO resident tax rates, checked on 15 Oct 2026. The definition of a new build is still to be set by the Minister, so that part is our best reading of the Budget papers. Not tax advice: confirm with a registered tax agent.</p>
       </section>
     </div>
     <!-- content:start -->

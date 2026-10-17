@@ -361,3 +361,12 @@ test('tax refund: the surcharge uses family thresholds and combined income for c
   const html = readFileSync('tools/tax-refund.html', 'utf8');
   for (const id of ['status', 'spouse', 'children', 'family-fields']) assert.match(html, new RegExp(`id="${id}"`));
 });
+
+test('capital gains tax and rental cashflow ask for an ownership share and scale the property figures by it', () => {
+  for (const [page, keys] of [['capital-gains-tax', ['price', 'buyCosts', 'proceeds', 'sellCosts', 'startValue']],
+    ['rental-cashflow', ['weeklyRent', 'price', 'loan', 'councilRates', 'strata', 'insurance', 'maintenance', 'landTax', 'depreciation']]]) {
+    assert.match(readFileSync(`tools/${page}.html`, 'utf8'), /<label for="share">Your ownership share \(%\)<\/label><input type="text" id="share" class="num" value="100"/);
+    const js = readFileSync(`js/pages/${page}.js`, 'utf8');
+    assert.ok(js.includes(`for (const k of ${JSON.stringify(keys).replace(/"/g, "'").replace(/,/g, ', ')}) if (v[k]) v[k] *= share / 100;`), page);
+  }
+});

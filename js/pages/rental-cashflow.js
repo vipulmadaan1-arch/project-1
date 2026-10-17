@@ -44,6 +44,10 @@ function update() {
     income: money('Other taxable income', 'income', { optional: true }),
     carriedForward: fyStart >= LIMIT_START_FY ? money('Losses carried forward', 'carried', { optional: true }) : 0,
   };
+  // Joint owners each declare their share of the rent and expenses and claim their share of any loss (ATO).
+  const share = readNumber($('share'), { name: 'Ownership share', unit: 'percent', above: 0, max: 100 });
+  if (share != null && share < 100) for (const k of ['weeklyRent', 'price', 'loan', 'councilRates', 'strata', 'insurance', 'maintenance', 'landTax', 'depreciation']) if (v[k]) v[k] *= share / 100;
+  if (share == null) v.share = null;
   const r = acquired && !Object.values(v).includes(null) ? rentalCashflow({
     fyStart, ...v, loanType: pi ? 'pi' : 'io', acquired, beforeBudgetTime: onBudgetDay && $('budget-time').checked, newBuild: $('newbuild').checked,
   }) : null;
@@ -91,6 +95,7 @@ function update() {
   }
   if (r.limited) notes.push('The limit applies across all your established homes bought after Budget night together: a profit on one absorbs a loss on another.');
   if (r.marginal != null && r.taxEffect !== 0) notes.push(`Your marginal rate, with the Medicare levy, is about ${Math.round(r.marginal * 100)}%.`);
+  if (share < 100) notes.push(`These figures are your ${share.toLocaleString('en-AU')}% share: rent, costs, cashflow and tax. Your co-owner works out theirs the same way, with their own income.`);
   $('note').textContent = notes.join(' ');
 }
 
