@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v83';
+const VERSION = 'v84';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -272,7 +272,7 @@ const HASHES = {
   'js/present-value.js': '01d21de1aa3daf9d',
   'tools/calculator.html': '838061c946ff9a16',
   'tools/compound-interest.html': 'feaa689385e01084',
-  'tools/date-calculator.html': '3326617fc3c07102',
+  'tools/date-calculator.html': '36e0798a2f969fa1',
   'tools/gst.html': 'aed5f18bbdc3a5ee',
   'tools/mortgage.html': 'e130cf899b0f0394',
   'tools/offset.html': 'af39223112e18647',
