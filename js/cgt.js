@@ -177,7 +177,7 @@ export function capitalGainsTax(o) {
     g = Math.max(0, g); const used = Math.min(g, priorLosses); g -= used;
     const withDiscount = settle({ rules: 'new', choice: 'discount', discountedPart: g * discount, netGain: g * (1 - discount), minGain: 0, loss, lossesUsed: used, factor: idx.factor, projected: idx.projected, notes: [...notes] });
     const best = withDiscount.total <= withIndex.total ? withDiscount : { ...withIndex, choice: 'indexation' };
-    best.notes.push(`New builds can choose the 50% discount or indexation. ${best.choice === 'discount' ? 'The 50% discount' : 'Indexation'} costs less here. The final definition of a new build is still to be set by the Government.`);
+    best.notes.push(`New builds can choose the 50% discount or indexation. ${best.choice === 'discount' ? 'The 50% discount' : 'Indexation'} costs less here. The definition of a new build is in a bill before Parliament (Tax Reform No. 3, introduced 14 October 2026) and could still change.`);
     return { ...best, alternative: best === withDiscount ? withIndex.total : withDiscount.total };
   }
   return settle(indexed);

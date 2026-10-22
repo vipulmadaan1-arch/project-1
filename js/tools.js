@@ -56,4 +56,4 @@ export const TOOLS = [
   { slug: 'upfront-costs', name: 'Upfront Costs of Buying a Home', desc: 'Cash needed to buy: deposit, stamp duty, registration fees, LMI and typical costs.', meta: 'All 8 states, 2026-27', cat: 'property', keywords: 'buying costs cash needed deposit first home buyer fhb settlement conveyancing nsw vic qld wa sa tas act nt new south wales victoria queensland western australia tasmania canberra northern territory' },
 ];
 
-export const RATES_CHECKED = '15 Oct 2026';
+export const RATES_CHECKED = '22 Oct 2026';

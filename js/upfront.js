@@ -64,8 +64,10 @@ export const REGO = {
     office: 'Access Canberra', source: 'https://www.accesscanberra.act.gov.au/building-and-property/land-title-lodgement-registration-and-search-forms-related-fees',
     transfer: () => 496, mortgage: 184,
   },
-  // NT: 2026-27 Land Titles Office fees could not be confirmed, so they are not included.
-  NT: { office: 'Land Titles Office NT', source: 'https://nt.gov.au/property/land-titles-office', transfer: null, mortgage: null },
+  // NT Land Titles Office (pages dated 1 July 2026, checked 22 Oct 2026): "Fee: A $181 fee applies" to transfer land
+  // and to lodge a mortgage. https://nt.gov.au/property/land-titles-office/transfer-your-land and
+  // https://nt.gov.au/property/land-titles-office/lodge-a-mortgage-or-discharge-of-mortgage
+  NT: { office: 'Land Titles Office NT', source: 'https://nt.gov.au/property/land-titles-office/transfer-your-land', transfer: () => 181, mortgage: 181 },
 };
 
 // Typical costs: ESTIMATES only, editable on the page. Ranges from Mozo's 2026 conveyancing guide

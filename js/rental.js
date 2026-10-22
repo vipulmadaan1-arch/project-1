@@ -16,8 +16,10 @@
 // 3. s26-155(2)(a) and (3): a dwelling you last acquired before 7.30 pm by legal time in the ACT (AEST) on
 //    12 May 2026 is outside the limit. For a purchase under a contract, the time you entered into the
 //    contract counts, even if settlement was later.
-// 4. s26-155(2)(b) and s26-160(3)-(4): a "new residential dwelling" is outside the limit. The Act leaves the
-//    definition to a Minister's legislative instrument, which had not been made by 15 Oct 2026 (UNCERTAIN).
+// 4. s26-155(2)(b) and s26-160(3)-(4): a "new residential dwelling" is outside the limit. The definition is now in
+//    Schedule 5 of the Treasury Laws Amendment (Tax Reform No. 3) Bill 2026, introduced 14 Oct 2026 and not yet
+//    passed (Senate committee report due 13 Nov 2026). Treasury's Aug 2026 exposure draft extended the Budget's
+//    12 months to buying within 24 months of a certificate of occupancy (UNCERTAIN until the bill passes).
 //    The Budget 2026-27 tax explainer (https://budget.gov.au/content/factsheets/download/
 //    tax-explainers-negative-gearing-capital-gains-tax.pdf) says a new build is built on vacant land, or
 //    replaces demolished housing with more dwellings, and hasn't been sold before (unless the builder owned

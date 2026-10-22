@@ -23,7 +23,9 @@ test('registration fees 2026-27', () => {
   assert.equal(registrationFees('VIC', 5000000).transfer, 3614.3);
   assert.equal(registrationFees('TAS', 500000).transfer, 256.76);
   assert.equal(registrationFees('ACT', 500000).mortgage, 184);
-  assert.equal(registrationFees('NT', 500000).missing, true);
+  assert.equal(registrationFees('NT', 500000).transfer, 181);
+  assert.equal(registrationFees('NT', 500000).mortgage, 181);
+  assert.equal(registrationFees('NT', 500000).missing, false);
   assert.equal(registrationFees('NSW', 500000, { borrowing: false }).mortgage, 0);
 });
 

@@ -5,7 +5,7 @@
 //   https://www.ato.gov.au/tax-rates-and-codes/study-and-training-loan-minimum-repayment-income-and-rates
 // Indexation is applied on 1 June each year at the lower of CPI and WPI. 2.8% was applied on
 // 1 June 2026. Sources: https://www.ato.gov.au/tax-rates-and-codes/study-and-training-support-loans-indexation-rates
-// (updated 17 Apr 2026) and https://www.studyassist.gov.au/news/indexation-28-will-be-applied-your-study-loan-1-june-2026
+// (updated 13 Oct 2026, rechecked 22 Oct 2026) and https://www.studyassist.gov.au/news/indexation-28-will-be-applied-your-study-loan-1-june-2026
 //
 // ESTIMATES AND SIMPLIFYING ASSUMPTIONS (not official figures):
 // - Future indexation rates are unknown; the caller passes an assumed rate (the page defaults to 2.8%,
