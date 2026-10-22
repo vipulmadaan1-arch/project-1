@@ -555,17 +555,6 @@ const prefetch = (e) => {
 addEventListener('pointerover', prefetch, { passive: true });
 addEventListener('touchstart', prefetch, { passive: true });
 addEventListener('focusin', prefetch);
-addEventListener('click', (e) => {
-  const a = e.target.closest?.('a[href]');
-  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || !sitePage(a)) return;
-  document.documentElement.classList.add('is-leaving');
-  a.closest('.tile')?.classList.add('is-pressed');
-});
-// Coming back with the Back button restores the page as it was left, so clear the loading state.
-addEventListener('pageshow', () => {
-  document.documentElement.classList.remove('is-leaving');
-  document.querySelectorAll('.is-pressed').forEach((el) => el.classList.remove('is-pressed'));
-});
 
 // Register after the page has loaded, so caching the site for offline use doesn't compete with this
 // page's own requests on a first visit.

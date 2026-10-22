@@ -16,22 +16,28 @@ const $search = document.getElementById('search');
 
 // The card is clickable through its title link (stretched over the card in CSS); the pin
 // button sits beside the link rather than inside it, so each is its own control.
+function syncPin(b, slug) {
+  const isPinned = pinned.includes(slug);
+  b.setAttribute('aria-pressed', String(isPinned));
+  b.title = isPinned ? 'Unpin' : 'Pin to top';
+}
 function pinButton(t) {
-  const isPinned = pinned.includes(t.slug);
   const b = document.createElement('button');
   b.className = 'pin';
   b.type = 'button';
-  b.setAttribute('aria-pressed', String(isPinned));
   b.setAttribute('aria-label', `Pin ${t.name}`);
-  b.title = isPinned ? 'Unpin' : 'Pin to top';
   b.innerHTML = icon('pin');
+  syncPin(b, t.slug);
   b.addEventListener('click', () => {
-    pinned = isPinned ? pinned.filter((s) => s !== t.slug) : [...pinned, t.slug];
+    const wasPinned = pinned.includes(t.slug);
+    pinned = wasPinned ? pinned.filter((s) => s !== t.slug) : [...pinned, t.slug];
     safeSet(PIN_KEY, JSON.stringify(pinned));
-    render();
-    // The tile moves between sections, so keep focus on its pin button.
-    document.querySelector(`.tile-link[href="tools/${t.slug}.html"]`)?.closest('.tile').querySelector('.pin').focus();
-    announce(isPinned ? `${t.name} unpinned` : `${t.name} pinned to top`);
+    syncPin(b, t.slug);
+    place();
+    filter();
+    // The tile moved between sections (the same element), so its pin button keeps focus.
+    b.focus();
+    announce(wasPinned ? `${t.name} unpinned` : `${t.name} pinned to top`);
   });
   return b;
 }
@@ -75,34 +81,58 @@ function matcher(query) {
   return (t) => qs.every((q, i) => INDEX.get(t.slug).some((w) => wordMatches(q, w, typing && i === qs.length - 1)));
 }
 
-function render() {
-  const match = matcher($search.value);
-  const pinnedTools = pinned.map((s) => TOOLS.find((t) => t.slug === s)).filter(Boolean).filter(match);
-  $pinned.replaceChildren(...pinnedTools.map(tile));
-  document.getElementById('pinned-section').hidden = pinnedTools.length === 0;
-  document.getElementById('pinned-count').innerHTML = `${pinnedTools.length}<span class="visually-hidden"> tool${pinnedTools.length === 1 ? '' : 's'}</span>`;
+// Each tile is built once. Pinning moves a tile between the Pinned grid and its section; searching only
+// shows and hides tiles, so typing never rebuilds the page.
+const tileFor = new Map();
+const grids = new Map();
 
-  let shown = pinnedTools.length;
-  $sections.replaceChildren(...CATEGORIES.map((c) => {
-    const tools = TOOLS.filter((t) => t.cat === c.key && !pinned.includes(t.slug)).filter(match);
-    shown += tools.length;
-    const sec = document.createElement('section');
-    sec.className = 'cat-section';
-    sec.id = c.key;
-    sec.hidden = tools.length === 0;
-    sec.innerHTML = `<div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count">${tools.length}<span class="visually-hidden"> tool${tools.length === 1 ? '' : 's'}</span></span><p class="cat-blurb">${c.blurb}</p></div>`;
-    const grid = document.createElement('div');
-    grid.className = 'grid';
-    grid.append(...tools.map(tile));
-    sec.append(grid);
-    return sec;
-  }));
+function ensureSections() {
+  for (const c of CATEGORIES) {
+    let sec = document.getElementById(c.key);
+    if (!sec) {
+      sec = document.createElement('section');
+      sec.className = 'cat-section';
+      sec.id = c.key;
+      sec.innerHTML = `<div class="cat-head"><h2 class="cat-title">${c.title}</h2><span class="cat-count"></span><p class="cat-blurb">${c.blurb}</p></div><div class="grid"></div>`;
+      $sections.append(sec);
+    }
+    grids.set(c.key, sec.querySelector('.grid'));
+  }
+}
+
+function place() {
+  for (const s of pinned) { const el = tileFor.get(s); if (el) $pinned.append(el); }
+  for (const t of TOOLS) if (!pinned.includes(t.slug)) grids.get(t.cat).append(tileFor.get(t.slug));
+}
+
+const countHtml = (n) => `${n}<span class="visually-hidden"> tool${n === 1 ? '' : 's'}</span>`;
+// Only touch a count when its number changes.
+const setCount = (el, n) => { if (el.dataset.n !== String(n)) { el.dataset.n = n; el.innerHTML = countHtml(n); } };
+function filter() {
+  const match = matcher($search.value);
+  let shown = 0;
+  let pinnedShown = 0;
+  const perCat = new Map(CATEGORIES.map((c) => [c.key, 0]));
+  for (const t of TOOLS) {
+    const ok = match(t);
+    tileFor.get(t.slug).hidden = !ok;
+    if (!ok) continue;
+    shown++;
+    if (pinned.includes(t.slug)) pinnedShown++; else perCat.set(t.cat, perCat.get(t.cat) + 1);
+  }
+  document.getElementById('pinned-section').hidden = pinnedShown === 0;
+  setCount(document.getElementById('pinned-count'), pinnedShown);
+  for (const c of CATEGORIES) {
+    const sec = document.getElementById(c.key);
+    sec.hidden = perCat.get(c.key) === 0;
+    setCount(sec.querySelector('.cat-count'), perCat.get(c.key));
+  }
   document.getElementById('empty').hidden = shown > 0;
   return shown;
 }
 
 function search() {
-  const shown = render();
+  const shown = filter();
   announce(shown ? `${shown} ${shown === 1 ? 'tool' : 'tools'} found` : 'No tools match that search.', 600);
 }
 $search.addEventListener('input', search);
@@ -118,16 +148,15 @@ document.getElementById('empty').addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
   if (e.key === '/' && shortcutAllowed(e)) { e.preventDefault(); $search.focus(); }
 });
-// The tiles are already in the HTML (written by scripts/seo.mjs). With nothing pinned and no search
-// (a restored search box counts), just add the pin buttons instead of rebuilding every tile.
-const staticTiles = [...$sections.querySelectorAll('.tile')];
-if (!pinned.length && !$search.value && staticTiles.length === TOOLS.length) {
-  for (const el of staticTiles) {
-    const t = TOOLS.find((x) => el.querySelector('.tile-link')?.getAttribute('href') === `tools/${x.slug}.html`);
-    if (t) el.append(pinButton(t));
-  }
-} else {
-  render();
+// The tiles are already in the HTML (written by scripts/seo.mjs): reuse them and add the pin buttons. Any tile
+// that's missing is built.
+ensureSections();
+for (const el of $sections.querySelectorAll('.tile')) {
+  const t = TOOLS.find((x) => el.querySelector('.tile-link')?.getAttribute('href') === `tools/${x.slug}.html`);
+  if (t && !tileFor.has(t.slug)) { el.append(pinButton(t)); tileFor.set(t.slug, el); }
 }
+for (const t of TOOLS) if (!tileFor.has(t.slug)) tileFor.set(t.slug, tile(t));
+place();
+filter();
 // The tiles are in their final places now (see .has-pins in style.css).
 document.documentElement.classList.remove('has-pins');

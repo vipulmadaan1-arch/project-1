@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v82';
+const VERSION = 'v83';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -163,7 +163,7 @@ const HASHES = {
   './': 'f2a993ab05302860',
   'js/analytics.js': '4bef7ed4b3c9194c',
   '404.html': '69dcdc81b536e124',
-  'css/style.css': '0e840f2b7c7808d0',
+  'css/style.css': '7cc0dcd52d57bcb2',
   'tools/upfront-costs.html': '62c0b0854634124d',
   'tools/lmi.html': '9f97a16b0a8a1b2b',
   'js/pages/upfront-costs.js': '605f91de49f15a12',
@@ -241,13 +241,13 @@ const HASHES = {
   'js/config.js': 'f45f3a2222e9e850',
   'js/duty.js': '511bfb98a0177d63',
   'js/icons.js': 'b77b2d5a3aad6693',
-  'js/layout.js': '120cfdf17c19a618',
+  'js/layout.js': 'a2d272ac7c9b0f4f',
   'js/site-footer.js': 'ad5302969c63e228',
   'js/pages/calculator.js': '4b0a93b681632315',
   'js/pages/compound-interest.js': '04639941f39dbd43',
   'js/pages/date-calculator.js': '6728f8569d2b697f',
   'js/pages/gst.js': '3f117f9b75185e6b',
-  'js/pages/home.js': 'b16721a1ae59d254',
+  'js/pages/home.js': 'dfb9dc1b12c17987',
   'js/pages/mortgage.js': '006682ff0ff2cfbe',
   'js/pages/offset.js': '358de09ba88ea789',
   'js/pages/percentage.js': '9ae086464f83548e',
