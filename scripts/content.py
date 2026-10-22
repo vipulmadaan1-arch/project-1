@@ -662,7 +662,7 @@ C = {
  related=['calculator','percentage','date-calculator','world-clock']),
 'date-calculator': dict(
  how="""<p>Count the days between two dates, including a breakdown into years, months and days, weeks, and business days (Monday to Friday). You can also add or subtract days from a date, handy for notice periods, settlement dates and deadlines.</p>
-<p>Business days skip weekends and NSW public holidays, useful for settlement periods and notice periods.</p>
+<p>Business days skip weekends and, if you tick the box, the public holidays of the state or territory you choose, useful for settlement periods and notice periods.</p>
 <p>By default the end date isn't counted (1 Jan to 2 Jan is 1 day). Tick “Include the end date” to count both.</p>
 <h3>Everyday Australian examples</h3>
 <ul><li><strong>Property settlement:</strong> NSW contracts often settle 42 days after exchange. Exchange on Monday 2 November 2026 and 42 days later is Monday 14 December 2026, which is 31 business days.</li>
@@ -670,7 +670,7 @@ C = {
 <li><strong>Lodging your own tax return:</strong> 1 July to 31 October 2026 is 122 days. 31 October is the usual deadline if you lodge yourself; a registered tax agent can often lodge later.</li>
 <li><strong>Christmas slowdown:</strong> December 2026 has 23 weekdays but only 21 NSW business days, because Christmas Day falls on a Friday and the Boxing Day holiday moves to Monday 28 December.</li></ul>""",
  faq=[("How do I work out a settlement or notice period?","Pick Add or subtract days, enter the start date (for example the exchange date) and the number of days. Check whether your contract or award counts calendar days or business days, and whether the first day counts: this calculator doesn't count the start day."),
-      ("Are public holidays excluded from business days?","Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ."),
+      ("Are public holidays excluded from business days?","Yes, when the box is ticked: the full-day public holidays for your chosen state or territory in 2026 and 2027, from the Fair Work Ombudsman. Regional and part-day holidays aren't included, such as Brisbane's Royal Queensland Show, Tasmania's regional days and the Christmas Eve and New Year's Eve evenings in SA, Queensland and the NT. Victoria's 2027 AFL Grand Final eve isn't included because its date hasn't been set."),
       ("Does daylight saving affect the count?","No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.")],
  related=['world-clock','timer','calculator','stopwatch']),
 'world-clock': dict(

@@ -7,14 +7,14 @@
   <script data-module="../js/pages/date-calculator.js">try{var d=document.documentElement,t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(/"/.test(localStorage.getItem('pinnedTools')||''))d.classList.add('has-pins')}catch(e){};(function(m){function go(){var s=document.createElement('script');s.type='module';s.src=m;document.head.appendChild(s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go()})(document.currentScript.getAttribute('data-module'))</script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Date Calculator: Days Between Dates | Dinkum Calc</title>
-  <meta name="description" content="Count days, weeks and business days between two dates, with the option to skip NSW public holidays, or add days to a date.">
+  <meta name="description" content="Count days, weeks and business days between two dates, with the option to skip any state's public holidays, or add days to a date.">
   <!-- seo:start -->
   <link rel="canonical" href="https://dinkumcalc.com.au/tools/date-calculator.html">
   <meta property="og:site_name" content="Dinkum Calc">
   <meta property="og:locale" content="en_AU">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Date Calculator: Days Between Dates">
-  <meta property="og:description" content="Count days, weeks and business days between two dates, with the option to skip NSW public holidays, or add days to a date.">
+  <meta property="og:description" content="Count days, weeks and business days between two dates, with the option to skip any state's public holidays, or add days to a date.">
   <meta property="og:url" content="https://dinkumcalc.com.au/tools/date-calculator.html">
   <meta property="og:image" content="https://dinkumcalc.com.au/img/og.png">
   <meta property="og:image:width" content="1200">
@@ -44,7 +44,7 @@
   <link rel="modulepreload" href="../js/rates.js">
   <link rel="modulepreload" href="../js/calc.js">
   <link rel="modulepreload" href="../js/pages/date-calculator.js">
-  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebPage", "name": "Date Calculator", "description": "Count days, weeks and business days between two dates, with the option to skip NSW public holidays, or add days to a date.", "inLanguage": "en-AU", "isAccessibleForFree": true, "dateModified": "2026-10-14", "publisher": {"@type": "Organization", "name": "Dinkum Calc", "@id": "https://dinkumcalc.com.au/#organization", "url": "https://dinkumcalc.com.au/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I work out a settlement or notice period?", "acceptedAnswer": {"@type": "Answer", "text": "Pick Add or subtract days, enter the start date (for example the exchange date) and the number of days. Check whether your contract or award counts calendar days or business days, and whether the first day counts: this calculator doesn't count the start day."}}, {"@type": "Question", "name": "Are public holidays excluded from business days?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ."}}, {"@type": "Question", "name": "Does daylight saving affect the count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors."}}]}]</script>
+  <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "WebPage", "name": "Date Calculator", "description": "Count days, weeks and business days between two dates, with the option to skip any state's public holidays, or add days to a date.", "inLanguage": "en-AU", "isAccessibleForFree": true, "dateModified": "2026-10-22", "publisher": {"@type": "Organization", "name": "Dinkum Calc", "@id": "https://dinkumcalc.com.au/#organization", "url": "https://dinkumcalc.com.au/"}}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I work out a settlement or notice period?", "acceptedAnswer": {"@type": "Answer", "text": "Pick Add or subtract days, enter the start date (for example the exchange date) and the number of days. Check whether your contract or award counts calendar days or business days, and whether the first day counts: this calculator doesn't count the start day."}}, {"@type": "Question", "name": "Are public holidays excluded from business days?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, when the box is ticked: the full-day public holidays for your chosen state or territory in 2026 and 2027, from the Fair Work Ombudsman. Regional and part-day holidays aren't included, such as Brisbane's Royal Queensland Show, Tasmania's regional days and the Christmas Eve and New Year's Eve evenings in SA, Queensland and the NT. Victoria's 2027 AFL Grand Final eve isn't included because its date hasn't been set."}}, {"@type": "Question", "name": "Does daylight saving affect the count?", "acceptedAnswer": {"@type": "Answer", "text": "No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors."}}]}]</script>
 </head>
 <body>
   <main class="wrap">
@@ -60,7 +60,8 @@
         <div class="field"><label for="start">Start date</label><input type="date" id="start"></div>
         <div class="field"><label for="end">End date</label><input type="date" id="end"></div>
         <label class="check"><input type="checkbox" id="incl"> Include the end date</label>
-        <label class="check"><input type="checkbox" id="hol" checked> Exclude NSW public holidays from business days</label>
+        <label class="check"><input type="checkbox" id="hol" checked> Exclude public holidays from business days</label>
+        <div class="field" id="state-field"><label for="state">State or territory</label><select id="state"><option value="NSW">NSW</option><option value="VIC">Victoria</option><option value="QLD">Queensland</option><option value="WA">Western Australia</option><option value="SA">South Australia</option><option value="TAS">Tasmania</option><option value="ACT">ACT</option><option value="NT">Northern Territory</option></select></div>
         <h2 class="section-title">Add or subtract days</h2>
         <div class="field"><label for="n">Days to add from start date (use − to subtract)</label><input type="text" id="n" class="num" value="90" spellcheck="false" autocomplete="off"></div>
       </form>
@@ -71,14 +72,14 @@
         <div class="kv"><span>Weeks</span><span id="weeks">–</span></div>
         <div class="kv"><span>Business days (Mon–Fri)</span><span id="biz">–</span></div>
         <div class="kv"><span id="added-label">Start date + 90 days</span><span id="added">–</span></div>
-        <p class="disclaimer" id="hol-note">Business days exclude weekends and, if ticked, NSW statewide public holidays for 2026–2027 (not local holidays or the Bank Holiday).</p>
+        <p class="disclaimer" id="hol-note">Business days exclude weekends and, if ticked, the chosen state's full-day public holidays for 2026–2027 (Fair Work Ombudsman). Regional and part-day holidays aren't included.</p>
       </section>
     </div>
     <!-- content:start -->
     <section class="content">
       <h2>Date Calculator: how it works</h2>
       <p>Count the days between two dates, including a breakdown into years, months and days, weeks, and business days (Monday to Friday). You can also add or subtract days from a date, handy for notice periods, settlement dates and deadlines.</p>
-<p>Business days skip weekends and NSW public holidays, useful for settlement periods and notice periods.</p>
+<p>Business days skip weekends and, if you tick the box, the public holidays of the state or territory you choose, useful for settlement periods and notice periods.</p>
 <p>By default the end date isn't counted (1 Jan to 2 Jan is 1 day). Tick “Include the end date” to count both.</p>
 <h3>Everyday Australian examples</h3>
 <ul><li><strong>Property settlement:</strong> NSW contracts often settle 42 days after exchange. Exchange on Monday 2 November 2026 and 42 days later is Monday 14 December 2026, which is 31 business days.</li>
@@ -87,7 +88,7 @@
 <li><strong>Christmas slowdown:</strong> December 2026 has 23 weekdays but only 21 NSW business days, because Christmas Day falls on a Friday and the Boxing Day holiday moves to Monday 28 December.</li></ul>
       
       <h2>Date Calculator FAQs</h2>
-      <details><summary>How do I work out a settlement or notice period?</summary><p>Pick Add or subtract days, enter the start date (for example the exchange date) and the number of days. Check whether your contract or award counts calendar days or business days, and whether the first day counts: this calculator doesn't count the start day.</p></details><details><summary>Are public holidays excluded from business days?</summary><p>Yes, NSW statewide public holidays for 2026 and 2027 are excluded when the box is ticked. Local public holidays and the August Bank Holiday aren't included, and other states' holidays differ.</p></details><details><summary>Does daylight saving affect the count?</summary><p>No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.</p></details>
+      <details><summary>How do I work out a settlement or notice period?</summary><p>Pick Add or subtract days, enter the start date (for example the exchange date) and the number of days. Check whether your contract or award counts calendar days or business days, and whether the first day counts: this calculator doesn't count the start day.</p></details><details><summary>Are public holidays excluded from business days?</summary><p>Yes, when the box is ticked: the full-day public holidays for your chosen state or territory in 2026 and 2027, from the Fair Work Ombudsman. Regional and part-day holidays aren't included, such as Brisbane's Royal Queensland Show, Tasmania's regional days and the Christmas Eve and New Year's Eve evenings in SA, Queensland and the NT. Victoria's 2027 AFL Grand Final eve isn't included because its date hasn't been set.</p></details><details><summary>Does daylight saving affect the count?</summary><p>No. Dates are counted as whole calendar days, so daylight saving changes don't cause off-by-one errors.</p></details>
       <h2>Related to Date Calculator</h2>
       <nav class="related" aria-label="Related tools"><a href="world-clock.html">World Clock</a><a href="timer.html">Countdown Timer</a><a href="calculator.html">Calculator</a><a href="stopwatch.html">Stopwatch</a></nav>
     </section>

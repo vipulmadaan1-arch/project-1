@@ -35,7 +35,7 @@ export const TOOLS = [
   { slug: 'calculator', name: 'Calculator', desc: 'Basic and scientific: trig, logs, powers, roots and factorials.', meta: 'Basic and scientific', cat: 'general', keywords: 'scientific basic maths math' },
   { slug: 'percentage', name: 'Percentage', desc: 'Percent of a number, share of a total and change.', meta: 'Three in one', cat: 'general', keywords: 'percent percentage change increase decrease' },
   { slug: 'unit-converter', name: 'Unit Converter', desc: 'Length, mass, volume, area, speed and temperature.', meta: 'Metric ⇄ imperial', cat: 'general', keywords: 'convert metric imperial length weight temperature' },
-  { slug: 'date-calculator', name: 'Date Calculator', desc: 'Days and business days between dates, or add days.', meta: 'NSW holidays', cat: 'general', keywords: 'days between dates business public holidays' },
+  { slug: 'date-calculator', name: 'Date Calculator', desc: 'Days and business days between dates, or add days.', meta: 'All states’ holidays', cat: 'general', keywords: 'days between dates business public holidays' },
   { slug: 'world-clock', name: 'World Clock', desc: 'Live times worldwide and a meeting-time converter.', meta: '50 cities', cat: 'general', keywords: 'time zones timezone meeting' },
   { slug: 'stopwatch', name: 'Stopwatch', desc: 'Split and total lap times to the hundredth.', meta: 'Space to start', cat: 'general', keywords: 'lap timer' },
   { slug: 'timer', name: 'Countdown Timer', desc: 'Hours, minutes and seconds with an audible alarm.', meta: 'Presets included', cat: 'general', keywords: 'countdown alarm' },

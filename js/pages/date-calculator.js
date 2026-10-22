@@ -1,5 +1,5 @@
 import { readNumber, setError, wireForm, blank, syncFormWithUrl, addResultActions } from '../layout.js';
-import { daysBetween, businessDays, ymdBetween, addDays, NSW_HOLIDAY_YEARS } from '../calc.js';
+import { daysBetween, businessDays, ymdBetween, addDays, HOLIDAY_YEARS } from '../calc.js';
 
 const $ = (id) => document.getElementById(id);
 const today = new Date();
@@ -34,14 +34,17 @@ function update() {
   $('ymd').textContent = [plural(y.years, 'year'), plural(y.months, 'month'), plural(y.days, 'day')].join(', ');
   $('weeks').textContent = `${plural(Math.floor(Math.abs(d) / 7), 'week')}, ${plural(Math.abs(d) % 7, 'day')}`;
   const hol = $('hol').checked;
-  $('biz').textContent = businessDays(a, b, { excludeHolidays: hol }).toLocaleString('en-AU');
+  const state = $('state').value;
+  $('state-field').hidden = !hol;
+  $('biz').textContent = businessDays(a, b, { excludeHolidays: hol, state }).toLocaleString('en-AU');
   const years = [+a.slice(0, 4), +b.slice(0, 4)];
-  const outside = hol && years.some((yr) => !NSW_HOLIDAY_YEARS.includes(yr));
+  const outside = hol && years.some((yr) => !HOLIDAY_YEARS.includes(yr));
   $('hol-note').textContent = outside
-    ? `Public holidays are only included for ${NSW_HOLIDAY_YEARS.join('–')}. Dates outside those years count weekends only.`
-    : 'Business days exclude weekends and, if ticked, NSW statewide public holidays for 2026–2027 (not local holidays or the Bank Holiday).';
+    ? `Public holidays are only included for ${HOLIDAY_YEARS.join('–')}. Dates outside those years count weekends only.`
+    : hol ? `Business days exclude weekends and ${$('state').selectedOptions[0].text} full-day public holidays for 2026–2027 (Fair Work Ombudsman). Regional and part-day holidays aren't included.` : 'Business days exclude weekends only.';
 }
 for (const id of ['start', 'end']) $(id).addEventListener('focusout', () => { $(id).dataset.touched = '1'; update(); });
 wireForm($('form'), update);
+$('form').addEventListener('change', update); // the state select and holiday tick
 syncFormWithUrl($('form'), update);
 addResultActions(document.querySelectorAll('.cols > .card')[1]);

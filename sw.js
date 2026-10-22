@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v84';
+const VERSION = 'v85';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -160,9 +160,9 @@ const FILES = [
 
 // hashes:start (written by scripts/sw-hashes.mjs: don't edit by hand)
 const HASHES = {
-  './': 'f2a993ab05302860',
+  './': 'efb1ba11c3dfded4',
   'js/analytics.js': '4bef7ed4b3c9194c',
-  '404.html': '69dcdc81b536e124',
+  '404.html': '117a95c892ef70fd',
   'css/style.css': '7cc0dcd52d57bcb2',
   'tools/upfront-costs.html': '62c0b0854634124d',
   'tools/lmi.html': '9f97a16b0a8a1b2b',
@@ -234,9 +234,9 @@ const HASHES = {
   'js/cgt.js': '22bdb68aafc0f6ad',
   'fonts/instrument-sans.woff2': '2ee17598a98d8a59',
   'img/icon.svg': '2411553927ad6b14',
-  'index.html': 'f2a993ab05302860',
+  'index.html': 'efb1ba11c3dfded4',
   'js/ads.js': '3693ab2a0433a185',
-  'js/calc.js': '128db9b2f8bc4130',
+  'js/calc.js': '618d5f68f2819292',
   'js/rates.js': '91bd0ec9179e7c03',
   'js/config.js': 'f45f3a2222e9e850',
   'js/duty.js': '511bfb98a0177d63',
@@ -245,7 +245,7 @@ const HASHES = {
   'js/site-footer.js': 'ad5302969c63e228',
   'js/pages/calculator.js': '4b0a93b681632315',
   'js/pages/compound-interest.js': '04639941f39dbd43',
-  'js/pages/date-calculator.js': '6728f8569d2b697f',
+  'js/pages/date-calculator.js': '9596e11c93512712',
   'js/pages/gst.js': '3f117f9b75185e6b',
   'js/pages/home.js': 'dfb9dc1b12c17987',
   'js/pages/mortgage.js': '006682ff0ff2cfbe',
@@ -260,7 +260,7 @@ const HASHES = {
   'js/pages/timer.js': '1c7d873440292157',
   'js/pages/unit-converter.js': 'f3baedb421204958',
   'js/pages/world-clock.js': 'b82c395f8cf09da9',
-  'js/tools.js': '92fb88dd9c7c3705',
+  'js/tools.js': '8a15a71105888653',
   'manifest.webmanifest': 'ade7e065154b24eb',
   'privacy.html': '3ccdbe91a288bdc4',
   'about.html': 'f1ee871423ec9647',
@@ -272,7 +272,7 @@ const HASHES = {
   'js/present-value.js': '01d21de1aa3daf9d',
   'tools/calculator.html': '838061c946ff9a16',
   'tools/compound-interest.html': 'feaa689385e01084',
-  'tools/date-calculator.html': '36e0798a2f969fa1',
+  'tools/date-calculator.html': '2f4636c69a7aff5b',
   'tools/gst.html': 'aed5f18bbdc3a5ee',
   'tools/mortgage.html': 'e130cf899b0f0394',
   'tools/offset.html': 'af39223112e18647',

@@ -214,3 +214,14 @@ test('mortgage schedule splits repayments and pays the loan off', async () => {
   assert.ok(Math.abs(interest - mortgage({ principal: 500000, ratePct: 6, years: 30 }).interest) < 1);
   assert.ok(rows[0].interest > rows[0].principal && rows.at(-1).principal > rows.at(-1).interest);
 });
+
+test('business days use the chosen state or territory’s public holidays (Fair Work Ombudsman 2026–2027)', () => {
+  // Week of 9–13 March 2026: Canberra Day, Adelaide Cup Day, Eight Hours Day (TAS) and Labour Day (VIC) fall on Monday 9 March.
+  for (const st of ['VIC', 'SA', 'TAS', 'ACT']) assert.equal(businessDays('2026-03-09', '2026-03-13', { excludeHolidays: true, state: st }), 4, st);
+  for (const st of ['NSW', 'QLD', 'WA', 'NT']) assert.equal(businessDays('2026-03-09', '2026-03-13', { excludeHolidays: true, state: st }), 5, st);
+  assert.equal(businessDays('2026-03-02', '2026-03-06', { excludeHolidays: true, state: 'WA' }), 4); // WA Labour Day
+  assert.equal(businessDays('2026-11-02', '2026-11-06', { excludeHolidays: true, state: 'VIC' }), 4); // Melbourne Cup
+  assert.equal(businessDays('2026-08-03', '2026-08-07', { excludeHolidays: true, state: 'NT' }), 4); // Picnic Day
+  assert.equal(businessDays('2026-05-04', '2026-05-08', { excludeHolidays: true, state: 'QLD' }), 4); // QLD Labour Day
+  assert.equal(businessDays('2026-05-04', '2026-05-08', { excludeHolidays: true }), 5); // default NSW
+});

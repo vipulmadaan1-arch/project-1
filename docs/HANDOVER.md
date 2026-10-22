@@ -24,6 +24,7 @@ anyone touching them. This is what needs a person, and when.
 | ~31 Oct 2026, then monthly | Search Console > Performance > 28 days: searches with 20+ impressions at position 8-30 are the ones to improve. | You |
 | 16 Apr 2027 | 6-month checkpoint: are clicks growing? If flat and nobody pays, consider pausing or selling. | You |
 | May-July 2027 | ATO publishes 2026-27 working from home rate and Medicare levy low-income thresholds (currently estimates), and 2027-28 rates. Update js/rates.js and js/deductions.js. CI fails after 30 June 2027 until the new year is added (tests/rollover.test.mjs). | Developer / Claude |
+| Dec 2027 | Add 2028 public holidays for all states to js/calc.js (HOLIDAYS) from fairwork.gov.au. | Developer / Claude |
 | 30 June 2027 | NT house-and-land stamp duty exemption and NT EV car duty concession end (js/duty.js, js/motor-duty.js). | Developer / Claude |
 | Before promoting the site | Tax agent review of tax refund, capital gains tax, rental cashflow, take-home pay and work deductions calculators. | You |
 
