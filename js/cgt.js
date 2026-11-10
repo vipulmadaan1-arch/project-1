@@ -11,7 +11,7 @@ export const REFORM_START = '2027-07-01';
 // ABS CPI, All groups, weighted average of the 8 capital cities, quarterly, Sep 2025 = 100 (the reference
 // period s960-280(3) requires after the ABS re-referencing). Only expenditure from 1 July 2027 is indexed,
 // so every factor today uses projected quarters: the latest published index grown at the assumed inflation rate.
-export const CPI = { '2025-3': 99.73, '2025-4': 100.32, '2026-1': 101.70, '2026-2': 102.31 };
+export const CPI = { '2025-3': 99.73, '2025-4': 100.32, '2026-1': 101.70, '2026-2': 102.31, '2026-3': 103.64 };
 const LAST_CPI = Object.keys(CPI).at(-1);
 
 // Resident tax rates and Medicare levy from js/rates.js, by the income year of the sale: 16% second bracket to

@@ -10,18 +10,18 @@ test('known ABS index points (Sep 2025 reference base)', () => {
   assert.equal(cpi(1948, 3), 2.59);
 });
 
-test('series runs from Sep 1948 to Jun 2026 with no gaps', () => {
+test('series runs from Sep 1948 to Sep 2026 with no gaps', () => {
   assert.deepEqual(FIRST, { year: 1948, q: 3 });
-  assert.deepEqual(LATEST, { year: 2026, q: 2 });
+  assert.deepEqual(LATEST, { year: 2026, q: 3 });
   let count = 0;
   for (let k = FIRST.year * 4 + FIRST.q; k <= LATEST.year * 4 + LATEST.q; k++) {
     const y = Math.floor((k - 1) / 4), q = ((k - 1) % 4) + 1;
     assert.ok(cpi(y, q) > 0, `missing ${quarterLabel(y, q)}`);
     count++;
   }
-  assert.equal(count, 312);
+  assert.equal(count, 313);
   assert.equal(CPI_ROWS.length, 79);
-  assert.equal(cpi(2026, 3), null); // not published yet
+  assert.equal(cpi(2026, 3), 103.64); assert.equal(cpi(2026, 4), null); // Dec 2026 not published yet
   assert.equal(cpi(1948, 2), null);
 });
 
@@ -45,7 +45,7 @@ test('same quarter is unchanged, and unpublished quarters return null', () => {
   const r = inflate({ amount: 50, from: { year: 2000, q: 1 }, to: { year: 2000, q: 1 } });
   assert.equal(r.value, 50);
   assert.equal(r.annualPct, 0);
-  assert.equal(inflate({ amount: 50, from: { year: 2026, q: 3 }, to: { year: 2000, q: 1 } }), null);
+  assert.equal(inflate({ amount: 50, from: { year: 2026, q: 4 }, to: { year: 2000, q: 1 } }), null);
 });
 
 test('year to Jun 2026 inflation is 3.9%', () => {

@@ -1,12 +1,12 @@
 // ABS Consumer Price Index, All groups CPI, weighted average of eight capital cities, quarterly index.
 // Source: ABS Data API, dataflow ABS,CPI,2.0.0, series 1.10001.10.50.Q (index numbers, original),
 // https://data.api.abs.gov.au/rest/data/ABS,CPI,2.0.0/1.10001.10.50.Q?startPeriod=1948-Q3&format=csv
-// Downloaded 15 Oct 2026. Reference period re-based by the ABS (Sep 2025 quarter series, BASE_PERIOD 25),
-// so Sep 2025 = 99.73 and Jun 2026 = 102.31. Only the ratios between quarters are used.
-// The Sep 2026 quarter is due from the ABS in late Oct 2026 and isn't included yet.
+// Downloaded 15 Oct 2026; Sep 2026 quarter (103.64, released 28 Oct 2026) added 10 Nov 2026. Reference period
+// re-based by the ABS (Sep 2025 quarter series, BASE_PERIOD 25), so Sep 2025 = 99.73 and Sep 2026 = 103.64.
+// Only the ratios between quarters are used. The Dec 2026 quarter is due from the ABS on 27 Jan 2027.
 export const CPI_START = { year: 1948, q: 3 };
 export const CPI_SOURCE = 'https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/consumer-price-index-australia';
-export const CPI_CHECKED = '15 Oct 2026';
+export const CPI_CHECKED = '10 Nov 2026';
 
 // One row per calendar year: [year, Mar, Jun, Sep, Dec]; null where no figure exists.
 export const CPI_ROWS = [
@@ -88,5 +88,5 @@ export const CPI_ROWS = [
   [2023, 92.08, 92.87, 93.94, 94.53],
   [2024, 95.41, 96.41, 96.62, 96.81],
   [2025, 97.7, 98.43, 99.73, 100.32],
-  [2026, 101.7, 102.31, null, null],
+  [2026, 101.7, 102.31, 103.64, null],
 ];
