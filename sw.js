@@ -276,7 +276,7 @@ const HASHES = {
   'tools/gst.html': 'aed5f18bbdc3a5ee',
   'tools/mortgage.html': 'e130cf899b0f0394',
   'tools/offset.html': 'af39223112e18647',
-  'tools/percentage.html': '48d489a1af853d33',
+  'tools/percentage.html': '37120bf358bc92df',
   'tools/rental-yield.html': '05d1f7f5634c0d08',
   'tools/stamp-duty-nsw.html': 'ca749f937b343fa9',
   'tools/stamp-duty-vic.html': 'f04fdd3dfa429c77',
@@ -287,11 +287,11 @@ const HASHES = {
   'tools/stamp-duty-act.html': 'f0c9a364f5c0bb9a',
   'tools/stamp-duty-nt.html': '4f34808c16b027d0',
   'tools/stamp-duty.html': '72a6e43255533418',
-  'tools/stopwatch.html': 'eb7c2eae7c6da754',
+  'tools/stopwatch.html': '3f33e2906f513136',
   'tools/take-home-pay.html': 'fb2a32d4eaa0969a',
   'tools/timer.html': '18a726b2005dd7ea',
-  'tools/unit-converter.html': '321ee23f5194adfb',
-  'tools/world-clock.html': '66c2b1552bb18d02',
+  'tools/unit-converter.html': 'd17053f8ee15cead',
+  'tools/world-clock.html': '702b410d1a4ac907',
 };
 // hashes:end
 
