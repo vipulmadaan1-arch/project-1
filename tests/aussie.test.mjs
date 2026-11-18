@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { analogies, countComparison, comparisons, BENCH, COUNTS } from '../js/aussie.js';
+import { analogies, comparisons, BENCH } from '../js/aussie.js';
 
 test('every benchmark is sourced, dated and tagged', () => {
-  for (const b of [...Object.values(BENCH), ...COUNTS]) {
+  for (const b of Object.values(BENCH)) {
     assert.match(b.url, /^https:\/\//);
     assert.ok(['verified', 'estimated'].includes(b.status));
     assert.ok(b.value > 0);
@@ -18,23 +18,12 @@ test('analogies use the benchmarks', () => {
   assert.deepEqual(analogies(0), []);
 });
 
-test('count comparison picks the nearest yardstick', () => {
-  assert.match(countComparison(100000).text, /about as many as the people at a sold-out MCG/);
-  assert.match(countComparison(12000000).text, /kangaroos in NSW/);
-  assert.equal(countComparison(500), null);
-});
-
 test('comparison bars include your result and three benchmarks', () => {
   const c = comparisons(27937);
   assert.equal(c.length, 4);
   assert.equal(c.filter((b) => b.you).length, 1);
 });
 
-test('pictogram icons stand for a round number', async () => {
-  const { iconUnit } = await import('../js/aussie.js');
-  assert.equal(iconUnit(100024), 10000); // a sold-out MCG: "Each icon is 10,000 people", not 10,002
-  assert.equal(iconUnit(274000), 20000);
-  assert.equal(iconUnit(580700), 50000);
-  assert.equal(iconUnit(9634900), 1000000);
-  for (const c of COUNTS) assert.match(String(iconUnit(c.value)), /^[125]0*$/);
+test('small amounts use footy tickets, not novelty prices', () => {
+  assert.equal(analogies(54).at(-1).text, '2 footy tickets at the ’G (general admission)');
 });

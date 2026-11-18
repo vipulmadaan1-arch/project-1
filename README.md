@@ -87,7 +87,7 @@ The How it works / FAQ / Related tools section of each tool page is generated fr
 | NSW transfer duty thresholds (CPI-indexed) | `NSW_BRACKETS`, `NSW_PREMIUM` in `js/calc.js` | Revenue NSW: How to calculate transfer duty |
 | Other states' transfer duty tables, home and first home rules, foreign surcharges | `STATES` and the tables above it in `js/duty.js`; update `DUTY_CHECKED` | Each state's revenue office (links in `source` per state) |
 | CPI quarterly index (ABS, Sep 2025 = 100) for CGT indexation; add each quarter as published | `CPI` in `js/cgt.js` | ABS Consumer Price Index, All groups, weighted average of eight capital cities |
-| "In Aussie terms" benchmarks: minimum wage (1 July), ABS earnings, Cotality rent and home values, MCG, ABS population, DCCEEW kangaroo counts | `BENCH` and `COUNTS` in `js/aussie.js` (each has its source and date) | Fair Work, ABS, Cotality, DCCEEW, AFL, MCC |
+| "In Aussie terms" benchmarks: minimum wage (1 July), ABS earnings, Cotality rent and home values, savings, RAV4 price, AFL ticket | `BENCH` in `js/aussie.js` (each has its source and date) | Fair Work, ABS, Cotality, Finder, CarExpert, AFL |
 | Income tax brackets, Medicare levy thresholds, HECS/HELP bands, Medicare levy surcharge tiers, standard deduction, LITO, super guarantee, maximum contribution base and concessional cap, per income year; then `CURRENT_YEAR` | `YEARS` in `js/rates.js` (every engine reads them from there; each figure names its ATO page in `SOURCES`). `tests/rollover.test.mjs` fails 14 days after `CURRENT_YEAR` ends | ATO pages listed in `SOURCES` |
 | NSW public holidays (add next year's dates) | `NSW_HOLIDAYS`, `NSW_HOLIDAY_YEARS` | nsw.gov.au/about-nsw/public-holidays |
 

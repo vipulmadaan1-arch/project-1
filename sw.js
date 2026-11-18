@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v86';
+const VERSION = 'v87';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -160,10 +160,10 @@ const FILES = [
 
 // hashes:start (written by scripts/sw-hashes.mjs: don't edit by hand)
 const HASHES = {
-  './': 'efb1ba11c3dfded4',
+  './': '46f5365783a6c7e6',
   'js/analytics.js': '4bef7ed4b3c9194c',
   '404.html': '117a95c892ef70fd',
-  'css/style.css': '7cc0dcd52d57bcb2',
+  'css/style.css': '1c462b2f676d52ee',
   'tools/upfront-costs.html': '62c0b0854634124d',
   'tools/lmi.html': '9f97a16b0a8a1b2b',
   'js/pages/upfront-costs.js': '605f91de49f15a12',
@@ -202,7 +202,7 @@ const HASHES = {
   'js/inflation.js': '7ff1caedb42a41e6',
   'js/cpi-data.js': '1f763dc280f2a33a',
   'js/chart.js': 'a3dab35ca256e7f8',
-  'js/aussie.js': '0fc6e377f2217e89',
+  'js/aussie.js': '379504f3b89884d8',
   'js/format.js': '60fd3bc6cbd9acc9',
   'tools/car-stamp-duty.html': '5478a2400b48e862',
   'js/pages/car-stamp-duty.js': '20a270a88a631e97',
@@ -228,13 +228,13 @@ const HASHES = {
   'js/hecs.js': 'bf545521cdec79f1',
   'js/grossup.js': '57af1d271d096f44',
   'tools/hecs-help.html': '43889f4694466d19',
-  'tools/gross-up.html': '291379fa9d822840',
+  'tools/gross-up.html': '7b0e9c824b0682de',
   'tools/capital-gains-tax.html': '44a359f8a3279538',
   'js/pages/capital-gains-tax.js': '2b9cc7f13154002e',
   'js/cgt.js': '649aa94f31daab1f',
   'fonts/instrument-sans.woff2': '2ee17598a98d8a59',
   'img/icon.svg': '2411553927ad6b14',
-  'index.html': 'efb1ba11c3dfded4',
+  'index.html': '46f5365783a6c7e6',
   'js/ads.js': '3693ab2a0433a185',
   'js/calc.js': '618d5f68f2819292',
   'js/rates.js': '91bd0ec9179e7c03',
@@ -262,7 +262,7 @@ const HASHES = {
   'js/pages/world-clock.js': 'b82c395f8cf09da9',
   'js/tools.js': '8a15a71105888653',
   'manifest.webmanifest': 'ade7e065154b24eb',
-  'privacy.html': '3ccdbe91a288bdc4',
+  'privacy.html': 'ce5bde510887fc4e',
   'about.html': 'f1ee871423ec9647',
   'terms.html': '91fc0501fa96ac9f',
   'contact.html': '342bb99b8e755650',
@@ -276,9 +276,9 @@ const HASHES = {
   'tools/gst.html': 'aed5f18bbdc3a5ee',
   'tools/mortgage.html': 'e130cf899b0f0394',
   'tools/offset.html': 'af39223112e18647',
-  'tools/percentage.html': '37120bf358bc92df',
+  'tools/percentage.html': '48d489a1af853d33',
   'tools/rental-yield.html': '05d1f7f5634c0d08',
-  'tools/stamp-duty-nsw.html': '13782db653521814',
+  'tools/stamp-duty-nsw.html': 'ca749f937b343fa9',
   'tools/stamp-duty-vic.html': 'f04fdd3dfa429c77',
   'tools/stamp-duty-qld.html': '1668d3bdebf8b390',
   'tools/stamp-duty-wa.html': '9a88cecb03f9bd40',
@@ -287,11 +287,11 @@ const HASHES = {
   'tools/stamp-duty-act.html': 'f0c9a364f5c0bb9a',
   'tools/stamp-duty-nt.html': '4f34808c16b027d0',
   'tools/stamp-duty.html': '72a6e43255533418',
-  'tools/stopwatch.html': '3f33e2906f513136',
-  'tools/take-home-pay.html': '53d14a713e6efe39',
+  'tools/stopwatch.html': 'eb7c2eae7c6da754',
+  'tools/take-home-pay.html': 'fb2a32d4eaa0969a',
   'tools/timer.html': '18a726b2005dd7ea',
-  'tools/unit-converter.html': 'd17053f8ee15cead',
-  'tools/world-clock.html': '702b410d1a4ac907',
+  'tools/unit-converter.html': '321ee23f5194adfb',
+  'tools/world-clock.html': '66c2b1552bb18d02',
 };
 // hashes:end
 

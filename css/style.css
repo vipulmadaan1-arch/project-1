@@ -186,9 +186,7 @@ body:not(:has(> .site-header))::before { content: ""; display: block; height: ca
 .hero h1 { font-size: var(--t-2xl); font-weight: 700; letter-spacing: -.028em; max-width: 17ch; }
 .hero-copy p { margin-top: 14px; color: var(--muted); font-size: var(--t-md); max-width: 46ch; }
 .hero-side { display: grid; gap: 14px; }
-.facts { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font-size: var(--t-sm); }
-.facts span { display: inline-flex; align-items: center; gap: 6px; }
-.facts .icon { width: 15px; height: 15px; color: var(--accent); }
+.facts { margin: 0; color: var(--muted); font-size: var(--t-sm); }
 .search-box { position: relative; }
 .search-box > .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--faint); pointer-events: none; }
 .search {
@@ -550,8 +548,8 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 /* ---------- In Aussie terms ---------- */
 /* scripts/content.py leaves an empty .aus-slot where the card goes. Until js/aussie.js fills it, it holds
    about the card's height, so the explainer below doesn't move when the card arrives (CLS). */
-.aus-slot:empty { min-height: 519px; margin-top: 20px; }
-@media (max-width: 900px) { .aus-slot:empty { min-height: 621px; } } /* tiles two to a row */
+.aus-slot:empty { min-height: 512px; margin-top: 20px; }
+@media (max-width: 900px) { .aus-slot:empty { min-height: 608px; } } /* tiles two to a row */
 @media (max-width: 640px) { .aus-slot:empty { min-height: 0; } } /* phones: well below the first screen */
 .aus-card { margin-top: 20px; }
 .aus-card .section-title { font-size: var(--t-md); color: var(--ink); margin-bottom: 14px; }
@@ -562,19 +560,9 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .aus-tile .icon { color: var(--accent); width: 22px; height: 22px; margin-bottom: 4px; }
 .aus-num { font: 600 var(--t-lg)/1.1 var(--font-display); letter-spacing: -.02em; font-feature-settings: var(--tnum); }
 .aus-unit { font-size: var(--t-sm); color: var(--muted); line-height: 1.35; }
-.aus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 36px; }
-@media (max-width: 760px) { .aus-grid { grid-template-columns: 1fr; } }
-.aus-count-text { margin: 0 0 12px; font-size: var(--t-base); line-height: 1.45; }
-.aus-pics { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; max-width: 340px; }
-.aus-pic { width: 100%; height: auto; aspect-ratio: 1; display: block; }
-.aus-pic-empty { fill: none; stroke: var(--faint); stroke-width: 1.2; }
-.aus-pic-full { fill: var(--series-2); }
-.aus-pic .cut { fill: var(--surface); }
-.aus-pic-key { display: flex; align-items: center; gap: 8px; margin: 10px 0 0; font-size: var(--t-xs); color: var(--muted); }
-.aus-pic-swatch { width: 10px; height: 10px; border-radius: 3px; background: var(--series-2); flex: none; }
 .aus-est { text-decoration: none; font-size: var(--t-xs); color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; margin-left: 2px; white-space: nowrap; }
 .aus-sub { font: 600 var(--t-sm)/1.2 var(--font-body); color: var(--muted); margin: 0 0 12px; }
-.aus-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.aus-bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; max-width: 560px; }
 .aus-bars li { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "label value" "track track"; gap: 4px 12px; font-size: var(--t-sm); }
 .aus-bar-label { grid-area: label; color: var(--muted); }
 .aus-bar-value { grid-area: value; font-weight: 600; font-feature-settings: var(--tnum); }
@@ -585,7 +573,7 @@ th { font-weight: 600; font-size: var(--t-sm); color: var(--muted); }
 .aus-sources { margin-top: 18px; font-size: var(--t-xs); color: var(--muted); }
 .aus-sources summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: var(--t-sm); }
 .aus-sources ul { margin: 10px 0 6px; padding-left: 18px; display: grid; gap: 4px; }
-@media (forced-colors: active) { .aus-bar, .aus-pic-empty { fill: GrayText; background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } .aus-pic-full { fill: Highlight; } }
+@media (forced-colors: active) { .aus-bar { background: GrayText; } .aus-bars .is-you .aus-bar { background: Highlight; } }
 
 /* ---------- Touch targets (44px on touch screens) ---------- */
 @media (pointer: coarse) {
