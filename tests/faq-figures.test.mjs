@@ -115,17 +115,17 @@ test('rental cashflow: FAQ figures', () => {
 
 test('mortgage: FAQ and repayment table figures', () => {
   const m = (ratePct, frequency = 'monthly', principal = 600000) => mortgage({ principal, ratePct, years: 30, frequency });
-  has('mortgage', money(m(6).repayment), cents(m(6, 'fortnightly').repayment), cents(m(6, 'weekly').repayment), money(m(5.5).repayment), money(m(6.5).repayment));
-  has('mortgage', money(m(6).interest), money(m(6).total), money(m(5.5).interest), money(m(6.5).interest));
-  const y1 = mortgageSchedule({ principal: 600000, ratePct: 6, years: 30 })[0];
+  has('mortgage', money(m(6.7).repayment), cents(m(6.7, 'fortnightly').repayment), cents(m(6.7, 'weekly').repayment), money(m(6.2).repayment), money(m(7.2).repayment));
+  has('mortgage', money(m(6.7).interest), money(m(6.7).total), money(m(6.2).interest), money(m(7.2).interest));
+  const y1 = mortgageSchedule({ principal: 600000, ratePct: 6.7, years: 30 })[0];
   has('mortgage', money(y1.interest), money(y1.interest + y1.principal));
-  const off = offsetSavings({ principal: 600000, ratePct: 6, years: 30, offset: 50000 });
+  const off = offsetSavings({ principal: 600000, ratePct: 6.7, years: 30, offset: 50000 });
   has('mortgage', money(off.interestSaved), `${Math.floor(off.periodsSaved / 12)} years ${off.periodsSaved % 12} months`);
-  for (const p of [400000, 500000, 750000, 1000000]) for (const r of [5.5, 6, 6.5]) has('mortgage', money(m(r, 'monthly', p).repayment));
+  for (const p of [400000, 500000, 750000, 1000000]) for (const r of [6.2, 6.7, 7.2]) has('mortgage', money(m(r, 'monthly', p).repayment));
 });
 
 test('borrowing power: FAQ figures', () => {
-  const bp = (o) => borrowingPower({ applicants: [{ income: 100000 }], expenses: 2500, ratePct: 6, years: 30, ...o });
+  const bp = (o) => borrowingPower({ applicants: [{ income: 100000 }], expenses: 2500, ratePct: 6.7, years: 30, ...o });
   // The FAQ gives loan sizes in whole thousands, rounded down ("about $491,000").
   const thousands = (n) => money(Math.floor(n / 1000) * 1000);
   const b = bp({});
@@ -133,7 +133,7 @@ test('borrowing power: FAQ figures', () => {
   const card = bp({ cardLimits: 10000 });
   has('borrowing-power', money(card.cardCommitment), thousands(card.maxLoan), thousands(b.maxLoan - card.maxLoan));
   has('borrowing-power', thousands(bp({ buffer: 0 }).maxLoan), thousands(bp({ otherIncome: 20000 }).maxLoan));
-  const couple = borrowingPower({ applicants: [{ income: 100000 }, { income: 80000 }], expenses: 4000, ratePct: 6, years: 30 });
+  const couple = borrowingPower({ applicants: [{ income: 100000 }, { income: 80000 }], expenses: 4000, ratePct: 6.7, years: 30 });
   has('borrowing-power', thousands(couple.maxLoan), money(couple.repayment), `ratio of ${couple.dti.toFixed(1)}`);
 });
 
@@ -151,21 +151,21 @@ test('upfront costs: FAQ figures', () => {
 
 test('mortgage: total interest table, extra repayments and interest-only', () => {
   const m = (principal, ratePct, years = 30) => mortgage({ principal, ratePct, years });
-  for (const p of [500000, 600000, 750000]) for (const r of [5.5, 6, 6.5]) has('mortgage', money(m(p, r).interest));
-  has('mortgage', money(m(600000, 6).repayment - m(600000, 5.5).repayment), money(m(600000, 6).interest - m(600000, 5.5).interest));
+  for (const p of [500000, 600000, 750000]) for (const r of [6.2, 6.7, 7.2]) has('mortgage', money(m(p, r).interest));
+  has('mortgage', money(m(600000, 6.7).repayment - m(600000, 6.2).repayment), money(m(600000, 6.7).interest - m(600000, 6.2).interest));
   const yrs = (x) => `${Math.floor(x.periodsSaved / 12)} years ${x.periodsSaved % 12} month`;
   for (const extra of [100, 200, 500]) {
-    const x = extraRepayments({ principal: 600000, ratePct: 6, years: 30, extra });
+    const x = extraRepayments({ principal: 600000, ratePct: 6.7, years: 30, extra });
     has('mortgage', money(x.interestSaved), yrs(x));
   }
-  const io = interestOnlyRepayment(600000, 6);
-  const rest = m(600000, 6, 25);
+  const io = interestOnlyRepayment(600000, 6.7);
+  const rest = m(600000, 6.7, 25);
   const ioInterest = io * 60 + rest.interest;
-  has('mortgage', money(io), money(rest.repayment), money(ioInterest), money(ioInterest - m(600000, 6).interest));
+  has('mortgage', money(io), money(rest.repayment), money(ioInterest), money(ioInterest - m(600000, 6.7).interest));
 });
 
 test('offset: FAQ figures', () => {
-  const o = (principal, offset) => offsetSavings({ principal, ratePct: 6, years: 30, offset });
+  const o = (principal, offset) => offsetSavings({ principal, ratePct: 6.7, years: 30, offset });
   const yrs = (x) => `${Math.floor(x.periodsSaved / 12)} year${Math.floor(x.periodsSaved / 12) === 1 ? '' : 's'} ${x.periodsSaved % 12} month`;
   for (const [p, off] of [[600000, 50000], [600000, 100000], [600000, 20000], [500000, 50000]]) has('offset', money(o(p, off).interestSaved), yrs(o(p, off)));
   has('offset', money(o(600000, 0).repayment), money(o(500000, 0).repayment));
@@ -197,7 +197,7 @@ test("today's dollars: compound interest, term deposit and rent vs buy FAQs", ()
   has('compound-interest', `${money(w.balance)} you'd have`, `about ${money(presentValue(w.balance, 10))} in today's dollars`, money(l.balance), `about ${money(presentValue(l.balance, 30))} in today's dollars`);
   const t = termDeposit({ amount: 10000, ratePct: 4.5, months: 24, paid: 'annually', reinvest: true });
   has('term-deposit', cents(t.interest), cents(t.balance), `about ${cents(presentValue(t.balance, 2))} in today's dollars`);
-  const r = rentVsBuy({ price: 800000, deposit: 160000, state: 'NSW', home: true, otherUpfront: 3000, ratePct: 6, termYears: 30, councilRates: 2000, strata: 0, insurance: 1800, maintenancePct: 1, costInflationPct: 3, growthPct: 5, weeklyRent: 650, rentGrowthPct: 4, returnPct: 7, taxDragPct: 15, sellingCostPct: 2.5, years: 10 });
+  const r = rentVsBuy({ price: 800000, deposit: 160000, state: 'NSW', home: true, otherUpfront: 3000, ratePct: 6.7, termYears: 30, councilRates: 2000, strata: 0, insurance: 1800, maintenancePct: 1, costInflationPct: 3, growthPct: 5, weeklyRent: 650, rentGrowthPct: 4, returnPct: 7, taxDragPct: 15, sellingCostPct: 2.5, years: 10 });
   has('rent-vs-buy', `${money(r.diff)} lead`, `about ${money(presentValue(r.diff, 10))} in today's dollars`, money(r.buy), money(r.rent), `about ${money(presentValue(r.buy, 10))} and ${money(presentValue(r.rent, 10))}`);
 });
 

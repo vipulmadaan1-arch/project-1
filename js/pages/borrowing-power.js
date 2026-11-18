@@ -23,7 +23,7 @@ function update() {
     cards: readNumber($('cards'), { name: 'Credit card limits', unit: 'money', min: 0, max: 1e8, optional: true }),
     repayments: readNumber($('repayments'), { name: 'Other loan repayments', unit: 'money', min: 0, max: 1e8, optional: true }),
     owing: readNumber($('owing'), { name: 'Total owing', unit: 'money', min: 0, max: 1e10, optional: true }),
-    rate: readNumber($('rate'), { name: 'Interest rate', unit: 'percent', min: 0, max: 30, example: '6' }),
+    rate: readNumber($('rate'), { name: 'Interest rate', unit: 'percent', min: 0, max: 30, example: '6.7' }),
     years: readNumber($('years'), { name: 'Loan term', unit: 'years', min: 1, max: 40, whole: true, example: '30' }),
   };
   if (Object.values(v).includes(null)) { $('note').textContent = ''; next(null); return blank(...OUT.map($)); }

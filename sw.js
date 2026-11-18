@@ -13,7 +13,7 @@
 // once the browser has installed the new worker (it checks sw.js on each visit and takes over straight
 // away), which is usually the next page opened. Anything not cached goes to the network, falling back
 // to the cache's copy if the network fails or answers slower than NETWORK_TIMEOUT_MS.
-const VERSION = 'v87';
+const VERSION = 'v88';
 const CACHE_PREFIX = 'dinkumcalc-';
 const CACHE = `${CACHE_PREFIX}${VERSION}`;
 // Caches this site has used: the current prefix, plus the one from before the rename to Dinkum Calc (v57 and
@@ -180,7 +180,7 @@ const HASHES = {
   'js/pages/tax-refund.js': '9fded5a6532d3a0f',
   'js/rentbuy.js': 'c389bfa04e175e66',
   'js/refund.js': '395d5f0140549a29',
-  'tools/rent-vs-buy.html': 'e5b8b9457105909c',
+  'tools/rent-vs-buy.html': '863f831f9ff7e06c',
   'tools/tax-refund.html': 'a48134fad8f129a1',
   'tools/balance-transfer.html': '543ad4dacf266e30',
   'tools/term-deposit.html': '171ee083c2a8f990',
@@ -194,9 +194,9 @@ const HASHES = {
   'tools/rental-cashflow.html': 'b61a4bd79e942eb6',
   'js/pages/rental-cashflow.js': '02aa3bc605600687',
   'js/rental.js': '0041fd583206e18e',
-  'tools/borrowing-power.html': '13440da4b80b6fca',
+  'tools/borrowing-power.html': '21eac6ce2ead7e9d',
   'tools/inflation.html': '6946da9756648944',
-  'js/pages/borrowing-power.js': '064b68613b8d2f27',
+  'js/pages/borrowing-power.js': 'd3121ac47a2dc1b8',
   'js/pages/inflation.js': '56f9647b0c8fa5cc',
   'js/borrowing.js': 'f21f0e8cfd098da9',
   'js/inflation.js': '7ff1caedb42a41e6',
@@ -274,10 +274,10 @@ const HASHES = {
   'tools/compound-interest.html': 'feaa689385e01084',
   'tools/date-calculator.html': '2f4636c69a7aff5b',
   'tools/gst.html': 'aed5f18bbdc3a5ee',
-  'tools/mortgage.html': 'e130cf899b0f0394',
-  'tools/offset.html': 'af39223112e18647',
+  'tools/mortgage.html': '775ddf1fdd0254c4',
+  'tools/offset.html': '2ff9b21c04c4d4b0',
   'tools/percentage.html': '37120bf358bc92df',
-  'tools/rental-yield.html': '05d1f7f5634c0d08',
+  'tools/rental-yield.html': 'eeedbc7b5acdc197',
   'tools/stamp-duty-nsw.html': 'ca749f937b343fa9',
   'tools/stamp-duty-vic.html': 'f04fdd3dfa429c77',
   'tools/stamp-duty-qld.html': '1668d3bdebf8b390',

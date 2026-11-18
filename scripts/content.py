@@ -68,12 +68,12 @@ C = {
  how="""<p>The calculator follows two versions of you, month by month. <strong>The buyer</strong> pays the deposit, stamp duty (worked out for your state) and other upfront costs, then the loan repayments plus council rates, strata, insurance and maintenance. <strong>The renter</strong> invests the same upfront cash on day one and pays rent. Each month, whoever has the cheaper housing invests the difference.</p>
 <p>At the end, the buyer's net wealth is the home's value less selling costs and the loan still owing, plus any investments. The renter's is their investments. The <strong>break-even year</strong> is the first year buying comes out ahead and stays ahead.</p>
 <p><strong>Every number except stamp duty is an assumption you choose:</strong> home price growth, rent rises, investment returns, interest rates and costs are held steady, which real life won't be. Try a few values. Your home is generally exempt from capital gains tax; the renter's investment earnings are reduced by the tax rate you enter (0% compares pre-tax returns). Lenders mortgage insurance isn't added automatically: put an estimate in other upfront costs if your deposit is under 20%.</p>""",
- faq=[("Is it better to rent or buy in Australia?","It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $112,914 after 10 years. At 4% growth the gap is only $3,115, and at 3% growth renting and investing is ahead by $97,391."),
-      ("How long until buying beats renting?","In the example it takes 5 years: by year 4 the renter is still ahead, but from year 5 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind."),
-      ("Does being a first home buyer change the answer?","Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $166,719 after 10 years and from year 2."),
-      ("Does the calculator include tax?","Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $622,036 after 10 years in the example, and at 0% (pre-tax) $674,213, which shrinks buying's lead to $60,736."),
-      ("What is the result in today's dollars?","In the example, buying's $112,914 lead after 10 years is worth about $88,208 in today's dollars, at 2.5% inflation a year. The net wealth figures, $734,949 if you buy and $622,036 if you rent and invest, are about $574,141 and $485,933 in today's dollars. The calculator shows these under every result, and you can change the inflation rate."),
-      ("What investment return should I use?","It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $188,995 ahead after 10 years instead of $112,914. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest.")],
+ faq=[("Is it better to rent or buy in Australia?","It depends mostly on home price growth versus investment returns. With our example assumptions ($800,000 NSW home, 20% deposit, 6.7% loan, $650 a week rent, 5% growth, 7% returns taxed at 15%), buying is ahead by $55,814 after 10 years. At 4% growth renting and investing is ahead by $53,985, and at 3% growth by $154,491."),
+      ("How long until buying beats renting?","In the example it takes 7 years: by year 6 the renter is still ahead, but from year 7 buying stays ahead. Upfront costs, such as $30,187 NSW stamp duty on $800,000, are why buying usually starts behind."),
+      ("Does being a first home buyer change the answer?","Yes, through stamp duty. A NSW first home buyer pays no duty on an $800,000 home, so the upfront cash falls from $193,187 to $163,000. In the example, buying is then ahead by $109,620 after 10 years and from year 3."),
+      ("Does the calculator include tax?","Partly. Your home is generally exempt from capital gains tax, so its growth isn't taxed. The renter's investment earnings lose the share you enter to tax: at 15% the renter has $669,462 after 10 years in the example, and at 0% (pre-tax) $724,273, which shrinks buying's lead to $1,004."),
+      ("What is the result in today's dollars?","In the example, buying's $55,814 lead after 10 years is worth about $43,602 in today's dollars, at 2.5% inflation a year. The net wealth figures, $725,276 if you buy and $669,462 if you rent and invest, are about $566,585 and $522,983 in today's dollars. The calculator shows these under every result, and you can change the inflation rate."),
+      ("What investment return should I use?","It's an assumption you choose; no one knows future returns. In the example, a 5% return instead of 7% makes buying $135,842 ahead after 10 years instead of $55,814. Use a return you'd realistically earn after fees, and set the tax rate to suit how you'd invest.")],
  related=['mortgage','stamp-duty','borrowing-power','rental-yield']),
 'refinance': dict(
  how="""<p>Enter your loan as it is now and the new rate you've been offered. The calculator works out both monthly repayments, the interest on each loan over its full term, and your net saving once switching costs (less any cashback) come off. Interest is charged monthly and both rates are assumed to stay the same.</p>
@@ -131,14 +131,14 @@ C = {
       ("Why is the index around 100 now?","The ABS re-based the CPI to 2025. Re-basing changes every index number by the same proportion, so the ratios this calculator uses, and its results, don't change.")],
  related=['savings-goal','capital-gains-tax','compound-interest','hecs-help']),
 'borrowing-power': dict(
- how="""<p>Banks work out how much you can borrow by checking what's left of your take-home income after living expenses and existing debts, then finding the largest loan that amount could repay. APRA requires banks to test repayments at <strong>3 percentage points above the loan rate</strong> (the serviceability buffer), so a 6% loan is tested at 9%.</p>
+ how="""<p>Banks work out how much you can borrow by checking what's left of your take-home income after living expenses and existing debts, then finding the largest loan that amount could repay. APRA requires banks to test repayments at <strong>3 percentage points above the loan rate</strong> (the serviceability buffer), so a 6.7% loan is tested at 9.7%.</p>
 <p>This estimate takes your income after 2026-27 tax, the Medicare levy and any HECS/HELP repayments. It counts <strong>80% of rental or other income</strong> and treats credit cards as fully drawn at <strong>3.8% of the limit a month</strong>, the repayment that clears the limit in three years. Both are typical lender practice, not official rules. It then subtracts your living expenses and other loan repayments.</p>
 <p>From 1 February 2026, APRA limits each bank to 20% of new home loans at a <strong>debt-to-income ratio</strong> of 6 or more, so very high borrowing compared with income can be harder to get. Lenders also apply their own minimum living expenses, the Household Expenditure Measure, which isn't published. Most will lend less than this estimate.</p>""",
- faq=[("How much can I borrow on $100,000?","On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6% loan over 30 years tested at 9% gives about $491,000. Repayments at 6% would be about $2,948 a month, and the loan would be 4.9 times income."),
-      ("How much does a credit card limit reduce borrowing power?","In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $444,000, around $47,000 less."),
-      ("What is the APRA serviceability buffer?","Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $659,000 instead of $491,000."),
-      ("How much can a couple borrow?","Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $966,000 at 6% over 30 years. Repayments would be about $5,797 a month, at a debt-to-income ratio of 5.4."),
-      ("Does rental income count?","Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $604,000.")],
+ faq=[("How much can I borrow on $100,000?","On a $100,000 salary with $2,500 a month in living expenses and no other debts, a 6.7% loan over 30 years tested at 9.7% gives about $462,000. Repayments at 6.7% would be about $2,984 a month, and the loan would be 4.6 times income."),
+      ("How much does a credit card limit reduce borrowing power?","In that example, a $10,000 limit counts as $380 a month even if you never use it. That cuts the estimate to about $418,000, around $44,000 less."),
+      ("What is the APRA serviceability buffer?","Banks must check you could repay at 3 percentage points above your loan rate. Without the buffer, the $100,000 example could borrow about $613,000 instead of $462,000."),
+      ("How much can a couple borrow?","Two people earning $100,000 and $80,000, with $4,000 a month in living expenses, could borrow about $909,000 at 6.7% over 30 years. Repayments would be about $5,868 a month, at a debt-to-income ratio of 5.1."),
+      ("Does rental income count?","Yes, but lenders usually count only about 80% of it. Adding $20,000 a year in rent to the $100,000 example raises the estimate to about $568,000.")],
  related=['upfront-costs','stamp-duty','lmi','rent-vs-buy','mortgage']),
 'car-stamp-duty': dict(
  how="""<p>Every state and territory charges <strong>motor vehicle duty</strong> (often called car stamp duty) when you register a new car or transfer a used one into your name. It's worked out on the car's <strong>dutiable value</strong>: usually the higher of the price and the market value, including GST and luxury car tax. Most states round the value up to the next $100 (Victoria to the next $200) before applying the rate.</p>
@@ -465,43 +465,43 @@ C = {
  h=('How mortgage repayments are calculated', 'Mortgage repayment FAQs', 'More home loan calculators'),
  how="""<p>Repayments on a principal and interest loan are calculated with the standard amortisation formula: each repayment covers that period's interest and pays down some principal. Early on, most of each repayment is interest.</p>
 <h3>Monthly repayments over 30 years</h3>
-<table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
-<tr><td>$400,000</td><td>$2,271</td><td>$2,398</td><td>$2,528</td></tr>
-<tr><td>$500,000</td><td>$2,839</td><td>$2,998</td><td>$3,160</td></tr>
-<tr><td>$600,000</td><td>$3,407</td><td>$3,597</td><td>$3,792</td></tr>
-<tr><td>$750,000</td><td>$4,258</td><td>$4,497</td><td>$4,741</td></tr>
-<tr><td>$1,000,000</td><td>$5,678</td><td>$5,996</td><td>$6,321</td></tr>
+<table><thead><tr><th>Loan</th><th>6.2% p.a.</th><th>6.7% p.a.</th><th>7.2% p.a.</th></tr></thead><tbody>
+<tr><td>$400,000</td><td>$2,450</td><td>$2,581</td><td>$2,715</td></tr>
+<tr><td>$500,000</td><td>$3,062</td><td>$3,226</td><td>$3,394</td></tr>
+<tr><td>$600,000</td><td>$3,675</td><td>$3,872</td><td>$4,073</td></tr>
+<tr><td>$750,000</td><td>$4,594</td><td>$4,840</td><td>$5,091</td></tr>
+<tr><td>$1,000,000</td><td>$6,125</td><td>$6,453</td><td>$6,788</td></tr>
 </tbody></table>
 <p>Principal and interest, monthly repayments, constant rate, no fees.</p>
 <h3>Total interest over 30 years</h3>
-<table><thead><tr><th>Loan</th><th>5.5% p.a.</th><th>6% p.a.</th><th>6.5% p.a.</th></tr></thead><tbody>
-<tr><td>$500,000</td><td>$522,020</td><td>$579,191</td><td>$637,722</td></tr>
-<tr><td>$600,000</td><td>$626,424</td><td>$695,029</td><td>$765,267</td></tr>
-<tr><td>$750,000</td><td>$783,030</td><td>$868,786</td><td>$956,584</td></tr>
+<table><thead><tr><th>Loan</th><th>6.2% p.a.</th><th>6.7% p.a.</th><th>7.2% p.a.</th></tr></thead><tbody>
+<tr><td>$500,000</td><td>$602,444</td><td>$661,500</td><td>$721,819</td></tr>
+<tr><td>$600,000</td><td>$722,933</td><td>$793,800</td><td>$866,183</td></tr>
+<tr><td>$750,000</td><td>$903,666</td><td>$992,251</td><td>$1,082,728</td></tr>
 </tbody></table>
-<p>Half a percentage point on a $600,000 loan is about $191 a month more at 6% than at 5.5% and $68,605 in interest over the life of the loan.</p>
+<p>Half a percentage point on a $600,000 loan is about $197 a month more at 6.7% than at 6.2% and $70,867 in interest over the life of the loan.</p>
 <h3>Extra repayments</h3>
-<p>Anything you pay above the minimum comes straight off the principal, so every later repayment has less interest in it. On a $600,000 loan at 6% over 30 years, an extra $200 a month saves $106,693 in interest and finishes the loan 3 years 11 months early. An extra $500 a month saves $212,713 and 7 years 11 months. Check your loan allows extra repayments: fixed-rate loans often cap them.</p>
+<p>Anything you pay above the minimum comes straight off the principal, so every later repayment has less interest in it. On a $600,000 loan at 6.7% over 30 years, an extra $200 a month saves $128,493 in interest and finishes the loan 4 years 1 month early. An extra $500 a month saves $252,393 and 8 years 2 months. Check your loan allows extra repayments: fixed-rate loans often cap them.</p>
 <h3>Interest-only loans</h3>
-<p>Interest-only repayments are the loan × the rate ÷ 12: $3,000 a month on $600,000 at 6%, against $3,597 for principal and interest. But you repay nothing off the loan. After 5 years interest-only, the full $600,000 has to be repaid over the remaining 25 years, at $3,866 a month, and total interest comes to $739,743 instead of $695,029.</p>
+<p>Interest-only repayments are the loan × the rate ÷ 12: $3,350 a month on $600,000 at 6.7%, against $3,872 for principal and interest. But you repay nothing off the loan. After 5 years interest-only, the full $600,000 has to be repaid over the remaining 25 years, at $4,127 a month, and total interest comes to $838,963 instead of $793,800.</p>
 <p><strong>Tip:</strong> paying fortnightly, half your monthly repayment every two weeks, means 26 half-payments a year: the equivalent of 13 monthly payments. That extra payment can cut years off a 30-year loan. This calculator shows the true fortnightly amount for the same term, so compare carefully.</p>""",
- faq=[("What are the repayments on a $600,000 mortgage?","$3,597 a month at 6% p.a. over 30 years, or $1,659.50 a fortnight or $829.58 a week. At 5.5% it's $3,407 a month and at 6.5% it's $3,792."),
-      ("What are the repayments on a $500,000 or $750,000 mortgage?","$2,998 a month on $500,000 and $4,497 on $750,000, at 6% over 30 years. At 5.5% they're $2,839 and $4,258; at 6.5%, $3,160 and $4,741."),
-      ("How much interest will I pay over 30 years?","$695,029 on a $600,000 loan at 6% p.a. with monthly repayments, so you repay $1,295,029 in total. At 5.5% the interest is $626,424 and at 6.5% it's $765,267. In the first year, $35,800 of the $43,168 you repay is interest."),
-      ("How much do extra repayments save?","$106,693 in interest and 3 years 11 months off a $600,000 loan at 6% over 30 years, if you pay an extra $200 a month from the start. An extra $100 a month saves $58,423 and 2 years 1 month."),
-      ("How much are interest-only repayments?","$3,000 a month on $600,000 at 6% (loan × rate ÷ 12), against $3,597 for principal and interest. After 5 interest-only years the repayment jumps to $3,866 a month for the remaining 25 years, and you pay $44,713 more interest overall."),
+ faq=[("What are the repayments on a $600,000 mortgage?","$3,872 a month at 6.7% p.a. over 30 years, or $1,786.09 a fortnight or $892.87 a week. At 6.2% it's $3,675 a month and at 7.2% it's $4,073."),
+      ("What are the repayments on a $500,000 or $750,000 mortgage?","$3,226 a month on $500,000 and $4,840 on $750,000, at 6.7% over 30 years. At 6.2% they're $3,062 and $4,594; at 7.2%, $3,394 and $5,091."),
+      ("How much interest will I pay over 30 years?","$793,800 on a $600,000 loan at 6.7% p.a. with monthly repayments, so you repay $1,393,800 in total. At 6.2% the interest is $722,933 and at 7.2% it's $866,183. In the first year, $40,004 of the $46,460 you repay is interest."),
+      ("How much do extra repayments save?","$128,493 in interest and 4 years 1 month off a $600,000 loan at 6.7% over 30 years, if you pay an extra $200 a month from the start. An extra $100 a month saves $70,908 and 2 years 2 months."),
+      ("How much are interest-only repayments?","$3,350 a month on $600,000 at 6.7% (loan × rate ÷ 12), against $3,872 for principal and interest. After 5 interest-only years the repayment jumps to $4,127 a month for the remaining 25 years, and you pay $45,163 more interest overall."),
       ("Does this include fees or LMI?","No. It covers principal and interest only, at a constant rate. Lender fees, lenders mortgage insurance and rate changes aren't included."),
-      ("How much will I save with an offset account?","About $202,175 in interest and 4 years 8 months off the loan, with $50,000 in offset against a $600,000 loan at 6% over 30 years and the same $3,597 monthly repayment. Use the <a href=\"offset.html\">offset account calculator</a> for your own balance.")],
+      ("How much will I save with an offset account?","About $248,050 in interest and 5 years 4 months off the loan, with $50,000 in offset against a $600,000 loan at 6.7% over 30 years and the same $3,872 monthly repayment. Use the <a href=\"offset.html\">offset account calculator</a> for your own balance.")],
  related=['refinance','upfront-costs','lmi','offset','borrowing-power']),
 'offset': dict(
  h=('How an offset account saves interest', 'Offset account FAQs', 'More home loan calculators'),
- how="""<p>On a $600,000 loan at 6% over 30 years, keeping $50,000 in offset saves <strong>$202,175</strong> in interest and finishes the loan <strong>4 years 8 months</strong> sooner. $100,000 in offset saves <strong>$338,658</strong> and <strong>7 years 10 months</strong>. Both assume the balance stays the same and you keep paying $3,597 a month.</p>
+ how="""<p>On a $600,000 loan at 6.7% over 30 years, keeping $50,000 in offset saves <strong>$248,050</strong> in interest and finishes the loan <strong>5 years 4 months</strong> sooner. $100,000 in offset saves <strong>$406,007</strong> and <strong>8 years 8 months</strong>. Both assume the balance stays the same and you keep paying $3,872 a month.</p>
 <p>An offset account is a transaction account linked to your home loan. Its balance is subtracted from your loan balance before interest is calculated, so $50,000 in offset on a $600,000 loan means you're charged interest on $550,000.</p>
 <p>Because your repayment stays the same, more of each payment goes to principal and the loan finishes early. This calculator compares the loan with and without the offset to show interest and time saved.</p>
 <h3>Offset or savings account?</h3>
 <p>Every dollar in offset "earns" your home loan rate, with no tax on it, because interest you don't pay isn't income. Savings account interest is taxed at your marginal rate, so a savings account has to pay well above your loan rate to beat an offset. The catch: offset accounts usually come with a package fee, often a few hundred dollars a year, and only on variable or part-fixed loans.</p>""",
- faq=[("How much does $20,000 in an offset account save?","$91,647 in interest and 2 years 1 month off a $600,000 loan at 6% over 30 years, if the $20,000 stays there and you keep paying $3,597 a month."),
-      ("How much does $50,000 in offset save on a $500,000 loan?","$194,606 in interest and 5 years 4 months, at 6% over 30 years with the normal $2,998 monthly repayment. Offset money saves more when it's there early in the loan."),
+ faq=[("How much does $20,000 in an offset account save?","$114,877 in interest and 2 years 5 months off a $600,000 loan at 6.7% over 30 years, if the $20,000 stays there and you keep paying $3,872 a month."),
+      ("How much does $50,000 in offset save on a $500,000 loan?","$237,429 in interest and 6 years 1 month, at 6.7% over 30 years with the normal $3,226 monthly repayment. Offset money saves more when it's there early in the loan."),
       ("Is an offset better than extra repayments?","Financially they save the same interest. An offset keeps your money accessible; extra repayments may be harder to withdraw (redraw rules vary by lender)."),
       ("Does the calculator assume my offset balance changes?","No, it assumes a constant balance. In practice your balance moves with your pay and spending, and even money that sits there for a few weeks between pay days helps."),
       ("Is offset interest saving taxable?","Interest saved through an offset isn't income, so it isn't taxed, unlike interest earned in a savings account. Check your own situation with a tax professional.")],
@@ -522,7 +522,7 @@ C = {
       ("What is the yield on a $750,000 property at $650 a week?","4.51% gross. With 2 weeks' vacancy and $9,000 of yearly costs, it nets $23,500, a 3.13% net yield."),
       ("What costs should I include?","Council and water rates, landlord insurance, strata levies, property management fees, repairs and maintenance, and land tax if it applies."),
       ("Does this include mortgage repayments?","No. Yield measures the property's return on its price. Use the mortgage calculator for repayments and the rental cashflow calculator for your cash flow after tax."),
-      ("What's a good rental yield?","About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 30 September 2026 put the national gross yield at 3.85%, with houses at 3.6% and units at 4.7%, and capital cities ranging from 3.4% in Sydney to 6.5% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.")],
+      ("What's a good rental yield?","About 3% to 5% gross is typical in Australia's capital cities. Cotality's figures to 31 October 2026 put the national gross yield at 3.9%, with houses at 3.7% and units at 4.7%, and capital cities ranging from 3.5% in Sydney to 6.4% in Darwin. These are industry estimates, not official statistics. Higher-yield areas often have lower capital growth, so compare a property with its local average rather than a national rule.")],
  related=['rental-cashflow','mortgage','stamp-duty','capital-gains-tax']),
 'compound-interest': dict(
  h=('How compound interest works', 'Compound interest FAQs', 'More savings calculators'),
