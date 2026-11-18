@@ -66,6 +66,11 @@ const PAGES = [
   { file: 'privacy.html', path: 'privacy.html' },
   { file: 'terms.html', path: 'terms.html' },
   { file: 'contact.html', path: 'contact.html' },
+  { file: 'guides/index.html', path: 'guides/' },
+  { file: 'guides/rate-rise-november-2026.html', path: 'guides/rate-rise-november-2026.html' },
+  { file: 'guides/capital-gains-tax-2027.html', path: 'guides/capital-gains-tax-2027.html' },
+  { file: 'guides/negative-gearing-2027.html', path: 'guides/negative-gearing-2027.html' },
+  { file: 'guides/tax-cut-2026-27.html', path: 'guides/tax-cut-2026-27.html' },
 ];
 
 // Sitemap lastmod = date of each page's last commit, or today if it has uncommitted changes (or no

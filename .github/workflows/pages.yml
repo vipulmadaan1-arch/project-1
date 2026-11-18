@@ -56,7 +56,7 @@ jobs:
       - name: Collect site files
         run: |
           mkdir _site
-          cp -r *.html manifest.webmanifest robots.txt sw.js css js img fonts tools _site/
+          cp -r *.html manifest.webmanifest robots.txt sw.js css js img fonts tools guides _site/
           [ -f sitemap.xml ] && cp sitemap.xml _site/ || true
           [ -f CNAME ] && cp CNAME _site/ || true
           [ -f ads.txt ] && cp ads.txt _site/ || true
